@@ -700,8 +700,110 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Main Focus Area - Two Cards */}
+      {/* Main Focus Area - Smart Priority Flow */}
       <div className="dashboard-main-focus">
+        
+        {/* Priority Today Section - Dynamic based on review needs */}
+        {itemsNeedingReview.length > 0 ? (
+          <section className="priority-section">
+            <div className="priority-header">
+              <h2>🎯 Your Priority Today</h2>
+              <span className="priority-badge">{itemsNeedingReview.length} items need review</span>
+            </div>
+            <p className="priority-subtitle">
+              Keep your memory strong • Estimated time: {estimatedReviewTime} minutes
+            </p>
+            
+            <div className="priority-items-list">
+              {itemsNeedingReview.slice(0, 3).map(item => (
+                <div key={item.id} className={`priority-item priority-${item.retention}`}>
+                  <div className="priority-item-icon">
+                    {item.retention === 'fading' && '🔴'}
+                    {item.retention === 'medium' && '🟡'}
+                  </div>
+                  <div className="priority-item-content">
+                    <h4>{item.title}</h4>
+                    <p className="priority-item-status">
+                      {item.retention === 'fading' && `⚠️ Fading fast! Last reviewed ${item.lastReview}`}
+                      {item.retention === 'medium' && `Review due • Last reviewed ${item.lastReview}`}
+                    </p>
+                  </div>
+                  <button 
+                    className="btn-quick-review"
+                    onClick={() => openLibraryItem(item, 'quiz')}
+                  >
+                    Quick Review
+                  </button>
+                </div>
+              ))}
+            </div>
+            
+            <button 
+              className="btn-primary btn-start-session"
+              onClick={startReviewSession}
+            >
+              <Brain size={20} /> Start Review Session ({itemsNeedingReview.length} items)
+            </button>
+          </section>
+        ) : libraryItems.filter(item => item.status !== 'pending').length > 0 ? (
+          // All caught up state
+          <section className="priority-section caught-up">
+            <div className="caught-up-content">
+              <h2>✅ You're All Caught Up!</h2>
+              <p>Great job! All your knowledge is fresh. Come back tomorrow for your next review.</p>
+              <div className="next-review-info">
+                <Clock size={18} />
+                <span>Next review: Tomorrow (2 items)</span>
+              </div>
+            </div>
+          </section>
+        ) : (
+          // New user / empty state
+          <section className="priority-section empty-state">
+            <div className="empty-state-content">
+              <h2>👋 Start Your Learning Journey</h2>
+              <p>Capture your first piece of knowledge to begin building lasting memory</p>
+              <div className="learning-steps">
+                <div className="step">
+                  <span className="step-number">1</span>
+                  <span>Capture</span>
+                </div>
+                <span className="step-arrow">→</span>
+                <div className="step">
+                  <span className="step-number">2</span>
+                  <span>Review</span>
+                </div>
+                <span className="step-arrow">→</span>
+                <div className="step">
+                  <span className="step-number">3</span>
+                  <span>Master</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+        
+        {/* Streak Motivation Widget */}
+        {dayStreak > 0 && (
+          <section className="streak-widget">
+            <div className="streak-content">
+              <div className="streak-icon">🔥</div>
+              <div className="streak-info">
+                <h3>{dayStreak} Day Streak!</h3>
+                <p>{daysToNextMilestone === 0 ? '🎉 Milestone reached!' : `${daysToNextMilestone} ${daysToNextMilestone === 1 ? 'day' : 'days'} to next milestone`}</p>
+              </div>
+              <div className="streak-progress-container">
+                <div className="streak-progress-bar">
+                  <div 
+                    className="streak-progress-fill" 
+                    style={{width: `${streakProgress}%`}}
+                  ></div>
+                </div>
+                <span className="streak-percentage">{Math.round(streakProgress)}%</span>
+              </div>
+            </div>
+          </section>
+        )}
         
         {/* Quick Capture Widget - Collapsible */}
         <div className={`quick-capture-widget ${isCaptureExpanded ? 'expanded' : 'collapsed'}`}>
