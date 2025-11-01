@@ -98,7 +98,7 @@ const Pricing = () => {
               <p className="plan-subtitle">Best for Consultants</p>
             </div>
             <div className="plan-price">
-              <span className="price">$10</span>
+              <span className="price">$9.99</span>
               <span className="period">/ month</span>
             </div>
             <ul className="plan-features">
