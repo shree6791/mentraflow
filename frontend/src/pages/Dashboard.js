@@ -305,6 +305,7 @@ const Dashboard = () => {
           <div className="workspace-card">
             <div className="card-header">
               <h2>Capture Knowledge</h2>
+              <p>Drop your ideas here — we'll help them stay remembered.</p>
             </div>
             <div className="tabs">
               <button 
