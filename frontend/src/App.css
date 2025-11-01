@@ -568,7 +568,7 @@ html {
 
 .step-card h3 {
   font-size: 1.5rem;
-  color: var(--contrast-indigo);
+  color: var(--heading-color);
   margin-bottom: 1rem;
 }
 
