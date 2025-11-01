@@ -1723,6 +1723,23 @@ html {
   .future-goal p {
     font-size: 1rem;
   }
+  
+  .challenge-card {
+    padding: 2rem 1.5rem;
+    min-height: 240px;
+  }
+  
+  .challenge-number {
+    font-size: 3rem;
+  }
+  
+  .challenge-card h3 {
+    font-size: 1.3rem;
+  }
+  
+  .challenge-card p {
+    font-size: 0.95rem;
+  }
 }
 
 /* ======================================
