@@ -1109,26 +1109,6 @@ const Dashboard = () => {
       </div>
         
 
-      {/* Knowledge Graph Modal */}
-      {showGraph && (
-        <div className="modal-overlay modal-fullscreen" onClick={() => setShowGraph(false)}>
-          <div className="modal-content graph-modal-fullscreen" onClick={(e) => e.stopPropagation()}>
-            <KnowledgeGraph 
-              topics={topics} 
-              userAvatar={user?.picture}
-              userName={user?.name || 'Demo User'}
-              onClose={() => setShowGraph(false)}
-              onReinforce={(node) => {
-                // Handle reinforce action
-                setShowGraph(false);
-                // Could trigger a quiz or review for this topic
-                showToast(`Let's reinforce ${node.title}!`);
-              }}
-            />
-          </div>
-        </div>
-      )}
-
       {/* Profile Settings Modal */}
       {showProfileModal && (
         <div className="modal-overlay" onClick={() => setShowProfileModal(false)}>
