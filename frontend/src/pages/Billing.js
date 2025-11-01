@@ -7,6 +7,7 @@ import '../styles/Billing.css';
 const Billing = () => {
   const navigate = useNavigate();
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+  const [teamMemberCount, setTeamMemberCount] = useState(5); // Default 5 users
 
   // Mock data - Replace with actual API calls
   const currentPlan = {
