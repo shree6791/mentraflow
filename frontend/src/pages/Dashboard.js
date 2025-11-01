@@ -300,6 +300,26 @@ const Dashboard = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   
+  // Priority Review Session
+  const [showReviewSession, setShowReviewSession] = useState(false);
+  const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
+  
+  // Get items that need review (based on retention status)
+  const itemsNeedingReview = libraryItems.filter(item => 
+    item.retention === 'fading' || item.retention === 'medium'
+  ).sort((a, b) => {
+    // Sort by urgency: fading first, then medium
+    if (a.retention === 'fading' && b.retention !== 'fading') return -1;
+    if (a.retention !== 'fading' && b.retention === 'fading') return 1;
+    return 0;
+  });
+  
+  const estimatedReviewTime = itemsNeedingReview.length * 3; // 3 min per item
+  
+  // Streak progress calculation
+  const daysToNextMilestone = 5 - (dayStreak % 5);
+  const streakProgress = ((dayStreak % 5) / 5) * 100;
+  
   const [profileData, setProfileData] = useState({
     name: 'Demo User',
     email: 'demo@mentraflow.com',
