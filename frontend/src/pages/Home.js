@@ -48,7 +48,7 @@ const Home = () => {
           <div className="neural-node"></div>
         </div>
         <div className="hero-content">
-          <h1>Don't just learn — retain what matters.</h1>
+          <h1>Don't just learn — <br />retain what matters.</h1>
           <p>
             You highlight an idea. You promise to revisit it.<br />
             But it fades. MentraFlow brings that aha moment back — right when it's about to fade.
