@@ -230,7 +230,7 @@ const Dashboard = () => {
               </div>
             </div>
             <button className="link-btn" onClick={() => setShowGraph(true)}>
-              Open full graph →
+              Open full graph &rarr;
             </button>
           </div>
 
