@@ -1416,7 +1416,6 @@ const Dashboard = () => {
                 <button 
                   className="btn-primary" 
                   onClick={() => {
-                    setShowGraph(true);
                     setShowOnboarding(false);
                   }}
                 >
