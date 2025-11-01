@@ -1,57 +1,90 @@
 <analysis>
-The previous AI engineer diligently evolved the MentraFlow application, significantly enhancing its frontend UI/UX and core functionality. Initially, the work focused on rectifying a non-opening Library Item Detail Modal within the Dashboard, which was ultimately found to be functional. Subsequent efforts centered on implementing a Generated Content Modal to provide visual feedback for newly created summaries and quizzes.
+The trajectory details the work of an AI engineer on the MentraFlow application, focusing heavily on UI/UX refinements for the Dashboard. Initially, the engineer tackled filter spacing and library card decluttering, successfully making cards more compact and aligning information. Subsequent user feedback led to the consolidation of card metadata (status, filename, links) into single rows, unifying the design between Your Priority Today and My Knowledge Library sections. This evolved into a complete dashboard redesign, replacing the Your Priority Today section with a top-banner Priority Widget that opens a dedicated modal, further enhancing space efficiency.
 
-A major focus was the iterative redesign of the Dashboard layout, transitioning from a two-column structure to a user-centric Smart Priority Flow single-column design. This involved replacing a collapsible capture widget with a Floating Action Button (FAB) for knowledge capture, adding pagination to the Knowledge Library and Priority sections, and incorporating numerous UI/UX polish items like retention indicators, progress rings, and tooltips. Recurring challenges included persistent alignment issues and spacing problems, particularly within the quick filters and library cards, which the engineer was actively addressing at the point the trajectory concluded. The project demonstrates a strong emphasis on user feedback and iterative refinement.
+The engineer then implemented a full payment flow, including pricing adjustments, a dedicated Billing page with carousel support for mobile, a Payment page, and a team member selector for team plans, culminating in the integration of an Apple Pay button. Concurrently, the navigation structure was refined by creating dedicated Insights and Knowledge Graph pages, converting previous modals into full-page experiences. The engineer meticulously addressed responsive design, layout consistency, and user feedback through iterative edits to , , and newly created files for billing, payment, and insights.
 </analysis>
 
 <product_requirements>
-MentraFlow is an MVP designed for memory enhancement, featuring conversion-optimized landing pages and a functional dashboard. The application adheres to a strict brand system, incorporating specific colors (Deep Teal, Mind Blue, Neuro Yellow, Neural Coral, Retention Green, Deep Indigo), Poppins/Inter fonts, glass-morphism, and neural-network animations. Key pages include Home, Science, Vision, Contact, Login, Dashboard, and Pricing. Paramount requirements include responsive design, consistent typography, spacing, and mobile-friendly carousels for card sections. A light/dark mode theme has been implemented but is currently hidden. The Dashboard was initially redesigned into a Priority Dashboard with a two-column layout, Knowledge Library, Recall Tasks, Capture Knowledge, progress tracking, and an interactive Knowledge Graph. The user's explicit goal is to make the dashboard the most user-friendly app ever to improve post-learning retention, shifting it from a passive library to an active learning coach that guides users. Recent work has focused on improving visual feedback, decluttering the interface, and enhancing cognitive aspects for better user guidance and engagement.
+MentraFlow is an MVP for memory enhancement, featuring conversion-optimized landing pages and a functional dashboard. The application uses a strict brand system with specific colors, Poppins/Inter fonts, glass-morphism, and neural-network animations, demanding responsive design and consistent UI/UX. The core problem is to transform the Dashboard from a passive library into an active learning coach that improves post-learning retention by being the most user-friendly app ever. This involves enhancing visual feedback, decluttering the interface, and improving user guidance.
+
+Recent implementations include:
+- A Generated Content Modal for summaries/quizzes.
+- Redesign of the Dashboard from a two-column layout to a Smart Priority Flow single-column.
+- Floating Action Button (FAB) for knowledge capture.
+- Pagination for Knowledge Library and Priority sections.
+- UI polish like retention indicators, progress rings, and tooltips.
+- Visual consolidation of library card metadata (status, filename, links) into compact rows.
+- Introduction of a Priority Widget in the top banner that opens a modal for urgent items, replacing the old Your Priority Today section.
+- Implementation of a full payment flow with a dedicated  page, responsive pricing cards (carousel on mobile), a team member selector, and a  page including an Apple Pay option.
+- Creation of dedicated  and  pages, converting previous modals into full-page experiences for better navigation and detailed analytics.
 </product_requirements>
 
 <key_technical_concepts>
--   **Full-stack:** React (frontend), FastAPI (backend), MongoDB (database).
--   **Frontend:** React Router DOM, Tailwind CSS, Framer Motion, Axios, CSS Custom Properties (theming), IntersectionObserver, CSS Scroll-Snap, D3.js (for Knowledge Graph),  for icons.
--   **Backend:** FastAPI, , .
--   **Authentication:** JWT,  for global state.
--   **Design:** Glass-morphism, Responsive Design, CSS themes, UX principles (cognitive load, visual hierarchy, feedback loops).
+- **Full-stack:** React (frontend), FastAPI (backend), MongoDB (database).
+- **Frontend:** React Router DOM, Tailwind CSS, Framer Motion, Axios, CSS Custom Properties, D3.js (Knowledge Graph),  for icons.
+- **Backend:** FastAPI, , .
+- **Authentication:** JWT, .
+- **Design:** Glass-morphism, Responsive Design, UX principles (cognitive load, visual hierarchy, feedback loops).
 </key_technical_concepts>
 
 <code_architecture>
 
--   ****: Global styles for the application. Key changes include adding  to the root variables, which was crucial for fixing the invisible Review Now button.
--   ****: This is the most heavily modified file. It has been completely refactored multiple times.
-    -   **Initial State:** Contained the Priority Dashboard layout with a  (found to be working).
-    -   **Key Changes:**
-        -   **Generated Content Modal:** Added state () and JSX for displaying generated summaries/quizzes after capture.
-        -   **Layout Revisions:** Evolved from a two-column layout to a stacked row layout, then to a Library-First layout with a collapsible Quick Capture Widget, and finally to a Smart Priority Flow with a Floating Action Button (FAB) for capture.
-        -   **State Management:** Added numerous state variables for pagination (, , , ), capture widget (), FAB modal (), filters (, ).
-        -   **Logic:** Implemented pagination logic for both library and priority items, , ,  helper functions, and .
-        -   **UI Elements:** Integrated  and  components. Modified JSX extensively to display Priority Today section, retention indicators (🟢🟡🔴), simplified action buttons, urgency messaging, quick filters, and sort options.
-        -   **Bug Fixes:** Removed Quick Start button. Renamed Generate Custom Quiz to Save Settings in customization modal. Fixed  import error.
-        -   **Data:** Modified  and  sample data to support new features (e.g., , / for all items).
--   ****: This file contains extensive styling for the Dashboard's evolving layout and components.
-    -   **Key Changes:** Styles for two-column layout, stacked rows, collapsible capture widget, FAB, pagination controls. Added styles for , , , , , , , , , , . Also, significant polish for spacing, hover effects, modal transitions, and responsive adjustments (e.g., stats banner carousel on mobile). Unified  for banner and main content and fixed stats banner card heights and widths.
--   ****: Removed the Quick Start button as it added clutter.
--   ** (NEW)**: A new React component created to render circular SVG-based progress rings.
--   ** (NEW)**: Styles for the  component.
--   ** (NEW)**: A new React component created for displaying contextual tooltips on hover and click.
--   ** (NEW)**: Styles for the  component, including positioning, background, and fade-in animation.
+-   ****: Central routing configuration. Modified to add new routes: , ,  (later ), and .
+-   ****: Global styles. Used for general pricing card styles, ensuring they are globally available.
+-   ****: Heavily modified.
+    -   **Purpose:** The main user interface for knowledge management and review.
+    -   **Changes:** Refactored for Smart Priority Flow, added , , pagination for library/priority. The Your Priority Today section was removed and replaced by a Priority Widget in the stats banner that opens .  was removed, and View Graph now navigates to a dedicated Knowledge Graph page. Avatar dropdown updated to include Manage Plan and Insights options. Filters are now behind a toggle button.
+-   ****: Extensive styling for the Dashboard.
+    -   **Purpose:** Controls the layout and appearance of all dashboard elements.
+    -   **Changes:** Styles for flexible layouts, pagination, FAB, modals. Updated for quick filter spacing, library card decluttering (reduced padding, spacing, color intensity), compact , , , . Added styles for unified card structure, priority widget/modal, and responsive adjustments for filters and cards. Also, width alignment fixes for main content sections.
+-   ****: Used as a template for card styles.
+    -   **Purpose:** Displays subscription pricing plans.
+    -   **Changes:** Updated prices from 0/5 to .99/4.99.
+-   ** (NEW)**:
+    -   **Purpose:** Dedicated page for logged-in users to manage their subscription plan.
+    -   **Changes:** Created to display plan options using pricing card styles from , including a  for mobile views and a team member selector for the Teams Plan.
+-   ** (NEW)**: Styles for the new Billing page, including responsive grid/carousel layout and team selector.
+-   ** (NEW)**:
+    -   **Purpose:** Handles the final payment process for plan upgrades/subscriptions.
+    -   **Changes:** Created to display order summary, handle dynamic pricing based on team members, and include an Apple Pay option with a Or pay with card divider.
+-   ** (NEW)**: Styles for the Payment page elements, including Apple Pay button and divider.
+-   ** (NEW, renamed to Insights conceptually)**:
+    -   **Purpose:** Displays learning progress and insights.
+    -   **Changes:** Created as a dedicated page for analytics, performance overview, knowledge clusters, and a link to the Knowledge Graph page.
+-   ** (NEW)**: Styles for the Activity/Insights page.
+-   ** (NEW)**:
+    -   **Purpose:** Acts as a standalone page wrapper for the existing  component, replacing its previous modal implementation.
+    -   **Changes:** Created to ensure the Knowledge Graph is a dedicated, navigable page.
+-   ** (NEW)**: Styles for the Knowledge Graph wrapper page.
+-   ****: Styles for the Tooltip component.
+    -   **Changes:**  increased to accommodate wider content.
+-   ****: Updated to include  dependency.
 </code_architecture>
 
 <pending_tasks>
--   Address the external  to enable actual Google OAuth.
--   Revert the authentication bypass in the Login page and Dashboard.
--   Implement backend integration for the Contact form, early access list, and full dashboard features.
--   Revisit Vision page founder section to change from teal gradient to a gray gradient.
--   Address persistent spacing issues with quick filters and declutter library cards in My Knowledge Library.
+- Address the external  to enable actual Google OAuth.
+- Revert the authentication bypass in the Login page and Dashboard.
+- Implement backend integration for the Contact form, early access list, and full dashboard features (e.g., actual data for analytics, payment gateway integration).
+- Revisit Vision page founder section to change from teal gradient to a gray gradient.
+- Fix the quick filters and sort dropdown not appearing on the same line in non-mobile view.
 </pending_tasks>
 
 <current_work>
-Immediately before this summary request, the AI engineer was addressing user feedback regarding visual clutter and spacing. The user reported that the quick filters in My Knowledge Library () had poor spacing and were out of order. Additionally, the library cards themselves feel off.. too much color.. or too much space.. long banner.. its not giving thr righ feel.
+Immediately before this summary request, the AI engineer was addressing a user request to further optimize space and improve the usability of filter options in the My Knowledge Library section. The explicit request was to place the filter options (All Items⏰ Due Soon🔴 Fading✅ Strong and Sort by: Priority) behind a filter icon, next to the View Graph button, and also to increase the width of info tooltips which were showing data vertically.
 
-The AI engineer's last explicit action was to fix the filter button spacing again, indicating Edit was successful. This implies a modification to  to adjust , , and  properties for the filter buttons and their container. The engineer was in the process of addressing these issues, confirming the user's observations, and had just completed an edit related to filter spacing. The next planned action was to declutter the library cards.
+The engineer's last actions involved:
+1.  **Modifying **:
+    *   Added  state to control the visibility of a new filter modal.
+    *   Replaced the inline filter options and sort dropdown with a Filters button (using a  icon) in the library header. This button now toggles the new .
+    *   Added the JSX for the  component to the  file, containing the previous filter and sort options.
+2.  **Modifying **:
+    *   Added specific CSS for , , , , and  to style the new modal.
+3.  **Modifying **:
+    *   Adjusted the  property to increase the width of tooltips, as requested.
+
+The current state is that the Filters button is visible on the dashboard next to View Graph. The engineer has just finished making these code changes and is about to take a screenshot to verify that clicking the new Filters button opens the filter modal as intended.
 </current_work>
 
 <optional_next_step>
-The next step is to properly fix the quick filters spacing and then declutter the library cards by making visual adjustments and possibly removing redundant information.
+Take a screenshot to verify that clicking the Filters button opens the filter modal correctly.
 </optional_next_step>
