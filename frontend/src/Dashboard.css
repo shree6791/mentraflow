@@ -2248,6 +2248,49 @@
   border-color: var(--neuro-yellow);
 }
 
+/* Priority Widget Card */
+.stat-banner-item.priority-widget-card {
+  background: linear-gradient(135deg, rgba(239, 71, 111, 0.08), rgba(255, 209, 102, 0.05));
+  border: 2px solid rgba(239, 71, 111, 0.3);
+  transition: all 0.3s ease;
+}
+
+.stat-banner-item.priority-widget-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(239, 71, 111, 0.2);
+  border-color: var(--neural-coral);
+}
+
+.priority-widget-icon {
+  font-size: 3rem;
+  flex-shrink: 0;
+}
+
+.stat-context-priority {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  font-weight: 600;
+  margin: 0;
+}
+
+.stat-context-urgent {
+  font-size: 0.85rem;
+  color: var(--neural-coral);
+  font-weight: 700;
+  margin: 0.25rem 0 0 0;
+}
+
+/* Priority Modal */
+.priority-modal {
+  max-width: 700px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.priority-modal-body {
+  padding: 1.5rem;
+}
+
 .stat-banner-icon {
   font-size: 2.5rem;
   line-height: 1;
