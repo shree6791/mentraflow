@@ -1,22 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Check, Linkedin, Twitter, Youtube, Menu, X } from 'lucide-react';
+import { Check } from 'lucide-react';
 import Carousel from '../components/Carousel';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const Pricing = () => {
   const navigate = useNavigate();
-  const [scrolled, setScrolled] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  // Handle scroll for header
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Intersection Observer for fade-in animations
   useEffect(() => {
