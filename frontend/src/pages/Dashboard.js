@@ -514,6 +514,19 @@ const Dashboard = () => {
     }, 2000);
   };
 
+  // Library Item Detail Modal Handlers
+  const openLibraryItem = (item, tab = 'summary') => {
+    setSelectedLibraryItem(item);
+    setLibraryModalTab(tab);
+  };
+
+  const closeLibraryItem = () => {
+    setSelectedLibraryItem(null);
+    setQuizAnswers({});
+    setQuizResults({});
+    setCurrentQuestionIndex(0);
+  };
+
   // Filter library items
   const filteredLibraryItems = libraryItems.filter(item => {
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
