@@ -63,6 +63,57 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 
+/* Global Page Consistency */
+/* Hero Sections - Consistent across all pages */
+.page-hero {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 2rem 4rem;
+  background: var(--bg-light);
+}
+
+.page-hero h1 {
+  font-size: var(--font-size-hero);
+  color: var(--contrast-indigo);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.page-hero p {
+  font-size: var(--font-size-body-lg);
+  color: var(--text-gray);
+  line-height: 1.7;
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Section Consistency */
+.page-section {
+  padding: var(--section-padding);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-section h2 {
+  font-size: var(--font-size-h2);
+  color: var(--contrast-indigo);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.page-section .section-description {
+  font-size: var(--font-size-body-lg);
+  color: var(--text-gray);
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  line-height: 1.7;
+}
+
 /* Smooth Scroll */
 html {
   scroll-behavior: smooth;
