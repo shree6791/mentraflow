@@ -148,10 +148,19 @@ const KnowledgeGraph = ({ topics, userAvatar, userName, onClose, onReinforce }) 
       setIsLoading(false);
     }, 800);
 
+    return () => clearTimeout(loadTimer);
+  }, []);
+
+  useEffect(() => {
+    // Don't run during loading
+    if (isLoading) return;
+    
     const canvas = canvasRef.current;
-    if (!canvas) return () => clearTimeout(loadTimer);
+    if (!canvas) return;
 
     const container = containerRef.current;
+    if (!container) return;
+    
     const width = container.offsetWidth;
     const height = container.offsetHeight;
     canvas.width = width * window.devicePixelRatio;
