@@ -49,7 +49,7 @@ const Home = () => {
           <a href="#hero" className="nav-link">Home</a>
           <Link to="/science" className="nav-link">Science</Link>
           <Link to="/vision" className="nav-link">Vision</Link>
-          <a href="#contact" className="nav-link">Contact</a>
+          <Link to="/contact" className="nav-link">Contact</Link>
           <button className="btn-login" onClick={() => setShowModal(true)}>
             Login
           </button>
