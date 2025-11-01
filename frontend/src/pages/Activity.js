@@ -187,7 +187,7 @@ const Activity = () => {
         <div className="activity-section">
           <div className="section-header">
             <h2>Knowledge Clusters</h2>
-            <button className="view-graph-btn" onClick={() => navigate('/dashboard')}>
+            <button className="view-graph-btn" onClick={() => navigate('/knowledge-graph')}>
               <BookOpen size={16} />
               View Knowledge Graph
               <ExternalLink size={14} />
