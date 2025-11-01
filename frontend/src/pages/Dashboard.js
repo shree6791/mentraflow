@@ -591,8 +591,233 @@ const Dashboard = () => {
         </div>
       </header>
 
-      {/* Main Dashboard Content - Two Column Layout */}
-      <div className="dashboard-content">
+      {/* Stats Banner */}
+      <div className="dashboard-stats-banner">
+        <div className="stat-banner-item">
+          <div className="stat-banner-icon">📊</div>
+          <div className="stat-banner-content">
+            <h3>{masteryScore}%</h3>
+            <p>Mastery</p>
+            <span className={`change ${weeklyChange >= 0 ? 'positive' : 'negative'}`}>
+              {weeklyChange >= 0 ? '↑' : '↓'} {Math.abs(weeklyChange)}% this week
+            </span>
+          </div>
+        </div>
+
+        <div className="stat-banner-item">
+          <div className="stat-banner-icon streak-icon">🔥</div>
+          <div className="stat-banner-content">
+            <h3>{streak}</h3>
+            <p>Day Streak</p>
+          </div>
+        </div>
+
+        <div className="stat-banner-item">
+          <div className="stat-banner-icon">⭐</div>
+          <div className="stat-banner-content">
+            <h3>{xp}</h3>
+            <p>Total XP</p>
+          </div>
+        </div>
+
+        <div className={`stat-banner-item recall-alert ${recallTasks.length > 0 ? 'has-tasks' : ''}`}>
+          <div className="stat-banner-icon">⏰</div>
+          <div className="stat-banner-content">
+            <h3>{recallTasks.length}</h3>
+            <p>Recall Tasks</p>
+            {recallTasks.length > 0 && (
+              <button 
+                className="view-tasks-btn"
+                onClick={() => recallTasks.length > 0 && startRecallTask(recallTasks[0])}
+              >
+                Start Now →
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Main Focus Area - Two Cards */}
+      <div className="dashboard-main-focus">
+        
+        {/* Library - Primary Workspace */}
+        <section className="dashboard-section library-section-main">
+          <div className="section-header">
+            <h2>My Knowledge Library</h2>
+            <button className="btn-icon-text" onClick={() => setShowGraph(true)}>
+              <Brain size={18} /> View Graph
+            </button>
+          </div>
+          
+          <div className="library-controls">
+            <div className="search-box">
+              <Search size={18} />
+              <input
+                type="text"
+                placeholder="Search your library..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+            <select 
+              className="filter-select"
+              value={filterStatus}
+              onChange={(e) => setFilterStatus(e.target.value)}
+            >
+              <option value="all">All Status</option>
+              <option value="summarized">Summarized</option>
+              <option value="quiz-available">Quiz Available</option>
+              <option value="pending">Pending</option>
+            </select>
+          </div>
+          
+          <div className="library-list">
+            {filteredLibraryItems.length === 0 ? (
+              <div className="library-empty-state">
+                <FileText size={48} className="empty-icon" />
+                <h3>Start capturing what matters</h3>
+                <p>Upload your first note or document to begin building your knowledge base.</p>
+              </div>
+            ) : (
+              filteredLibraryItems.map(item => (
+                <div key={item.id} className="library-item">
+                  <div className="library-item-header">
+                    <h3>{item.title}</h3>
+                    <span className={`status-badge status-${item.status}`}>
+                      {item.status === 'summarized' && '✅ Summarized'}
+                      {item.status === 'quiz-available' && '🧠 Quiz Available'}
+                      {item.status === 'pending' && '⏳ Pending'}
+                    </span>
+                  </div>
+                  <p className="library-item-meta">
+                    {item.filename} • Uploaded {new Date(item.uploadDate).toLocaleDateString()}
+                  </p>
+                  {item.lastReview && (
+                    <p className="library-item-review">Last reviewed: {item.lastReview}</p>
+                  )}
+                  <div className="library-item-actions">
+                    {item.status === 'summarized' && (
+                      <button className="action-btn" onClick={() => openLibraryItem(item, 'summary')}>
+                        <Eye size={16} /> View Summary
+                      </button>
+                    )}
+                    {item.hasQuiz && (
+                      <button className="action-btn" onClick={() => openLibraryItem(item, 'quiz')}>
+                        <Brain size={16} /> Take Quiz
+                      </button>
+                    )}
+                    {item.quizScore !== null && (
+                      <button className="action-btn" onClick={() => openLibraryItem(item, 'performance')}>
+                        <TrendingUp size={16} /> Score: {item.quizScore}%
+                      </button>
+                    )}
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+          
+          <div className="autosave-banner">
+            💾 Your work is saved automatically
+          </div>
+        </section>
+
+        {/* Capture Knowledge - Primary Action */}
+        <section className="dashboard-section capture-section-main">
+          <div className="section-header">
+            <h2>Capture Knowledge</h2>
+            <button 
+              className="btn-customize"
+              onClick={() => setShowQuizCustomization(true)}
+              title="Customize quiz settings"
+            >
+              <Filter size={16} /> Customize
+            </button>
+          </div>
+          
+          <div className="capture-tabs">
+            <button 
+              className={`tab ${activeTab === 'upload' ? 'active' : ''}`}
+              onClick={() => setActiveTab('upload')}
+            >
+              <Upload size={18} /> Upload File
+            </button>
+            <button 
+              className={`tab ${activeTab === 'paste' ? 'active' : ''}`}
+              onClick={() => setActiveTab('paste')}
+            >
+              <PenTool size={18} /> Paste Text
+            </button>
+          </div>
+
+          {activeTab === 'upload' ? (
+            <div className="upload-zone">
+              <input
+                type="file"
+                id="file-upload"
+                accept=".txt,.pdf,.doc,.docx"
+                onChange={handleFileUpload}
+                style={{ display: 'none' }}
+              />
+              <label htmlFor="file-upload" className="upload-label">
+                <Upload size={48} className="upload-icon" />
+                <p className="upload-text">Drag & drop or click to upload</p>
+                <p className="upload-hint">Supports .txt, .pdf, .doc, .docx</p>
+              </label>
+            </div>
+          ) : (
+            <div className="paste-zone">
+              <textarea
+                placeholder="Paste your notes, articles, or any text you want to remember..."
+                value={uploadedContent}
+                onChange={(e) => setUploadedContent(e.target.value)}
+                rows={12}
+              />
+            </div>
+          )}
+
+          <button 
+            className="btn-primary btn-generate"
+            onClick={generateSummaryAndQuiz}
+            disabled={generating || !uploadedContent}
+          >
+            {generating ? (
+              <>
+                <div className="spinner-small"></div> Generating...
+              </>
+            ) : (
+              <>
+                <Brain size={18} /> Generate Summary & Quiz
+              </>
+            )}
+          </button>
+
+          {/* Quick Progress Indicator */}
+          <div className="quick-progress-indicator">
+            <div className="progress-mini-bars">
+              <div className="progress-mini-item">
+                <span>Mastered</span>
+                <div className="mini-bar">
+                  <div className="mini-bar-fill bar-high" style={{width: `${(masteredCount/topics.length)*100}%`}}></div>
+                </div>
+              </div>
+              <div className="progress-mini-item">
+                <span>Medium</span>
+                <div className="mini-bar">
+                  <div className="mini-bar-fill bar-medium" style={{width: `${(mediumCount/topics.length)*100}%`}}></div>
+                </div>
+              </div>
+              <div className="progress-mini-item">
+                <span>Fading</span>
+                <div className="mini-bar">
+                  <div className="mini-bar-fill bar-fading" style={{width: `${(fadingCount/topics.length)*100}%`}}></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
         
         {/* LEFT COLUMN - Insights Zone */}
         <div className="dashboard-left">
