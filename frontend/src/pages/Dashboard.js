@@ -709,7 +709,7 @@ const Dashboard = () => {
             </p>
             
             <div className="priority-items-list">
-              {itemsNeedingReview.slice(0, 3).map(item => (
+              {paginatedPriorityItems.map(item => (
                 <div key={item.id} className={`priority-item priority-${item.retention}`}>
                   <div className="priority-item-icon">
                     {item.retention === 'fading' && '🔴'}
@@ -731,6 +731,29 @@ const Dashboard = () => {
                 </div>
               ))}
             </div>
+            
+            {/* Priority Pagination */}
+            {totalPriorityPages > 1 && (
+              <div className="priority-pagination">
+                <button 
+                  className="priority-nav-btn"
+                  onClick={() => setPriorityPage(prev => Math.max(1, prev - 1))}
+                  disabled={priorityPage === 1}
+                >
+                  ← Previous
+                </button>
+                <span className="priority-page-info">
+                  {priorityStartIndex + 1}-{Math.min(priorityEndIndex, itemsNeedingReview.length)} of {itemsNeedingReview.length}
+                </span>
+                <button 
+                  className="priority-nav-btn"
+                  onClick={() => setPriorityPage(prev => Math.min(totalPriorityPages, prev + 1))}
+                  disabled={priorityPage === totalPriorityPages}
+                >
+                  Next →
+                </button>
+              </div>
+            )}
             
             <button 
               className="btn-primary btn-start-session"
