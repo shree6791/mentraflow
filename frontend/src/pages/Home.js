@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Linkedin, Twitter, Youtube, Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import Carousel from '../components/Carousel';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const Home = () => {
-  const [scrolled, setScrolled] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Header shadow on scroll
   useEffect(() => {
