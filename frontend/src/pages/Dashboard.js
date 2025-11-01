@@ -1072,7 +1072,7 @@ const Dashboard = () => {
                       </div>
                     </div>
                     
-                    {/* Compact Meta Row - Status, Countdown, and Filename in one line */}
+                    {/* Compact Meta Row - Status, Countdown, Filename, Summary & Score all in one line */}
                     <div className="library-item-meta-row">
                       {item.retention && (
                         <span className={`retention-chip retention-chip-${item.retention}`}>
@@ -1092,6 +1092,18 @@ const Dashboard = () => {
                       <span className="filename-text">
                         {item.filename}
                       </span>
+                      
+                      {/* Quick Action Links */}
+                      <div className="quick-action-links">
+                        <button className="link-btn-compact" onClick={() => openLibraryItem(item, 'summary')}>
+                          <Eye size={12} /> Summary
+                        </button>
+                        {item.quizScore !== null && (
+                          <button className="link-btn-compact" onClick={() => openLibraryItem(item, 'performance')}>
+                            <TrendingUp size={12} /> Score: {item.quizScore}%
+                          </button>
+                        )}
+                      </div>
                     </div>
                     
                     <div className="library-item-actions">
@@ -1105,18 +1117,6 @@ const Dashboard = () => {
                           <Brain size={18} /> Take Quiz
                         </button>
                       )}
-                      
-                      {/* Secondary Actions - Always show Summary and Score */}
-                      <div className="library-secondary-actions">
-                        <button className="link-btn" onClick={() => openLibraryItem(item, 'summary')}>
-                          <Eye size={14} /> Summary
-                        </button>
-                        {item.quizScore !== null && (
-                          <button className="link-btn" onClick={() => openLibraryItem(item, 'performance')}>
-                            <TrendingUp size={14} /> Score: {item.quizScore}%
-                          </button>
-                        )}
-                      </div>
                     </div>
                   </div>
                 ))}
