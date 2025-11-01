@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Linkedin, Twitter, Youtube } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import './home.css';
 
 const Home = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -23,8 +24,17 @@ const Home = () => {
     return () => observer.disconnect();
   }, []);
 
-  const scrollToContact = () => {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  // ESC key to close modal
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape' && showModal) setShowModal(false);
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [showModal]);
+
+  const scrollToCta = () => {
+    document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const scrollToHow = () => {
@@ -62,7 +72,7 @@ const Home = () => {
             But it fades. MentraFlow brings that aha moment back — right when it's about to fade.
           </p>
           <div className="hero-cta">
-            <button className="btn-primary" onClick={scrollToContact}>
+            <button className="btn-primary" onClick={scrollToCta}>
               Experience the Demo
             </button>
             <button className="btn-secondary" onClick={scrollToHow}>
@@ -77,7 +87,7 @@ const Home = () => {
         <div className="fade-in">
           <h2 className="section-title">Most of what we learn fades within days.</h2>
           <p className="section-subtitle">
-            Our survey of 100+ learners showed that 74% revisit their notes only once — and forget the rest.
+            Our learner survey showed most people revisit notes only once — and forget the rest.
           </p>
         </div>
         <div className="stats-grid fade-in">
@@ -87,11 +97,11 @@ const Home = () => {
           </div>
           <div className="stat-card">
             <h3>9 of 10</h3>
-            <p>said re-reading doesn't help</p>
+            <p>say re-reading doesn't help</p>
           </div>
           <div className="stat-card">
             <h3>82%</h3>
-            <p>wished their learning could 'stay with them'</p>
+            <p>wish their learning would "stick" longer</p>
           </div>
         </div>
       </section>
@@ -130,14 +140,11 @@ const Home = () => {
       <section id="visualization" className="section viz-section">
         <div className="fade-in">
           <h2 className="section-title">From scattered thoughts to structured recall.</h2>
-          <p className="section-subtitle">
-            See your understanding strengthen — one recall at a time.
-          </p>
         </div>
         <div className="viz-container fade-in">
           <div className="viz-card before">
             <h3>Before</h3>
-            <p>Gray scattered notes. Ideas drift away, connections fade.</p>
+            <p>Gray scattered notes. Ideas drift; connections fade.</p>
           </div>
           <div className="viz-card during">
             <h3>With MentraFlow</h3>
@@ -145,53 +152,23 @@ const Home = () => {
           </div>
           <div className="viz-card after">
             <h3>After</h3>
-            <p>Green-lit memory network. Everything stays, strengthens, grows.</p>
+            <p>Green-lit memory network. Everything strengthens and stays.</p>
           </div>
         </div>
       </section>
 
-      {/* Vision Section */}
-      <section id="vision" className="section vision-section">
+      {/* CTA (Merged Founder + Contact) */}
+      <section id="cta" className="section contact-section">
         <div className="fade-in">
-          <h2 className="section-title">Information doubles every year — our memory hasn't evolved.</h2>
-          <p className="section-subtitle">
-            MentraFlow pioneers adaptive memory infrastructure — where AI helps you learn once and remember forever.
-            Whether you're a student, a founder, or a lifelong learner — MentraFlow is built for minds that never stop growing.
-          </p>
-        </div>
-        <div className="timeline fade-in">
-          <div className="timeline-item">Learn</div>
-          <span className="timeline-arrow">→</span>
-          <div className="timeline-item">Forget</div>
-          <span className="timeline-arrow">→</span>
-          <div className="timeline-item">Reinforce</div>
-          <span className="timeline-arrow">→</span>
-          <div className="timeline-item">Retain</div>
-        </div>
-        <p className="vision-caption fade-in">
-          Inspired by Stanford, MIT, and Ebbinghaus' Forgetting Curve.
-        </p>
-      </section>
-
-      {/* Founder Section */}
-      <section className="founder-section">
-        <div className="founder-quote fade-in">
-          <blockquote>
+          <blockquote className="founder-quote">
             "We built MentraFlow because we were tired of losing the ideas that shaped us."
           </blockquote>
-          <p>Our goal is simple — make forgetting optional.</p>
-        </div>
-      </section>
-
-      {/* Contact / CTA */}
-      <section id="contact" className="section contact-section">
-        <div className="fade-in">
-          <h2 className="section-title">Interested in trying MentraFlow?</h2>
-          <p className="section-subtitle">Let's start with a conversation.</p>
-          <button className="btn-primary" onClick={() => setShowModal(true)}>
-            Access Demo
-          </button>
-          <br />
+          <p className="section-subtitle">Our goal is simple — make forgetting optional.</p>
+          <div style={{ marginTop: '1rem' }}>
+            <button className="btn-primary" onClick={() => setShowModal(true)}>
+              Access Demo
+            </button>
+          </div>
           <a href="mailto:hello@mentraflow.com" className="contact-email">
             hello@mentraflow.com
           </a>
@@ -227,12 +204,22 @@ const Home = () => {
 
       {/* Demo Modal */}
       {showModal && (
-        <div className="modal-overlay" onClick={() => setShowModal(false)} role="dialog" aria-modal="true">
+        <div 
+          className="modal-overlay" 
+          onClick={() => setShowModal(false)} 
+          role="dialog" 
+          aria-modal="true"
+          aria-labelledby="modal-title"
+        >
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setShowModal(false)} aria-label="Close">
+            <button 
+              className="modal-close" 
+              onClick={() => setShowModal(false)} 
+              aria-label="Close modal"
+            >
               ×
             </button>
-            <h2>Demo Access Coming Soon</h2>
+            <h2 id="modal-title">Demo Access Coming Soon</h2>
             <p>
               We're putting the finishing touches on MentraFlow's demo experience.
               Join our early access list and be the first to experience memory infrastructure that actually works.
