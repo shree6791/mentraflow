@@ -386,6 +386,9 @@ const Dashboard = () => {
         setOnboardingStep(2);
       }
       
+      // Show the generated content modal
+      setGeneratedContentTab('summary');
+      setShowGeneratedModal(true);
       showToast('Summary and quiz generated!');
     }, 2000);
   };
