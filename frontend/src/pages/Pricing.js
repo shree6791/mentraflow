@@ -1,0 +1,289 @@
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Check, Linkedin, Twitter, Youtube } from 'lucide-react';
+
+const Pricing = () => {
+  const navigate = useNavigate();
+  const [scrolled, setScrolled] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  // Handle scroll for header
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Intersection Observer for fade-in animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = document.querySelectorAll('.fade-in');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollToPlans = () => {
+    document.getElementById('plans').scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleAccessDemo = () => {
+    navigate('/login');
+  };
+
+  return (
+    <div className="pricing-page">
+      {/* Header */}
+      <header className={`header ${scrolled ? 'scrolled' : ''}`}>
+        <Link to="/" className="logo">
+          MentraFlow
+        </Link>
+        <nav className="nav">
+          <Link to="/" className="nav-link">Home</Link>
+          <Link to="/science" className="nav-link">Science</Link>
+          <Link to="/vision" className="nav-link">Vision</Link>
+          <Link to="/contact" className="nav-link">Contact</Link>
+          <Link to="/login" className="btn-login">
+            Login
+          </Link>
+        </nav>
+      </header>
+
+      {/* Hero Section */}
+      <section className="pricing-hero-section">
+        <div className="pricing-hero-content fade-in">
+          <h1>Choose how you grow with MentraFlow.</h1>
+          <p>
+            Whether you're mastering your own mind or scaling learning across teams — we adapt to your pace.
+          </p>
+          <div className="pricing-hero-cta">
+            <button className="btn-primary" onClick={scrollToPlans}>
+              Explore Plans
+            </button>
+            <button className="btn-secondary" onClick={handleAccessDemo}>
+              Access Demo
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Plans */}
+      <section id="plans" className="pricing-plans-section">
+        <div className="pricing-cards-container">
+          {/* Free Plan */}
+          <div className="pricing-card fade-in">
+            <div className="plan-header">
+              <h3 className="plan-name">Free Plan</h3>
+              <p className="plan-subtitle">Best for Students</p>
+            </div>
+            <div className="plan-price">
+              <span className="price">$0</span>
+              <span className="period">/ month</span>
+            </div>
+            <ul className="plan-features">
+              <li>
+                <Check size={20} className="check-icon" />
+                Up to 50 notes
+              </li>
+              <li>
+                <Check size={20} className="check-icon" />
+                Adaptive recall
+              </li>
+              <li>
+                <Check size={20} className="check-icon" />
+                Weekly progress tracking
+              </li>
+            </ul>
+            <button className="plan-cta" onClick={handleAccessDemo}>
+              Start Free
+            </button>
+          </div>
+
+          {/* Pro Plan - Most Popular */}
+          <div className="pricing-card pricing-card-popular fade-in">
+            <div className="popular-badge">⭐ Most Popular</div>
+            <div className="plan-header">
+              <h3 className="plan-name">Pro Plan</h3>
+              <p className="plan-subtitle">Best for Consultants</p>
+            </div>
+            <div className="plan-price">
+              <span className="price">$10</span>
+              <span className="period">/ month</span>
+            </div>
+            <ul className="plan-features">
+              <li>
+                <Check size={20} className="check-icon" />
+                Unlimited notes
+              </li>
+              <li>
+                <Check size={20} className="check-icon" />
+                Integrations (Notion, Slack, ChatGPT)
+              </li>
+              <li>
+                <Check size={20} className="check-icon" />
+                Retention analytics
+              </li>
+              <li>
+                <Check size={20} className="check-icon" />
+                Recall reminders
+              </li>
+            </ul>
+            <button className="plan-cta plan-cta-primary" onClick={handleAccessDemo}>
+              Try Pro
+            </button>
+          </div>
+
+          {/* Teams Plan */}
+          <div className="pricing-card fade-in">
+            <div className="plan-header">
+              <h3 className="plan-name">Teams Plan</h3>
+              <p className="plan-subtitle">Best for Organizations</p>
+            </div>
+            <div className="plan-price">
+              <span className="price">$15</span>
+              <span className="period">/ user / month</span>
+              <span className="custom-note">(Custom)</span>
+            </div>
+            <ul className="plan-features">
+              <li>
+                <Check size={20} className="check-icon" />
+                Multi-seat dashboards
+              </li>
+              <li>
+                <Check size={20} className="check-icon" />
+                Team analytics
+              </li>
+              <li>
+                <Check size={20} className="check-icon" />
+                API access
+              </li>
+              <li>
+                <Check size={20} className="check-icon" />
+                Priority support
+              </li>
+            </ul>
+            <button className="plan-cta" onClick={() => setShowModal(true)}>
+              Request Demo
+            </button>
+          </div>
+        </div>
+
+        <p className="pricing-footer-note fade-in">
+          All plans include adaptive recall and secure cloud sync.
+        </p>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="pricing-benefits-section">
+        <div className="benefits-container">
+          <div className="benefits-illustration fade-in">
+            <div className="benefits-visual">
+              <div className="visual-node node-1"></div>
+              <div className="visual-node node-2"></div>
+              <div className="visual-node node-3"></div>
+              <div className="visual-node node-4"></div>
+              <div className="visual-connection conn-1"></div>
+              <div className="visual-connection conn-2"></div>
+              <div className="visual-connection conn-3"></div>
+            </div>
+          </div>
+          <div className="benefits-content">
+            <h2 className="fade-in">What you'll gain with MentraFlow.</h2>
+            <ul className="benefits-list">
+              <li className="fade-in benefit-item-1">
+                <span className="benefit-icon">🧠</span>
+                <span>Reinforce your memory naturally.</span>
+              </li>
+              <li className="fade-in benefit-item-2">
+                <span className="benefit-icon">🔄</span>
+                <span>Transform reading into retention with adaptive recall.</span>
+              </li>
+              <li className="fade-in benefit-item-3">
+                <span className="benefit-icon">📊</span>
+                <span>See how your understanding strengthens each week.</span>
+              </li>
+              <li className="fade-in benefit-item-4">
+                <span className="benefit-icon">🤝</span>
+                <span>Integrate with Notion, Slack & ChatGPT.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Footer Banner */}
+      <section className="pricing-cta-banner">
+        <div className="cta-banner-content">
+          <blockquote className="fade-in">
+            "Because knowledge isn't stored — it's strengthened."
+          </blockquote>
+          <p className="fade-in">
+            Start free, stay consistent, and watch your learning evolve.
+          </p>
+          <button className="btn-cta-banner fade-in" onClick={handleAccessDemo}>
+            Access Demo
+          </button>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="footer-content">
+          <div className="footer-links">
+            <Link to="/" className="footer-link">Home</Link>
+            <Link to="/science" className="footer-link">Science</Link>
+            <Link to="/vision" className="footer-link">Vision</Link>
+            <Link to="/contact" className="footer-link">Contact</Link>
+          </div>
+          <div className="social-links">
+            <a href="#" className="social-link" aria-label="LinkedIn">
+              <Linkedin size={20} />
+            </a>
+            <a href="#" className="social-link" aria-label="Twitter">
+              <Twitter size={20} />
+            </a>
+            <a href="#" className="social-link" aria-label="YouTube">
+              <Youtube size={20} />
+            </a>
+          </div>
+          <p className="footer-tagline">
+            Because knowledge isn't stored — it's strengthened.
+          </p>
+        </div>
+      </footer>
+
+      {/* Request Demo Modal */}
+      {showModal && (
+        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowModal(false)}>
+              ×
+            </button>
+            <h2>Request Teams Demo</h2>
+            <p>
+              Let's explore how MentraFlow can scale your team's learning infrastructure.
+              We'll reach out within 24 hours.
+            </p>
+            <button className="btn-primary" onClick={() => setShowModal(false)}>
+              Got it!
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Pricing;
