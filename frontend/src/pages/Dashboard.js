@@ -191,6 +191,60 @@ const Dashboard = () => {
     showToast('Added to Knowledge Store! 📚');
   };
 
+  const validateProfileField = (field, value) => {
+    switch (field) {
+      case 'email':
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(value) ? '' : 'Invalid email format';
+      case 'phone':
+        if (!value) return ''; // Phone is optional
+        const phoneRegex = /^\+?[\d\s\-()]+$/;
+        return phoneRegex.test(value) ? '' : 'Invalid phone number';
+      case 'name':
+        return value.trim().length > 0 ? '' : 'Name is required';
+      default:
+        return '';
+    }
+  };
+
+  const handleProfileChange = (field, value) => {
+    setProfileData({ ...profileData, [field]: value });
+    const error = validateProfileField(field, value);
+    setProfileErrors({ ...profileErrors, [field]: error });
+  };
+
+  const handleNotificationChange = (field) => {
+    setProfileData({
+      ...profileData,
+      notificationPreferences: {
+        ...profileData.notificationPreferences,
+        [field]: !profileData.notificationPreferences[field]
+      }
+    });
+  };
+
+  const saveProfile = () => {
+    // Validate all fields
+    const errors = {
+      name: validateProfileField('name', profileData.name),
+      email: validateProfileField('email', profileData.email),
+      phone: validateProfileField('phone', profileData.phone)
+    };
+
+    setProfileErrors(errors);
+
+    // Check if any errors exist
+    if (Object.values(errors).some(error => error !== '')) {
+      showToast('Please fix validation errors', 'error');
+      return;
+    }
+
+    // Simulate save
+    setUser({ ...user, name: profileData.name, email: profileData.email });
+    setShowProfileModal(false);
+    showToast('Your profile was updated successfully');
+  };
+
   if (loading) {
     return (
       <div className="dashboard-page">
