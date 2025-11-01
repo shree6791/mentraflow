@@ -677,6 +677,313 @@ html {
   transform: translateY(0);
 }
 
+/* ======================================
+   SCIENCE PAGE STYLES
+   ====================================== */
+
+/* Science Hero */
+.science-hero {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 2rem 4rem;
+  background: white;
+  position: relative;
+}
+
+.science-hero .hero-content {
+  max-width: 900px;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.science-hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  color: var(--primary-teal);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.science-hero p {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  color: var(--text-gray);
+  line-height: 1.7;
+}
+
+/* Brainwave Animation */
+.brainwave-container {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 3rem;
+}
+
+.brainwave {
+  width: 100%;
+  height: auto;
+}
+
+.wave-path {
+  stroke: url(#waveGradient);
+  animation: waveDraw 3s ease-in-out infinite;
+}
+
+@keyframes waveDraw {
+  0%, 100% {
+    stroke-dasharray: 0 2000;
+  }
+  50% {
+    stroke-dasharray: 2000 0;
+  }
+}
+
+/* Core Science Section */
+.core-science-section {
+  background: var(--bg-light);
+}
+
+.science-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.science-card {
+  background: white;
+  padding: 3rem 2rem;
+  border-radius: 20px;
+  border: 2px solid rgba(14, 124, 123, 0.1);
+  transition: all 0.4s ease;
+  text-align: center;
+}
+
+.science-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(14, 124, 123, 0.15);
+  border-color: var(--primary-teal);
+}
+
+.science-icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(14, 124, 123, 0.1) 0%, rgba(17, 138, 178, 0.1) 100%);
+  color: var(--primary-teal);
+  position: relative;
+}
+
+/* Spacing Effect Icon - Animated Curve */
+.spacing-icon {
+  overflow: hidden;
+}
+
+.curve-animation {
+  width: 80px;
+  height: 60px;
+  position: relative;
+}
+
+.curve-animation::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--primary-teal);
+  border-radius: 2px 2px 0 0;
+  animation: curveRise 2s ease-in-out infinite;
+}
+
+@keyframes curveRise {
+  0% {
+    height: 4px;
+    background: #CBD5E0;
+  }
+  50% {
+    height: 50px;
+    background: var(--primary-teal);
+  }
+  100% {
+    height: 4px;
+    background: #CBD5E0;
+  }
+}
+
+/* Recall Icon Animation */
+.recall-icon svg {
+  animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Neuro Icon Animation */
+.neuro-icon svg {
+  animation: networkPulse 2s ease-in-out infinite;
+}
+
+@keyframes networkPulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+.science-card h3 {
+  font-size: 1.75rem;
+  color: var(--contrast-indigo);
+  margin-bottom: 1rem;
+}
+
+.science-principle {
+  font-size: 1.05rem;
+  color: var(--secondary-blue);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.science-description {
+  font-size: 1rem;
+  color: var(--text-gray);
+  line-height: 1.7;
+}
+
+/* Memory Graph Section */
+.memory-graph-section {
+  background: white;
+}
+
+.graph-container {
+  max-width: 700px;
+  margin: 3rem auto 0;
+}
+
+.graph-visual {
+  background: rgba(14, 124, 123, 0.03);
+  padding: 2rem;
+  border-radius: 20px;
+  border: 1px solid rgba(14, 124, 123, 0.1);
+}
+
+.graph-visual svg {
+  width: 100%;
+  height: auto;
+}
+
+.learning-curve {
+  animation: drawCurve 2s ease-out forwards;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+
+@keyframes drawCurve {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.data-point {
+  animation: pointAppear 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.data-point:nth-child(7) { animation-delay: 0.3s; }
+.data-point:nth-child(8) { animation-delay: 0.6s; }
+.data-point:nth-child(9) { animation-delay: 0.9s; }
+.data-point:nth-child(10) { animation-delay: 1.2s; }
+.data-point:nth-child(11) { animation-delay: 1.5s; }
+.data-point:nth-child(12) { animation-delay: 1.8s; }
+
+@keyframes pointAppear {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.graph-legend {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.legend-line {
+  width: 40px;
+  height: 3px;
+}
+
+.legend-line.dashed {
+  background: #CBD5E0;
+  opacity: 0.6;
+}
+
+.legend-line.solid {
+  background: linear-gradient(to right, #0E7C7B 0%, #118AB2 50%, #FFD166 100%);
+}
+
+.legend-item span {
+  font-size: 0.95rem;
+  color: var(--text-gray);
+}
+
+/* Research Section */
+.research-section {
+  background: var(--bg-light);
+}
+
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.research-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  border-left: 4px solid var(--primary-teal);
+  transition: all 0.3s ease;
+}
+
+.research-card:hover {
+  transform: translateX(5px);
+  box-shadow: 0 5px 20px rgba(14, 124, 123, 0.1);
+}
+
+.research-card h4 {
+  font-size: 1.2rem;
+  color: var(--primary-teal);
+  margin-bottom: 0.75rem;
+}
+
+.research-card p {
+  font-size: 0.95rem;
+  color: var(--text-gray);
+  line-height: 1.6;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .header {
@@ -696,7 +1003,8 @@ html {
     font-size: 0.85rem;
   }
   
-  .hero-section {
+  .hero-section,
+  .science-hero {
     padding: 6rem 1.5rem 3rem;
   }
   
@@ -716,7 +1024,9 @@ html {
   
   .stats-grid,
   .steps-grid,
-  .viz-container {
+  .viz-container,
+  .science-grid,
+  .research-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
@@ -731,6 +1041,11 @@ html {
   }
   
   .footer-links {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .graph-legend {
     flex-direction: column;
     gap: 1rem;
   }
