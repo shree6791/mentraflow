@@ -861,6 +861,28 @@ const Dashboard = () => {
             <p className="stat-context">{500 - (xp % 500)} XP to next level</p>
           </div>
         </div>
+
+        {/* Priority Widget - Clickable */}
+        <div 
+          className="stat-banner-item priority-widget-card"
+          onClick={() => setShowPriorityModal(true)}
+          style={{cursor: 'pointer'}}
+        >
+          <div className="priority-widget-icon">
+            🎯
+          </div>
+          <div className="stat-banner-content">
+            <h3>Priority Today</h3>
+            <p className="stat-context-priority">
+              {itemsNeedingReview.length} items need review
+            </p>
+            {itemsNeedingReview.filter(i => i.retention === 'fading').length > 0 && (
+              <p className="stat-context-urgent">
+                🔴 {itemsNeedingReview.filter(i => i.retention === 'fading').length} critical
+              </p>
+            )}
+          </div>
+        </div>
       </div>
 
       {/* Main Focus Area - Smart Priority Flow */}
