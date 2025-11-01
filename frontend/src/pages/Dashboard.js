@@ -933,11 +933,16 @@ const Dashboard = () => {
           <div className="section-header">
             <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
               <h2>My Knowledge Library</h2>
-              <Tooltip content="All your captured knowledge organized by retention strength" position="right" />
+              <Tooltip content="All your captured knowledge organized by retention strength. Use filters to focus on specific topics or sort by priority." position="right" />
             </div>
-            <button className="btn-icon-text" onClick={() => navigate('/knowledge-graph')}>
-              <Brain size={18} /> View Graph
-            </button>
+            <div style={{display: 'flex', alignItems: 'center', gap: '0.75rem'}}>
+              <button className="btn-icon-text" onClick={() => setShowFilterModal(true)}>
+                <Filter size={18} /> Filters
+              </button>
+              <button className="btn-icon-text" onClick={() => navigate('/knowledge-graph')}>
+                <Brain size={18} /> View Graph
+              </button>
+            </div>
           </div>
           
           <div className="library-controls">
@@ -949,43 +954,6 @@ const Dashboard = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-            </div>
-          </div>
-          
-          {/* Quick Filters */}
-          <div className="quick-filters">
-            <button 
-              className={`quick-filter-btn ${quickFilter === 'all' ? 'active' : ''}`}
-              onClick={() => setQuickFilter('all')}
-            >
-              All Items
-            </button>
-            <button 
-              className={`quick-filter-btn warning ${quickFilter === 'due-soon' ? 'active' : ''}`}
-              onClick={() => setQuickFilter('due-soon')}
-            >
-              ⏰  Due Soon
-            </button>
-            <button 
-              className={`quick-filter-btn urgent ${quickFilter === 'fading' ? 'active' : ''}`}
-              onClick={() => setQuickFilter('fading')}
-            >
-              🔴  Fading
-            </button>
-            <button 
-              className={`quick-filter-btn success ${quickFilter === 'strong' ? 'active' : ''}`}
-              onClick={() => setQuickFilter('strong')}
-            >
-              ✅  Strong
-            </button>
-            
-            <div className="sort-controls">
-              <label>Sort by:</label>
-              <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-                <option value="priority">Priority</option>
-                <option value="recent">Recent</option>
-                <option value="score">Score</option>
-              </select>
             </div>
           </div>
           
