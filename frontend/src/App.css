@@ -1091,7 +1091,7 @@ html {
   align-items: center;
   justify-content: center;
   padding: 8rem 2rem 4rem;
-  background: var(--contrast-indigo);
+  background: var(--bg-light);
   position: relative;
 }
 
@@ -1103,7 +1103,7 @@ html {
 .vision-hero h1 {
   font-size: clamp(3rem, 6vw, 5rem);
   font-weight: 700;
-  color: white;
+  color: var(--contrast-indigo);
   margin-bottom: 1.5rem;
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -1111,7 +1111,7 @@ html {
 
 .vision-hero p {
   font-size: clamp(1.2rem, 2vw, 1.5rem);
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-gray);
   line-height: 1.7;
 }
 
