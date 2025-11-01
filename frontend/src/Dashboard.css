@@ -2580,13 +2580,24 @@
 
 .btn-start-session {
   width: 100%;
-  padding: 1rem;
-  font-size: 1rem;
-  font-weight: 600;
+  padding: 1.25rem;
+  font-size: 1.125rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
+  animation: buttonPulse 2s infinite;
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(14, 124, 123, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 12px rgba(14, 124, 123, 0.3),
+                0 0 0 3px rgba(14, 124, 123, 0.1);
+  }
 }
 
 /* Priority Pagination */
