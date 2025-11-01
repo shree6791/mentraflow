@@ -587,14 +587,6 @@ const Dashboard = () => {
         </Link>
         
         <div className="header-actions">
-          <button 
-            className="btn-guide"
-            onClick={() => setShowOnboarding(true)}
-            title="View quick start guide"
-          >
-            <FileText size={16} /> Quick Start
-          </button>
-          
           <div className="avatar-dropdown-container">
             <button 
               className="avatar-button"
