@@ -214,6 +214,18 @@ frontend:
         - agent: "main"
         - comment: "Known issue: Login page 'Access Demo' button shows 'Demo Access Coming Soon' modal. However, dashboard can be accessed directly via URL (/dashboard) and all features work correctly. This is a separate navigation flow issue, not related to the Library Item Detail Modal functionality."
 
+  - task: "Filter Bar - Single Line Layout (Desktop)"
+    implemented: false
+    working: false
+    file: "/app/frontend/src/Dashboard.css, /app/frontend/src/pages/Dashboard.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+        - working: false
+        - agent: "main"
+        - comment: "TODO: Filter buttons and Sort dropdown should be on same horizontal line in desktop view (left and right corners). Currently appearing as plain text on separate lines. CSS has flex-wrap: nowrap and margin-left: auto configured, but styled container not rendering properly. May need cache clear or container structure verification."
+
 metadata:
   created_by: "main_agent"
   version: "3.0"
