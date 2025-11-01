@@ -1098,10 +1098,14 @@ const Dashboard = () => {
                     </div>
                     
                     <div className="library-item-actions">
-                      {/* Primary Action - One clear button based on state */}
+                      {/* Primary Action - Color coded by urgency */}
                       {item.retention === 'fading' ? (
                         <button className="action-btn action-primary action-urgent" onClick={() => openLibraryItem(item, 'quiz')}>
                           <Brain size={18} /> Review Now
+                        </button>
+                      ) : item.retention === 'medium' ? (
+                        <button className="action-btn action-primary action-warning" onClick={() => openLibraryItem(item, 'quiz')}>
+                          <Brain size={18} /> Review Soon
                         </button>
                       ) : (
                         <button className="action-btn action-primary" onClick={() => openLibraryItem(item, 'quiz')}>
