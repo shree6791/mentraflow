@@ -1306,6 +1306,66 @@ const Dashboard = () => {
         </div>
       )}
 
+      {/* Onboarding Tooltip - Phase 3 */}
+      {showOnboarding && (
+        <div className="onboarding-overlay">
+          <div className="onboarding-tooltip">
+            <button className="onboarding-close" onClick={() => setShowOnboarding(false)}>
+              <X size={20} />
+            </button>
+            
+            {onboardingStep === 1 && (
+              <div className="onboarding-content">
+                <h3>👋 Welcome to MentraFlow!</h3>
+                <p>Let's get you started with building your knowledge base.</p>
+                <div className="onboarding-steps">
+                  <div className="onboarding-step active">
+                    <span className="step-number">1</span>
+                    <div>
+                      <h4>Upload your first note</h4>
+                      <p>Add any document, article, or notes you want to remember</p>
+                    </div>
+                  </div>
+                  <div className="onboarding-step">
+                    <span className="step-number">2</span>
+                    <div>
+                      <h4>Watch your knowledge graph grow</h4>
+                      <p>See how concepts connect and track your retention</p>
+                    </div>
+                  </div>
+                </div>
+                <button className="btn-primary" onClick={() => setShowOnboarding(false)}>
+                  Got it! Let's start
+                </button>
+              </div>
+            )}
+            
+            {onboardingStep === 2 && hasUploadedFirstNote && (
+              <div className="onboarding-content">
+                <h3>🎉 Great! You've uploaded your first note</h3>
+                <p>Now let's see how your memory graph evolves as you learn.</p>
+                <button 
+                  className="btn-primary" 
+                  onClick={() => {
+                    setShowGraph(true);
+                    setShowOnboarding(false);
+                  }}
+                >
+                  View Knowledge Graph
+                </button>
+                <button 
+                  className="btn-secondary" 
+                  onClick={() => setShowOnboarding(false)}
+                  style={{marginTop: '0.5rem'}}
+                >
+                  I'll explore later
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Toast Notification */}
       {toast && (
         <div className={`toast toast-${toast.type}`}>
