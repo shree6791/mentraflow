@@ -141,7 +141,7 @@ const Home = () => {
         <div className="fade-in">
           <h2 className="section-title">From scattered thoughts to structured recall.</h2>
         </div>
-        <div className="viz-container fade-in">
+        <Carousel className="viz-container">
           <div className="viz-card before">
             <h3>Before</h3>
             <p>Gray scattered notes. Ideas drift; connections fade.</p>
@@ -154,7 +154,7 @@ const Home = () => {
             <h3>After</h3>
             <p>Green-lit memory network. Everything strengthens and stays.</p>
           </div>
-        </div>
+        </Carousel>
       </section>
 
       {/* CTA (Merged Founder + Contact) */}
