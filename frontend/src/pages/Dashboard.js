@@ -371,6 +371,13 @@ const Dashboard = () => {
       setCurrentQuestionIndex(0);
       setShowQuizResults(false);
       setGenerating(false);
+      
+      // Phase 3: Check onboarding
+      if (!hasUploadedFirstNote) {
+        setHasUploadedFirstNote(true);
+        setOnboardingStep(2);
+      }
+      
       showToast('Summary and quiz generated!');
     }, 2000);
   };
