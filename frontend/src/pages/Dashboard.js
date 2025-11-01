@@ -4,6 +4,7 @@ import { LogOut, User, Upload, FileText, BarChart3, Brain, CheckCircle, XCircle,
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import KnowledgeGraph from '../components/KnowledgeGraph';
+import Tooltip from '../components/Tooltip';
 import '../Dashboard.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
