@@ -2583,6 +2583,45 @@
   gap: 0.5rem;
 }
 
+/* Priority Pagination */
+.priority-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+  border-top: 1px solid var(--divider);
+}
+
+.priority-nav-btn {
+  padding: 0.5rem 1rem;
+  background: white;
+  border: 1px solid var(--divider);
+  border-radius: 8px;
+  color: var(--text-dark);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.priority-nav-btn:hover:not(:disabled) {
+  background: var(--primary-teal);
+  color: white;
+  border-color: var(--primary-teal);
+}
+
+.priority-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.priority-page-info {
+  font-size: 0.875rem;
+  color: var(--text-gray);
+  font-weight: 500;
+}
+
 /* Caught Up State */
 .priority-section.caught-up {
   border-color: var(--retention-green);
