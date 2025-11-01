@@ -146,9 +146,11 @@ const Dashboard = () => {
       await axios.post(`${API}/auth/logout`, {}, {
         withCredentials: true
       });
+      authLogout(); // Clear auth context
       navigate('/');
     } catch (err) {
       console.error('Logout error:', err);
+      authLogout(); // Clear auth context even on error
       navigate('/');
     }
   };
