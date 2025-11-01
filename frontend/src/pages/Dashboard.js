@@ -339,6 +339,7 @@ const Dashboard = () => {
   // Quick Filters and Sorting
   const [quickFilter, setQuickFilter] = useState('all'); // all, fading, due-soon, strong
   const [sortBy, setSortBy] = useState('priority'); // priority, recent, score
+  const [showFilterModal, setShowFilterModal] = useState(false);
   
   // Pagination for Library
   const [currentPage, setCurrentPage] = useState(1);
