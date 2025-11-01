@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Check, Linkedin, Twitter, Youtube } from 'lucide-react';
+import Carousel from '../components/Carousel';
 
 const Pricing = () => {
   const navigate = useNavigate();
