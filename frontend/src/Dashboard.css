@@ -3091,39 +3091,39 @@
 }
 
 .retention-status {
-  padding: 0.5rem 0.75rem;
-  border-radius: 8px;
-  font-size: 0.875rem;
+  padding: 0.375rem 0.625rem;
+  border-radius: 6px;
+  font-size: 0.8125rem;
   font-weight: 500;
-  margin: 0.25rem 0;
+  margin: 0.15rem 0;
 }
 
 .retention-status-high {
-  background: rgba(76, 175, 80, 0.1);
+  background: rgba(76, 175, 80, 0.08);
   color: var(--retention-green);
 }
 
 .retention-status-medium {
-  background: rgba(255, 193, 7, 0.1);
+  background: rgba(255, 193, 7, 0.08);
   color: #F57C00;
 }
 
 .retention-status-fading {
-  background: rgba(255, 107, 107, 0.1);
+  background: rgba(255, 107, 107, 0.08);
   color: var(--neural-coral);
 }
 
 .library-item.retention-fading {
-  border-left: 4px solid var(--neural-coral);
-  background: linear-gradient(135deg, rgba(255, 107, 107, 0.02) 0%, rgba(255, 107, 107, 0.04) 100%);
+  border-left: 2px solid var(--neural-coral);
+  background: rgba(255, 107, 107, 0.015);
 }
 
 .library-item.retention-medium {
-  border-left: 4px solid var(--neuro-yellow);
+  border-left: 2px solid var(--neuro-yellow);
 }
 
 .library-item.retention-high {
-  border-left: 4px solid var(--retention-green);
+  border-left: 2px solid var(--retention-green);
 }
 
 .action-btn.action-urgent {
