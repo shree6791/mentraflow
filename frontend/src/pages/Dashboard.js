@@ -867,7 +867,10 @@ const Dashboard = () => {
         {itemsNeedingReview.length > 0 ? (
           <section className="priority-section">
             <div className="priority-header">
-              <h2>🎯 Your Priority Today</h2>
+              <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                <h2>🎯 Your Priority Today</h2>
+                <Tooltip content="Items that need review to prevent memory loss" position="right" />
+              </div>
               <span className="priority-badge">{itemsNeedingReview.length} items need review</span>
             </div>
             <p className="priority-subtitle">
