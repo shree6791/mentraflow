@@ -4060,6 +4060,7 @@ html {
   max-width: 1080px;
   margin: 0 auto;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  padding-top: 2rem; /* Space for "Most Popular" badge */
 }
 
 .pricing-card {
