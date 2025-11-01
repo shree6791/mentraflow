@@ -4206,6 +4206,7 @@ html {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(14, 124, 123, 0.3);
+  margin-top: auto;
 }
 
 .plan-cta:hover {
