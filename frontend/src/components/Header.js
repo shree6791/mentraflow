@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -20,6 +21,9 @@ const Header = () => {
       <Link to="/" className="logo">
         MentraFlow
       </Link>
+      
+      {/* Theme Toggle */}
+      <ThemeToggle />
       
       {/* Hamburger Toggle */}
       <button 
