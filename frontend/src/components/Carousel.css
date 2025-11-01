@@ -16,6 +16,7 @@
 .carousel-wrapper {
   display: flex;
   overflow-x: auto;
+  overflow-y: visible; /* Allow badges to show above cards */
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
