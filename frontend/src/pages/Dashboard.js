@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { LogOut, User, Upload, FileText, BarChart3, Brain, CheckCircle, XCircle, ChevronDown, ChevronUp, Menu, X, Search, Filter, Eye, PenTool, TrendingUp, Clock, Settings, CreditCard } from 'lucide-react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import AppHeader from '../components/AppHeader';
 import KnowledgeGraph from '../components/KnowledgeGraph';
 import Tooltip from '../components/Tooltip';
 import '../Dashboard.css';
