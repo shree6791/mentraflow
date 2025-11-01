@@ -1,0 +1,121 @@
+/* Carousel Component Styles */
+
+/* Desktop Grid - Shows all cards */
+.carousel-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+/* Mobile Carousel */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  padding: 0 0 3rem 0;
+}
+
+.carousel-wrapper {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+.carousel-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-wrapper > * {
+  flex: 0 0 85%;
+  scroll-snap-align: center;
+}
+
+/* Navigation Arrows */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.carousel-arrow:hover {
+  background: var(--primary-teal);
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-arrow-left {
+  left: 0;
+}
+
+.carousel-arrow-right {
+  right: 0;
+}
+
+/* Dots Indicator */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: #CBD5E0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.carousel-dot.active {
+  background: var(--primary-teal);
+  width: 24px;
+  border-radius: 4px;
+}
+
+.carousel-dot:hover {
+  background: var(--mind-blue);
+}
+
+/* Desktop - No carousel, show grid */
+@media (min-width: 768px) {
+  .carousel-container {
+    padding: 0;
+  }
+  
+  .carousel-wrapper {
+    display: grid;
+    overflow-x: visible;
+    scroll-snap-type: none;
+    gap: 2rem;
+    padding: 0;
+  }
+  
+  .carousel-wrapper > * {
+    flex: unset;
+  }
+  
+  .carousel-arrow,
+  .carousel-dots {
+    display: none;
+  }
+}
