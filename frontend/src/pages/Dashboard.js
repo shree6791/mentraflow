@@ -1002,14 +1002,6 @@ const Dashboard = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            <select 
-              className="filter-select"
-              value={filterStatus}
-              onChange={(e) => setFilterStatus(e.target.value)}
-            >
-              <option value="all">All Status</option>
-              <option value="summarized">Summarized</option>
-            </select>
           </div>
           
           {/* Quick Filters */}
