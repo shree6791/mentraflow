@@ -16,6 +16,8 @@ const KnowledgeGraph = ({ topics, userAvatar, userName, onClose, onReinforce }) 
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [isLoading, setIsLoading] = useState(true);
+  const [focusedNodeIndex, setFocusedNodeIndex] = useState(null);
 
   // Enhanced graph data with library connections
   const graphData = [
