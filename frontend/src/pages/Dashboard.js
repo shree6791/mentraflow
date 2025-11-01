@@ -901,14 +901,17 @@ const Dashboard = () => {
                 strokeLinecap="round"
               />
               <text x="40" y="40" className="progress-ring-text-large" textAnchor="middle" dominantBaseline="middle">
-                {itemsNeedingReview.filter(i => i.retention === 'fading').length}
+                {itemsNeedingReview.length}
               </text>
             </svg>
           </div>
           <div className="stat-banner-content">
             <h3>Priority Today</h3>
             <p className="stat-context">
-              {itemsNeedingReview.length} items need review
+              {itemsNeedingReview.filter(i => i.retention === 'fading').length > 0 
+                ? `${itemsNeedingReview.filter(i => i.retention === 'fading').length} critical ${itemsNeedingReview.filter(i => i.retention === 'fading').length === 1 ? 'item' : 'items'} need review`
+                : `${itemsNeedingReview.length} items need review`
+              }
             </p>
           </div>
         </div>
