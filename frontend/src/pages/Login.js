@@ -146,13 +146,26 @@ const Login = () => {
   }
 
   return (
-    <div className="login-page">
-      <div className="login-container">
-        <div className="auth-card">
-          <Link to="/" className="logo-link">
-            <h1 className="auth-logo">MentraFlow</h1>
+    <div className="login-page-integrated">
+      {/* Header */}
+      <header className={`header ${scrolled ? 'scrolled' : ''}`}>
+        <Link to="/" className="logo">
+          MentraFlow
+        </Link>
+        <nav className="nav">
+          <a href="/#hero" className="nav-link">Home</a>
+          <Link to="/science" className="nav-link">Science</Link>
+          <Link to="/vision" className="nav-link">Vision</Link>
+          <Link to="/contact" className="nav-link">Contact</Link>
+          <Link to="/login" className="btn-login">
+            Login
           </Link>
-          
+        </nav>
+      </header>
+
+      {/* Login Content */}
+      <div className="login-content-wrapper">
+        <div className="auth-card-glass">
           <div className="auth-header">
             <h2>Welcome back to MentraFlow.</h2>
             <p>Your personalized memory workspace.</p>
@@ -235,11 +248,33 @@ const Login = () => {
             </button>
           </div>
         </div>
-
-        <div className="login-tagline">
-          Because knowledge isn't stored — it's strengthened.
-        </div>
       </div>
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="footer-content">
+          <div className="footer-links">
+            <a href="/#hero" className="footer-link">Home</a>
+            <Link to="/science" className="footer-link">Science</Link>
+            <Link to="/vision" className="footer-link">Vision</Link>
+            <Link to="/contact" className="footer-link">Contact</Link>
+          </div>
+          <div className="social-links">
+            <a href="#" className="social-link" aria-label="LinkedIn">
+              <Linkedin size={20} />
+            </a>
+            <a href="#" className="social-link" aria-label="Twitter">
+              <Twitter size={20} />
+            </a>
+            <a href="#" className="social-link" aria-label="YouTube">
+              <Youtube size={20} />
+            </a>
+          </div>
+          <p className="footer-tagline">
+            Because knowledge isn't stored — it's strengthened.
+          </p>
+        </div>
+      </footer>
 
       {/* Early Access Modal */}
       {showEarlyAccessModal && (
