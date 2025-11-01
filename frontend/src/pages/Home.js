@@ -126,7 +126,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Visualization Section */}
+      {/* Visualization */}
       <section id="visualization" className="section viz-section">
         <div className="fade-in">
           <h2 className="section-title">From scattered thoughts to structured recall.</h2>
