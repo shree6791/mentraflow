@@ -10,6 +10,7 @@ import Dashboard from './pages/Dashboard';
 import Pricing from './pages/Pricing';
 import Billing from './pages/Billing';
 import Payment from './pages/Payment';
+import Activity from './pages/Activity';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/billing" element={<Billing />} />
             <Route path="/payment" element={<Payment />} />
+            <Route path="/activity" element={<Activity />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
