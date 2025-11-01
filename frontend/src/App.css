@@ -4108,14 +4108,14 @@ html {
   top: -16px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, var(--neuro-yellow) 0%, var(--coral) 100%);
-  color: var(--inverse-text);
+  background: #0E7C7B;
+  color: white;
   padding: 0.5rem 1.5rem;
   border-radius: 50px;
   font-family: 'Inter', sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(14, 124, 123, 0.4);
   white-space: nowrap;
   z-index: 10;
 }
