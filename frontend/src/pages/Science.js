@@ -43,7 +43,7 @@ const Science = () => {
         <nav className="nav">
           <Link to="/" className="nav-link">Home</Link>
           <Link to="/science" className="nav-link">Science</Link>
-          <a href="/#vision" className="nav-link">Vision</a>
+          <Link to="/vision" className="nav-link">Vision</Link>
           <a href="/#contact" className="nav-link">Contact</a>
           <button className="btn-login" onClick={() => window.location.href = '/#contact'}>
             Login
