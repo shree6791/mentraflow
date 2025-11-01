@@ -1060,16 +1060,7 @@ const Dashboard = () => {
                 {paginatedLibraryItems.map(item => (
                   <div key={item.id} className={`library-item retention-${item.retention || 'none'}`}>
                     <div className="library-item-header">
-                      <div className="library-item-title-group">
-                        {item.retention && (
-                          <span className={`retention-indicator retention-${item.retention}`}>
-                            {item.retention === 'high' && '🟢'}
-                            {item.retention === 'medium' && '🟡'}
-                            {item.retention === 'fading' && '🔴'}
-                          </span>
-                        )}
-                        <h3>{item.title}</h3>
-                      </div>
+                      <h3>{item.title}</h3>
                     </div>
                     
                     {/* Compact Meta Row - Status, Countdown, Filename, Summary & Score all in one line */}
