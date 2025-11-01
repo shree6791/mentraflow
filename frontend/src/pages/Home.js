@@ -215,7 +215,7 @@ const Home = () => {
           <div className="footer-links">
             <a href="#hero" className="footer-link">Home</a>
             <Link to="/science" className="footer-link">Science</Link>
-            <a href="#vision" className="footer-link">Vision</a>
+            <Link to="/vision" className="footer-link">Vision</Link>
             <a href="#contact" className="footer-link">Contact</a>
           </div>
           <div className="social-links">
