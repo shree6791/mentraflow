@@ -108,7 +108,7 @@ const Vision = () => {
         <div className="fade-in">
           <h2 className="section-title">The World's Information Challenge</h2>
         </div>
-        <div className="challenge-grid fade-in">
+        <Carousel className="challenge-grid">
           <div className="challenge-card">
             <div className="challenge-number">2x</div>
             <h3>Information Doubles</h3>
@@ -124,7 +124,7 @@ const Vision = () => {
             <h3>Productivity Cost</h3>
             <p>Organizations lose billions annually to knowledge silos and forgotten training.</p>
           </div>
-        </div>
+        </Carousel>
       </section>
 
       {/* Future Outlook Section */}
