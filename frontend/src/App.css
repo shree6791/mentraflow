@@ -1145,16 +1145,16 @@ html {
 
 /* Memory Graph Section */
 .memory-graph-section {
-  background: linear-gradient(135deg, var(--primary-teal) 0%, var(--mind-blue) 100%);
+  background: var(--surface);
   padding: 6rem 2rem;
 }
 
 .memory-graph-section .section-title {
-  color: white;
+  color: var(--contrast-indigo);
 }
 
 .memory-graph-section .section-subtitle {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-gray);
 }
 
 .graph-container {
