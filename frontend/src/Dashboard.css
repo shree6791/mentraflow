@@ -319,6 +319,9 @@
   text-decoration: underline;
   padding: 0;
   transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .link-btn:hover {
