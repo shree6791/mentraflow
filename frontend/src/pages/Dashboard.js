@@ -236,10 +236,16 @@ const Dashboard = () => {
                 <div className="node-dot high"></div>
                 <div className="node-dot medium"></div>
               </div>
-              <div className="graph-legend">
-                <span className="legend-item"><span className="dot high"></span> High</span>
-                <span className="legend-item"><span className="dot medium"></span> Medium</span>
-                <span className="legend-item"><span className="dot fading"></span> Fading</span>
+              <div className="graph-legend-mini">
+                <span className="legend-mini-item">
+                  <span className="dot-mini high"></span> High
+                </span>
+                <span className="legend-mini-item">
+                  <span className="dot-mini medium"></span> Medium
+                </span>
+                <span className="legend-mini-item">
+                  <span className="dot-mini fading"></span> Fading
+                </span>
               </div>
             </div>
             <button className="link-btn" onClick={() => setShowGraph(true)}>
