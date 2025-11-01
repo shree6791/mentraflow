@@ -1097,6 +1097,161 @@ const Dashboard = () => {
         </div>
       )}
 
+      {/* Recall Quiz Modal - Phase 2 */}
+      {showRecallQuiz && recallQuizData && (
+        <div className="modal-overlay" onClick={() => setShowRecallQuiz(false)}>
+          <div className="modal-content recall-quiz-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Quick Recall: {currentRecallTask?.title}</h2>
+              <button className="modal-close" onClick={() => setShowRecallQuiz(false)}>
+                <X size={24} />
+              </button>
+            </div>
+            <div className="modal-body">
+              <div className="quiz-progress-bar">
+                <div 
+                  className="quiz-progress-fill"
+                  style={{width: `${((currentQuestionIndex + 1) / recallQuizData.length) * 100}%`}}
+                ></div>
+              </div>
+              
+              <div className="quiz-question">
+                <p className="question-number">Question {currentQuestionIndex + 1} of {recallQuizData.length}</p>
+                <h3>{recallQuizData[currentQuestionIndex].q}</h3>
+                <div className="quiz-options">
+                  {recallQuizData[currentQuestionIndex].options.map((option, idx) => (
+                    <button
+                      key={idx}
+                      className={`quiz-option ${quizAnswers[currentQuestionIndex] === idx ? 'selected' : ''}`}
+                      onClick={() => handleQuizAnswer(currentQuestionIndex, idx)}
+                    >
+                      <span className="option-letter">{String.fromCharCode(65 + idx)}</span>
+                      <span className="option-text">{option}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="quiz-navigation">
+                <button 
+                  className="btn-secondary"
+                  onClick={previousQuestion}
+                  disabled={currentQuestionIndex === 0}
+                >
+                  Previous
+                </button>
+                {currentQuestionIndex < recallQuizData.length - 1 ? (
+                  <button 
+                    className="btn-primary"
+                    onClick={nextQuestion}
+                    disabled={quizAnswers[currentQuestionIndex] === undefined}
+                  >
+                    Next
+                  </button>
+                ) : (
+                  <button 
+                    className="btn-primary"
+                    onClick={submitRecallQuiz}
+                    disabled={Object.keys(quizAnswers).length !== recallQuizData.length}
+                  >
+                    Submit
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Quiz Customization Modal - Phase 2 */}
+      {showQuizCustomization && (
+        <div className="modal-overlay" onClick={() => setShowQuizCustomization(false)}>
+          <div className="modal-content quiz-custom-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Customize Your Quiz</h2>
+              <button className="modal-close" onClick={() => setShowQuizCustomization(false)}>
+                <X size={24} />
+              </button>
+            </div>
+            <div className="modal-body">
+              <form className="quiz-custom-form">
+                <div className="form-group">
+                  <label>Number of Questions</label>
+                  <select
+                    value={quizConfig.questionCount}
+                    onChange={(e) => setQuizConfig({...quizConfig, questionCount: parseInt(e.target.value)})}
+                  >
+                    <option value={5}>5 Questions</option>
+                    <option value={10}>10 Questions</option>
+                    <option value={15}>15 Questions</option>
+                  </select>
+                </div>
+                
+                <div className="form-group">
+                  <label>Difficulty Level</label>
+                  <div className="difficulty-options">
+                    <button
+                      type="button"
+                      className={`difficulty-btn ${quizConfig.difficulty === 'easy' ? 'active' : ''}`}
+                      onClick={() => setQuizConfig({...quizConfig, difficulty: 'easy'})}
+                    >
+                      🟢 Easy
+                      <span className="difficulty-desc">60% recall, 30% conceptual, 10% applied</span>
+                    </button>
+                    <button
+                      type="button"
+                      className={`difficulty-btn ${quizConfig.difficulty === 'balanced' ? 'active' : ''}`}
+                      onClick={() => setQuizConfig({...quizConfig, difficulty: 'balanced'})}
+                    >
+                      🟡 Balanced
+                      <span className="difficulty-desc">Mixed difficulty across all types</span>
+                    </button>
+                    <button
+                      type="button"
+                      className={`difficulty-btn ${quizConfig.difficulty === 'advanced' ? 'active' : ''}`}
+                      onClick={() => setQuizConfig({...quizConfig, difficulty: 'advanced'})}
+                    >
+                      🔴 Advanced
+                      <span className="difficulty-desc">30% recall, 40% conceptual, 30% applied</span>
+                    </button>
+                  </div>
+                </div>
+                
+                <div className="form-group">
+                  <label>Focus Area</label>
+                  <select
+                    value={quizConfig.focusArea}
+                    onChange={(e) => setQuizConfig({...quizConfig, focusArea: e.target.value})}
+                  >
+                    <option value="all">All Topics</option>
+                    {topics.map(topic => (
+                      <option key={topic.id} value={topic.id}>{topic.title}</option>
+                    ))}
+                  </select>
+                </div>
+                
+                <div className="form-actions">
+                  <button 
+                    type="button" 
+                    className="btn-secondary" 
+                    onClick={() => setShowQuizCustomization(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button 
+                    type="button" 
+                    className="btn-primary" 
+                    onClick={generateCustomQuiz}
+                  >
+                    <Brain size={18} /> Generate Custom Quiz
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Toast Notification */}
       {toast && (
         <div className={`toast toast-${toast.type}`}>
