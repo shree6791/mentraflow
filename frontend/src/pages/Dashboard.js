@@ -439,13 +439,9 @@ const Dashboard = () => {
 
       {/* Knowledge Graph Modal */}
       {showGraph && (
-        <div className="modal-overlay" onClick={() => setShowGraph(false)}>
-          <div className="modal-content graph-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setShowGraph(false)}>
-              ×
-            </button>
-            <h2>Your Knowledge Graph</h2>
-            <KnowledgeGraph topics={topics} />
+        <div className="modal-overlay-graph" onClick={() => setShowGraph(false)}>
+          <div className="modal-content-graph" onClick={(e) => e.stopPropagation()}>
+            <KnowledgeGraph topics={topics} onClose={() => setShowGraph(false)} />
           </div>
         </div>
       )}
