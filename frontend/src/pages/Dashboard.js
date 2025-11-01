@@ -783,28 +783,6 @@ const Dashboard = () => {
           </section>
         )}
         
-        {/* Streak Motivation Widget */}
-        {streak > 0 && (
-          <section className="streak-widget">
-            <div className="streak-content">
-              <div className="streak-icon">🔥</div>
-              <div className="streak-info">
-                <h3>{streak} Day Streak!</h3>
-                <p>{daysToNextMilestone === 0 ? '🎉 Milestone reached!' : `${daysToNextMilestone} ${daysToNextMilestone === 1 ? 'day' : 'days'} to next milestone`}</p>
-              </div>
-              <div className="streak-progress-container">
-                <div className="streak-progress-bar">
-                  <div 
-                    className="streak-progress-fill" 
-                    style={{width: `${streakProgress}%`}}
-                  ></div>
-                </div>
-                <span className="streak-percentage">{Math.round(streakProgress)}%</span>
-              </div>
-            </div>
-          </section>
-        )}
-        
         {/* Quick Capture Widget - Collapsible */}
         <div className={`quick-capture-widget ${isCaptureExpanded ? 'expanded' : 'collapsed'}`}>
           {!isCaptureExpanded ? (
