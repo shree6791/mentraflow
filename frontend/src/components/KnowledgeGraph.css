@@ -59,8 +59,8 @@
   display: flex;
   gap: 1rem;
   padding: 1rem 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: white;
+  border-bottom: 1px solid var(--divider);
   flex-wrap: wrap;
 }
 
@@ -68,16 +68,16 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--bg-light);
   padding: 0.5rem 1rem;
   border-radius: 8px;
   flex: 1;
   min-width: 200px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--divider);
 }
 
 .graph-search svg {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-gray);
 }
 
 .graph-search input {
@@ -85,12 +85,12 @@
   background: none;
   outline: none;
   font-size: 0.95rem;
-  color: white;
+  color: var(--text-dark);
   flex: 1;
 }
 
 .graph-search input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-gray);
 }
 
 .graph-filters {
