@@ -198,7 +198,7 @@ const Payment = () => {
                 className="btn-submit-payment"
                 disabled={processing}
               >
-                {processing ? 'Processing...' : `Pay $${selectedPlan.price}${selectedPlan.period}`}
+                {processing ? 'Processing...' : `Pay $${totalPrice}/month`}
               </button>
 
               <p className="payment-note">
