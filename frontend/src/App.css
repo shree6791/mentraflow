@@ -246,11 +246,11 @@ html {
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.95);
-  color: var(--contrast-indigo);
+  background: white;
+  color: var(--primary-teal);
   padding: 1rem 2.5rem;
   border-radius: 50px;
-  border: 2px solid var(--contrast-indigo);
+  border: 2px solid var(--primary-teal);
   font-weight: 600;
   font-size: 1.05rem;
   cursor: pointer;
@@ -258,14 +258,13 @@ html {
   text-decoration: none;
   display: inline-block;
   font-family: var(--font-body);
-  backdrop-filter: blur(10px);
 }
 
 .btn-secondary:hover {
-  background: var(--contrast-indigo);
+  background: var(--primary-teal);
   color: white;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(7, 59, 76, 0.3);
+  box-shadow: 0 4px 12px rgba(14, 124, 123, 0.3);
 }
 
 /* Section Styles */
