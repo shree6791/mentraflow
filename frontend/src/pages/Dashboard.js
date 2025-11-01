@@ -2024,6 +2024,96 @@ const Dashboard = () => {
         </div>
       )}
 
+      {/* Filter Modal */}
+      {showFilterModal && (
+        <div className="modal-overlay" onClick={() => setShowFilterModal(false)}>
+          <div className="modal-content filter-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Filters & Sorting</h2>
+              <button className="modal-close" onClick={() => setShowFilterModal(false)}>
+                <X size={24} />
+              </button>
+            </div>
+            <div className="modal-body">
+              <div className="filter-section">
+                <h3>Filter by Status</h3>
+                <div className="filter-buttons">
+                  <button 
+                    className={`filter-option-btn ${quickFilter === 'all' ? 'active' : ''}`}
+                    onClick={() => {
+                      setQuickFilter('all');
+                      setShowFilterModal(false);
+                    }}
+                  >
+                    All Items
+                  </button>
+                  <button 
+                    className={`filter-option-btn warning ${quickFilter === 'due-soon' ? 'active' : ''}`}
+                    onClick={() => {
+                      setQuickFilter('due-soon');
+                      setShowFilterModal(false);
+                    }}
+                  >
+                    ⏰  Due Soon
+                  </button>
+                  <button 
+                    className={`filter-option-btn urgent ${quickFilter === 'fading' ? 'active' : ''}`}
+                    onClick={() => {
+                      setQuickFilter('fading');
+                      setShowFilterModal(false);
+                    }}
+                  >
+                    🔴  Fading
+                  </button>
+                  <button 
+                    className={`filter-option-btn success ${quickFilter === 'strong' ? 'active' : ''}`}
+                    onClick={() => {
+                      setQuickFilter('strong');
+                      setShowFilterModal(false);
+                    }}
+                  >
+                    ✅  Strong
+                  </button>
+                </div>
+              </div>
+
+              <div className="filter-section">
+                <h3>Sort by</h3>
+                <div className="sort-options">
+                  <button 
+                    className={`sort-option-btn ${sortBy === 'priority' ? 'active' : ''}`}
+                    onClick={() => {
+                      setSortBy('priority');
+                      setShowFilterModal(false);
+                    }}
+                  >
+                    Priority
+                  </button>
+                  <button 
+                    className={`sort-option-btn ${sortBy === 'recent' ? 'active' : ''}`}
+                    onClick={() => {
+                      setSortBy('recent');
+                      setShowFilterModal(false);
+                    }}
+                  >
+                    Recent
+                  </button>
+                  <button 
+                    className={`sort-option-btn ${sortBy === 'score' ? 'active' : ''}`}
+                    onClick={() => {
+                      setSortBy('score');
+                      setShowFilterModal(false);
+                    }}
+                  >
+                    Score
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Toast Notification */}
       {toast && (
         <div className={`toast toast-${toast.type}`}>
