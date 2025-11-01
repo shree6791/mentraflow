@@ -2418,6 +2418,10 @@ html {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.dot-mini.high { background: #06D6A0; }
+.dot-mini.medium { background: #FFD166; }
+.dot-mini.fading { background: #FF6B6B; }
+
 .link-btn {
   background: none;
   border: none;
