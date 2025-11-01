@@ -948,28 +948,56 @@ const Dashboard = () => {
             <>
               <div className="library-list">
                 {paginatedLibraryItems.map(item => (
-                  <div key={item.id} className="library-item">
+                  <div key={item.id} className={`library-item retention-${item.retention || 'none'}`}>
                     <div className="library-item-header">
-                      <h3>{item.title}</h3>
+                      <div className="library-item-title-group">
+                        {item.retention && (
+                          <span className={`retention-indicator retention-${item.retention}`}>
+                            {item.retention === 'high' && '🟢'}
+                            {item.retention === 'medium' && '🟡'}
+                            {item.retention === 'fading' && '🔴'}
+                          </span>
+                        )}
+                        <h3>{item.title}</h3>
+                      </div>
                       <span className={`status-badge status-${item.status}`}>
                         {item.status === 'summarized' && '✅ Summarized'}
                         {item.status === 'quiz-available' && '🧠 Quiz Available'}
                         {item.status === 'pending' && '⏳ Pending'}
                       </span>
                     </div>
+                    
+                    {/* Retention Status */}
+                    {item.retention && (
+                      <div className={`retention-status retention-status-${item.retention}`}>
+                        {item.retention === 'high' && (
+                          <span>✅ Strong Memory • Last reviewed {item.lastReview}</span>
+                        )}
+                        {item.retention === 'medium' && (
+                          <span>⚠️ Review Soon • Last reviewed {item.lastReview}</span>
+                        )}
+                        {item.retention === 'fading' && (
+                          <span>🔴 Fading Fast! • Last reviewed {item.lastReview}</span>
+                        )}
+                      </div>
+                    )}
+                    
                     <p className="library-item-meta">
                       {item.filename} • Uploaded {new Date(item.uploadDate).toLocaleDateString()}
                     </p>
-                    {item.lastReview && (
-                      <p className="library-item-review">Last reviewed: {item.lastReview}</p>
-                    )}
+                    
                     <div className="library-item-actions">
+                      {item.retention === 'fading' && (
+                        <button className="action-btn action-urgent" onClick={() => openLibraryItem(item, 'quiz')}>
+                          <Brain size={16} /> Review Now
+                        </button>
+                      )}
                       {item.status === 'summarized' && (
                         <button className="action-btn" onClick={() => openLibraryItem(item, 'summary')}>
                           <Eye size={16} /> View Summary
                         </button>
                       )}
-                      {item.hasQuiz && (
+                      {item.hasQuiz && item.retention !== 'fading' && (
                         <button className="action-btn" onClick={() => openLibraryItem(item, 'quiz')}>
                           <Brain size={16} /> Take Quiz
                         </button>
