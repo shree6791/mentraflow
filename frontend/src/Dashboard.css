@@ -2035,6 +2035,7 @@
   background: white;
   border-bottom: 1px solid var(--divider);
   width: 100%;
+  box-sizing: border-box;
 }
 
 .stat-banner-item {
