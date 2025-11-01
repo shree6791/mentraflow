@@ -44,8 +44,8 @@ const Vision = () => {
           <Link to="/" className="nav-link">Home</Link>
           <Link to="/science" className="nav-link">Science</Link>
           <Link to="/vision" className="nav-link">Vision</Link>
-          <a href="/#contact" className="nav-link">Contact</a>
-          <button className="btn-login" onClick={() => window.location.href = '/#contact'}>
+          <Link to="/contact" className="nav-link">Contact</Link>
+          <button className="btn-login" onClick={() => window.location.href = '/contact'}>
             Login
           </button>
         </nav>
