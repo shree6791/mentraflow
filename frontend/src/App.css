@@ -4337,7 +4337,7 @@ html {
 /* Benefits Section */
 .pricing-benefits-section {
   padding: 80px 2rem;
-  background: linear-gradient(135deg, var(--primary-teal) 0%, var(--mind-blue) 100%);
+  background: var(--bg-light);
 }
 
 .benefits-container {
