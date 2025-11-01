@@ -695,6 +695,46 @@ html {
   font-style: italic;
 }
 
+/* Footer Mobile/Tablet Optimization */
+@media (max-width: 968px) {
+  .footer {
+    padding: 2rem 1.5rem 1.5rem;
+  }
+  
+  .footer-content {
+    gap: 1.5rem;
+  }
+  
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem 1.5rem;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .footer-link {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  
+  .footer-tagline {
+    font-size: 0.85rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-links {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+  
+  .footer-link {
+    font-size: 0.85rem;
+  }
+}
+
 /* Modal */
 .modal-overlay {
   position: fixed;
