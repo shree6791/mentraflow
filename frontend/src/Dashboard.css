@@ -2240,3 +2240,220 @@
     gap: 1rem;
   }
 }
+
+
+/* ========================================
+   QUICK CAPTURE WIDGET - Collapsible
+   ======================================== */
+
+.quick-capture-widget {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--divider);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.quick-capture-widget.collapsed {
+  border: 2px solid var(--primary-teal);
+}
+
+.quick-capture-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, var(--primary-teal), var(--mind-blue));
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.quick-capture-trigger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(14, 124, 123, 0.3);
+}
+
+.quick-capture-trigger .chevron-icon {
+  margin-left: auto;
+  transition: transform 0.3s ease;
+}
+
+.quick-capture-content {
+  padding: 1.5rem;
+}
+
+.capture-widget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.capture-widget-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.capture-widget-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-customize-small {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-light);
+  border: 1px solid var(--divider);
+  border-radius: 8px;
+  color: var(--primary-teal);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-customize-small:hover {
+  background: var(--primary-teal);
+  color: white;
+}
+
+.btn-collapse {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background: var(--bg-light);
+  border: 1px solid var(--divider);
+  border-radius: 8px;
+  color: var(--text-gray);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-collapse:hover {
+  background: var(--neural-coral);
+  color: white;
+  border-color: var(--neural-coral);
+}
+
+/* ========================================
+   PAGINATION CONTROLS
+   ======================================== */
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--divider);
+}
+
+.pagination-btn {
+  padding: 0.5rem 1rem;
+  background: white;
+  border: 1px solid var(--divider);
+  border-radius: 8px;
+  color: var(--text-dark);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: var(--primary-teal);
+  color: white;
+  border-color: var(--primary-teal);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination-numbers {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.pagination-number {
+  min-width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background: white;
+  border: 1px solid var(--divider);
+  border-radius: 8px;
+  color: var(--text-dark);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pagination-number:hover {
+  background: var(--bg-light);
+  border-color: var(--primary-teal);
+}
+
+.pagination-number.active {
+  background: var(--primary-teal);
+  color: white;
+  border-color: var(--primary-teal);
+}
+
+.library-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--divider);
+  font-size: 0.875rem;
+  color: var(--text-gray);
+}
+
+.library-info p {
+  margin: 0;
+}
+
+.autosave-text {
+  color: var(--primary-teal);
+  font-weight: 500;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .pagination-controls {
+    flex-wrap: wrap;
+  }
+  
+  .pagination-numbers {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+  
+  .library-info {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+}
+
