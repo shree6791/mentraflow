@@ -608,24 +608,31 @@ const KnowledgeGraph = ({ topics, userAvatar, userName, onClose, onReinforce }) 
           </button>
         </div>
 
-        {/* Legend */}
-        <div className="graph-legend">
-          <h4>Retention Strength</h4>
-          <div className="legend-items">
-            <div className="legend-item">
-              <div className="legend-dot" style={{background: '#06D6A0'}}></div>
-              <span>High (≥80%)</span>
+            {/* Legend */}
+            <div className="graph-legend">
+              <h4>Retention Strength</h4>
+              <div className="legend-items">
+                <div className="legend-item">
+                  <div className="legend-dot" style={{background: '#06D6A0'}}></div>
+                  <span>High (≥80%)</span>
+                </div>
+                <div className="legend-item">
+                  <div className="legend-dot" style={{background: '#FFD166'}}></div>
+                  <span>Medium (50-79%)</span>
+                </div>
+                <div className="legend-item">
+                  <div className="legend-dot" style={{background: '#EF476F'}}></div>
+                  <span>Fading (&lt;50%)</span>
+                </div>
+              </div>
             </div>
-            <div className="legend-item">
-              <div className="legend-dot" style={{background: '#FFD166'}}></div>
-              <span>Medium (50-79%)</span>
+
+            {/* Keyboard Navigation Hint */}
+            <div className="keyboard-hint">
+              <span>💡 Use ← → arrows to navigate • ESC to close</span>
             </div>
-            <div className="legend-item">
-              <div className="legend-dot" style={{background: '#EF476F'}}></div>
-              <span>Fading (&lt;50%)</span>
-            </div>
-          </div>
-        </div>
+          </>
+        )}
       </div>
 
       {/* Detail Modal */}
