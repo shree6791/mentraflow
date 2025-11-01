@@ -983,7 +983,10 @@ const Dashboard = () => {
         {/* My Knowledge Library - Main Content */}
         <section className="dashboard-section library-section-main">
           <div className="section-header">
-            <h2>My Knowledge Library</h2>
+            <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+              <h2>My Knowledge Library</h2>
+              <Tooltip content="All your captured knowledge organized by retention strength" position="right" />
+            </div>
             <button className="btn-icon-text" onClick={() => setShowGraph(true)}>
               <Brain size={18} /> View Graph
             </button>
