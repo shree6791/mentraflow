@@ -6,36 +6,29 @@ const Home = () => {
   const [scrolled, setScrolled] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  // Handle scroll for header
+  // Header shadow on scroll
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Intersection Observer for fade-in animations
+  // Fade-in on view
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      },
+      entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
       { threshold: 0.1 }
     );
-
-    const elements = document.querySelectorAll('.fade-in');
-    elements.forEach((el) => observer.observe(el));
-
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
   const scrollToContact = () => {
-    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToHow = () => {
+    document.getElementById('how')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
