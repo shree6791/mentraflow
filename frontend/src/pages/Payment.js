@@ -21,11 +21,11 @@ const Payment = () => {
   const [processing, setProcessing] = useState(false);
   const [applePayAvailable, setApplePayAvailable] = useState(false);
 
-  // Check if Apple Pay is available
+  // Check if Apple Pay is available (for demo, always show)
   useEffect(() => {
-    if (window.ApplePaySession) {
-      setApplePayAvailable(ApplePaySession.canMakePayments());
-    }
+    // In production: check if (window.ApplePaySession)
+    // For demo purposes, always show
+    setApplePayAvailable(true);
   }, []);
 
   // Plan details
