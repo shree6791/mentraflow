@@ -65,6 +65,18 @@ const Dashboard = () => {
   const [toast, setToast] = useState(null);
 
   useEffect(() => {
+    // TEMPORARY: Bypass authentication for demo
+    const mockUser = {
+      id: 'demo-user',
+      email: 'demo@mentraflow.com',
+      name: 'Demo User',
+      picture: 'https://ui-avatars.com/api/?name=Demo+User&background=0E7C7B&color=fff&size=150'
+    };
+    
+    setUser(mockUser);
+    setLoading(false);
+    
+    /* COMMENTED OUT - Re-enable for production auth
     const fetchUser = async () => {
       try {
         const response = await axios.get(`${API}/auth/me`, {
@@ -79,6 +91,7 @@ const Dashboard = () => {
     };
 
     fetchUser();
+    */
   }, [navigate]);
 
   const showToast = (message, type = 'success') => {
