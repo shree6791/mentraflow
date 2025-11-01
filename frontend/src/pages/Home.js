@@ -46,7 +46,7 @@ const Home = () => {
         </nav>
       </header>
 
-      {/* Hero Section */}
+      {/* Hero */}
       <section id="hero" className="hero-section">
         <div className="hero-bg">
           <div className="neural-node"></div>
@@ -59,15 +59,14 @@ const Home = () => {
           <h1>Don't just learn — retain what matters.</h1>
           <p>
             You highlight an idea. You promise to revisit it.<br />
-            But it fades.<br />
-            MentraFlow brings that 'aha moment' back — right when you're about to lose it.
+            But it fades. MentraFlow brings that aha moment back — right when it's about to fade.
           </p>
           <div className="hero-cta">
             <button className="btn-primary" onClick={scrollToContact}>
               Experience the Demo
             </button>
-            <button className="btn-secondary" onClick={() => document.getElementById('problem').scrollIntoView({ behavior: 'smooth' })}>
-              Why We Forget
+            <button className="btn-secondary" onClick={scrollToHow}>
+              How It Works
             </button>
           </div>
         </div>
