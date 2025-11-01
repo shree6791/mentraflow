@@ -1822,3 +1822,200 @@
     margin: 0;
   }
 }
+
+/* ========================================
+   LIBRARY ITEM DETAIL MODAL
+   ======================================== */
+
+.library-detail-modal {
+  max-width: 800px;
+  width: 90%;
+  max-height: 85vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-gray);
+  margin: 0.25rem 0 0 0;
+}
+
+/* Tabs */
+.library-modal-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--divider);
+  background: var(--bg-light);
+  padding: 0 1.5rem;
+}
+
+.library-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-gray);
+  transition: all 0.3s ease;
+  margin-bottom: -2px;
+}
+
+.library-tab:hover:not(:disabled) {
+  color: var(--primary-teal);
+  background: rgba(14, 124, 123, 0.05);
+}
+
+.library-tab.active {
+  color: var(--primary-teal);
+  border-bottom-color: var(--primary-teal);
+  font-weight: 600;
+}
+
+.library-tab:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Modal Body */
+.library-modal-body {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.library-tab-content {
+  padding: 2rem;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Performance Tab */
+.performance-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.perf-stat-card {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(14, 124, 123, 0.05), rgba(17, 138, 178, 0.05));
+  border-radius: 12px;
+  border: 1px solid var(--divider);
+}
+
+.perf-stat-card h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-gray);
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.perf-score {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--primary-teal);
+  margin: 0.5rem 0;
+}
+
+.retention-badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.retention-badge.retention-high {
+  background: rgba(6, 214, 160, 0.1);
+  color: var(--retention-green);
+}
+
+.retention-badge.retention-medium {
+  background: rgba(255, 209, 102, 0.1);
+  color: var(--neuro-yellow);
+}
+
+.retention-badge.retention-fading {
+  background: rgba(239, 71, 111, 0.1);
+  color: var(--coral);
+}
+
+.perf-info-card {
+  padding: 1.5rem;
+  background: var(--bg-light);
+  border-radius: 12px;
+  border: 1px solid var(--divider);
+}
+
+.perf-info-card h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--contrast-indigo);
+  margin: 0 0 1rem 0;
+}
+
+.perf-info-card p {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  margin: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.perf-warning {
+  padding: 1rem 1.25rem;
+  background: rgba(239, 71, 111, 0.1);
+  border-left: 4px solid var(--coral);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: var(--coral);
+  line-height: 1.6;
+}
+
+.quiz-results-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .library-detail-modal {
+    max-width: 100%;
+    width: 100%;
+    max-height: 95vh;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .library-modal-tabs {
+    padding: 0 1rem;
+    overflow-x: auto;
+  }
+
+  .library-tab {
+    padding: 0.875rem 1rem;
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
+
+  .library-tab-content {
+    padding: 1.5rem;
+  }
+
+  .perf-stat-card {
+    padding: 1.5rem;
+  }
+
+  .perf-score {
+    font-size: 2.5rem;
+  }
+}
