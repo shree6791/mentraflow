@@ -331,6 +331,10 @@ const Dashboard = () => {
   const [showFABCapture, setShowFABCapture] = useState(false);
   const [fabAnimatePulse, setFabAnimatePulse] = useState(true); // Pulse on first visit
   
+  // Quick Filters and Sorting
+  const [quickFilter, setQuickFilter] = useState('all'); // all, fading, due-soon, strong
+  const [sortBy, setSortBy] = useState('priority'); // priority, recent, score
+  
   // Pagination for Library
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
