@@ -696,7 +696,13 @@ const Dashboard = () => {
           <div className="stat-banner-icon">📊</div>
           <div className="stat-banner-content">
             <h3>{masteryScore}%</h3>
-            <p>Mastery</p>
+            <p>Overall Mastery</p>
+            <div className="stat-progress-bar">
+              <div 
+                className="stat-progress-fill mastery-fill" 
+                style={{width: `${masteryScore}%`}}
+              ></div>
+            </div>
             <span className={`change ${weeklyChange >= 0 ? 'positive' : 'negative'}`}>
               {weeklyChange >= 0 ? '↑' : '↓'} {Math.abs(weeklyChange)}% this week
             </span>
@@ -706,16 +712,30 @@ const Dashboard = () => {
         <div className="stat-banner-item">
           <div className="stat-banner-icon streak-icon">🔥</div>
           <div className="stat-banner-content">
-            <h3>{streak}</h3>
-            <p>Day Streak</p>
+            <h3>{streak} Days</h3>
+            <p>Current Streak</p>
+            <div className="stat-progress-bar">
+              <div 
+                className="stat-progress-fill streak-fill" 
+                style={{width: `${((streak % 7) / 7) * 100}%`}}
+              ></div>
+            </div>
+            <p className="stat-context">{7 - (streak % 7)} days to weekly goal</p>
           </div>
         </div>
 
         <div className="stat-banner-item">
           <div className="stat-banner-icon">⭐</div>
           <div className="stat-banner-content">
-            <h3>{xp}</h3>
-            <p>Total XP</p>
+            <h3>{xp} XP</h3>
+            <p>Total Experience</p>
+            <div className="stat-progress-bar">
+              <div 
+                className="stat-progress-fill xp-fill" 
+                style={{width: `${((xp % 500) / 500) * 100}%`}}
+              ></div>
+            </div>
+            <p className="stat-context">{500 - (xp % 500)} XP to next level</p>
           </div>
         </div>
       </div>
