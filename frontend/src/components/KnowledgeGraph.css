@@ -283,15 +283,17 @@
   border-radius: 12px;
   border: 1px solid var(--divider);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  min-width: 180px;
 }
 
 .graph-legend h4 {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--contrast-indigo);
   margin: 0 0 0.75rem 0;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  text-align: center;
 }
 
 .legend-items {
