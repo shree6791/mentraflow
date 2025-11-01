@@ -3464,6 +3464,15 @@
   gap: 0.75rem;
 }
 
+/* Desktop: Display filters horizontally */
+@media (min-width: 768px) {
+  .filter-buttons,
+  .sort-options {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
 .filter-option-btn,
 .sort-option-btn {
   padding: 0.875rem 1.25rem;
@@ -3475,7 +3484,17 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  text-align: left;
+  text-align: center;
+  flex: 1;
+  min-width: fit-content;
+}
+
+/* Mobile: Full width buttons */
+@media (max-width: 767px) {
+  .filter-option-btn,
+  .sort-option-btn {
+    text-align: left;
+  }
 }
 
 .filter-option-btn:hover,
