@@ -1,20 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Linkedin, Twitter, Youtube, BookOpen, TrendingDown, RefreshCw, Award, Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { BookOpen, TrendingDown, RefreshCw, Award } from 'lucide-react';
 import Carousel from '../components/Carousel';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const Vision = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  // Handle scroll for header
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Intersection Observer for fade-in animations
   useEffect(() => {
