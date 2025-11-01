@@ -1309,7 +1309,7 @@ html {
 
 /* Future Outlook Section */
 .future-outlook-section {
-  background: var(--contrast-indigo);
+  background: var(--bg-light);
   padding: 6rem 2rem;
   text-align: center;
 }
@@ -1322,14 +1322,14 @@ html {
 .future-content h2 {
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
-  color: var(--accent-yellow);
+  color: var(--primary-teal);
   margin-bottom: 1.5rem;
   letter-spacing: -0.01em;
 }
 
 .future-vision {
   font-size: clamp(1.3rem, 2.5vw, 1.75rem);
-  color: white;
+  color: var(--text-gray);
   line-height: 1.6;
   margin-bottom: 4rem;
   max-width: 800px;
@@ -1345,18 +1345,19 @@ html {
 }
 
 .future-goal {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+  background: white;
   padding: 2.5rem 2rem;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(14, 124, 123, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   transition: all 0.4s ease;
 }
 
 .future-goal:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--accent-yellow);
+  background: white;
+  border-color: var(--primary-teal);
   transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(14, 124, 123, 0.15);
 }
 
 .future-goal h4 {
