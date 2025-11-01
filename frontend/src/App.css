@@ -333,7 +333,7 @@ html {
 
 /* Section Styles */
 .section {
-  padding: 5rem 2rem;
+  padding: var(--section-padding);
   max-width: 1200px;
   margin: 0 auto;
 }
