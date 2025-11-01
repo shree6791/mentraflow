@@ -279,11 +279,12 @@
   bottom: 1.5rem;
   right: 1.5rem;
   background: white;
-  padding: 1rem 1.25rem;
+  padding: 1rem;
   border-radius: 12px;
   border: 1px solid var(--divider);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  min-width: 180px;
+  min-width: 160px;
+  max-width: 200px;
 }
 
 .graph-legend h4 {
@@ -293,7 +294,9 @@
   margin: 0 0 0.75rem 0;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  text-align: center;
+  text-align: left;
+  display: block;
+  width: 100%;
 }
 
 .legend-items {
