@@ -70,12 +70,11 @@ const Billing = () => {
 
   return (
     <div className="billing-page">
-      {/* Header */}
+      {/* App Header */}
+      <AppHeader />
+      
+      {/* Page Title */}
       <div className="billing-header">
-        <button className="back-btn" onClick={() => navigate('/dashboard')}>
-          <ArrowLeft size={20} />
-          Back to Dashboard
-        </button>
         <h1>Billing & Plans</h1>
       </div>
 
