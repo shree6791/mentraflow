@@ -1324,6 +1324,12 @@ html {
     text-align: center;
     margin-top: 1rem;
   }
+  
+  .header.scrolled .btn-login {
+    display: inline-block;
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 @media (max-width: 768px) {
