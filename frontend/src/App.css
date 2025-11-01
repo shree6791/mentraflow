@@ -3808,12 +3808,13 @@ html {
 }
 
 /* Pricing Hero Section */
+/* Pricing Page Hero */
 .pricing-hero-section {
   min-height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 120px 2rem 80px;
+  padding: 8rem 2rem 4rem;
   background: var(--bg-light);
 }
 
@@ -3824,8 +3825,7 @@ html {
 }
 
 .pricing-hero-content h1 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 3rem;
+  font-size: var(--font-size-hero);
   font-weight: 600;
   color: var(--contrast-indigo);
   margin-bottom: 1.5rem;
@@ -3833,11 +3833,10 @@ html {
 }
 
 .pricing-hero-content p {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.25rem;
+  font-size: var(--font-size-body-lg);
   color: var(--text-gray);
   margin-bottom: 2.5rem;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .pricing-hero-cta {
