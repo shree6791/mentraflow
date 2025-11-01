@@ -2859,6 +2859,47 @@
   50% { opacity: 0.8; }
 }
 
+
+/* Next Review Countdown */
+.next-review-countdown {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  width: fit-content;
+}
+
+.next-review-countdown.normal {
+  background: rgba(14, 124, 123, 0.08);
+  color: var(--primary-teal);
+}
+
+.next-review-countdown.urgent {
+  background: rgba(255, 193, 7, 0.15);
+  color: #F57C00;
+  animation: pulseCountdown 2s ease-in-out infinite;
+}
+
+.next-review-countdown.overdue {
+  background: rgba(255, 107, 107, 0.15);
+  color: var(--neural-coral);
+  font-weight: 700;
+}
+
+@keyframes pulseCountdown {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+
 .streak-info {
   flex: 1;
 }
