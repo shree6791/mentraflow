@@ -764,15 +764,25 @@ const Dashboard = () => {
                   <div className="priority-item-content">
                     <h4>{item.title}</h4>
                     <p className="priority-item-status">
-                      {item.retention === 'fading' && `⚠️ Fading fast! Last reviewed ${item.lastReview}`}
-                      {item.retention === 'medium' && `Review due • Last reviewed ${item.lastReview}`}
+                      {item.retention === 'fading' && `⚠️ Critical: You're forgetting this! Last reviewed ${item.lastReview}`}
+                      {item.retention === 'medium' && `⏰ Review soon to maintain memory • Last reviewed ${item.lastReview}`}
                     </p>
+                    {item.retention === 'fading' && (
+                      <p className="priority-consequence">
+                        📉 Without review: ~70% memory loss within 3 days
+                      </p>
+                    )}
+                    {item.retention === 'medium' && (
+                      <p className="priority-next-review">
+                        📅 Best reviewed within 2 days for optimal retention
+                      </p>
+                    )}
                   </div>
                   <button 
                     className="btn-quick-review"
                     onClick={() => openLibraryItem(item, 'quiz')}
                   >
-                    Quick Review
+                    {item.retention === 'fading' ? 'Review Now' : 'Quick Review'}
                   </button>
                 </div>
               ))}
