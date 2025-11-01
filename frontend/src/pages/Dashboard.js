@@ -650,17 +650,17 @@ const Dashboard = () => {
                     )}
                     <div className="library-item-actions">
                       {item.status === 'summarized' && (
-                        <button className="action-btn" onClick={() => setSummary(SAMPLE_SUMMARY)}>
+                        <button className="action-btn" onClick={() => openLibraryItem(item, 'summary')}>
                           <Eye size={16} /> View Summary
                         </button>
                       )}
                       {item.hasQuiz && (
-                        <button className="action-btn" onClick={() => setQuiz(SAMPLE_QUIZ)}>
+                        <button className="action-btn" onClick={() => openLibraryItem(item, 'quiz')}>
                           <Brain size={16} /> Take Quiz
                         </button>
                       )}
                       {item.quizScore !== null && (
-                        <button className="action-btn">
+                        <button className="action-btn" onClick={() => openLibraryItem(item, 'performance')}>
                           <TrendingUp size={16} /> Score: {item.quizScore}%
                         </button>
                       )}
