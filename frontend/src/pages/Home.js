@@ -164,13 +164,10 @@ const Home = () => {
           </blockquote>
           <p className="section-subtitle">Our goal is simple — make forgetting optional.</p>
           <div style={{ marginTop: '1rem' }}>
-            <button className="btn-primary" onClick={() => setShowModal(true)}>
-              Access Demo
-            </button>
+            <Link to="/login" className="btn-primary">
+              Try MentraFlow
+            </Link>
           </div>
-          <a href="mailto:hello@mentraflow.com" className="contact-email">
-            hello@mentraflow.com
-          </a>
         </div>
       </section>
 
