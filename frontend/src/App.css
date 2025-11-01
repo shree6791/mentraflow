@@ -4179,33 +4179,32 @@ html {
 .plan-cta {
   width: 100%;
   padding: 1rem 2rem;
-  background: var(--surface);
-  border: 2px solid var(--primary-teal);
+  background: linear-gradient(135deg, var(--neuro-yellow) 0%, var(--coral) 100%);
+  border: none;
   border-radius: 10px;
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--primary-teal);
+  color: var(--inverse-text);
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 209, 102, 0.3);
 }
 
 .plan-cta:hover {
-  background: var(--primary-teal);
-  color: white;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(14, 124, 123, 0.3);
+  box-shadow: 0 8px 25px rgba(239, 71, 111, 0.4);
 }
 
 .plan-cta-primary {
-  background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-coral) 100%);
+  background: linear-gradient(135deg, var(--neuro-yellow) 0%, var(--coral) 100%);
   border: none;
-  color: var(--contrast-indigo);
+  color: var(--inverse-text);
 }
 
 .plan-cta-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+  box-shadow: 0 8px 25px rgba(239, 71, 111, 0.4);
 }
 
 .pricing-footer-note {
