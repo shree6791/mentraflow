@@ -1121,26 +1121,20 @@ const Dashboard = () => {
                         <button className="action-btn action-primary action-urgent" onClick={() => openLibraryItem(item, 'quiz')}>
                           <Brain size={18} /> Review Now
                         </button>
-                      ) : item.hasQuiz ? (
+                      ) : (
                         <button className="action-btn action-primary" onClick={() => openLibraryItem(item, 'quiz')}>
                           <Brain size={18} /> Take Quiz
                         </button>
-                      ) : item.status === 'summarized' ? (
-                        <button className="action-btn action-primary" onClick={() => openLibraryItem(item, 'summary')}>
-                          <Eye size={18} /> View Summary
-                        </button>
-                      ) : null}
+                      )}
                       
-                      {/* Secondary Actions - Text links */}
+                      {/* Secondary Actions - Always show Summary and Score */}
                       <div className="library-secondary-actions">
-                        {item.status === 'summarized' && item.hasQuiz && item.retention !== 'fading' && (
-                          <button className="link-btn" onClick={() => openLibraryItem(item, 'summary')}>
-                            Summary
-                          </button>
-                        )}
+                        <button className="link-btn" onClick={() => openLibraryItem(item, 'summary')}>
+                          <Eye size={14} /> Summary
+                        </button>
                         {item.quizScore !== null && (
                           <button className="link-btn" onClick={() => openLibraryItem(item, 'performance')}>
-                            Score: {item.quizScore}%
+                            <TrendingUp size={14} /> Score: {item.quizScore}%
                           </button>
                         )}
                       </div>
