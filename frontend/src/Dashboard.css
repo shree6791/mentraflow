@@ -2105,6 +2105,40 @@
   margin: 0.25rem 0 0 0;
 }
 
+.stat-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0.75rem 0 0.5rem 0;
+}
+
+.stat-progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.stat-progress-fill.mastery-fill {
+  background: linear-gradient(90deg, var(--primary-teal), var(--retention-green));
+}
+
+.stat-progress-fill.streak-fill {
+  background: linear-gradient(90deg, #FF6B6B, #FFD166);
+}
+
+.stat-progress-fill.xp-fill {
+  background: linear-gradient(90deg, var(--mind-blue), var(--neuro-yellow));
+}
+
+.stat-context {
+  font-size: 0.75rem;
+  color: var(--text-gray);
+  margin: 0.25rem 0 0 0;
+  font-weight: 500;
+}
+
 .stat-banner-content .change {
   display: inline-block;
   margin-top: 0.5rem;
