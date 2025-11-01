@@ -90,7 +90,8 @@ const Login = () => {
   }, [navigate, processingSession]);
 
   const handleGoogleLogin = () => {
-    // TEMPORARY BYPASS: Go directly to dashboard
+    // TEMPORARY BYPASS: Go directly to dashboard and set auth
+    login({ email: 'demo@mentraflow.com', name: 'Demo User' });
     navigate('/dashboard');
     
     /* COMMENTED OUT - Re-enable for production
@@ -101,7 +102,8 @@ const Login = () => {
   const handleEmailLogin = async (e) => {
     e.preventDefault();
     
-    // TEMPORARY BYPASS: Go directly to dashboard
+    // TEMPORARY BYPASS: Go directly to dashboard and set auth
+    login({ email: formData.email || 'demo@mentraflow.com', name: 'Demo User' });
     navigate('/dashboard');
     
     /* COMMENTED OUT - Re-enable for production
