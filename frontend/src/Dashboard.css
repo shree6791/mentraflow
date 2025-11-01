@@ -3037,11 +3037,17 @@
   display: flex;
   align-items: center;
   gap: 0.875rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin: 1.5rem 0;
   padding: 1.25rem 1.75rem;
   background: var(--bg-light);
   border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  .quick-filters {
+    flex-wrap: wrap;
+  }
 }
 
 .quick-filter-btn {
