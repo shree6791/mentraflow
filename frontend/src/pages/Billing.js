@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { CreditCard, Calendar, TrendingUp, X, Check, ArrowLeft } from 'lucide-react';
 import Carousel from '../components/Carousel';
 import '../styles/Billing.css';
-import './Pricing.css'; // Reuse pricing page styles
 
 const Billing = () => {
   const navigate = useNavigate();
