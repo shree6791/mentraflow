@@ -2030,7 +2030,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
   padding: 2rem;
-  max-width: 1600px;
+  max-width: 1200px;
   margin: 0 auto;
   background: white;
   border-bottom: 1px solid var(--divider);
