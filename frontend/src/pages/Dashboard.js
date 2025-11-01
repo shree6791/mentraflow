@@ -396,6 +396,10 @@ const Dashboard = () => {
       // Show the generated content modal
       setGeneratedContentTab('summary');
       setShowGeneratedModal(true);
+      
+      // Collapse the capture widget after generation
+      setIsCaptureExpanded(false);
+      
       showToast('Summary and quiz generated!');
     }, 2000);
   };
