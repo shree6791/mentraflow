@@ -734,48 +734,126 @@ const Dashboard = () => {
       {/* Stats Banner */}
       <div className="dashboard-stats-banner">
         <div className="stat-banner-item">
-          <div className="stat-banner-icon">📊</div>
+          <div className="progress-ring-container">
+            <svg className="progress-ring" width="80" height="80">
+              <circle
+                className="progress-ring-circle-bg"
+                stroke="#E0E0E0"
+                strokeWidth="6"
+                fill="transparent"
+                r="34"
+                cx="40"
+                cy="40"
+              />
+              <circle
+                className="progress-ring-circle mastery-ring"
+                stroke="url(#masteryGradient)"
+                strokeWidth="6"
+                fill="transparent"
+                r="34"
+                cx="40"
+                cy="40"
+                strokeDasharray={`${(masteryScore / 100) * 213.6} 213.6`}
+                strokeLinecap="round"
+              />
+              <defs>
+                <linearGradient id="masteryGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#0E7C7B" />
+                  <stop offset="100%" stopColor="#06D6A0" />
+                </linearGradient>
+              </defs>
+              <text x="40" y="45" textAnchor="middle" className="progress-ring-text">
+                {masteryScore}%
+              </text>
+            </svg>
+          </div>
           <div className="stat-banner-content">
-            <h3>{masteryScore}%</h3>
-            <p>Overall Mastery</p>
-            <div className="stat-progress-bar">
-              <div 
-                className="stat-progress-fill mastery-fill" 
-                style={{width: `${masteryScore}%`}}
-              ></div>
-            </div>
-            <span className={`change ${weeklyChange >= 0 ? 'positive' : 'negative'}`}>
+            <h3>Overall Mastery</h3>
+            <p className="stat-context">
               {weeklyChange >= 0 ? '↑' : '↓'} {Math.abs(weeklyChange)}% this week
-            </span>
+            </p>
           </div>
         </div>
 
         <div className="stat-banner-item">
-          <div className="stat-banner-icon streak-icon">🔥</div>
+          <div className="progress-ring-container">
+            <svg className="progress-ring" width="80" height="80">
+              <circle
+                className="progress-ring-circle-bg"
+                stroke="#E0E0E0"
+                strokeWidth="6"
+                fill="transparent"
+                r="34"
+                cx="40"
+                cy="40"
+              />
+              <circle
+                className="progress-ring-circle streak-ring"
+                stroke="url(#streakGradient)"
+                strokeWidth="6"
+                fill="transparent"
+                r="34"
+                cx="40"
+                cy="40"
+                strokeDasharray={`${((streak % 7) / 7) * 213.6} 213.6`}
+                strokeLinecap="round"
+              />
+              <defs>
+                <linearGradient id="streakGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#FF6B6B" />
+                  <stop offset="100%" stopColor="#FFD166" />
+                </linearGradient>
+              </defs>
+              <text x="40" y="40" textAnchor="middle" className="progress-ring-text-large">
+                {streak}
+              </text>
+              <text x="40" y="52" textAnchor="middle" className="progress-ring-text-small">
+                days
+              </text>
+            </svg>
+          </div>
           <div className="stat-banner-content">
-            <h3>{streak} Days</h3>
-            <p>Current Streak</p>
-            <div className="stat-progress-bar">
-              <div 
-                className="stat-progress-fill streak-fill" 
-                style={{width: `${((streak % 7) / 7) * 100}%`}}
-              ></div>
-            </div>
+            <h3>Current Streak</h3>
             <p className="stat-context">{7 - (streak % 7)} days to weekly goal</p>
           </div>
         </div>
 
         <div className="stat-banner-item">
-          <div className="stat-banner-icon">⭐</div>
+          <div className="progress-ring-container">
+            <svg className="progress-ring" width="80" height="80">
+              <circle
+                className="progress-ring-circle-bg"
+                stroke="#E0E0E0"
+                strokeWidth="6"
+                fill="transparent"
+                r="34"
+                cx="40"
+                cy="40"
+              />
+              <circle
+                className="progress-ring-circle xp-ring"
+                stroke="url(#xpGradient)"
+                strokeWidth="6"
+                fill="transparent"
+                r="34"
+                cx="40"
+                cy="40"
+                strokeDasharray={`${((xp % 500) / 500) * 213.6} 213.6`}
+                strokeLinecap="round"
+              />
+              <defs>
+                <linearGradient id="xpGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#1FA6C0" />
+                  <stop offset="100%" stopColor="#FFC130" />
+                </linearGradient>
+              </defs>
+              <text x="40" y="45" textAnchor="middle" className="progress-ring-text">
+                {xp}
+              </text>
+            </svg>
+          </div>
           <div className="stat-banner-content">
-            <h3>{xp} XP</h3>
-            <p>Total Experience</p>
-            <div className="stat-progress-bar">
-              <div 
-                className="stat-progress-fill xp-fill" 
-                style={{width: `${((xp % 500) / 500) * 100}%`}}
-              ></div>
-            </div>
+            <h3>Total XP</h3>
             <p className="stat-context">{500 - (xp % 500)} XP to next level</p>
           </div>
         </div>
