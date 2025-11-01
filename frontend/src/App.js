@@ -11,6 +11,7 @@ import Pricing from './pages/Pricing';
 import Billing from './pages/Billing';
 import Payment from './pages/Payment';
 import Activity from './pages/Activity';
+import KnowledgeGraphPage from './pages/KnowledgeGraphPage';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/billing" element={<Billing />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/activity" element={<Activity />} />
+            <Route path="/knowledge-graph" element={<KnowledgeGraphPage />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
