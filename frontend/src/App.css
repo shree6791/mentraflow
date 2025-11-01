@@ -434,7 +434,7 @@ html {
 .section-title {
   font-size: var(--font-size-h2);
   font-weight: 700;
-  color: var(--contrast-indigo);
+  color: var(--heading-color);
   text-align: center;
   margin-bottom: 1.5rem;
   line-height: 1.2;
@@ -442,7 +442,7 @@ html {
 
 .section-subtitle {
   font-size: var(--font-size-body-lg);
-  color: var(--text-gray);
+  color: var(--muted-text);
   text-align: center;
   max-width: 800px;
   margin: 0 auto 3rem;
