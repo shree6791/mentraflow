@@ -343,6 +343,7 @@ const KnowledgeGraph = ({ topics, userAvatar, userName, onClose, onReinforce }) 
       if (animationId) {
         cancelAnimationFrame(animationId);
       }
+      clearTimeout(loadTimer);
     };
   }, [hoveredNode, selectedNode, filterState, searchQuery, zoom, pan, userName, userAvatar]);
 
