@@ -19,57 +19,107 @@ const KnowledgeGraph = ({ topics, userAvatar, userName, onClose, onReinforce }) 
   const [isLoading, setIsLoading] = useState(true);
   const [focusedNodeIndex, setFocusedNodeIndex] = useState(null);
 
-  // Enhanced graph data with library connections
+  // Enhanced graph data with richer connections and variety
   const graphData = [
     {
       id: 't1',
       title: 'Forgetting Curve',
       state: 'high',
       lastReview: '2 days ago',
-      score: 80,
+      score: 85,
       quizCount: 3,
       libraryId: 'lib1',
-      connections: ['t2', 't5']
+      connections: ['t2', 't5', 't7']
     },
     {
       id: 't2',
       title: 'Active Recall',
-      state: 'medium',
-      lastReview: '5 days ago',
-      score: 65,
-      quizCount: 2,
+      state: 'high',
+      lastReview: '1 day ago',
+      score: 92,
+      quizCount: 5,
       libraryId: 'lib2',
       connections: ['t1', 't3', 't5']
     },
     {
       id: 't3',
       title: 'Spacing Effect',
-      state: 'fading',
-      lastReview: '2 weeks ago',
-      score: 45,
-      quizCount: 1,
+      state: 'medium',
+      lastReview: '1 week ago',
+      score: 68,
+      quizCount: 2,
       libraryId: 'lib3',
-      connections: ['t2', 't4']
+      connections: ['t2', 't4', 't6']
     },
     {
       id: 't4',
       title: 'Neuroplasticity',
-      state: 'medium',
-      lastReview: 'Never',
-      score: 0,
-      quizCount: 0,
+      state: 'fading',
+      lastReview: '3 weeks ago',
+      score: 42,
+      quizCount: 1,
       libraryId: 'lib4',
-      connections: ['t3', 't5']
+      connections: ['t3', 't5', 't8']
     },
     {
       id: 't5',
       title: 'Memory Consolidation',
       state: 'high',
       lastReview: '3 days ago',
-      score: 90,
+      score: 88,
       quizCount: 4,
-      libraryId: 'lib1',
-      connections: ['t1', 't2', 't4']
+      libraryId: 'lib5',
+      connections: ['t1', 't2', 't4', 't6']
+    },
+    {
+      id: 't6',
+      title: 'Cognitive Load Theory',
+      state: 'medium',
+      lastReview: '5 days ago',
+      score: 71,
+      quizCount: 3,
+      libraryId: 'lib6',
+      connections: ['t3', 't5', 't7']
+    },
+    {
+      id: 't7',
+      title: 'Working Memory',
+      state: 'high',
+      lastReview: '1 day ago',
+      score: 94,
+      quizCount: 6,
+      libraryId: 'lib7',
+      connections: ['t1', 't6', 't8']
+    },
+    {
+      id: 't8',
+      title: 'Long-term Potentiation',
+      state: 'fading',
+      lastReview: '2 weeks ago',
+      score: 48,
+      quizCount: 2,
+      libraryId: 'lib8',
+      connections: ['t4', 't7']
+    },
+    {
+      id: 't9',
+      title: 'Dual Coding Theory',
+      state: 'medium',
+      lastReview: '4 days ago',
+      score: 75,
+      quizCount: 3,
+      libraryId: 'lib9',
+      connections: ['t2', 't6']
+    },
+    {
+      id: 't10',
+      title: 'Retrieval Practice',
+      state: 'high',
+      lastReview: '2 days ago',
+      score: 89,
+      quizCount: 5,
+      libraryId: 'lib10',
+      connections: ['t1', 't2', 't9']
     }
   ];
 
