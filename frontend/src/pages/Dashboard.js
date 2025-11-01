@@ -682,22 +682,6 @@ const Dashboard = () => {
             <p>Total XP</p>
           </div>
         </div>
-
-        <div className={`stat-banner-item recall-alert ${recallTasks.length > 0 ? 'has-tasks' : ''}`}>
-          <div className="stat-banner-icon">⏰</div>
-          <div className="stat-banner-content">
-            <h3>{recallTasks.length}</h3>
-            <p>Recall Tasks</p>
-            {recallTasks.length > 0 && (
-              <button 
-                className="view-tasks-btn"
-                onClick={() => recallTasks.length > 0 && startRecallTask(recallTasks[0])}
-              >
-                Start Now →
-              </button>
-            )}
-          </div>
-        </div>
       </div>
 
       {/* Main Focus Area - Smart Priority Flow */}
