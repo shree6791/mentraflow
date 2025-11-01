@@ -96,7 +96,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* How It Works Section */}
+      {/* How It Works */}
       <section id="how" className="section how-section">
         <div className="fade-in">
           <h2 className="section-title">Your memory, re-engineered.</h2>
