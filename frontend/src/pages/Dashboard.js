@@ -315,8 +315,9 @@ const Dashboard = () => {
   const [showGeneratedModal, setShowGeneratedModal] = useState(false);
   const [generatedContentTab, setGeneratedContentTab] = useState('summary'); // summary | quiz
   
-  // Quick Capture Widget (Collapsible)
-  const [isCaptureExpanded, setIsCaptureExpanded] = useState(false);
+  // FAB Capture Modal
+  const [showFABCapture, setShowFABCapture] = useState(false);
+  const [fabAnimatePulse, setFabAnimatePulse] = useState(true); // Pulse on first visit
   
   // Pagination for Library
   const [currentPage, setCurrentPage] = useState(1);
