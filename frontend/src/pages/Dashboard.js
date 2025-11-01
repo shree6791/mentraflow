@@ -873,19 +873,43 @@ const Dashboard = () => {
           }}
           style={{cursor: 'pointer'}}
         >
-          <div className="priority-widget-icon">
-            🎯
+          <div className="progress-ring-container">
+            <svg className="progress-ring" width="80" height="80">
+              <defs>
+                <linearGradient id="priorityGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#EF476F" />
+                  <stop offset="100%" stopColor="#FFD166" />
+                </linearGradient>
+              </defs>
+              <circle
+                cx="40"
+                cy="40"
+                r="34"
+                fill="none"
+                stroke="#f0f0f0"
+                strokeWidth="6"
+              />
+              <circle
+                className="progress-ring-circle"
+                cx="40"
+                cy="40"
+                r="34"
+                fill="none"
+                stroke="url(#priorityGradient)"
+                strokeWidth="6"
+                strokeDasharray={`${(itemsNeedingReview.filter(i => i.retention === 'fading').length / Math.max(itemsNeedingReview.length, 1)) * 213.5} 213.5`}
+                strokeLinecap="round"
+              />
+              <text x="40" y="40" className="progress-ring-text-large" textAnchor="middle" dominantBaseline="middle">
+                {itemsNeedingReview.filter(i => i.retention === 'fading').length}
+              </text>
+            </svg>
           </div>
           <div className="stat-banner-content">
             <h3>Priority Today</h3>
-            <p className="stat-context-priority">
+            <p className="stat-context">
               {itemsNeedingReview.length} items need review
             </p>
-            {itemsNeedingReview.filter(i => i.retention === 'fading').length > 0 && (
-              <p className="stat-context-urgent">
-                🔴 {itemsNeedingReview.filter(i => i.retention === 'fading').length} critical
-              </p>
-            )}
           </div>
         </div>
       </div>
