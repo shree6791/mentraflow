@@ -22,7 +22,7 @@ const SAMPLE_SUMMARY = {
     'Reviewing just before forgetting maximizes retention.',
     'Intervals should expand over time (1d, 3d, 7d...).',
     'Short, effortful recall beats passive re-reading.',
-    'Track what's fading to prioritize review.'
+    'Track what is fading to prioritize review.'
   ],
   keywords: ['Spacing Effect', 'Recall', 'Intervals', 'Prioritization']
 };
