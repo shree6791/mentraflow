@@ -44,6 +44,7 @@ const Science = () => {
           <Link to="/" className="nav-link">Home</Link>
           <Link to="/science" className="nav-link">Science</Link>
           <Link to="/vision" className="nav-link">Vision</Link>
+          <Link to="/pricing" className="nav-link">Pricing</Link>
           <Link to="/contact" className="nav-link">Contact</Link>
           <Link to="/login" className="btn-login">
             Login
@@ -220,6 +221,7 @@ const Science = () => {
             <Link to="/" className="footer-link">Home</Link>
             <Link to="/science" className="footer-link">Science</Link>
             <Link to="/vision" className="footer-link">Vision</Link>
+            <Link to="/pricing" className="footer-link">Pricing</Link>
             <Link to="/contact" className="footer-link">Contact</Link>
           </div>
           <div className="social-links">
