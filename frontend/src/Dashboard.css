@@ -1795,3 +1795,30 @@
     max-width: 90%;
   }
 }
+
+/* ========================================
+   KNOWLEDGE GRAPH FULLSCREEN MODAL
+   ======================================== */
+
+.modal-fullscreen {
+  padding: 0;
+}
+
+.graph-modal-fullscreen {
+  max-width: 95vw;
+  max-height: 90vh;
+  width: 100%;
+  height: 90vh;
+  padding: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 968px) {
+  .graph-modal-fullscreen {
+    max-width: 100vw;
+    max-height: 100vh;
+    height: 100vh;
+    border-radius: 0;
+    margin: 0;
+  }
+}
