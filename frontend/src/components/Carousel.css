@@ -97,7 +97,7 @@
 }
 
 /* Desktop - No carousel, show grid */
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .carousel-container {
     padding: 0;
   }
