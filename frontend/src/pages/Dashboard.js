@@ -293,7 +293,6 @@ const Dashboard = () => {
   const [quiz, setQuiz] = useState(null);
   const [quizAnswers, setQuizAnswers] = useState({});
   const [quizResults, setQuizResults] = useState({});
-  const [showGraph, setShowGraph] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [toast, setToast] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
