@@ -1447,8 +1447,7 @@ html {
     gap: 3rem;
   }
   
-  .challenge-grid,
-  .future-goals {
+  .challenge-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
