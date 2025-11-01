@@ -2068,7 +2068,7 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 80px 2rem 60px;
+  padding: 140px 2rem 80px;
   animation: fadeInUp 0.5s ease-out;
   max-width: 500px;
   margin: 0 auto;
