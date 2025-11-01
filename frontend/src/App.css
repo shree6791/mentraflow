@@ -4442,7 +4442,7 @@ html {
   font-family: 'Poppins', sans-serif;
   font-size: 2.25rem;
   font-weight: 600;
-  color: var(--contrast-indigo);
+  color: white;
   margin-bottom: 2rem;
 }
 
@@ -4458,7 +4458,7 @@ html {
   gap: 1rem;
   font-family: 'Inter', sans-serif;
   font-size: 1.1rem;
-  color: var(--text-dark);
+  color: rgba(255, 255, 255, 0.95);
   margin-bottom: 1.5rem;
   opacity: 0;
   transform: translateX(-20px);
