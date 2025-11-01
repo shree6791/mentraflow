@@ -2893,6 +2893,82 @@
 @keyframes pulseCountdown {
   0%, 100% {
     transform: scale(1);
+
+
+/* Quick Filters */
+.quick-filters {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: var(--bg-light);
+  border-radius: 12px;
+}
+
+.quick-filter-btn {
+  padding: 0.5rem 1rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: white;
+  color: var(--text-dark);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.quick-filter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.quick-filter-btn.active {
+  background: var(--primary-teal);
+  color: white;
+  border-color: var(--primary-teal);
+}
+
+.quick-filter-btn.urgent.active {
+  background: var(--neural-coral);
+  border-color: var(--neural-coral);
+}
+
+.quick-filter-btn.warning.active {
+  background: #F57C00;
+  border-color: #F57C00;
+}
+
+.quick-filter-btn.success.active {
+  background: var(--retention-green);
+  border-color: var(--retention-green);
+}
+
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.sort-controls label {
+  font-size: 0.875rem;
+  color: var(--text-gray);
+  font-weight: 600;
+}
+
+.sort-controls select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--divider);
+  border-radius: 8px;
+  background: white;
+  color: var(--text-dark);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
   }
   50% {
     transform: scale(1.02);
