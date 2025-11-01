@@ -2069,6 +2069,9 @@ html {
   justify-content: center;
   padding: 80px 2rem 60px;
   animation: fadeInUp 0.5s ease-out;
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 @keyframes fadeInUp {
@@ -2084,11 +2087,10 @@ html {
 
 .auth-card-glass {
   width: 100%;
-  max-width: 400px;
-  background: white;
-  border-radius: 24px;
-  padding: 3rem;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
   animation: cardLift 0.2s ease-out;
 }
 
