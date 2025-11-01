@@ -1514,7 +1514,7 @@ html {
 }
 
 .contact-hero p {
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  font-size: var(--font-size-body-lg);
   color: var(--text-gray);
   line-height: 1.7;
 }
