@@ -332,6 +332,9 @@ const Dashboard = () => {
   const [showFABCapture, setShowFABCapture] = useState(false);
   const [fabAnimatePulse, setFabAnimatePulse] = useState(true); // Pulse on first visit
   
+  // Priority Modal
+  const [showPriorityModal, setShowPriorityModal] = useState(false);
+  
   // Quick Filters and Sorting
   const [quickFilter, setQuickFilter] = useState('all'); // all, fading, due-soon, strong
   const [sortBy, setSortBy] = useState('priority'); // priority, recent, score
