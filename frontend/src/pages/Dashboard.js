@@ -935,7 +935,7 @@ const Dashboard = () => {
               <h2>My Knowledge Library</h2>
               <Tooltip content="All your captured knowledge organized by retention strength" position="right" />
             </div>
-            <button className="btn-icon-text" onClick={() => setShowGraph(true)}>
+            <button className="btn-icon-text" onClick={() => navigate('/knowledge-graph')}>
               <Brain size={18} /> View Graph
             </button>
           </div>
