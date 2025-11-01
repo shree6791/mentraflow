@@ -118,12 +118,10 @@ const Payment = () => {
 
   return (
     <div className="payment-page">
+      {/* App Header */}
+      <AppHeader />
+      
       <div className="payment-container">
-        {/* Header */}
-        <button className="back-btn" onClick={() => navigate('/billing')}>
-          <ArrowLeft size={20} />
-          Back to Billing
-        </button>
 
         <div className="payment-content">
           {/* Left: Payment Form */}
