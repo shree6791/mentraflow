@@ -4031,14 +4031,14 @@ html {
 .pricing-hero-content h1 {
   font-size: var(--font-size-hero);
   font-weight: 600;
-  color: var(--contrast-indigo);
+  color: var(--heading-color);
   margin-bottom: 1.5rem;
   line-height: 1.2;
 }
 
 .pricing-hero-content p {
   font-size: var(--font-size-body-lg);
-  color: var(--text-gray);
+  color: var(--muted-text);
   margin-bottom: 2.5rem;
   line-height: 1.7;
 }
