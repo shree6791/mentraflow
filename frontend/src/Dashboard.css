@@ -2466,12 +2466,12 @@
    ======================================== */
 
 .priority-section {
-  background: white;
+  background: linear-gradient(135deg, rgba(14, 124, 123, 0.03) 0%, rgba(31, 166, 192, 0.03) 100%);
   border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 2.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   border: 2px solid var(--primary-teal);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .priority-header {
