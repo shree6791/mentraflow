@@ -755,4 +755,29 @@
     padding: 0 0.5rem;
     font-size: 0.75rem;
   }
+
+  /* Larger touch targets on mobile */
+  .graph-canvas {
+    touch-action: none;
+  }
+
+  .keyboard-hint {
+    display: none;
+  }
+
+  .back-btn-inline {
+    padding: 0.5rem;
+  }
+
+  .graph-header-left {
+    gap: 0.75rem;
+  }
+
+  .graph-header-left h2 {
+    font-size: 1.25rem;
+  }
+
+  .graph-subtitle {
+    font-size: 0.8125rem;
+  }
 }
