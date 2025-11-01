@@ -496,8 +496,8 @@ const KnowledgeGraph = ({ topics, userAvatar, userName, onClose, onReinforce }) 
 
   const hoveredNodeData = hoveredNode !== null ? nodes[hoveredNode] : null;
   
-  // Check if filtered results are empty
-  const hasResults = nodes.length > 0;
+  // Check if filtered results are empty - use graphData length as backup
+  const hasResults = nodes.length > 0 || (!isLoading && graphData.length > 0);
 
   return (
     <div className="knowledge-graph-modal">
