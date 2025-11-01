@@ -3249,6 +3249,19 @@
   box-shadow: 0 4px 8px rgba(255, 107, 107, 0.3);
 }
 
+.action-btn.action-warning {
+  background: #F57C00;
+  color: white;
+  font-weight: 600;
+  justify-content: center;
+}
+
+.action-btn.action-warning:hover {
+  background: #FF9800;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(245, 124, 0, 0.3);
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   /* Stats Banner Carousel for Mobile */
