@@ -203,6 +203,40 @@ const Billing = () => {
                       <span className="price">${plan.price}</span>
                       <span className="period">{plan.period}</span>
                     </div>
+                    
+                    {/* Team Member Selector for Teams Plan */}
+                    {plan.id === 'teams' && (
+                      <div className="team-selector">
+                        <label>Number of team members:</label>
+                        <div className="quantity-selector">
+                          <button 
+                            type="button"
+                            onClick={() => setTeamMemberCount(Math.max(2, teamMemberCount - 1))}
+                            className="qty-btn"
+                          >
+                            −
+                          </button>
+                          <input 
+                            type="number" 
+                            value={teamMemberCount}
+                            onChange={(e) => setTeamMemberCount(Math.max(2, parseInt(e.target.value) || 2))}
+                            min="2"
+                            className="qty-input"
+                          />
+                          <button 
+                            type="button"
+                            onClick={() => setTeamMemberCount(teamMemberCount + 1)}
+                            className="qty-btn"
+                          >
+                            +
+                          </button>
+                        </div>
+                        <p className="total-price">
+                          Total: <strong>${(plan.price * teamMemberCount).toFixed(2)}/month</strong>
+                        </p>
+                      </div>
+                    )}
+                    
                     <ul className="plan-features">
                       {plan.features.map((feature, idx) => (
                         <li key={idx}>
@@ -215,7 +249,7 @@ const Billing = () => {
                       className={`plan-cta ${plan.popular ? 'plan-cta-primary' : ''}`}
                       onClick={() => handleUpgrade(plan.id)}
                     >
-                      Select {plan.name}
+                      {plan.id === 'teams' ? `Select for ${teamMemberCount} users` : `Select ${plan.name}`}
                     </button>
                   </div>
                 ))}
@@ -235,6 +269,40 @@ const Billing = () => {
                         <span className="price">${plan.price}</span>
                         <span className="period">{plan.period}</span>
                       </div>
+                      
+                      {/* Team Member Selector for Teams Plan */}
+                      {plan.id === 'teams' && (
+                        <div className="team-selector">
+                          <label>Number of team members:</label>
+                          <div className="quantity-selector">
+                            <button 
+                              type="button"
+                              onClick={() => setTeamMemberCount(Math.max(2, teamMemberCount - 1))}
+                              className="qty-btn"
+                            >
+                              −
+                            </button>
+                            <input 
+                              type="number" 
+                              value={teamMemberCount}
+                              onChange={(e) => setTeamMemberCount(Math.max(2, parseInt(e.target.value) || 2))}
+                              min="2"
+                              className="qty-input"
+                            />
+                            <button 
+                              type="button"
+                              onClick={() => setTeamMemberCount(teamMemberCount + 1)}
+                              className="qty-btn"
+                            >
+                              +
+                            </button>
+                          </div>
+                          <p className="total-price">
+                            Total: <strong>${(plan.price * teamMemberCount).toFixed(2)}/month</strong>
+                          </p>
+                        </div>
+                      )}
+                      
                       <ul className="plan-features">
                         {plan.features.map((feature, idx) => (
                           <li key={idx}>
@@ -247,7 +315,7 @@ const Billing = () => {
                         className={`plan-cta ${plan.popular ? 'plan-cta-primary' : ''}`}
                         onClick={() => handleUpgrade(plan.id)}
                       >
-                        Select {plan.name}
+                        {plan.id === 'teams' ? `Select for ${teamMemberCount} users` : `Select ${plan.name}`}
                       </button>
                     </div>
                   ))}
