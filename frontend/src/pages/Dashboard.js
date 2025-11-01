@@ -548,6 +548,17 @@ const Dashboard = () => {
     const matchesFilter = filterStatus === 'all' || item.status === filterStatus;
     return matchesSearch && matchesFilter;
   });
+  
+  // Paginate library items
+  const totalPages = Math.ceil(filteredLibraryItems.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedLibraryItems = filteredLibraryItems.slice(startIndex, endIndex);
+  
+  // Reset to page 1 when search/filter changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, filterStatus]);
 
   // Calculate progress metrics
   const masteredCount = topics.filter(t => t.status === 'high').length;
