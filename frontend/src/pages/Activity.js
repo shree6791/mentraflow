@@ -48,16 +48,15 @@ const Activity = () => {
 
   return (
     <div className="activity-page">
+      {/* App Header */}
+      <AppHeader />
+      
       <div className="activity-container">
-        {/* Header */}
+        {/* Page Title */}
         <div className="activity-header">
-          <button className="back-btn" onClick={() => navigate('/dashboard')}>
-            <ArrowLeft size={20} />
-            Back to Dashboard
-          </button>
           <div className="header-content">
-            <h1>Your Learning Activity</h1>
-            <p className="subtitle">Track your progress and discover insights</p>
+            <h1>Your Learning Insights</h1>
+            <p className="subtitle">Track your progress and discover patterns</p>
           </div>
         </div>
 
