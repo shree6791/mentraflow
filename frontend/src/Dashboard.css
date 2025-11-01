@@ -2513,12 +2513,18 @@
 .priority-item {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: var(--bg-light);
+  gap: 1.25rem;
+  padding: 1.25rem;
+  background: white;
   border-radius: 12px;
   border-left: 4px solid;
   transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.priority-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .priority-item.priority-fading {
