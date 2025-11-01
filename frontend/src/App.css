@@ -1712,7 +1712,8 @@ html {
   
   .future-goal {
     padding: 1.75rem 1.5rem;
-    min-height: 200px;
+    min-height: auto;
+    justify-content: flex-start;
   }
   
   .future-goal h4 {
@@ -1722,11 +1723,12 @@ html {
   
   .future-goal p {
     font-size: 1rem;
+    line-height: 1.6;
   }
   
   .challenge-card {
     padding: 2rem 1.5rem;
-    min-height: 240px;
+    min-height: 220px;
   }
   
   .challenge-number {
