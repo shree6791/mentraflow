@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import * as d3 from 'd3';
-import '../styles/KnowledgeGraph.css';
+import '../styles/KnowledgeGraphPage.css';
 
 const KnowledgeGraphPage = () => {
   const navigate = useNavigate();
