@@ -529,6 +529,146 @@ const Dashboard = () => {
         </main>
       </div>
 
+      {/* Profile Settings Modal */}
+      {showProfileModal && (
+        <div className="modal-overlay" onClick={() => setShowProfileModal(false)}>
+          <div className="profile-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Profile Settings</h2>
+              <button 
+                className="modal-close" 
+                onClick={() => setShowProfileModal(false)}
+              >
+                <X size={24} />
+              </button>
+            </div>
+            
+            <div className="modal-body">
+              {/* Name Field */}
+              <div className="form-group">
+                <label htmlFor="profile-name">Name *</label>
+                <input
+                  id="profile-name"
+                  type="text"
+                  value={profileData.name}
+                  onChange={(e) => handleProfileChange('name', e.target.value)}
+                  className={profileErrors.name ? 'input-error' : ''}
+                  placeholder="Enter your name"
+                />
+                {profileErrors.name && (
+                  <span className="error-text">{profileErrors.name}</span>
+                )}
+              </div>
+
+              {/* Email Field */}
+              <div className="form-group">
+                <label htmlFor="profile-email">Email *</label>
+                <input
+                  id="profile-email"
+                  type="email"
+                  value={profileData.email}
+                  onChange={(e) => handleProfileChange('email', e.target.value)}
+                  className={profileErrors.email ? 'input-error' : ''}
+                  placeholder="you@example.com"
+                />
+                {profileErrors.email && (
+                  <span className="error-text">{profileErrors.email}</span>
+                )}
+              </div>
+
+              {/* Phone Field */}
+              <div className="form-group">
+                <label htmlFor="profile-phone">Phone (Optional)</label>
+                <input
+                  id="profile-phone"
+                  type="tel"
+                  value={profileData.phone}
+                  onChange={(e) => handleProfileChange('phone', e.target.value)}
+                  className={profileErrors.phone ? 'input-error' : ''}
+                  placeholder="+1 (555) 000-0000"
+                />
+                {profileErrors.phone && (
+                  <span className="error-text">{profileErrors.phone}</span>
+                )}
+              </div>
+
+              {/* Timezone Field */}
+              <div className="form-group">
+                <label htmlFor="profile-timezone">Timezone</label>
+                <select
+                  id="profile-timezone"
+                  value={profileData.timezone}
+                  onChange={(e) => handleProfileChange('timezone', e.target.value)}
+                >
+                  <option value="America/New_York">Eastern Time (ET)</option>
+                  <option value="America/Chicago">Central Time (CT)</option>
+                  <option value="America/Denver">Mountain Time (MT)</option>
+                  <option value="America/Los_Angeles">Pacific Time (PT)</option>
+                  <option value="Europe/London">London (GMT)</option>
+                  <option value="Europe/Paris">Paris (CET)</option>
+                  <option value="Asia/Tokyo">Tokyo (JST)</option>
+                  <option value="Asia/Dubai">Dubai (GST)</option>
+                  <option value="Australia/Sydney">Sydney (AEST)</option>
+                </select>
+              </div>
+
+              {/* Notification Preferences */}
+              <div className="form-section">
+                <h3>Notification Preferences</h3>
+                
+                <div className="checkbox-group">
+                  <label className="checkbox-label">
+                    <input
+                      type="checkbox"
+                      checked={profileData.notificationPreferences.emailNotifications}
+                      onChange={() => handleNotificationChange('emailNotifications')}
+                    />
+                    <span>Email notifications</span>
+                  </label>
+                </div>
+
+                <div className="checkbox-group">
+                  <label className="checkbox-label">
+                    <input
+                      type="checkbox"
+                      checked={profileData.notificationPreferences.reviewReminders}
+                      onChange={() => handleNotificationChange('reviewReminders')}
+                    />
+                    <span>Review reminders</span>
+                  </label>
+                </div>
+
+                <div className="checkbox-group">
+                  <label className="checkbox-label">
+                    <input
+                      type="checkbox"
+                      checked={profileData.notificationPreferences.weeklyProgress}
+                      onChange={() => handleNotificationChange('weeklyProgress')}
+                    />
+                    <span>Weekly progress reports</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className="modal-footer">
+              <button 
+                className="btn-secondary" 
+                onClick={() => setShowProfileModal(false)}
+              >
+                Cancel
+              </button>
+              <button 
+                className="btn-primary" 
+                onClick={saveProfile}
+              >
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Knowledge Graph Modal */}
       {showGraph && (
         <div className="modal-overlay-graph" onClick={() => setShowGraph(false)}>
