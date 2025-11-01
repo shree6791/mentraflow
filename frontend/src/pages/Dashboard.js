@@ -289,6 +289,10 @@ const Dashboard = () => {
   const [selectedLibraryItem, setSelectedLibraryItem] = useState(null);
   const [libraryModalTab, setLibraryModalTab] = useState('summary'); // summary | quiz | performance
   
+  // Generated Content Modal
+  const [showGeneratedModal, setShowGeneratedModal] = useState(false);
+  const [generatedContentTab, setGeneratedContentTab] = useState('summary'); // summary | quiz
+  
   const [profileData, setProfileData] = useState({
     name: 'Demo User',
     email: 'demo@mentraflow.com',
