@@ -1145,7 +1145,8 @@ html {
 
 /* Memory Graph Section */
 .memory-graph-section {
-  background: var(--surface);
+  background: linear-gradient(135deg, var(--primary-teal) 0%, var(--mind-blue) 100%);
+  padding: 6rem 2rem;
 }
 
 .graph-container {
