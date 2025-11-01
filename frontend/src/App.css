@@ -1239,7 +1239,7 @@ html {
 
 .legend-item span {
   font-size: 0.95rem;
-  color: var(--text-gray);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 /* Research Section */
