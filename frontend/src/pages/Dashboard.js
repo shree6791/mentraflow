@@ -1078,11 +1078,6 @@ const Dashboard = () => {
                         )}
                         <h3>{item.title}</h3>
                       </div>
-                      <span className={`status-badge status-${item.status}`}>
-                        {item.status === 'summarized' && '✅ Summarized'}
-                        {item.status === 'quiz-available' && '🧠 Quiz Available'}
-                        {item.status === 'pending' && '⏳ Pending'}
-                      </span>
                     </div>
                     
                     {/* Retention Status */}
