@@ -318,6 +318,12 @@ const Dashboard = () => {
     return 0;
   });
   
+  // Paginate priority items
+  const totalPriorityPages = Math.ceil(itemsNeedingReview.length / priorityItemsPerPage);
+  const priorityStartIndex = (priorityPage - 1) * priorityItemsPerPage;
+  const priorityEndIndex = priorityStartIndex + priorityItemsPerPage;
+  const paginatedPriorityItems = itemsNeedingReview.slice(priorityStartIndex, priorityEndIndex);
+  
   const estimatedReviewTime = itemsNeedingReview.length * 3; // 3 min per item
   
   // Streak progress calculation
