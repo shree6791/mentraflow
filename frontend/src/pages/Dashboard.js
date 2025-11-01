@@ -1157,9 +1157,12 @@ const Dashboard = () => {
                   <button 
                     type="button" 
                     className="btn-primary" 
-                    onClick={generateCustomQuiz}
+                    onClick={() => {
+                      setShowQuizCustomization(false);
+                      showToast('Quiz settings saved! Use "Generate Summary & Quiz" to create content.');
+                    }}
                   >
-                    <Brain size={18} /> Generate Custom Quiz
+                    <Filter size={18} /> Save Settings
                   </button>
                 </div>
               </form>
