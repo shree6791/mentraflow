@@ -3308,6 +3308,28 @@
     width: 100%;
   }
   
+  /* Library Card Meta Row - Stack on Mobile */
+  .library-item-meta-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .filename-text {
+    margin-left: 0;
+    order: 2;
+  }
+  
+  .quick-action-links {
+    margin-left: 0;
+    order: 3;
+  }
+  
+  .retention-chip,
+  .countdown-chip {
+    order: 1;
+  }
+  
   .priority-pagination {
     flex-direction: column;
     gap: 0.5rem;
