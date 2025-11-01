@@ -90,7 +90,7 @@ const Home = () => {
             Our learner survey showed most people revisit notes only once — and forget the rest.
           </p>
         </div>
-        <div className="stats-grid fade-in">
+        <Carousel className="stats-grid">
           <div className="stat-card">
             <h3>43%</h3>
             <p>still rely on handwritten notes</p>
@@ -103,7 +103,7 @@ const Home = () => {
             <h3>82%</h3>
             <p>wish their learning would "stick" longer</p>
           </div>
-        </div>
+        </Carousel>
       </section>
 
       {/* How It Works */}
