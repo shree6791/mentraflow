@@ -246,11 +246,11 @@ html {
 }
 
 .btn-secondary {
-  background: white;
-  color: var(--primary-teal);
+  background: #FFFFFF;
+  color: #0E7C7B;
   padding: 1rem 2.5rem;
   border-radius: 50px;
-  border: 2px solid var(--primary-teal);
+  border: 2px solid #0E7C7B;
   font-weight: 600;
   font-size: 1.05rem;
   cursor: pointer;
@@ -261,8 +261,8 @@ html {
 }
 
 .btn-secondary:hover {
-  background: var(--primary-teal);
-  color: white;
+  background: #0E7C7B;
+  color: #FFFFFF;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(14, 124, 123, 0.3);
 }
