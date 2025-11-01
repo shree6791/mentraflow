@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { X, Search, Filter, Eye, Brain, ZoomIn, ZoomOut } from 'lucide-react';
+import './KnowledgeGraph.css';
 
 const KnowledgeGraph = ({ topics, userAvatar, userName, onClose, onReinforce }) => {
   const canvasRef = useRef(null);
