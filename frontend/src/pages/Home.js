@@ -35,18 +35,14 @@ const Home = () => {
     <div>
       {/* Header */}
       <header className={`header ${scrolled ? 'scrolled' : ''}`}>
-        <Link to="/" className="logo">
-          MentraFlow
-        </Link>
+        <Link to="/" className="logo">MentraFlow</Link>
         <nav className="nav">
           <a href="#hero" className="nav-link">Home</a>
           <Link to="/science" className="nav-link">Science</Link>
           <Link to="/vision" className="nav-link">Vision</Link>
           <Link to="/pricing" className="nav-link">Pricing</Link>
           <Link to="/contact" className="nav-link">Contact</Link>
-          <Link to="/login" className="btn-login">
-            Login
-          </Link>
+          <Link to="/login" className="btn-login">Login</Link>
         </nav>
       </header>
 
