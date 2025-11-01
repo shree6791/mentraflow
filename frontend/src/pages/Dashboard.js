@@ -1099,7 +1099,7 @@ const Dashboard = () => {
                     )}
                     
                     <p className="library-item-meta">
-                      {item.filename} • Uploaded {new Date(item.uploadDate).toLocaleDateString()}
+                      {item.filename}
                     </p>
                     
                     <div className="library-item-actions">
