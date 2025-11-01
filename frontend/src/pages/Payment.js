@@ -214,9 +214,12 @@ const Payment = () => {
               
               <div className="plan-summary">
                 <div className="plan-badge">{selectedPlan.name}</div>
+                {planId === 'teams' && (
+                  <p className="member-count">{memberCount} team members</p>
+                )}
                 <div className="plan-price-summary">
-                  <span className="price">${selectedPlan.price}</span>
-                  <span className="period">{selectedPlan.period}</span>
+                  <span className="price">${totalPrice}</span>
+                  <span className="period">/ month</span>
                 </div>
               </div>
 
