@@ -300,108 +300,18 @@
   overflow-y: auto;
 }
 
-.upgrade-plans {
+/* Desktop: Grid layout */
+.upgrade-plans-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   margin-top: 1.5rem;
 }
 
-.upgrade-plan-card {
-  padding: 2rem;
-  background: white;
-  border: 2px solid var(--divider);
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.upgrade-plan-card.popular {
-  border-color: var(--neuro-yellow);
-  box-shadow: 0 4px 16px rgba(255, 209, 102, 0.2);
-}
-
-.upgrade-plan-card.popular .popular-badge {
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 0.375rem 1rem;
-  background: var(--neuro-yellow);
-  color: var(--contrast-indigo);
-  border-radius: 20px;
-  font-size: 0.8125rem;
-  font-weight: 700;
-}
-
-.upgrade-plan-card h3 {
-  font-size: 1.5rem;
-  color: var(--contrast-indigo);
-  margin: 1rem 0 0.5rem 0;
-}
-
-.plan-subtitle {
-  font-size: 0.875rem;
-  color: var(--text-gray);
-  margin: 0 0 1.5rem 0;
-}
-
-.upgrade-plan-card .plan-price {
-  margin-bottom: 1.5rem;
-}
-
-.upgrade-plan-card .price {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--primary-teal);
-}
-
-.upgrade-plan-card .period {
-  font-size: 1rem;
-  color: var(--text-gray);
-  margin-left: 0.5rem;
-}
-
-.upgrade-plan-card .plan-features {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 2rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.875rem;
-}
-
-.upgrade-plan-card .plan-features li {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  font-size: 0.9375rem;
-  color: var(--text-dark);
-}
-
-.upgrade-plan-card .plan-features svg {
-  color: var(--retention-green);
-  flex-shrink: 0;
-  margin-top: 0.125rem;
-}
-
-.btn-select-plan {
-  width: 100%;
-  padding: 0.875rem;
-  background: var(--primary-teal);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-select-plan:hover {
-  background: var(--mind-blue);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(14, 124, 123, 0.3);
+/* Mobile: Carousel (hidden on desktop) */
+.upgrade-plans-carousel {
+  display: none;
+  margin-top: 1.5rem;
 }
 
 /* Responsive */
@@ -425,7 +335,12 @@
     justify-content: center;
   }
 
-  .upgrade-plans {
-    grid-template-columns: 1fr;
+  /* Show carousel, hide grid on mobile */
+  .upgrade-plans-grid {
+    display: none;
+  }
+
+  .upgrade-plans-carousel {
+    display: block;
   }
 }
