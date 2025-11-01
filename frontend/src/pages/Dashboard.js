@@ -40,7 +40,7 @@ const SAMPLE_QUIZ = [
   },
   {
     q: 'Which schedule aligns with spacing?',
-    options: ['1-1-1 daily same time', '1d → 3d → 7d → 14d', 'Only monthly reviews', 'Random reminders'],
+    options: ['1-1-1 daily same time', '1d > 3d > 7d > 14d', 'Only monthly reviews', 'Random reminders'],
     correctIndex: 1
   }
 ];
