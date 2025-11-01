@@ -1741,18 +1741,22 @@ html {
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
+  height: 100%;
+  justify-content: space-between;
 }
 
 .contact-method {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 2rem;
+  padding: 2.5rem 2rem;
   background: white;
   border-radius: 15px;
   border: 1px solid rgba(14, 124, 123, 0.1);
   transition: all 0.3s ease;
+  flex: 1;
 }
 
 .contact-method:hover {
