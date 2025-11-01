@@ -520,7 +520,7 @@ html {
 
 /* Contact Section */
 .contact-section {
-  background: var(--contrast-indigo);
+  background: linear-gradient(135deg, var(--primary-teal) 0%, var(--mind-blue) 100%);
   padding: 5rem 2rem;
   text-align: center;
 }
@@ -531,6 +531,18 @@ html {
 
 .contact-section .section-subtitle {
   color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  margin-bottom: 2.5rem;
+}
+
+.contact-section .founder-quote {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: white;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
 }
 
 .contact-email {
