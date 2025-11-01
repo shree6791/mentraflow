@@ -44,7 +44,10 @@ const KnowledgeGraphPage = () => {
 
   return (
     <div className="knowledge-graph-page-wrapper">
-      {/* Knowledge Graph Component - Back button now inside */}
+      {/* App Header */}
+      <AppHeader />
+      
+      {/* Knowledge Graph Component */}
       <div className="graph-page-content">
         <KnowledgeGraph 
           topics={topics} 
