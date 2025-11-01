@@ -2019,3 +2019,220 @@
     font-size: 2.5rem;
   }
 }
+
+/* ========================================
+   PRIORITY DASHBOARD - OPTION A
+   ======================================== */
+
+/* Stats Banner */
+.dashboard-stats-banner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  padding: 2rem;
+  background: white;
+  border-bottom: 1px solid var(--divider);
+}
+
+.stat-banner-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--bg-light);
+  border-radius: 12px;
+  border: 1px solid var(--divider);
+  transition: all 0.3s ease;
+}
+
+.stat-banner-item:hover {
+  border-color: var(--primary-teal);
+  box-shadow: 0 2px 8px rgba(14, 124, 123, 0.08);
+}
+
+.stat-banner-item.recall-alert.has-tasks {
+  background: linear-gradient(135deg, rgba(255, 209, 102, 0.1), rgba(239, 71, 111, 0.05));
+  border-color: var(--neuro-yellow);
+}
+
+.stat-banner-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.stat-banner-icon.streak-icon {
+  animation: flicker 2s ease-in-out infinite;
+}
+
+.stat-banner-content {
+  flex: 1;
+}
+
+.stat-banner-content h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-teal);
+  margin: 0;
+  line-height: 1;
+}
+
+.stat-banner-content p {
+  font-size: 0.875rem;
+  color: var(--text-gray);
+  margin: 0.25rem 0 0 0;
+}
+
+.stat-banner-content .change {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+}
+
+.change.positive {
+  background: rgba(6, 214, 160, 0.1);
+  color: var(--retention-green);
+}
+
+.change.negative {
+  background: rgba(239, 71, 111, 0.1);
+  color: var(--coral);
+}
+
+.view-tasks-btn {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  background: var(--primary-teal);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-tasks-btn:hover {
+  background: var(--mind-blue);
+  transform: translateX(2px);
+}
+
+/* Main Focus Area */
+.dashboard-main-focus {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.library-section-main,
+.capture-section-main {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--divider);
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-icon-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--bg-light);
+  border: 1px solid var(--divider);
+  border-radius: 8px;
+  color: var(--primary-teal);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-icon-text:hover {
+  background: var(--primary-teal);
+  color: white;
+  border-color: var(--primary-teal);
+}
+
+/* Quick Progress Indicator */
+.quick-progress-indicator {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-light);
+  border-radius: 12px;
+  border: 1px solid var(--divider);
+}
+
+.progress-mini-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.progress-mini-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.progress-mini-item span {
+  font-size: 0.875rem;
+  color: var(--text-gray);
+  font-weight: 500;
+  min-width: 70px;
+}
+
+.mini-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--divider);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.mini-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .dashboard-main-focus {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 968px) {
+  .dashboard-stats-banner {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .stat-banner-item {
+    padding: 1rem;
+  }
+
+  .stat-banner-icon {
+    font-size: 2rem;
+  }
+
+  .stat-banner-content h3 {
+    font-size: 1.5rem;
+  }
+
+  .dashboard-main-focus {
+    padding: 1rem;
+    gap: 1rem;
+  }
+}
