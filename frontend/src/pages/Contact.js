@@ -192,6 +192,7 @@ const Contact = () => {
             <Link to="/" className="footer-link">Home</Link>
             <Link to="/science" className="footer-link">Science</Link>
             <Link to="/vision" className="footer-link">Vision</Link>
+            <Link to="/pricing" className="footer-link">Pricing</Link>
             <Link to="/contact" className="footer-link">Contact</Link>
           </div>
           <div className="social-links">
