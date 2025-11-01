@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Eye, EyeOff, Linkedin, Twitter, Youtube } from 'lucide-react';
+import { Eye, EyeOff, Linkedin, Twitter, Youtube, Menu, X } from 'lucide-react';
 import axios from 'axios';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -20,6 +20,7 @@ const Login = () => {
   const [earlyAccessSubmitted, setEarlyAccessSubmitted] = useState(false);
   const [processingSession, setProcessingSession] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Handle scroll for header
   useEffect(() => {
