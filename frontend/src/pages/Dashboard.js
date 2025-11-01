@@ -727,7 +727,7 @@ const Dashboard = () => {
                   <User size={16} />
                   Profile Settings
                 </button>
-                <button onClick={() => { navigate('/pricing'); setShowDropdown(false); }}>
+                <button onClick={() => { navigate('/billing'); setShowDropdown(false); }}>
                   <CreditCard size={16} />
                   Manage Plan
                 </button>
