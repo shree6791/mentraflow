@@ -1715,6 +1715,102 @@ const Dashboard = () => {
         </div>
       )}
 
+      {/* Floating Action Button (FAB) */}
+      <button 
+        className={`fab-button ${fabAnimatePulse ? 'fab-pulse' : ''}`}
+        onClick={() => setShowFABCapture(true)}
+        title="Capture New Knowledge"
+      >
+        <Upload size={24} />
+      </button>
+
+      {/* FAB Capture Modal */}
+      {showFABCapture && (
+        <div className="modal-overlay" onClick={() => setShowFABCapture(false)}>
+          <div className="modal-content fab-capture-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Capture New Knowledge</h2>
+              <button className="modal-close" onClick={() => setShowFABCapture(false)}>
+                <X size={24} />
+              </button>
+            </div>
+
+            <div className="modal-body">
+              <div className="fab-capture-header">
+                <button 
+                  className="btn-customize-small"
+                  onClick={() => {
+                    setShowQuizCustomization(true);
+                    setShowFABCapture(false);
+                  }}
+                  title="Customize quiz settings"
+                >
+                  <Filter size={16} /> Customize Quiz
+                </button>
+              </div>
+
+              <div className="capture-tabs">
+                <button 
+                  className={`tab ${activeTab === 'upload' ? 'active' : ''}`}
+                  onClick={() => setActiveTab('upload')}
+                >
+                  <Upload size={18} /> Upload File
+                </button>
+                <button 
+                  className={`tab ${activeTab === 'paste' ? 'active' : ''}`}
+                  onClick={() => setActiveTab('paste')}
+                >
+                  <PenTool size={18} /> Paste Text
+                </button>
+              </div>
+
+              {activeTab === 'upload' ? (
+                <div className="upload-zone">
+                  <input
+                    type="file"
+                    id="fab-file-upload"
+                    accept=".txt,.pdf,.doc,.docx"
+                    onChange={handleFileUpload}
+                    style={{ display: 'none' }}
+                  />
+                  <label htmlFor="fab-file-upload" className="upload-label">
+                    <Upload size={48} className="upload-icon" />
+                    <p className="upload-text">Drag & drop or click to upload</p>
+                    <p className="upload-hint">Supports .txt, .pdf, .doc, .docx</p>
+                  </label>
+                </div>
+              ) : (
+                <div className="paste-zone">
+                  <textarea
+                    placeholder="Paste your notes, articles, or any text you want to remember..."
+                    value={uploadedContent}
+                    onChange={(e) => setUploadedContent(e.target.value)}
+                    rows={10}
+                  />
+                </div>
+              )}
+
+              <button 
+                className="btn-primary btn-generate"
+                onClick={generateSummaryAndQuiz}
+                disabled={generating || !uploadedContent}
+                style={{marginTop: '1rem'}}
+              >
+                {generating ? (
+                  <>
+                    <div className="spinner-small"></div> Generating...
+                  </>
+                ) : (
+                  <>
+                    <Brain size={18} /> Generate Summary & Quiz
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Toast Notification */}
       {toast && (
         <div className={`toast toast-${toast.type}`}>
