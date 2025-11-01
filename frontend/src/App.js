@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Pricing from './pages/Pricing';
 import Billing from './pages/Billing';
+import Payment from './pages/Payment';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/billing" element={<Billing />} />
+            <Route path="/payment" element={<Payment />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
