@@ -160,6 +160,21 @@ html {
   align-items: center;
 }
 
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-dark);
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1001;
+}
+
+.header.scrolled .mobile-menu-toggle {
+  color: white;
+}
+
 .nav-link {
   color: var(--text-dark);
   text-decoration: none;
