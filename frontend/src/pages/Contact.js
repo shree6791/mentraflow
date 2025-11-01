@@ -1,25 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Linkedin, Twitter, Youtube, Mail, Send, CheckCircle, Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Mail, Send, CheckCircle } from 'lucide-react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const Contact = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
-
-  // Handle scroll for header
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Intersection Observer for fade-in animations
   useEffect(() => {
