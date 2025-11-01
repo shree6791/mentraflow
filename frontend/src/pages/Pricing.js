@@ -83,9 +83,9 @@ const Pricing = () => {
 
       {/* Pricing Plans */}
       <section id="plans" className="pricing-plans-section">
-        <div className="pricing-cards-container">
+        <Carousel className="pricing-cards-container">
           {/* Free Plan */}
-          <div className="pricing-card fade-in">
+          <div className="pricing-card">
             <div className="plan-header">
               <h3 className="plan-name">Free Plan</h3>
               <p className="plan-subtitle">Best for Students</p>
@@ -114,7 +114,7 @@ const Pricing = () => {
           </div>
 
           {/* Pro Plan - Most Popular */}
-          <div className="pricing-card pricing-card-popular fade-in">
+          <div className="pricing-card pricing-card-popular">
             <div className="popular-badge">⭐ Most Popular</div>
             <div className="plan-header">
               <h3 className="plan-name">Pro Plan</h3>
@@ -148,7 +148,7 @@ const Pricing = () => {
           </div>
 
           {/* Teams Plan */}
-          <div className="pricing-card fade-in">
+          <div className="pricing-card">
             <div className="plan-header">
               <h3 className="plan-name">Teams Plan</h3>
               <p className="plan-subtitle">Best for Organizations</p>
@@ -180,7 +180,7 @@ const Pricing = () => {
               Request Demo
             </button>
           </div>
-        </div>
+        </Carousel>
 
         <p className="pricing-footer-note fade-in">
           All plans include adaptive recall and secure cloud sync.
