@@ -392,7 +392,8 @@ const Dashboard = () => {
   };
 
   const nextQuestion = () => {
-    if (currentQuestionIndex < quiz.length - 1) {
+    const activeQuiz = recallQuizData || quiz;
+    if (activeQuiz && currentQuestionIndex < activeQuiz.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
     }
   };
