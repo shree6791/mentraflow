@@ -214,7 +214,7 @@ const Home = () => {
         <div className="footer-content">
           <div className="footer-links">
             <a href="#hero" className="footer-link">Home</a>
-            <a href="#how" className="footer-link">Science</a>
+            <Link to="/science" className="footer-link">Science</Link>
             <a href="#vision" className="footer-link">Vision</a>
             <a href="#contact" className="footer-link">Contact</a>
           </div>
