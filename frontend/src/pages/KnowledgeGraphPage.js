@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
 import KnowledgeGraph from '../components/KnowledgeGraph';
 
 const KnowledgeGraphPage = () => {
@@ -44,15 +43,7 @@ const KnowledgeGraphPage = () => {
 
   return (
     <div className="knowledge-graph-page-wrapper">
-      {/* Back Button */}
-      <div className="graph-page-back-btn-container">
-        <button className="back-btn" onClick={() => navigate(-1)}>
-          <ArrowLeft size={20} />
-          Back
-        </button>
-      </div>
-
-      {/* Knowledge Graph Component */}
+      {/* Knowledge Graph Component - Back button now inside */}
       <div className="graph-page-content">
         <KnowledgeGraph 
           topics={topics} 
