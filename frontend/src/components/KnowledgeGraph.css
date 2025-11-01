@@ -17,31 +17,30 @@
   justify-content: space-between;
   align-items: flex-start;
   padding: 1.5rem 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: white;
+  border-bottom: 1px solid var(--divider);
 }
 
 .graph-header-left h2 {
   font-size: 1.5rem;
   font-weight: 600;
-  color: white;
+  color: var(--contrast-indigo);
   margin: 0 0 0.25rem 0;
 }
 
 .graph-subtitle {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-gray);
   margin: 0;
 }
 
 .modal-close-btn {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--bg-light);
+  border: 1px solid var(--divider);
   border-radius: 8px;
   padding: 0.5rem;
   cursor: pointer;
-  color: white;
+  color: var(--text-gray);
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
@@ -49,7 +48,9 @@
 }
 
 .modal-close-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--primary-teal);
+  color: white;
+  border-color: var(--primary-teal);
   transform: rotate(90deg);
 }
 
