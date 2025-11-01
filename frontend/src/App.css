@@ -246,11 +246,11 @@ html {
 }
 
 .btn-secondary {
-  background: transparent;
-  color: white;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--contrast-indigo);
   padding: 1rem 2.5rem;
   border-radius: 50px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid var(--contrast-indigo);
   font-weight: 600;
   font-size: 1.05rem;
   cursor: pointer;
@@ -258,12 +258,14 @@ html {
   text-decoration: none;
   display: inline-block;
   font-family: var(--font-body);
+  backdrop-filter: blur(10px);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.6);
+  background: var(--contrast-indigo);
+  color: white;
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(7, 59, 76, 0.3);
 }
 
 /* Section Styles */
