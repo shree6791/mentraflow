@@ -304,6 +304,10 @@ const Dashboard = () => {
   const [showReviewSession, setShowReviewSession] = useState(false);
   const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
   
+  // Priority Section Pagination
+  const [priorityPage, setPriorityPage] = useState(1);
+  const priorityItemsPerPage = 2;
+  
   // Get items that need review (based on retention status)
   const itemsNeedingReview = libraryItems.filter(item => 
     item.retention === 'fading' || item.retention === 'medium'
