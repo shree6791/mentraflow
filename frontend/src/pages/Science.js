@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Linkedin, Twitter, Youtube, Brain, RefreshCw, Network } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Carousel from '../components/Carousel';
 
 const Science = () => {
   const [scrolled, setScrolled] = useState(false);
