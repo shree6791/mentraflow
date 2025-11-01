@@ -445,18 +445,23 @@ const KnowledgeGraph = ({ topics, userAvatar, userName, onClose, onReinforce }) 
   }, [nodes, selectedNode, focusedNodeIndex, onClose]);
 
   const hoveredNodeData = hoveredNode !== null ? nodes[hoveredNode] : null;
+  
+  // Check if filtered results are empty
+  const hasResults = nodes.length > 0;
 
   return (
     <div className="knowledge-graph-modal">
       {/* Header with Search and Filters */}
       <div className="graph-modal-header">
         <div className="graph-header-left">
-          <h2>Your Knowledge Network</h2>
-          <p className="graph-subtitle">Interactive memory visualization • Click nodes to explore</p>
+          <button className="back-btn-inline" onClick={onClose} aria-label="Go back">
+            <ArrowLeft size={20} />
+          </button>
+          <div>
+            <h2>Your Knowledge Network</h2>
+            <p className="graph-subtitle">Interactive memory visualization • Click nodes to explore</p>
+          </div>
         </div>
-        <button className="modal-close-btn" onClick={onClose} aria-label="Close">
-          <X size={24} />
-        </button>
       </div>
 
       {/* Controls Bar */}
