@@ -669,102 +669,102 @@ const Dashboard = () => {
       {/* Main Focus Area - Two Cards */}
       <div className="dashboard-main-focus">
         
-        {/* Capture Knowledge - Primary Action (User's First Step) */}
-        <section className="dashboard-section capture-section-main">
-          <div className="section-header">
-            <h2>Capture Knowledge</h2>
+        {/* Quick Capture Widget - Collapsible */}
+        <div className={`quick-capture-widget ${isCaptureExpanded ? 'expanded' : 'collapsed'}`}>
+          {!isCaptureExpanded ? (
+            // Collapsed State - Just a prominent button
             <button 
-              className="btn-customize"
-              onClick={() => setShowQuizCustomization(true)}
-              title="Customize quiz settings"
+              className="quick-capture-trigger"
+              onClick={() => setIsCaptureExpanded(true)}
             >
-              <Filter size={16} /> Customize
+              <Upload size={20} />
+              <span>Capture New Knowledge</span>
+              <ChevronDown size={18} className="chevron-icon" />
             </button>
-          </div>
-          
-          <div className="capture-tabs">
-            <button 
-              className={`tab ${activeTab === 'upload' ? 'active' : ''}`}
-              onClick={() => setActiveTab('upload')}
-            >
-              <Upload size={18} /> Upload File
-            </button>
-            <button 
-              className={`tab ${activeTab === 'paste' ? 'active' : ''}`}
-              onClick={() => setActiveTab('paste')}
-            >
-              <PenTool size={18} /> Paste Text
-            </button>
-          </div>
-
-          {activeTab === 'upload' ? (
-            <div className="upload-zone">
-              <input
-                type="file"
-                id="file-upload"
-                accept=".txt,.pdf,.doc,.docx"
-                onChange={handleFileUpload}
-                style={{ display: 'none' }}
-              />
-              <label htmlFor="file-upload" className="upload-label">
-                <Upload size={48} className="upload-icon" />
-                <p className="upload-text">Drag & drop or click to upload</p>
-                <p className="upload-hint">Supports .txt, .pdf, .doc, .docx</p>
-              </label>
-            </div>
           ) : (
-            <div className="paste-zone">
-              <textarea
-                placeholder="Paste your notes, articles, or any text you want to remember..."
-                value={uploadedContent}
-                onChange={(e) => setUploadedContent(e.target.value)}
-                rows={12}
-              />
+            // Expanded State - Full capture interface
+            <div className="quick-capture-content">
+              <div className="capture-widget-header">
+                <h3>Capture Knowledge</h3>
+                <div className="capture-widget-actions">
+                  <button 
+                    className="btn-customize-small"
+                    onClick={() => setShowQuizCustomization(true)}
+                    title="Customize quiz settings"
+                  >
+                    <Filter size={16} /> Customize
+                  </button>
+                  <button 
+                    className="btn-collapse"
+                    onClick={() => setIsCaptureExpanded(false)}
+                    title="Collapse"
+                  >
+                    <ChevronUp size={20} />
+                  </button>
+                </div>
+              </div>
+              
+              <div className="capture-tabs">
+                <button 
+                  className={`tab ${activeTab === 'upload' ? 'active' : ''}`}
+                  onClick={() => setActiveTab('upload')}
+                >
+                  <Upload size={18} /> Upload File
+                </button>
+                <button 
+                  className={`tab ${activeTab === 'paste' ? 'active' : ''}`}
+                  onClick={() => setActiveTab('paste')}
+                >
+                  <PenTool size={18} /> Paste Text
+                </button>
+              </div>
+
+              {activeTab === 'upload' ? (
+                <div className="upload-zone">
+                  <input
+                    type="file"
+                    id="file-upload"
+                    accept=".txt,.pdf,.doc,.docx"
+                    onChange={handleFileUpload}
+                    style={{ display: 'none' }}
+                  />
+                  <label htmlFor="file-upload" className="upload-label">
+                    <Upload size={48} className="upload-icon" />
+                    <p className="upload-text">Drag & drop or click to upload</p>
+                    <p className="upload-hint">Supports .txt, .pdf, .doc, .docx</p>
+                  </label>
+                </div>
+              ) : (
+                <div className="paste-zone">
+                  <textarea
+                    placeholder="Paste your notes, articles, or any text you want to remember..."
+                    value={uploadedContent}
+                    onChange={(e) => setUploadedContent(e.target.value)}
+                    rows={8}
+                  />
+                </div>
+              )}
+
+              <button 
+                className="btn-primary btn-generate"
+                onClick={generateSummaryAndQuiz}
+                disabled={generating || !uploadedContent}
+              >
+                {generating ? (
+                  <>
+                    <div className="spinner-small"></div> Generating...
+                  </>
+                ) : (
+                  <>
+                    <Brain size={18} /> Generate Summary & Quiz
+                  </>
+                )}
+              </button>
             </div>
           )}
+        </div>
 
-          <button 
-            className="btn-primary btn-generate"
-            onClick={generateSummaryAndQuiz}
-            disabled={generating || !uploadedContent}
-          >
-            {generating ? (
-              <>
-                <div className="spinner-small"></div> Generating...
-              </>
-            ) : (
-              <>
-                <Brain size={18} /> Generate Summary & Quiz
-              </>
-            )}
-          </button>
-
-          {/* Quick Progress Indicator */}
-          <div className="quick-progress-indicator">
-            <div className="progress-mini-bars">
-              <div className="progress-mini-item">
-                <span>Mastered</span>
-                <div className="mini-bar">
-                  <div className="mini-bar-fill bar-high" style={{width: `${(masteredCount/topics.length)*100}%`}}></div>
-                </div>
-              </div>
-              <div className="progress-mini-item">
-                <span>Medium</span>
-                <div className="mini-bar">
-                  <div className="mini-bar-fill bar-medium" style={{width: `${(mediumCount/topics.length)*100}%`}}></div>
-                </div>
-              </div>
-              <div className="progress-mini-item">
-                <span>Fading</span>
-                <div className="mini-bar">
-                  <div className="mini-bar-fill bar-fading" style={{width: `${(fadingCount/topics.length)*100}%`}}></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* My Knowledge Library - Review & Practice */}
+        {/* My Knowledge Library - Main Content */}
         <section className="dashboard-section library-section-main">
           <div className="section-header">
             <h2>My Knowledge Library</h2>
@@ -795,55 +795,98 @@ const Dashboard = () => {
             </select>
           </div>
           
-          <div className="library-list">
-            {filteredLibraryItems.length === 0 ? (
-              <div className="library-empty-state">
-                <FileText size={48} className="empty-icon" />
-                <h3>Start capturing what matters</h3>
-                <p>Upload your first note or document to begin building your knowledge base.</p>
+          {filteredLibraryItems.length === 0 ? (
+            <div className="library-empty-state">
+              <FileText size={48} className="empty-icon" />
+              <h3>Start capturing what matters</h3>
+              <p>Click "Capture New Knowledge" above to begin building your knowledge base.</p>
+              <button 
+                className="btn-primary"
+                onClick={() => setIsCaptureExpanded(true)}
+                style={{marginTop: '1rem'}}
+              >
+                <Upload size={18} /> Start Capturing
+              </button>
+            </div>
+          ) : (
+            <>
+              <div className="library-list">
+                {paginatedLibraryItems.map(item => (
+                  <div key={item.id} className="library-item">
+                    <div className="library-item-header">
+                      <h3>{item.title}</h3>
+                      <span className={`status-badge status-${item.status}`}>
+                        {item.status === 'summarized' && '✅ Summarized'}
+                        {item.status === 'quiz-available' && '🧠 Quiz Available'}
+                        {item.status === 'pending' && '⏳ Pending'}
+                      </span>
+                    </div>
+                    <p className="library-item-meta">
+                      {item.filename} • Uploaded {new Date(item.uploadDate).toLocaleDateString()}
+                    </p>
+                    {item.lastReview && (
+                      <p className="library-item-review">Last reviewed: {item.lastReview}</p>
+                    )}
+                    <div className="library-item-actions">
+                      {item.status === 'summarized' && (
+                        <button className="action-btn" onClick={() => openLibraryItem(item, 'summary')}>
+                          <Eye size={16} /> View Summary
+                        </button>
+                      )}
+                      {item.hasQuiz && (
+                        <button className="action-btn" onClick={() => openLibraryItem(item, 'quiz')}>
+                          <Brain size={16} /> Take Quiz
+                        </button>
+                      )}
+                      {item.quizScore !== null && (
+                        <button className="action-btn" onClick={() => openLibraryItem(item, 'performance')}>
+                          <TrendingUp size={16} /> Score: {item.quizScore}%
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ) : (
-              filteredLibraryItems.map(item => (
-                <div key={item.id} className="library-item">
-                  <div className="library-item-header">
-                    <h3>{item.title}</h3>
-                    <span className={`status-badge status-${item.status}`}>
-                      {item.status === 'summarized' && '✅ Summarized'}
-                      {item.status === 'quiz-available' && '🧠 Quiz Available'}
-                      {item.status === 'pending' && '⏳ Pending'}
-                    </span>
+              
+              {/* Pagination Controls */}
+              {totalPages > 1 && (
+                <div className="pagination-controls">
+                  <button 
+                    className="pagination-btn"
+                    onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                    disabled={currentPage === 1}
+                  >
+                    Previous
+                  </button>
+                  
+                  <div className="pagination-numbers">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(pageNum => (
+                      <button
+                        key={pageNum}
+                        className={`pagination-number ${currentPage === pageNum ? 'active' : ''}`}
+                        onClick={() => setCurrentPage(pageNum)}
+                      >
+                        {pageNum}
+                      </button>
+                    ))}
                   </div>
-                  <p className="library-item-meta">
-                    {item.filename} • Uploaded {new Date(item.uploadDate).toLocaleDateString()}
-                  </p>
-                  {item.lastReview && (
-                    <p className="library-item-review">Last reviewed: {item.lastReview}</p>
-                  )}
-                  <div className="library-item-actions">
-                    {item.status === 'summarized' && (
-                      <button className="action-btn" onClick={() => openLibraryItem(item, 'summary')}>
-                        <Eye size={16} /> View Summary
-                      </button>
-                    )}
-                    {item.hasQuiz && (
-                      <button className="action-btn" onClick={() => openLibraryItem(item, 'quiz')}>
-                        <Brain size={16} /> Take Quiz
-                      </button>
-                    )}
-                    {item.quizScore !== null && (
-                      <button className="action-btn" onClick={() => openLibraryItem(item, 'performance')}>
-                        <TrendingUp size={16} /> Score: {item.quizScore}%
-                      </button>
-                    )}
-                  </div>
+                  
+                  <button 
+                    className="pagination-btn"
+                    onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                    disabled={currentPage === totalPages}
+                  >
+                    Next
+                  </button>
                 </div>
-              ))
-            )}
-          </div>
-          
-          <div className="autosave-banner">
-            💾 Your work is saved automatically
-          </div>
+              )}
+              
+              <div className="library-info">
+                <p>Showing {startIndex + 1}-{Math.min(endIndex, filteredLibraryItems.length)} of {filteredLibraryItems.length} items</p>
+                <p className="autosave-text">💾 Your work is saved automatically</p>
+              </div>
+            </>
+          )}
         </section>
 
       </div>
