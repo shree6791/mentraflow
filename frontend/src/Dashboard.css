@@ -219,15 +219,16 @@
 
 .library-item {
   padding: 1.25rem;
-  background: var(--bg-light);
+  background: white;
   border-radius: 12px;
   border: 1px solid var(--divider);
   transition: all 0.3s ease;
 }
 
 .library-item:hover {
+  transform: translateY(-2px);
   border-color: var(--primary-teal);
-  box-shadow: 0 4px 12px rgba(14, 124, 123, 0.08);
+  box-shadow: 0 6px 16px rgba(14, 124, 123, 0.12);
 }
 
 .library-item-header {
