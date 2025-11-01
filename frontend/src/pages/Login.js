@@ -22,6 +22,14 @@ const Login = () => {
 
   // Check for session_id in URL fragment and process it
   useEffect(() => {
+    // TEMPORARY BYPASS: Skip session processing, just redirect to dashboard
+    const hash = window.location.hash;
+    if (hash.includes('session_id')) {
+      navigate('/dashboard');
+      return;
+    }
+    
+    /* COMMENTED OUT - Re-enable for production
     const processSessionId = async () => {
       const hash = window.location.hash;
       const params = new URLSearchParams(hash.substring(1));
@@ -37,9 +45,7 @@ const Login = () => {
           });
 
           if (response.data.success) {
-            // Clear URL fragment
             window.history.replaceState(null, '', window.location.pathname);
-            // Redirect to dashboard
             navigate('/dashboard');
           }
         } catch (err) {
@@ -51,19 +57,23 @@ const Login = () => {
     };
 
     processSessionId();
+    */
   }, [navigate]);
 
   // Check if user is already authenticated
   useEffect(() => {
+    // TEMPORARY BYPASS: Skip auth check
+    return;
+    
+    /* COMMENTED OUT - Re-enable for production
     const checkAuth = async () => {
-      if (processingSession) return; // Don't check if processing session_id
+      if (processingSession) return;
       
       try {
         const response = await axios.get(`${API}/auth/me`, {
           withCredentials: true
         });
         if (response.data) {
-          // User is already authenticated
           navigate('/dashboard');
         }
       } catch (err) {
@@ -72,6 +82,7 @@ const Login = () => {
     };
 
     checkAuth();
+    */
   }, [navigate, processingSession]);
 
   const handleGoogleLogin = () => {
