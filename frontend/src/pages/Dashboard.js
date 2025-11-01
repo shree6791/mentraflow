@@ -560,9 +560,31 @@ const Dashboard = () => {
 
   const closeLibraryItem = () => {
     setSelectedLibraryItem(null);
+    setLibraryModalTab('summary');
     setQuizAnswers({});
     setQuizResults({});
     setCurrentQuestionIndex(0);
+  };
+  
+  // Start Priority Review Session
+  const startReviewSession = () => {
+    if (itemsNeedingReview.length > 0) {
+      setCurrentReviewIndex(0);
+      openLibraryItem(itemsNeedingReview[0], 'quiz');
+    }
+  };
+  
+  // Move to next item in review session
+  const nextReviewItem = () => {
+    if (currentReviewIndex < itemsNeedingReview.length - 1) {
+      setCurrentReviewIndex(currentReviewIndex + 1);
+      openLibraryItem(itemsNeedingReview[currentReviewIndex + 1], 'quiz');
+    } else {
+      // Completed all reviews
+      showToast(`🎉 Review session complete! You reviewed ${itemsNeedingReview.length} items.`);
+      setSelectedLibraryItem(null);
+      setCurrentReviewIndex(0);
+    }
   };
 
   // Filter library items
