@@ -185,12 +185,15 @@ const Billing = () => {
               </button>
             </div>
             <div className="modal-body">
-              <div className="upgrade-plans">
+              {/* Desktop: Grid layout */}
+              <div className="upgrade-plans-grid">
                 {plans.map((plan) => (
-                  <div key={plan.id} className={`upgrade-plan-card ${plan.popular ? 'popular' : ''}`}>
+                  <div key={plan.id} className={`pricing-card ${plan.popular ? 'pricing-card-popular' : ''}`}>
                     {plan.popular && <div className="popular-badge">⭐ Most Popular</div>}
-                    <h3>{plan.name}</h3>
-                    <p className="plan-subtitle">{plan.subtitle}</p>
+                    <div className="plan-header">
+                      <h3 className="plan-name">{plan.name}</h3>
+                      <p className="plan-subtitle">{plan.subtitle}</p>
+                    </div>
                     <div className="plan-price">
                       <span className="price">${plan.price}</span>
                       <span className="period">{plan.period}</span>
@@ -198,19 +201,52 @@ const Billing = () => {
                     <ul className="plan-features">
                       {plan.features.map((feature, idx) => (
                         <li key={idx}>
-                          <Check size={16} />
+                          <Check size={20} className="check-icon" />
                           {feature}
                         </li>
                       ))}
                     </ul>
                     <button 
-                      className="btn-select-plan"
+                      className={`plan-cta ${plan.popular ? 'plan-cta-primary' : ''}`}
                       onClick={() => handleUpgrade(plan.id)}
                     >
                       Select {plan.name}
                     </button>
                   </div>
                 ))}
+              </div>
+
+              {/* Mobile: Carousel */}
+              <div className="upgrade-plans-carousel">
+                <Carousel>
+                  {plans.map((plan) => (
+                    <div key={plan.id} className={`pricing-card ${plan.popular ? 'pricing-card-popular' : ''}`}>
+                      {plan.popular && <div className="popular-badge">⭐ Most Popular</div>}
+                      <div className="plan-header">
+                        <h3 className="plan-name">{plan.name}</h3>
+                        <p className="plan-subtitle">{plan.subtitle}</p>
+                      </div>
+                      <div className="plan-price">
+                        <span className="price">${plan.price}</span>
+                        <span className="period">{plan.period}</span>
+                      </div>
+                      <ul className="plan-features">
+                        {plan.features.map((feature, idx) => (
+                          <li key={idx}>
+                            <Check size={20} className="check-icon" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                      <button 
+                        className={`plan-cta ${plan.popular ? 'plan-cta-primary' : ''}`}
+                        onClick={() => handleUpgrade(plan.id)}
+                      >
+                        Select {plan.name}
+                      </button>
+                    </div>
+                  ))}
+                </Carousel>
               </div>
             </div>
           </div>
