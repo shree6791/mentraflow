@@ -402,7 +402,23 @@ const Dashboard = () => {
     setMasteryScore(prev => Math.min(100, Math.max(0, prev + change)));
     setWeeklyChange(prev => prev + change);
     
-    showToast(`Quiz complete! You scored ${percentage}%`);
+    // Phase 3: Award XP
+    const xpGain = 10;
+    setXp(prev => prev + xpGain);
+    
+    // Motivational message based on performance
+    let message = '';
+    if (percentage === 100) {
+      message = `🎉 Perfect score! +${xpGain} XP. You've mastered this!`;
+    } else if (percentage >= 80) {
+      message = `✅ Great work! ${percentage}% correct. +${xpGain} XP`;
+    } else if (percentage >= 60) {
+      message = `🧠 Good effort! ${percentage}% correct. +${xpGain} XP. Keep practicing!`;
+    } else {
+      message = `💪 ${percentage}% correct. +${xpGain} XP. Each recall strengthens your memory!`;
+    }
+    
+    showToast(message);
   };
 
   const nextQuestion = () => {
