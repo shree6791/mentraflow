@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import Science from './pages/Science';
 import Vision from './pages/Vision';
 import Contact from './pages/Contact';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
           <Route path="/science" element={<Science />} />
           <Route path="/vision" element={<Vision />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
     </div>
