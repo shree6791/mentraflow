@@ -287,6 +287,33 @@
   margin: 0.25rem 0;
 }
 
+.quick-action-links {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-left: auto;
+}
+
+.link-btn-compact {
+  background: none;
+  border: none;
+  color: var(--primary-teal);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.link-btn-compact:hover {
+  color: var(--mind-blue);
+  text-decoration: underline;
+}
+
 .retention-chip {
   display: inline-flex;
   align-items: center;
