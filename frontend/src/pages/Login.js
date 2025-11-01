@@ -19,6 +19,16 @@ const Login = () => {
   const [earlyAccessData, setEarlyAccessData] = useState({ name: '', email: '' });
   const [earlyAccessSubmitted, setEarlyAccessSubmitted] = useState(false);
   const [processingSession, setProcessingSession] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Handle scroll for header
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Check for session_id in URL fragment and process it
   useEffect(() => {
