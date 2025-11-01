@@ -285,6 +285,10 @@ const Dashboard = () => {
   const [onboardingStep, setOnboardingStep] = useState(1);
   const [hasUploadedFirstNote, setHasUploadedFirstNote] = useState(false);
   
+  // Library Item Detail Modal
+  const [selectedLibraryItem, setSelectedLibraryItem] = useState(null);
+  const [libraryModalTab, setLibraryModalTab] = useState('summary'); // summary | quiz | performance
+  
   const [profileData, setProfileData] = useState({
     name: 'Demo User',
     email: 'demo@mentraflow.com',
