@@ -549,8 +549,25 @@ const KnowledgeGraph = ({ topics, userAvatar, userName, onClose, onReinforce }) 
               onMouseLeave={handleMouseUp}
             />
 
-        {/* Hover Tooltip */}
-        {hoveredNodeData && !selectedNode && (
+            {/* Node Labels Overlay */}
+            <div className="graph-node-labels">
+              {nodes.map((node, idx) => (
+                <div
+                  key={node.id}
+                  className={`node-label ${hoveredNode === idx || selectedNode?.id === node.id ? 'visible' : ''}`}
+                  style={{
+                    left: `${(node.x * zoom + pan.x)}px`,
+                    top: `${((node.y + node.radius + 15) * zoom + pan.y)}px`,
+                    transform: 'translate(-50%, 0)'
+                  }}
+                >
+                  {node.title}
+                </div>
+              ))}
+            </div>
+
+            {/* Hover Tooltip */}
+            {hoveredNodeData && !selectedNode && (
           <div className="graph-tooltip">
             <h4>{hoveredNodeData.title}</h4>
             <div className="tooltip-stats">
