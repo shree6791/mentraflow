@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Linkedin, Twitter, Youtube, Brain, RefreshCw, Network } from 'lucide-react';
+import { Linkedin, Twitter, Youtube, Brain, RefreshCw, Network, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Carousel from '../components/Carousel';
 
 const Science = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Handle scroll for header
   useEffect(() => {
