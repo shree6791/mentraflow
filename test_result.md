@@ -120,14 +120,14 @@ frontend:
   - task: "Library Cards - Declutter and Color Reduction"
     implemented: true
     working: true
-    file: "/app/frontend/src/Dashboard.css"
+    file: "/app/frontend/src/Dashboard.css, /app/frontend/src/pages/Dashboard.js"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
         - working: true
         - agent: "main"
-        - comment: "Significantly reduced visual noise in library cards. Changes: 1) Reduced card padding from 1.5rem to 1.25rem, 2) Reduced gap between elements from 0.75rem to 0.5rem, 3) Reduced left border accent from 4px to 2px, 4) Removed gradient background on fading cards (was too much color), replaced with very subtle solid color (0.015 opacity), 5) Made retention status banners more compact (padding 0.375rem vs 0.5rem, font-size 0.8125rem vs 0.875rem), 6) Reduced next-review-countdown size and background opacity, 7) Made file meta text smaller (0.75rem vs 0.8rem), 8) Reduced heading from 1.125rem to 1.05rem. Overall effect: cleaner, less overwhelming, better breathing room."
+        - comment: "Significantly reduced visual noise in library cards. Changes: 1) Reduced card padding from 1.5rem to 1.25rem, 2) Reduced gap between elements from 0.75rem to 0.5rem, 3) Reduced left border accent from 4px to 2px, 4) Removed gradient background on fading cards (was too much color), replaced with very subtle solid color (0.015 opacity), 5) Made retention status banners more compact (padding 0.375rem vs 0.5rem, font-size 0.8125rem vs 0.875rem), 6) Reduced next-review-countdown size and background opacity, 7) Made file meta text smaller (0.75rem vs 0.8rem), 8) Reduced heading from 1.125rem to 1.05rem. MAJOR UPDATE: Consolidated 3 separate rows (retention status, next review countdown, filename) into a single horizontal meta row with chips, saving significant vertical space. Cards are now ~40% more compact while remaining readable."
 
   - task: "Generated Content Modal"
     implemented: true
