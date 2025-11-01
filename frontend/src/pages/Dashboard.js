@@ -1009,8 +1009,6 @@ const Dashboard = () => {
             >
               <option value="all">All Status</option>
               <option value="summarized">Summarized</option>
-              <option value="quiz-available">Quiz Available</option>
-              <option value="pending">Pending</option>
             </select>
           </div>
           
