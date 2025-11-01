@@ -867,7 +867,10 @@ const Dashboard = () => {
         {/* Priority Widget - Clickable */}
         <div 
           className="stat-banner-item priority-widget-card"
-          onClick={() => setShowPriorityModal(true)}
+          onClick={() => {
+            setPriorityModalPage(1); // Reset to page 1
+            setShowPriorityModal(true);
+          }}
           style={{cursor: 'pointer'}}
         >
           <div className="priority-widget-icon">
