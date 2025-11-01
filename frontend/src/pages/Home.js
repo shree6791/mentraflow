@@ -6,13 +6,6 @@ import Footer from '../components/Footer';
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
 
-  // Header shadow on scroll
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   // Fade-in on view
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -42,28 +35,7 @@ const Home = () => {
 
   return (
     <div>
-      {/* Header */}
-      <header className={`header ${scrolled ? 'scrolled' : ''}`}>
-        <Link to="/" className="logo">MentraFlow</Link>
-        
-        {/* Hamburger Toggle */}
-        <button 
-          className="mobile-menu-toggle" 
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-        
-        <nav className={`nav ${mobileMenuOpen ? 'nav-open' : ''}`}>
-          <a href="#hero" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Home</a>
-          <Link to="/science" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Science</Link>
-          <Link to="/vision" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Vision</Link>
-          <Link to="/pricing" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Pricing</Link>
-          <Link to="/contact" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
-          <Link to="/login" className="btn-login" onClick={() => setMobileMenuOpen(false)}>Login</Link>
-        </nav>
-      </header>
+      <Header />
 
       {/* Hero */}
       <section id="hero" className="hero-section">
