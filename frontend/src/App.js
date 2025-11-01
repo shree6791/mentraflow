@@ -6,6 +6,7 @@ import Vision from './pages/Vision';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import Pricing from './pages/Pricing';
 
 function App() {
   return (
