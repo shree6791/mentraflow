@@ -75,17 +75,28 @@ const Login = () => {
   }, [navigate, processingSession]);
 
   const handleGoogleLogin = () => {
+    // TEMPORARY BYPASS: Go directly to dashboard
+    navigate('/dashboard');
+    
+    /* COMMENTED OUT - Re-enable for production
     window.location.href = EMERGENT_AUTH_URL;
+    */
   };
 
   const handleEmailLogin = async (e) => {
     e.preventDefault();
+    
+    // TEMPORARY BYPASS: Go directly to dashboard
+    navigate('/dashboard');
+    
+    /* COMMENTED OUT - Re-enable for production
     setError('');
     setLoading(true);
 
     // For now, show early access modal (email/password not implemented yet)
     setShowEarlyAccessModal(true);
     setLoading(false);
+    */
   };
 
   const handleEarlyAccessSubmit = (e) => {
