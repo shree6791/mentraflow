@@ -236,9 +236,15 @@ const Payment = () => {
               </div>
 
               <div className="price-breakdown">
+                {planId === 'teams' && (
+                  <div className="price-row">
+                    <span>${selectedPlan.price} × {memberCount} users</span>
+                    <span>${totalPrice}</span>
+                  </div>
+                )}
                 <div className="price-row">
                   <span>Subtotal</span>
-                  <span>${selectedPlan.price}</span>
+                  <span>${totalPrice}</span>
                 </div>
                 <div className="price-row">
                   <span>Tax</span>
@@ -246,7 +252,7 @@ const Payment = () => {
                 </div>
                 <div className="price-row total">
                   <span>Total</span>
-                  <span>${selectedPlan.price}</span>
+                  <span>${totalPrice}</span>
                 </div>
               </div>
 
