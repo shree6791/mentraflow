@@ -4193,32 +4193,34 @@ html {
 .plan-cta {
   width: 100%;
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, var(--neuro-yellow) 0%, var(--coral) 100%);
+  background: #0E7C7B;
   border: none;
   border-radius: 10px;
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--inverse-text);
+  color: white;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(255, 209, 102, 0.3);
+  box-shadow: 0 4px 12px rgba(14, 124, 123, 0.3);
 }
 
 .plan-cta:hover {
+  background: #0a5e5d;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(239, 71, 111, 0.4);
+  box-shadow: 0 8px 25px rgba(14, 124, 123, 0.5);
 }
 
 .plan-cta-primary {
-  background: linear-gradient(135deg, var(--neuro-yellow) 0%, var(--coral) 100%);
+  background: #0E7C7B;
   border: none;
-  color: var(--inverse-text);
+  color: white;
 }
 
 .plan-cta-primary:hover {
+  background: #0a5e5d;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(239, 71, 111, 0.4);
+  box-shadow: 0 8px 25px rgba(14, 124, 123, 0.5);
 }
 
 .pricing-footer-note {
