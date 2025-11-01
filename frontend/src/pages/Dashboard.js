@@ -24,7 +24,9 @@ const LIBRARY_ITEMS = [
     hasQuiz: true,
     quizScore: 80,
     lastReview: '2 days ago',
-    retention: 'high'
+    retention: 'high',
+    nextReview: 'In 5 days',
+    nextReviewDays: 5
   },
   {
     id: 'lib2',
@@ -35,7 +37,9 @@ const LIBRARY_ITEMS = [
     hasQuiz: true,
     quizScore: null,
     lastReview: '5 days ago',
-    retention: 'medium'
+    retention: 'medium',
+    nextReview: 'In 2 days',
+    nextReviewDays: 2
   },
   {
     id: 'lib3',
@@ -46,7 +50,9 @@ const LIBRARY_ITEMS = [
     hasQuiz: true,
     quizScore: 60,
     lastReview: '2 weeks ago',
-    retention: 'fading'
+    retention: 'fading',
+    nextReview: 'Overdue!',
+    nextReviewDays: -3
   },
   {
     id: 'lib4',
@@ -57,7 +63,9 @@ const LIBRARY_ITEMS = [
     hasQuiz: false,
     quizScore: null,
     lastReview: null,
-    retention: null
+    retention: null,
+    nextReview: null,
+    nextReviewDays: null
   },
   {
     id: 'lib5',
@@ -68,7 +76,9 @@ const LIBRARY_ITEMS = [
     hasQuiz: true,
     quizScore: 55,
     lastReview: '3 weeks ago',
-    retention: 'fading'
+    retention: 'fading',
+    nextReview: 'Overdue!',
+    nextReviewDays: -10
   },
   {
     id: 'lib6',
@@ -79,7 +89,9 @@ const LIBRARY_ITEMS = [
     hasQuiz: true,
     quizScore: 70,
     lastReview: '1 week ago',
-    retention: 'medium'
+    retention: 'medium',
+    nextReview: 'Tomorrow',
+    nextReviewDays: 1
   }
 ];
 
