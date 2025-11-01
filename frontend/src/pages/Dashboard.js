@@ -63,6 +63,20 @@ const Dashboard = () => {
   const [showGraph, setShowGraph] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [toast, setToast] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [profileData, setProfileData] = useState({
+    name: 'Demo User',
+    email: 'demo@mentraflow.com',
+    phone: '',
+    timezone: 'America/New_York',
+    notificationPreferences: {
+      emailNotifications: true,
+      reviewReminders: true,
+      weeklyProgress: false
+    }
+  });
+  const [profileErrors, setProfileErrors] = useState({});
 
   useEffect(() => {
     // TEMPORARY: Bypass authentication for demo
