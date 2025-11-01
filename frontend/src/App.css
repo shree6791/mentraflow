@@ -4071,6 +4071,8 @@ html {
   transition: all 0.3s ease;
   position: relative;
   border: 2px solid transparent;
+  margin-top: 20px; /* Space for badge above */
+  overflow: visible; /* Allow badge to show outside card */
 }
 
 .pricing-card:hover {
