@@ -2908,3 +2908,82 @@
   }
 }
 
+
+
+/* ========================================
+   FLOATING ACTION BUTTON (FAB)
+   ======================================== */
+
+.fab-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-teal), var(--mind-blue));
+  color: white;
+  border: none;
+  box-shadow: 0 8px 24px rgba(14, 124, 123, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.fab-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(14, 124, 123, 0.5);
+  background: linear-gradient(135deg, var(--mind-blue), var(--primary-teal));
+}
+
+.fab-button:active {
+  transform: translateY(-2px);
+}
+
+/* FAB Pulse Animation for First-Time Users */
+.fab-button.fab-pulse {
+  animation: fabPulse 2s infinite;
+}
+
+@keyframes fabPulse {
+  0%, 100% {
+    box-shadow: 0 8px 24px rgba(14, 124, 123, 0.4);
+  }
+  50% {
+    box-shadow: 0 8px 24px rgba(14, 124, 123, 0.4),
+                0 0 0 15px rgba(14, 124, 123, 0.2),
+                0 0 0 30px rgba(14, 124, 123, 0.1);
+  }
+}
+
+/* FAB Capture Modal */
+.fab-capture-modal {
+  max-width: 600px;
+  width: 90%;
+}
+
+.fab-capture-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+/* Mobile FAB Positioning (Thumb Zone) */
+@media (max-width: 768px) {
+  .fab-button {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 56px;
+    height: 56px;
+  }
+  
+  .fab-capture-modal {
+    width: 95%;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+}
+
