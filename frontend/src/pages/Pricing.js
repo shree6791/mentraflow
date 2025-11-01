@@ -54,6 +54,7 @@ const Pricing = () => {
           <Link to="/" className="nav-link">Home</Link>
           <Link to="/science" className="nav-link">Science</Link>
           <Link to="/vision" className="nav-link">Vision</Link>
+          <Link to="/pricing" className="nav-link">Pricing</Link>
           <Link to="/contact" className="nav-link">Contact</Link>
           <Link to="/login" className="btn-login">
             Login
