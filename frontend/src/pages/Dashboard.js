@@ -464,10 +464,14 @@ const Dashboard = () => {
     setMasteryScore(prev => Math.min(100, Math.max(0, prev + change)));
     setWeeklyChange(prev => prev + change);
     
+    // Phase 3: Award XP for recall
+    const xpGain = 5;
+    setXp(prev => prev + xpGain);
+    
     // Remove completed task
     setRecallTasks(prev => prev.filter(t => t.id !== currentRecallTask.id));
     
-    showToast(`Great recall! ${percentage}% correct. 🧠`);
+    showToast(`Great recall! ${percentage}% correct. +${xpGain} XP 🧠`);
     
     // Close modal after showing results briefly
     setTimeout(() => {
