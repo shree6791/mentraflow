@@ -1789,10 +1789,10 @@ html {
 }
 
 .submit-btn {
-  background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-coral) 100%);
-  color: var(--contrast-indigo);
+  background: transparent;
+  color: var(--primary-main);
   padding: 1.25rem 2rem;
-  border: none;
+  border: 2px solid var(--primary-main);
   border-radius: 50px;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
@@ -1807,8 +1807,10 @@ html {
 }
 
 .submit-btn:hover {
+  background: var(--primary-main);
+  color: #FFFFFF;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+  box-shadow: 0 4px 12px rgba(14, 124, 123, 0.3);
 }
 
 .submit-btn:active {
