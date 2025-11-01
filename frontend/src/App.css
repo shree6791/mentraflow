@@ -1618,6 +1618,9 @@ html {
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
 }
 
 .future-goal:hover {
