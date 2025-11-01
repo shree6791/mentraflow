@@ -7,6 +7,7 @@ const Payment = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const planId = searchParams.get('plan');
+  const memberCount = parseInt(searchParams.get('members')) || 1;
 
   const [formData, setFormData] = useState({
     cardNumber: '',
@@ -46,6 +47,9 @@ const Payment = () => {
   };
 
   const selectedPlan = plans[planId] || plans.pro;
+  const totalPrice = planId === 'teams' 
+    ? (selectedPlan.price * memberCount).toFixed(2)
+    : selectedPlan.price.toFixed(2);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
