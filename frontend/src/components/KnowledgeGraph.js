@@ -58,7 +58,7 @@ const KnowledgeGraph = ({ topics, onClose }) => {
     const getStateColor = (state) => {
       switch(state) {
         case 'high': return '#06D6A0';
-        case 'medium': return '#FFD166';
+        case 'medium': return '#FFC947'; // Deeper yellow
         case 'fading': return '#FF6B6B';
         default: return '#CBD5E0';
       }
@@ -225,7 +225,7 @@ const KnowledgeGraph = ({ topics, onClose }) => {
   const getStateColor = (state) => {
     switch(state) {
       case 'high': return '#06D6A0';
-      case 'medium': return '#FFD166';
+      case 'medium': return '#FFC947';
       case 'fading': return '#FF6B6B';
       default: return '#CBD5E0';
     }
@@ -251,23 +251,21 @@ const KnowledgeGraph = ({ topics, onClose }) => {
           onMouseMove={handleCanvasMouseMove}
         />
         
-        <div className="graph-legend">
-          <div className="legend-title">Retention States</div>
-          <div className="legend-items">
-            <div className="legend-item">
-              <div className="legend-dot" style={{background: '#06D6A0'}}></div>
+        <div className="graph-legend-floating">
+          <div className="legend-items-compact">
+            <div className="legend-item-compact">
+              <div className="legend-dot-compact" style={{background: '#06D6A0'}}></div>
               <span>High</span>
             </div>
-            <div className="legend-item">
-              <div className="legend-dot" style={{background: '#FFD166'}}></div>
+            <div className="legend-item-compact">
+              <div className="legend-dot-compact" style={{background: '#FFC947'}}></div>
               <span>Medium</span>
             </div>
-            <div className="legend-item">
-              <div className="legend-dot" style={{background: '#FF6B6B'}}></div>
+            <div className="legend-item-compact">
+              <div className="legend-dot-compact" style={{background: '#FF6B6B'}}></div>
               <span>Fading</span>
             </div>
           </div>
-          <p className="legend-hint">Your memory network adapts as you recall and reinforce ideas.</p>
         </div>
         
         {selectedNode && (
