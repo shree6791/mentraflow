@@ -173,14 +173,6 @@ const Contact = () => {
               <h3>Connect with us</h3>
               <p className="social-text">Follow our journey on social media</p>
             </div>
-
-            <div className="contact-info-box">
-              <h4>Early Access</h4>
-              <p>
-                Interested in being among the first to experience MentraFlow?
-                Drop us a message and we'll add you to our early access list.
-              </p>
-            </div>
           </div>
         </div>
       </section>
