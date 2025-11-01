@@ -3620,7 +3620,7 @@ html {
   border-top: 1px solid #E2E8F0;
 }
 
-.btn-secondary {
+.btn-modal-secondary {
   padding: 0.875rem 1.5rem;
   background: transparent;
   border: 1px solid #E2E8F0;
@@ -3633,12 +3633,12 @@ html {
   transition: all 0.3s ease;
 }
 
-.btn-secondary:hover {
+.btn-modal-secondary:hover {
   background: rgba(0, 0, 0, 0.03);
   border-color: #CBD5E0;
 }
 
-.btn-primary {
+.btn-modal-primary {
   padding: 0.875rem 1.5rem;
   background: linear-gradient(135deg, var(--primary-teal) 0%, var(--mind-blue) 100%);
   border: none;
@@ -3652,7 +3652,7 @@ html {
   box-shadow: 0 4px 12px rgba(14, 124, 123, 0.2);
 }
 
-.btn-primary:hover {
+.btn-modal-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(14, 124, 123, 0.3);
 }
