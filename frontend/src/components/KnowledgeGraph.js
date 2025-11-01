@@ -70,6 +70,8 @@ const KnowledgeGraph = ({ topics, onClose }) => {
 
       // Draw connections
       connections.forEach(([i, j]) => {
+        if (!generatedNodes[i] || !generatedNodes[j]) return;
+        
         const nodeA = generatedNodes[i];
         const nodeB = generatedNodes[j];
         
@@ -99,6 +101,8 @@ const KnowledgeGraph = ({ topics, onClose }) => {
 
       // Draw nodes
       generatedNodes.forEach((node, idx) => {
+        if (!node) return;
+        
         const isHovered = hoveredNode === idx;
         const isSelected = selectedNode?.id === node.id;
         const scale = isHovered ? 1.08 : 1;
