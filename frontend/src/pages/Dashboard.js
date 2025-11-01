@@ -334,6 +334,8 @@ const Dashboard = () => {
   
   // Priority Modal
   const [showPriorityModal, setShowPriorityModal] = useState(false);
+  const [priorityModalPage, setPriorityModalPage] = useState(1);
+  const priorityModalItemsPerPage = 5;
   
   // Quick Filters and Sorting
   const [quickFilter, setQuickFilter] = useState('all'); // all, fading, due-soon, strong
