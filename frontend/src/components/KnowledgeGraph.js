@@ -1,170 +1,329 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { X } from 'lucide-react';
+import { X, Search, Filter, Eye, Brain, ZoomIn, ZoomOut } from 'lucide-react';
 
-const KnowledgeGraph = ({ topics, onClose }) => {
+const KnowledgeGraph = ({ topics, userAvatar, userName, onClose, onReinforce }) => {
   const canvasRef = useRef(null);
-  const [selectedNode, setSelectedNode] = useState(null);
+  const containerRef = useRef(null);
+  
   const [nodes, setNodes] = useState([]);
+  const [centerNode, setCenterNode] = useState(null);
   const [hoveredNode, setHoveredNode] = useState(null);
+  const [selectedNode, setSelectedNode] = useState(null);
+  const [filterState, setFilterState] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
-  // Sample data with connections
+  // Enhanced graph data with library connections
   const graphData = [
-    {id: 1, title: 'Forgetting Curve', state: 'fading', lastReview: '3 weeks ago', score: 45},
-    {id: 2, title: 'Active Recall Benefits', state: 'high', lastReview: '1 week ago', score: 92},
-    {id: 3, title: 'Spacing Effect Principles', state: 'high', lastReview: '3 days ago', score: 88},
-    {id: 4, title: 'Neuroplasticity', state: 'medium', lastReview: '5 days ago', score: 68},
-    {id: 5, title: 'Transformer Attention', state: 'medium', lastReview: '2 days ago', score: 72}
+    {
+      id: 't1',
+      title: 'Forgetting Curve',
+      state: 'high',
+      lastReview: '2 days ago',
+      score: 80,
+      quizCount: 3,
+      libraryId: 'lib1',
+      connections: ['t2', 't5']
+    },
+    {
+      id: 't2',
+      title: 'Active Recall',
+      state: 'medium',
+      lastReview: '5 days ago',
+      score: 65,
+      quizCount: 2,
+      libraryId: 'lib2',
+      connections: ['t1', 't3', 't5']
+    },
+    {
+      id: 't3',
+      title: 'Spacing Effect',
+      state: 'fading',
+      lastReview: '2 weeks ago',
+      score: 45,
+      quizCount: 1,
+      libraryId: 'lib3',
+      connections: ['t2', 't4']
+    },
+    {
+      id: 't4',
+      title: 'Neuroplasticity',
+      state: 'medium',
+      lastReview: 'Never',
+      score: 0,
+      quizCount: 0,
+      libraryId: 'lib4',
+      connections: ['t3', 't5']
+    },
+    {
+      id: 't5',
+      title: 'Memory Consolidation',
+      state: 'high',
+      lastReview: '3 days ago',
+      score: 90,
+      quizCount: 4,
+      libraryId: 'lib1',
+      connections: ['t1', 't2', 't4']
+    }
   ];
 
-  const connections = [
-    [2, 3], // Active Recall <-> Spacing Effect
-    [3, 4], // Spacing Effect <-> Neuroplasticity
-    [4, 5], // Neuroplasticity <-> Transformer
-    [1, 2]  // Forgetting Curve <-> Active Recall (weak)
-  ];
+  const getStateColor = (state) => {
+    switch(state) {
+      case 'high': return '#06D6A0'; // Retention Green
+      case 'medium': return '#FFD166'; // Neuro Yellow
+      case 'fading': return '#EF476F'; // Coral
+      default: return '#CBD5E0';
+    }
+  };
+
+  const getStateLabel = (state) => {
+    switch(state) {
+      case 'high': return 'High Retention';
+      case 'medium': return 'Medium';
+      case 'fading': return 'Fading';
+      default: return 'Unknown';
+    }
+  };
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const width = canvas.offsetWidth;
-    const height = canvas.offsetHeight;
-    canvas.width = width;
-    canvas.height = height;
+    const container = containerRef.current;
+    const width = container.offsetWidth;
+    const height = container.offsetHeight;
+    canvas.width = width * window.devicePixelRatio;
+    canvas.height = height * window.devicePixelRatio;
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
 
-    // Create nodes with fixed positions for better layout
+    const ctx = canvas.getContext('2d');
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+    // Create center node (user)
     const centerX = width / 2;
     const centerY = height / 2;
-    const radius = Math.min(width, height) / 3;
+    
+    const center = {
+      id: 'center',
+      title: userName || 'You',
+      x: centerX,
+      y: centerY,
+      radius: 45,
+      isCenter: true,
+      avatar: userAvatar
+    };
+    
+    setCenterNode(center);
 
-    const generatedNodes = graphData.map((data, i) => {
-      const angle = (i / graphData.length) * Math.PI * 2 - Math.PI / 2;
+    // Create topic nodes in circle around center
+    const radius = Math.min(width, height) / 3.5;
+    
+    // Filter nodes based on search and filter
+    let filteredData = graphData;
+    
+    if (searchQuery) {
+      filteredData = filteredData.filter(topic =>
+        topic.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+    
+    if (filterState !== 'all') {
+      filteredData = filteredData.filter(topic => topic.state === filterState);
+    }
+
+    const generatedNodes = filteredData.map((data, i) => {
+      const angle = (i / filteredData.length) * Math.PI * 2 - Math.PI / 2;
       return {
         ...data,
         x: centerX + Math.cos(angle) * radius,
         y: centerY + Math.sin(angle) * radius,
-        vx: 0,
-        vy: 0,
-        radius: 28
+        radius: 35
       };
     });
 
     setNodes(generatedNodes);
 
-    const ctx = canvas.getContext('2d');
     let animationId;
     let time = 0;
 
-    const getStateColor = (state) => {
-      switch(state) {
-        case 'high': return '#06D6A0';
-        case 'medium': return '#FFC947'; // Deeper yellow
-        case 'fading': return '#FF6B6B';
-        default: return '#CBD5E0';
-      }
-    };
-
     const animate = () => {
-      time += 0.01;
+      time += 0.015;
       ctx.clearRect(0, 0, width, height);
 
-      // Draw connections
-      connections.forEach(([i, j]) => {
-        if (!generatedNodes[i] || !generatedNodes[j]) return;
-        
-        const nodeA = generatedNodes[i];
-        const nodeB = generatedNodes[j];
-        
-        const isWeak = (i === 0 || j === 0); // Forgetting Curve connections are weak
+      // Apply transformations
+      ctx.save();
+      ctx.translate(pan.x, pan.y);
+      ctx.scale(zoom, zoom);
+
+      // Draw connections from center to topics
+      generatedNodes.forEach((node) => {
+        if (!node || !center) return;
         
         ctx.save();
-        ctx.strokeStyle = isWeak ? 'rgba(14, 124, 123, 0.15)' : 'rgba(14, 124, 123, 0.3)';
-        ctx.lineWidth = isWeak ? 1.5 : 2.5;
         
-        // Draw curved line
-        const midX = (nodeA.x + nodeB.x) / 2;
-        const midY = (nodeA.y + nodeB.y) / 2;
-        const offsetX = (nodeB.y - nodeA.y) * 0.15;
-        const offsetY = (nodeA.x - nodeB.x) * 0.15;
+        // Soft glowing line
+        const gradient = ctx.createLinearGradient(center.x, center.y, node.x, node.y);
+        gradient.addColorStop(0, 'rgba(14, 124, 123, 0.3)');
+        gradient.addColorStop(1, getStateColor(node.state) + '40');
+        
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = 2;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = getStateColor(node.state) + '60';
+        
+        // Draw bezier curve
+        const midX = (center.x + node.x) / 2;
+        const midY = (center.y + node.y) / 2;
+        const offsetX = (node.y - center.y) * 0.1;
+        const offsetY = (center.x - node.x) * 0.1;
         
         ctx.beginPath();
-        ctx.moveTo(nodeA.x, nodeA.y);
+        ctx.moveTo(center.x, center.y);
         ctx.quadraticCurveTo(
           midX + offsetX,
           midY + offsetY,
-          nodeB.x,
-          nodeB.y
+          node.x,
+          node.y
         );
         ctx.stroke();
         ctx.restore();
       });
 
-      // Draw nodes
-      generatedNodes.forEach((node, idx) => {
-        if (!node) return;
+      // Draw inter-topic connections
+      generatedNodes.forEach((nodeA) => {
+        if (!nodeA.connections) return;
         
-        const isHovered = hoveredNode === idx;
-        const isSelected = selectedNode?.id === node.id;
-        const scale = isHovered ? 1.08 : 1;
-        const nodeRadius = node.radius * scale;
-        
-        // Gentle breathing animation
-        const breathe = Math.sin(time + idx) * 0.03 + 1;
-        const finalRadius = nodeRadius * breathe;
-
-        // Draw glow for hovered/selected
-        if (isHovered || isSelected) {
+        nodeA.connections.forEach(connId => {
+          const nodeB = generatedNodes.find(n => n.id === connId);
+          if (!nodeB) return;
+          
           ctx.save();
-          const gradient = ctx.createRadialGradient(
-            node.x, node.y, 0,
-            node.x, node.y, finalRadius + 12
-          );
-          gradient.addColorStop(0, getStateColor(node.state) + '40');
-          gradient.addColorStop(1, getStateColor(node.state) + '00');
-          ctx.fillStyle = gradient;
+          ctx.strokeStyle = 'rgba(14, 124, 123, 0.15)';
+          ctx.lineWidth = 1.5;
+          ctx.setLineDash([5, 5]);
+          
           ctx.beginPath();
-          ctx.arc(node.x, node.y, finalRadius + 12, 0, Math.PI * 2);
-          ctx.fill();
+          ctx.moveTo(nodeA.x, nodeA.y);
+          ctx.lineTo(nodeB.x, nodeB.y);
+          ctx.stroke();
           ctx.restore();
-        }
+        });
+      });
 
-        // Draw node
+      // Draw center node (user)
+      if (center) {
+        const centerScale = 1 + Math.sin(time * 0.8) * 0.03;
+        const centerRadius = center.radius * centerScale;
+        
+        // Outer ring (Deep Teal)
         ctx.save();
         ctx.beginPath();
-        ctx.arc(node.x, node.y, finalRadius, 0, Math.PI * 2);
-        ctx.fillStyle = getStateColor(node.state);
+        ctx.arc(center.x, center.y, centerRadius + 6, 0, Math.PI * 2);
+        ctx.strokeStyle = '#0E7C7B';
+        ctx.lineWidth = 4;
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = 'rgba(14, 124, 123, 0.4)';
+        ctx.stroke();
+        ctx.restore();
+        
+        // Inner circle (avatar or initial)
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(center.x, center.y, centerRadius, 0, Math.PI * 2);
+        ctx.fillStyle = '#118AB2';
         ctx.fill();
         ctx.strokeStyle = 'white';
         ctx.lineWidth = 3;
         ctx.stroke();
         ctx.restore();
-
-        // Draw label
+        
+        // User initial or emoji
         ctx.save();
-        ctx.fillStyle = '#2E2E2E';
-        ctx.font = isHovered ? '600 13px Inter' : '500 12px Inter';
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 24px Inter';
         ctx.textAlign = 'center';
-        ctx.textBaseline = 'top';
+        ctx.textBaseline = 'middle';
+        const initial = (center.title || 'Y')[0].toUpperCase();
+        ctx.fillText(initial, center.x, center.y);
+        ctx.restore();
+      }
+
+      // Draw topic nodes
+      generatedNodes.forEach((node, idx) => {
+        if (!node) return;
         
-        const maxWidth = 120;
-        const words = node.title.split(' ');
-        let line = '';
-        let y = node.y + finalRadius + 12;
+        const isHovered = hoveredNode === idx;
+        const isSelected = selectedNode?.id === node.id;
+        const isFading = node.state === 'fading';
         
-        words.forEach((word, i) => {
-          const testLine = line + word + ' ';
-          const metrics = ctx.measureText(testLine);
-          if (metrics.width > maxWidth && i > 0) {
-            ctx.fillText(line, node.x, y);
-            line = word + ' ';
-            y += 16;
-          } else {
-            line = testLine;
-          }
-        });
-        ctx.fillText(line, node.x, y);
+        // Pulsing animation for fading topics
+        let pulseScale = 1;
+        if (isFading) {
+          pulseScale = 1 + Math.sin(time * 2 + idx) * 0.1;
+        }
+        
+        // Scale on hover
+        const scale = isHovered ? 1.15 : (isSelected ? 1.1 : 1);
+        const nodeRadius = node.radius * scale * pulseScale;
+
+        // Draw glow for hovered/selected
+        if (isHovered || isSelected || isFading) {
+          ctx.save();
+          const gradient = ctx.createRadialGradient(
+            node.x, node.y, 0,
+            node.x, node.y, nodeRadius + 15
+          );
+          gradient.addColorStop(0, getStateColor(node.state) + (isFading ? '60' : '40'));
+          gradient.addColorStop(1, getStateColor(node.state) + '00');
+          ctx.fillStyle = gradient;
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, nodeRadius + 15, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        // Draw node circle
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, nodeRadius, 0, Math.PI * 2);
+        
+        // Gradient fill based on state
+        const nodeGradient = ctx.createRadialGradient(
+          node.x - nodeRadius * 0.3,
+          node.y - nodeRadius * 0.3,
+          0,
+          node.x,
+          node.y,
+          nodeRadius
+        );
+        nodeGradient.addColorStop(0, getStateColor(node.state));
+        nodeGradient.addColorStop(1, getStateColor(node.state) + 'CC');
+        
+        ctx.fillStyle = nodeGradient;
+        ctx.fill();
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 3;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.15)';
+        ctx.stroke();
+        ctx.restore();
+
+        // Draw icon based on score
+        ctx.save();
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 20px Inter';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        const icon = node.score >= 80 ? '✓' : node.score >= 50 ? '•' : '!';
+        ctx.fillText(icon, node.x, node.y);
         ctx.restore();
       });
+
+      ctx.restore(); // Restore transformations
 
       animationId = requestAnimationFrame(animate);
     };
@@ -176,13 +335,15 @@ const KnowledgeGraph = ({ topics, onClose }) => {
         cancelAnimationFrame(animationId);
       }
     };
-  }, [hoveredNode, selectedNode]);
+  }, [hoveredNode, selectedNode, filterState, searchQuery, zoom, pan, userName, userAvatar]);
 
   const handleCanvasClick = (e) => {
+    if (isDragging) return;
+    
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const x = (e.clientX - rect.left - pan.x) / zoom;
+    const y = (e.clientY - rect.top - pan.y) / zoom;
 
     const clickedNodeIndex = nodes.findIndex(node => {
       const dx = x - node.x;
@@ -198,10 +359,18 @@ const KnowledgeGraph = ({ topics, onClose }) => {
   };
 
   const handleCanvasMouseMove = (e) => {
+    if (isDragging) {
+      const dx = e.clientX - dragStart.x;
+      const dy = e.clientY - dragStart.y;
+      setPan({ x: pan.x + dx, y: pan.y + dy });
+      setDragStart({ x: e.clientX, y: e.clientY });
+      return;
+    }
+
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const x = (e.clientX - rect.left - pan.x) / zoom;
+    const y = (e.clientY - rect.top - pan.y) / zoom;
 
     const hoveredIndex = nodes.findIndex(node => {
       const dx = x - node.x;
@@ -210,107 +379,222 @@ const KnowledgeGraph = ({ topics, onClose }) => {
     });
 
     setHoveredNode(hoveredIndex >= 0 ? hoveredIndex : null);
-    canvas.style.cursor = hoveredIndex >= 0 ? 'pointer' : 'default';
+    canvas.style.cursor = hoveredIndex >= 0 ? 'pointer' : (isDragging ? 'grabbing' : 'grab');
   };
 
-  const getStateLabel = (state) => {
-    switch(state) {
-      case 'high': return 'High';
-      case 'medium': return 'Medium';
-      case 'fading': return 'Fading';
-      default: return 'Unknown';
-    }
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setDragStart({ x: e.clientX, y: e.clientY });
   };
 
-  const getStateColor = (state) => {
-    switch(state) {
-      case 'high': return '#06D6A0';
-      case 'medium': return '#FFC947';
-      case 'fading': return '#FF6B6B';
-      default: return '#CBD5E0';
-    }
+  const handleMouseUp = () => {
+    setIsDragging(false);
   };
+
+  const handleZoomIn = () => {
+    setZoom(Math.min(zoom + 0.2, 2));
+  };
+
+  const handleZoomOut = () => {
+    setZoom(Math.max(zoom - 0.2, 0.5));
+  };
+
+  const handleResetView = () => {
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+  };
+
+  const hoveredNodeData = hoveredNode !== null ? nodes[hoveredNode] : null;
 
   return (
-    <div className="graph-modal-container">
+    <div className="knowledge-graph-modal">
+      {/* Header with Search and Filters */}
       <div className="graph-modal-header">
-        <div>
-          <h2>Your Knowledge Graph</h2>
-          <p className="graph-subtitle">See how your understanding connects and strengthens over time.</p>
+        <div className="graph-header-left">
+          <h2>Your Knowledge Network</h2>
+          <p className="graph-subtitle">Interactive memory visualization • Click nodes to explore</p>
         </div>
-        <button className="modal-close-btn" onClick={onClose} aria-label="Close modal">
+        <button className="modal-close-btn" onClick={onClose} aria-label="Close">
           <X size={24} />
         </button>
       </div>
-      
-      <div className="graph-canvas-container">
-        <canvas 
-          ref={canvasRef} 
+
+      {/* Controls Bar */}
+      <div className="graph-controls-bar">
+        <div className="graph-search">
+          <Search size={16} />
+          <input
+            type="text"
+            placeholder="Search topics..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+
+        <div className="graph-filters">
+          <button
+            className={`filter-btn ${filterState === 'all' ? 'active' : ''}`}
+            onClick={() => setFilterState('all')}
+          >
+            All
+          </button>
+          <button
+            className={`filter-btn filter-high ${filterState === 'high' ? 'active' : ''}`}
+            onClick={() => setFilterState('high')}
+          >
+            High
+          </button>
+          <button
+            className={`filter-btn filter-medium ${filterState === 'medium' ? 'active' : ''}`}
+            onClick={() => setFilterState('medium')}
+          >
+            Medium
+          </button>
+          <button
+            className={`filter-btn filter-fading ${filterState === 'fading' ? 'active' : ''}`}
+            onClick={() => setFilterState('fading')}
+          >
+            Fading
+          </button>
+        </div>
+      </div>
+
+      {/* Canvas Container */}
+      <div 
+        ref={containerRef}
+        className="graph-canvas-container"
+      >
+        <canvas
+          ref={canvasRef}
           className="graph-canvas"
           onClick={handleCanvasClick}
           onMouseMove={handleCanvasMouseMove}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
         />
-        
-        <div className="graph-legend-floating">
-          <div className="legend-items-compact">
-            <div className="legend-item-compact">
-              <div className="legend-dot-compact" style={{background: '#06D6A0'}}></div>
-              <span>High</span>
+
+        {/* Hover Tooltip */}
+        {hoveredNodeData && !selectedNode && (
+          <div className="graph-tooltip">
+            <h4>{hoveredNodeData.title}</h4>
+            <div className="tooltip-stats">
+              <div className="tooltip-stat">
+                <span className="stat-label">Recall:</span>
+                <span className="stat-value" style={{color: getStateColor(hoveredNodeData.state)}}>
+                  {hoveredNodeData.score}%
+                </span>
+              </div>
+              <div className="tooltip-stat">
+                <span className="stat-label">Last Review:</span>
+                <span className="stat-value">{hoveredNodeData.lastReview}</span>
+              </div>
+              <div className="tooltip-stat">
+                <span className="stat-label">State:</span>
+                <span className="stat-badge" style={{
+                  background: getStateColor(hoveredNodeData.state) + '20',
+                  color: getStateColor(hoveredNodeData.state)
+                }}>
+                  {getStateLabel(hoveredNodeData.state)}
+                </span>
+              </div>
             </div>
-            <div className="legend-item-compact">
-              <div className="legend-dot-compact" style={{background: '#FFC947'}}></div>
-              <span>Medium</span>
+            <p className="tooltip-hint">Click to explore</p>
+          </div>
+        )}
+
+        {/* Zoom Controls */}
+        <div className="graph-zoom-controls">
+          <button onClick={handleZoomIn} title="Zoom In">
+            <ZoomIn size={18} />
+          </button>
+          <button onClick={handleZoomOut} title="Zoom Out">
+            <ZoomOut size={18} />
+          </button>
+          <button onClick={handleResetView} title="Reset View" className="reset-btn">
+            Reset
+          </button>
+        </div>
+
+        {/* Legend */}
+        <div className="graph-legend">
+          <h4>Retention Strength</h4>
+          <div className="legend-items">
+            <div className="legend-item">
+              <div className="legend-dot" style={{background: '#06D6A0'}}></div>
+              <span>High (≥80%)</span>
             </div>
-            <div className="legend-item-compact">
-              <div className="legend-dot-compact" style={{background: '#FF6B6B'}}></div>
-              <span>Fading</span>
+            <div className="legend-item">
+              <div className="legend-dot" style={{background: '#FFD166'}}></div>
+              <span>Medium (50-79%)</span>
+            </div>
+            <div className="legend-item">
+              <div className="legend-dot" style={{background: '#EF476F'}}></div>
+              <span>Fading (<50%)</span>
             </div>
           </div>
         </div>
-        
-        {selectedNode && (
-          <div className="node-detail-panel">
-            <div className="node-detail-header">
-              <h4>{selectedNode.title}</h4>
-              <button 
-                className="node-close"
-                onClick={() => setSelectedNode(null)}
-                aria-label="Close detail"
-              >
-                <X size={16} />
+      </div>
+
+      {/* Detail Modal */}
+      {selectedNode && (
+        <div className="node-detail-modal">
+          <div className="node-detail-header">
+            <div>
+              <h3>{selectedNode.title}</h3>
+              <span className="node-detail-subtitle">
+                {selectedNode.quizCount} {selectedNode.quizCount === 1 ? 'quiz' : 'quizzes'} taken
+              </span>
+            </div>
+            <button onClick={() => setSelectedNode(null)} className="detail-close">
+              <X size={20} />
+            </button>
+          </div>
+
+          <div className="node-detail-body">
+            <div className="detail-stats-grid">
+              <div className="detail-stat-card">
+                <span className="stat-icon">📊</span>
+                <div>
+                  <h4>{selectedNode.score}%</h4>
+                  <p>Recall Score</p>
+                </div>
+              </div>
+              <div className="detail-stat-card">
+                <span className="stat-icon">⏰</span>
+                <div>
+                  <h4>{selectedNode.lastReview}</h4>
+                  <p>Last Reviewed</p>
+                </div>
+              </div>
+              <div className="detail-stat-card">
+                <span className="stat-icon">
+                  {selectedNode.state === 'high' ? '🟢' : selectedNode.state === 'medium' ? '🟡' : '🔴'}
+                </span>
+                <div>
+                  <h4>{getStateLabel(selectedNode.state)}</h4>
+                  <p>Current State</p>
+                </div>
+              </div>
+            </div>
+
+            {selectedNode.state === 'fading' && (
+              <div className="detail-warning">
+                ⚠️ This topic needs reinforcement soon to prevent forgetting
+              </div>
+            )}
+
+            <div className="detail-actions">
+              <button className="btn-action btn-primary" onClick={() => onReinforce && onReinforce(selectedNode)}>
+                <Brain size={18} /> Reinforce Now
+              </button>
+              <button className="btn-action btn-secondary">
+                <Eye size={18} /> View Summary
               </button>
             </div>
-            <div className="node-detail-body">
-              <div className="detail-row">
-                <span className="detail-label">Last Reviewed:</span>
-                <span className="detail-value">{selectedNode.lastReview}</span>
-              </div>
-              <div className="detail-row">
-                <span className="detail-label">Recall Score:</span>
-                <span className="detail-value">
-                  <span className="score-badge" style={{color: getStateColor(selectedNode.state)}}>
-                    {selectedNode.score}%
-                  </span>
-                </span>
-              </div>
-              <div className="detail-row">
-                <span className="detail-label">State:</span>
-                <span className="state-badge" style={{
-                  background: getStateColor(selectedNode.state) + '20',
-                  color: getStateColor(selectedNode.state),
-                  border: `1px solid ${getStateColor(selectedNode.state)}`
-                }}>
-                  {getStateLabel(selectedNode.state)}
-                </span>
-              </div>
-            </div>
-            <div className="node-detail-actions">
-              <button className="detail-action-btn">Review Summary</button>
-              <button className="detail-action-btn">Practice 3 Qs</button>
-            </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
