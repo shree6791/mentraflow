@@ -1655,7 +1655,7 @@ html {
   transition: all 0.4s ease;
   display: flex;
   flex-direction: column;
-  min-height: 320px;
+  min-height: 250px;
 }
 
 .future-goal:hover {
