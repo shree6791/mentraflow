@@ -2846,6 +2846,7 @@
 
 .library-item.retention-fading {
   border-left: 4px solid var(--neural-coral);
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.02) 0%, rgba(255, 107, 107, 0.04) 100%);
 }
 
 .library-item.retention-medium {
