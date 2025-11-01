@@ -644,19 +644,44 @@ const Dashboard = () => {
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          item.filename.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesFilter = filterStatus === 'all' || item.status === filterStatus;
-    return matchesSearch && matchesFilter;
+    
+    // Apply quick filter
+    let matchesQuickFilter = true;
+    if (quickFilter === 'fading') {
+      matchesQuickFilter = item.retention === 'fading';
+    } else if (quickFilter === 'due-soon') {
+      matchesQuickFilter = item.nextReviewDays !== null && item.nextReviewDays <= 2;
+    } else if (quickFilter === 'strong') {
+      matchesQuickFilter = item.retention === 'high';
+    }
+    
+    return matchesSearch && matchesFilter && matchesQuickFilter;
+  });
+  
+  // Sort library items
+  const sortedLibraryItems = [...filteredLibraryItems].sort((a, b) => {
+    if (sortBy === 'priority') {
+      // Sort by retention: fading > medium > high
+      const retentionOrder = { fading: 0, medium: 1, high: 2, null: 3 };
+      return retentionOrder[a.retention] - retentionOrder[b.retention];
+    } else if (sortBy === 'recent') {
+      return new Date(b.uploadDate) - new Date(a.uploadDate);
+    } else if (sortBy === 'score') {
+      return (b.quizScore || 0) - (a.quizScore || 0);
+    }
+    return 0;
   });
   
   // Paginate library items
-  const totalPages = Math.ceil(filteredLibraryItems.length / itemsPerPage);
+  const totalPages = Math.ceil(sortedLibraryItems.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const paginatedLibraryItems = filteredLibraryItems.slice(startIndex, endIndex);
+  const paginatedLibraryItems = sortedLibraryItems.slice(startIndex, endIndex);
   
   // Reset to page 1 when search/filter changes
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchQuery, filterStatus]);
+  }, [searchQuery, filterStatus, quickFilter, sortBy]);
 
   // Calculate progress metrics
   const masteredCount = topics.filter(t => t.status === 'high').length;
