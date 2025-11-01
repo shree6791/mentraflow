@@ -19,6 +19,14 @@ const Payment = () => {
   });
 
   const [processing, setProcessing] = useState(false);
+  const [applePayAvailable, setApplePayAvailable] = useState(false);
+
+  // Check if Apple Pay is available
+  useEffect(() => {
+    if (window.ApplePaySession) {
+      setApplePayAvailable(ApplePaySession.canMakePayments());
+    }
+  }, []);
 
   // Plan details
   const plans = {
