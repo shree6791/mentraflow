@@ -4087,6 +4087,9 @@ html {
   border: 2px solid transparent;
   margin-top: 20px; /* Space for badge above */
   overflow: visible; /* Allow badge to show outside card */
+  display: flex;
+  flex-direction: column;
+  min-height: 520px;
 }
 
 .pricing-card:hover {
