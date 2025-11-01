@@ -115,6 +115,18 @@
   box-sizing: border-box;
 }
 
+/* Smooth theme transition */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body, 
+.hero-section,
+.section {
+  background-color: var(--bg-base);
+  color: var(--body-text);
+}
+
 body {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
