@@ -48,7 +48,7 @@ const Home = () => {
         <nav className="nav">
           <a href="#hero" className="nav-link">Home</a>
           <Link to="/science" className="nav-link">Science</Link>
-          <a href="#vision" className="nav-link">Vision</a>
+          <Link to="/vision" className="nav-link">Vision</Link>
           <a href="#contact" className="nav-link">Contact</a>
           <button className="btn-login" onClick={() => setShowModal(true)}>
             Login
