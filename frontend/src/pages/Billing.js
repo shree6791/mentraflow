@@ -57,7 +57,8 @@ const Billing = () => {
 
   const handleUpgrade = (planId) => {
     console.log('Upgrading to:', planId);
-    // Implement payment flow here
+    // Navigate to payment page with plan info
+    navigate(`/payment?plan=${planId}`);
     setShowUpgradeModal(false);
   };
 
