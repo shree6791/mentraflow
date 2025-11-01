@@ -14,6 +14,7 @@ const EMERGENT_AUTH_URL = `https://auth.emergentagent.com/?redirect=${encodeURIC
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ email: '', password: '', remember: false });
   const [loading, setLoading] = useState(false);
