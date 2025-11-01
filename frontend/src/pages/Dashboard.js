@@ -1072,35 +1072,27 @@ const Dashboard = () => {
                       </div>
                     </div>
                     
-                    {/* Retention Status */}
-                    {item.retention && (
-                      <div className={`retention-status retention-status-${item.retention}`}>
-                        {item.retention === 'high' && (
-                          <span>✅ Strong Memory • Last reviewed {item.lastReview}</span>
-                        )}
-                        {item.retention === 'medium' && (
-                          <span>⚠️ Review Soon • Last reviewed {item.lastReview}</span>
-                        )}
-                        {item.retention === 'fading' && (
-                          <span>🔴 Fading Fast! • Last reviewed {item.lastReview}</span>
-                        )}
-                      </div>
-                    )}
-                    
-                    {/* Next Review Countdown */}
-                    {item.nextReview && (
-                      <div className={`next-review-countdown ${item.nextReviewDays < 0 ? 'overdue' : item.nextReviewDays <= 1 ? 'urgent' : 'normal'}`}>
-                        <Clock size={14} />
-                        <span>
-                          {item.nextReviewDays < 0 ? 'Review ' : 'Next review: '}
+                    {/* Compact Meta Row - Status, Countdown, and Filename in one line */}
+                    <div className="library-item-meta-row">
+                      {item.retention && (
+                        <span className={`retention-chip retention-chip-${item.retention}`}>
+                          {item.retention === 'high' && '🟢 Strong'}
+                          {item.retention === 'medium' && '🟡 Review Soon'}
+                          {item.retention === 'fading' && '🔴 Fading'}
+                        </span>
+                      )}
+                      
+                      {item.nextReview && (
+                        <span className={`countdown-chip ${item.nextReviewDays < 0 ? 'overdue' : item.nextReviewDays <= 1 ? 'urgent' : 'normal'}`}>
+                          <Clock size={12} />
                           {item.nextReview}
                         </span>
-                      </div>
-                    )}
-                    
-                    <p className="library-item-meta">
-                      {item.filename}
-                    </p>
+                      )}
+                      
+                      <span className="filename-text">
+                        {item.filename}
+                      </span>
+                    </div>
                     
                     <div className="library-item-actions">
                       {/* Primary Action - One clear button based on state */}
