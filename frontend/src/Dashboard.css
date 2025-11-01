@@ -277,6 +277,73 @@
   margin: 0;
 }
 
+/* Compact Meta Row - All info in one horizontal line */
+.library-item-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  font-size: 0.75rem;
+  margin: 0.25rem 0;
+}
+
+.retention-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.625rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.retention-chip-high {
+  background: rgba(76, 175, 80, 0.1);
+  color: var(--retention-green);
+}
+
+.retention-chip-medium {
+  background: rgba(255, 193, 7, 0.1);
+  color: #F57C00;
+}
+
+.retention-chip-fading {
+  background: rgba(255, 107, 107, 0.1);
+  color: var(--neural-coral);
+}
+
+.countdown-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.countdown-chip.normal {
+  background: rgba(14, 124, 123, 0.08);
+  color: var(--primary-teal);
+}
+
+.countdown-chip.urgent {
+  background: rgba(255, 193, 7, 0.1);
+  color: #F57C00;
+}
+
+.countdown-chip.overdue {
+  background: rgba(255, 107, 107, 0.1);
+  color: var(--neural-coral);
+}
+
+.filename-text {
+  color: var(--text-gray);
+  font-size: 0.75rem;
+  margin-left: auto;
+}
+
 .library-item-review {
   font-size: 0.875rem;
   color: var(--text-gray);
