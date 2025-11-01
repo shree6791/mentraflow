@@ -2733,18 +2733,19 @@
 .priority-items-list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   margin-bottom: 2rem;
 }
 
 .priority-item {
   display: flex;
-  align-items: center;
-  gap: 1.25rem;
+  flex-direction: column;
+  gap: 0.5rem;
   padding: 1.25rem;
   background: white;
   border-radius: 12px;
-  border-left: 4px solid;
+  border: 1px solid var(--divider);
+  border-left: 2px solid;
   transition: all 0.3s ease;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
@@ -2752,77 +2753,31 @@
 .priority-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: var(--primary-teal);
 }
 
 .priority-item.priority-fading {
   border-left-color: var(--neural-coral);
-  background: rgba(255, 107, 107, 0.05);
+  background: rgba(255, 107, 107, 0.015);
 }
 
 .priority-item.priority-medium {
   border-left-color: var(--neuro-yellow);
-  background: rgba(255, 193, 7, 0.05);
+  background: rgba(255, 193, 7, 0.015);
 }
 
-.priority-item-icon {
-  font-size: 2rem;
-  flex-shrink: 0;
+.priority-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.25rem;
 }
 
-.priority-item-content {
-  flex: 1;
-}
-
-.priority-item-content h4 {
-  font-size: 1.125rem;
+.priority-item-header h4 {
+  font-size: 1.05rem;
   font-weight: 600;
-  color: var(--text-dark);
-  margin: 0 0 0.25rem 0;
-}
-
-.priority-item-status {
-  font-size: 0.875rem;
-  color: var(--text-gray);
+  color: var(--contrast-indigo);
   margin: 0;
-}
-
-.priority-consequence {
-  font-size: 0.8rem;
-  color: var(--neural-coral);
-  margin: 0.5rem 0 0 0;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.priority-next-review {
-  font-size: 0.8rem;
-  color: var(--primary-teal);
-  margin: 0.5rem 0 0 0;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.btn-quick-review {
-  padding: 0.5rem 1rem;
-  background: white;
-  border: 1px solid var(--divider);
-  border-radius: 8px;
-  color: var(--primary-teal);
-  font-size: 0.875rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-.btn-quick-review:hover {
-  background: var(--primary-teal);
-  color: white;
-  border-color: var(--primary-teal);
 }
 
 .btn-start-session {
