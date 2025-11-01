@@ -293,6 +293,13 @@ const Dashboard = () => {
   const [showGeneratedModal, setShowGeneratedModal] = useState(false);
   const [generatedContentTab, setGeneratedContentTab] = useState('summary'); // summary | quiz
   
+  // Quick Capture Widget (Collapsible)
+  const [isCaptureExpanded, setIsCaptureExpanded] = useState(false);
+  
+  // Pagination for Library
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  
   const [profileData, setProfileData] = useState({
     name: 'Demo User',
     email: 'demo@mentraflow.com',
