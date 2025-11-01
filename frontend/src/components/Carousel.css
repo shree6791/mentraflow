@@ -50,8 +50,6 @@
 .carousel-wrapper > * {
   flex: 0 0 85%;
   scroll-snap-align: center;
-  display: flex;
-  flex-direction: column;
 }
 
 /* Ensure content is visible in carousel items */
