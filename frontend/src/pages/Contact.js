@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Linkedin, Twitter, Youtube, Mail, Send, CheckCircle } from 'lucide-react';
+import { Linkedin, Twitter, Youtube, Mail, Send, CheckCircle, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Contact = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
