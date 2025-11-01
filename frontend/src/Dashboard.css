@@ -2127,11 +2127,12 @@
 /* Main Focus Area */
 .dashboard-main-focus {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 0.95fr 1.05fr;
   gap: 2rem;
   padding: 2rem;
   max-width: 1600px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .library-section-main,
