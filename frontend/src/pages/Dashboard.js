@@ -929,6 +929,43 @@ const Dashboard = () => {
             </select>
           </div>
           
+          {/* Quick Filters */}
+          <div className="quick-filters">
+            <button 
+              className={`quick-filter-btn ${quickFilter === 'all' ? 'active' : ''}`}
+              onClick={() => setQuickFilter('all')}
+            >
+              All Items
+            </button>
+            <button 
+              className={`quick-filter-btn urgent ${quickFilter === 'fading' ? 'active' : ''}`}
+              onClick={() => setQuickFilter('fading')}
+            >
+              🔴 Fading
+            </button>
+            <button 
+              className={`quick-filter-btn warning ${quickFilter === 'due-soon' ? 'active' : ''}`}
+              onClick={() => setQuickFilter('due-soon')}
+            >
+              ⏰ Due Soon
+            </button>
+            <button 
+              className={`quick-filter-btn success ${quickFilter === 'strong' ? 'active' : ''}`}
+              onClick={() => setQuickFilter('strong')}
+            >
+              ✅ Strong
+            </button>
+            
+            <div className="sort-controls">
+              <label>Sort by:</label>
+              <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+                <option value="priority">Priority</option>
+                <option value="recent">Recent</option>
+                <option value="score">Score</option>
+              </select>
+            </div>
+          </div>
+          
           {filteredLibraryItems.length === 0 ? (
             <div className="library-empty-state">
               <FileText size={48} className="empty-icon" />
