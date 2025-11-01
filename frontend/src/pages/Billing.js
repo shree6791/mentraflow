@@ -58,8 +58,12 @@ const Billing = () => {
 
   const handleUpgrade = (planId) => {
     console.log('Upgrading to:', planId);
-    // Navigate to payment page with plan info
-    navigate(`/payment?plan=${planId}`);
+    // Navigate to payment page with plan info and team count
+    if (planId === 'teams') {
+      navigate(`/payment?plan=${planId}&members=${teamMemberCount}`);
+    } else {
+      navigate(`/payment?plan=${planId}`);
+    }
     setShowUpgradeModal(false);
   };
 
