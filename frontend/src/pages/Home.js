@@ -183,7 +183,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* Contact / CTA */}
       <section id="contact" className="section contact-section">
         <div className="fade-in">
           <h2 className="section-title">Interested in trying MentraFlow?</h2>
