@@ -1919,7 +1919,9 @@ const Dashboard = () => {
               {itemsNeedingReview.length > 0 ? (
                 <>
                   <div className="library-list">
-                    {itemsNeedingReview.map(item => (
+                    {itemsNeedingReview
+                      .slice((priorityModalPage - 1) * priorityModalItemsPerPage, priorityModalPage * priorityModalItemsPerPage)
+                      .map(item => (
                       <div key={item.id} className={`library-item retention-${item.retention || 'none'}`}>
                         <div className="library-item-header">
                           <h3>{item.title}</h3>
@@ -1993,13 +1995,35 @@ const Dashboard = () => {
                     ))}
                   </div>
                   
+                  {/* Pagination Controls */}
+                  {itemsNeedingReview.length > priorityModalItemsPerPage && (
+                    <div className="pagination-controls" style={{marginTop: '1.5rem', marginBottom: '1rem'}}>
+                      <button 
+                        className="pagination-btn"
+                        onClick={() => setPriorityModalPage(prev => Math.max(1, prev - 1))}
+                        disabled={priorityModalPage === 1}
+                      >
+                        ← Previous
+                      </button>
+                      <span className="pagination-info">
+                        Page {priorityModalPage} of {Math.ceil(itemsNeedingReview.length / priorityModalItemsPerPage)}
+                      </span>
+                      <button 
+                        className="pagination-btn"
+                        onClick={() => setPriorityModalPage(prev => Math.min(Math.ceil(itemsNeedingReview.length / priorityModalItemsPerPage), prev + 1))}
+                        disabled={priorityModalPage === Math.ceil(itemsNeedingReview.length / priorityModalItemsPerPage)}
+                      >
+                        Next →
+                      </button>
+                    </div>
+                  )}
+                  
                   <button 
                     className="btn-primary btn-start-session"
                     onClick={() => {
                       setShowPriorityModal(false);
                       startReviewSession();
                     }}
-                    style={{marginTop: '1.5rem'}}
                   >
                     <Brain size={20} /> Start Review Session ({itemsNeedingReview.length} items)
                   </button>
