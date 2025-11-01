@@ -1897,6 +1897,100 @@ const Dashboard = () => {
         </div>
       )}
 
+      {/* Priority Modal */}
+      {showPriorityModal && (
+        <div className="modal-overlay" onClick={() => setShowPriorityModal(false)}>
+          <div className="modal-content priority-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <div>
+                <h2>🎯 Your Priority Today</h2>
+                <p className="modal-subtitle">
+                  {itemsNeedingReview.length} items • {estimatedReviewTime} min estimated
+                </p>
+              </div>
+              <button className="modal-close" onClick={() => setShowPriorityModal(false)}>
+                <X size={24} />
+              </button>
+            </div>
+
+            <div className="modal-body priority-modal-body">
+              {itemsNeedingReview.length > 0 ? (
+                <>
+                  <div className="priority-items-list">
+                    {itemsNeedingReview.map(item => (
+                      <div key={item.id} className={`priority-item priority-${item.retention}`}>
+                        <div className="priority-item-header">
+                          <h4>{item.title}</h4>
+                        </div>
+                        
+                        {/* Unified Meta Row */}
+                        <div className="library-item-meta-row">
+                          {item.retention && (
+                            <span className={`retention-chip retention-chip-${item.retention}`}>
+                              {item.retention === 'high' && '🟢 Strong'}
+                              {item.retention === 'medium' && '🟡 Review Soon'}
+                              {item.retention === 'fading' && '🔴 Fading'}
+                            </span>
+                          )}
+                          
+                          {item.nextReview && (
+                            <span className={`countdown-chip ${item.nextReviewDays < 0 ? 'overdue' : item.nextReviewDays <= 1 ? 'urgent' : 'normal'}`}>
+                              <Clock size={12} />
+                              {item.nextReview}
+                            </span>
+                          )}
+                        </div>
+                        
+                        <div className="library-item-actions">
+                          {item.retention === 'fading' ? (
+                            <button className="action-btn action-primary action-urgent" onClick={() => {
+                              setShowPriorityModal(false);
+                              openLibraryItem(item, 'quiz');
+                            }}>
+                              <Brain size={18} /> Review Now
+                            </button>
+                          ) : item.retention === 'medium' ? (
+                            <button className="action-btn action-primary action-warning" onClick={() => {
+                              setShowPriorityModal(false);
+                              openLibraryItem(item, 'quiz');
+                            }}>
+                              <Brain size={18} /> Review Soon
+                            </button>
+                          ) : (
+                            <button className="action-btn action-primary" onClick={() => {
+                              setShowPriorityModal(false);
+                              openLibraryItem(item, 'quiz');
+                            }}>
+                              <Brain size={18} /> Take Quiz
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <button 
+                    className="btn-primary btn-start-session"
+                    onClick={() => {
+                      setShowPriorityModal(false);
+                      startReviewSession();
+                    }}
+                    style={{marginTop: '1.5rem'}}
+                  >
+                    <Brain size={20} /> Start Review Session ({itemsNeedingReview.length} items)
+                  </button>
+                </>
+              ) : (
+                <div className="caught-up-content">
+                  <h3>✅ You're All Caught Up!</h3>
+                  <p>Great job! All your knowledge is fresh.</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Toast Notification */}
       {toast && (
         <div className={`toast toast-${toast.type}`}>
