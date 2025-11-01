@@ -4417,13 +4417,13 @@ html {
 
 .btn-cta-banner {
   padding: 1rem 3rem;
-  background: linear-gradient(135deg, var(--neuro-yellow) 0%, var(--coral) 100%) !important;
+  background: linear-gradient(135deg, #FFD166 0%, #EF476F 100%) !important;
   border: none;
   border-radius: 50px;
   font-family: 'Inter', sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--inverse-text) !important;
+  color: #073B4C !important;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 8px 20px rgba(255, 209, 102, 0.3);
