@@ -278,6 +278,13 @@ const Dashboard = () => {
     focusArea: 'all'
   });
   
+  // Phase 3: Gamification & Onboarding
+  const [streak, setStreak] = useState(4); // Days in a row
+  const [xp, setXp] = useState(285); // Total XP
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  const [onboardingStep, setOnboardingStep] = useState(1);
+  const [hasUploadedFirstNote, setHasUploadedFirstNote] = useState(false);
+  
   const [profileData, setProfileData] = useState({
     name: 'Demo User',
     email: 'demo@mentraflow.com',
