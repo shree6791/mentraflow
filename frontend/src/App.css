@@ -1108,8 +1108,7 @@ html {
   .stats-grid,
   .steps-grid,
   .viz-container,
-  .science-grid,
-  .research-grid {
+  .science-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
