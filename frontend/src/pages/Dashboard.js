@@ -1916,14 +1916,14 @@ const Dashboard = () => {
             <div className="modal-body priority-modal-body">
               {itemsNeedingReview.length > 0 ? (
                 <>
-                  <div className="priority-items-list">
+                  <div className="library-list">
                     {itemsNeedingReview.map(item => (
-                      <div key={item.id} className={`priority-item priority-${item.retention}`}>
-                        <div className="priority-item-header">
-                          <h4>{item.title}</h4>
+                      <div key={item.id} className={`library-item retention-${item.retention || 'none'}`}>
+                        <div className="library-item-header">
+                          <h3>{item.title}</h3>
                         </div>
                         
-                        {/* Unified Meta Row */}
+                        {/* Unified Meta Row - Same as Library */}
                         <div className="library-item-meta-row">
                           {item.retention && (
                             <span className={`retention-chip retention-chip-${item.retention}`}>
@@ -1939,6 +1939,28 @@ const Dashboard = () => {
                               {item.nextReview}
                             </span>
                           )}
+                          
+                          <span className="filename-text">
+                            {item.filename}
+                          </span>
+                          
+                          {/* Quick Action Links */}
+                          <div className="quick-action-links">
+                            <button className="link-btn-compact" onClick={() => {
+                              setShowPriorityModal(false);
+                              openLibraryItem(item, 'summary');
+                            }}>
+                              <Eye size={12} /> Summary
+                            </button>
+                            {item.quizScore !== null && (
+                              <button className="link-btn-compact" onClick={() => {
+                                setShowPriorityModal(false);
+                                openLibraryItem(item, 'performance');
+                              }}>
+                                <TrendingUp size={12} /> Score: {item.quizScore}%
+                              </button>
+                            )}
+                          </div>
                         </div>
                         
                         <div className="library-item-actions">
