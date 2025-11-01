@@ -110,6 +110,22 @@
     padding: 0;
   }
   
+  /* Apply grid columns for specific carousel types */
+  .carousel-wrapper.research-grid,
+  .carousel-wrapper.steps-grid,
+  .carousel-wrapper.viz-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  .carousel-wrapper.stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .carousel-wrapper.future-goals,
+  .carousel-wrapper.pricing-cards-container {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  
   .carousel-wrapper > * {
     flex: unset;
   }
