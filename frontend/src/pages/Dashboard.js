@@ -944,26 +944,34 @@ const Dashboard = () => {
                     </p>
                     
                     <div className="library-item-actions">
-                      {item.retention === 'fading' && (
-                        <button className="action-btn action-urgent" onClick={() => openLibraryItem(item, 'quiz')}>
-                          <Brain size={16} /> Review Now
+                      {/* Primary Action - One clear button based on state */}
+                      {item.retention === 'fading' ? (
+                        <button className="action-btn action-primary action-urgent" onClick={() => openLibraryItem(item, 'quiz')}>
+                          <Brain size={18} /> Review Now
                         </button>
-                      )}
-                      {item.status === 'summarized' && (
-                        <button className="action-btn" onClick={() => openLibraryItem(item, 'summary')}>
-                          <Eye size={16} /> View Summary
+                      ) : item.hasQuiz ? (
+                        <button className="action-btn action-primary" onClick={() => openLibraryItem(item, 'quiz')}>
+                          <Brain size={18} /> Take Quiz
                         </button>
-                      )}
-                      {item.hasQuiz && item.retention !== 'fading' && (
-                        <button className="action-btn" onClick={() => openLibraryItem(item, 'quiz')}>
-                          <Brain size={16} /> Take Quiz
+                      ) : item.status === 'summarized' ? (
+                        <button className="action-btn action-primary" onClick={() => openLibraryItem(item, 'summary')}>
+                          <Eye size={18} /> View Summary
                         </button>
-                      )}
-                      {item.quizScore !== null && (
-                        <button className="action-btn" onClick={() => openLibraryItem(item, 'performance')}>
-                          <TrendingUp size={16} /> Score: {item.quizScore}%
-                        </button>
-                      )}
+                      ) : null}
+                      
+                      {/* Secondary Actions - Text links */}
+                      <div className="library-secondary-actions">
+                        {item.status === 'summarized' && item.hasQuiz && item.retention !== 'fading' && (
+                          <button className="link-btn" onClick={() => openLibraryItem(item, 'summary')}>
+                            Summary
+                          </button>
+                        )}
+                        {item.quizScore !== null && (
+                          <button className="link-btn" onClick={() => openLibraryItem(item, 'performance')}>
+                            Score: {item.quizScore}%
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
                 ))}
