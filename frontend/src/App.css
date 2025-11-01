@@ -310,8 +310,8 @@ html {
 }
 
 .btn-login {
-  background: var(--accent-yellow);
-  color: var(--contrast-indigo);
+  background: linear-gradient(135deg, var(--primary-teal), var(--mind-blue));
+  color: white;
   padding: 0.75rem 1.75rem;
   border-radius: 50px;
   border: none;
@@ -324,9 +324,9 @@ html {
 }
 
 .btn-login:hover {
-  background: var(--accent-coral);
   transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
+  box-shadow: 0 4px 20px rgba(14, 124, 123, 0.4);
+  opacity: 0.9;
 }
 
 /* Hero Section */
