@@ -408,6 +408,73 @@ const Dashboard = () => {
     setShowProfileModal(false);
   };
 
+  // Phase 2: Recall Tasks Handlers
+  const startRecallTask = (task) => {
+    setCurrentRecallTask(task);
+    setRecallQuizData(QUICK_RECALL_QUIZ[task.title]);
+    setQuizAnswers({});
+    setQuizResults({});
+    setCurrentQuestionIndex(0);
+    setShowRecallQuiz(true);
+  };
+
+  const submitRecallQuiz = () => {
+    const results = {};
+    recallQuizData.forEach((q, idx) => {
+      results[idx] = quizAnswers[idx] === q.correctIndex;
+    });
+    setQuizResults(results);
+    
+    const score = Object.values(results).filter(Boolean).length;
+    const percentage = Math.round((score / recallQuizData.length) * 100);
+    
+    // Update mastery score
+    const change = percentage >= 70 ? 3 : 1;
+    setMasteryScore(prev => Math.min(100, Math.max(0, prev + change)));
+    setWeeklyChange(prev => prev + change);
+    
+    // Remove completed task
+    setRecallTasks(prev => prev.filter(t => t.id !== currentRecallTask.id));
+    
+    showToast(`Great recall! ${percentage}% correct. 🧠`);
+    
+    // Close modal after showing results briefly
+    setTimeout(() => {
+      setShowRecallQuiz(false);
+      setCurrentRecallTask(null);
+      setRecallQuizData(null);
+    }, 2000);
+  };
+
+  const generateCustomQuiz = () => {
+    setShowQuizCustomization(false);
+    setGenerating(true);
+    
+    // Simulate API call with custom parameters
+    setTimeout(() => {
+      // Generate quiz based on configuration
+      let questions = [...SAMPLE_QUIZ];
+      
+      // Adjust number of questions
+      if (quizConfig.questionCount === 10) {
+        questions = [...questions, ...SAMPLE_QUIZ.slice(0, 5)]; // Duplicate some
+      } else if (quizConfig.questionCount === 15) {
+        questions = [...questions, ...SAMPLE_QUIZ, ...SAMPLE_QUIZ.slice(0, 5)];
+      }
+      
+      questions = questions.slice(0, quizConfig.questionCount);
+      
+      setSummary(SAMPLE_SUMMARY);
+      setQuiz(questions);
+      setQuizAnswers({});
+      setQuizResults({});
+      setCurrentQuestionIndex(0);
+      setShowQuizResults(false);
+      setGenerating(false);
+      showToast(`Custom quiz generated! (${quizConfig.questionCount} questions, ${quizConfig.difficulty})`);
+    }, 2000);
+  };
+
   // Filter library items
   const filteredLibraryItems = libraryItems.filter(item => {
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
