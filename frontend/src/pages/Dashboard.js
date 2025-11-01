@@ -880,33 +880,44 @@ const Dashboard = () => {
             <div className="priority-items-list">
               {paginatedPriorityItems.map(item => (
                 <div key={item.id} className={`priority-item priority-${item.retention}`}>
-                  <div className="priority-item-icon">
-                    {item.retention === 'fading' && '🔴'}
-                    {item.retention === 'medium' && '🟡'}
-                  </div>
-                  <div className="priority-item-content">
+                  <div className="priority-item-header">
                     <h4>{item.title}</h4>
-                    <p className="priority-item-status">
-                      {item.retention === 'fading' && `⚠️ Critical: You're forgetting this! Last reviewed ${item.lastReview}`}
-                      {item.retention === 'medium' && `⏰ Review soon to maintain memory • Last reviewed ${item.lastReview}`}
-                    </p>
-                    {item.retention === 'fading' && (
-                      <p className="priority-consequence">
-                        📉 Without review: ~70% memory loss within 3 days
-                      </p>
+                  </div>
+                  
+                  {/* Unified Meta Row - Same structure as Library cards */}
+                  <div className="library-item-meta-row">
+                    {item.retention && (
+                      <span className={`retention-chip retention-chip-${item.retention}`}>
+                        {item.retention === 'high' && '🟢 Strong'}
+                        {item.retention === 'medium' && '🟡 Review Soon'}
+                        {item.retention === 'fading' && '🔴 Fading'}
+                      </span>
                     )}
-                    {item.retention === 'medium' && (
-                      <p className="priority-next-review">
-                        📅 Best reviewed within 2 days for optimal retention
-                      </p>
+                    
+                    {item.nextReview && (
+                      <span className={`countdown-chip ${item.nextReviewDays < 0 ? 'overdue' : item.nextReviewDays <= 1 ? 'urgent' : 'normal'}`}>
+                        <Clock size={12} />
+                        {item.nextReview}
+                      </span>
                     )}
                   </div>
-                  <button 
-                    className="btn-quick-review"
-                    onClick={() => openLibraryItem(item, 'quiz')}
-                  >
-                    {item.retention === 'fading' ? 'Review Now' : 'Quick Review'}
-                  </button>
+                  
+                  <div className="library-item-actions">
+                    {/* Same button logic as Library */}
+                    {item.retention === 'fading' ? (
+                      <button className="action-btn action-primary action-urgent" onClick={() => openLibraryItem(item, 'quiz')}>
+                        <Brain size={18} /> Review Now
+                      </button>
+                    ) : item.retention === 'medium' ? (
+                      <button className="action-btn action-primary action-warning" onClick={() => openLibraryItem(item, 'quiz')}>
+                        <Brain size={18} /> Review Soon
+                      </button>
+                    ) : (
+                      <button className="action-btn action-primary" onClick={() => openLibraryItem(item, 'quiz')}>
+                        <Brain size={18} /> Take Quiz
+                      </button>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
