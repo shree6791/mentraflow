@@ -114,7 +114,7 @@ const Home = () => {
             MentraFlow follows your brain's rhythm — recall, reflect, rest.
           </p>
         </div>
-        <div className="steps-grid fade-in">
+        <Carousel className="steps-grid">
           <div className="step-card">
             <div className="step-icon">1</div>
             <h3>Capture</h3>
@@ -133,7 +133,7 @@ const Home = () => {
             <p>Each interaction strengthens memory.</p>
             <p className="step-science">Neuroplasticity: build stronger neural links.</p>
           </div>
-        </div>
+        </Carousel>
       </section>
 
       {/* Visualization */}
