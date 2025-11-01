@@ -317,8 +317,8 @@ const Dashboard = () => {
   const estimatedReviewTime = itemsNeedingReview.length * 3; // 3 min per item
   
   // Streak progress calculation
-  const daysToNextMilestone = 5 - (dayStreak % 5);
-  const streakProgress = ((dayStreak % 5) / 5) * 100;
+  const daysToNextMilestone = 5 - (streak % 5);
+  const streakProgress = ((streak % 5) / 5) * 100;
   
   const [profileData, setProfileData] = useState({
     name: 'Demo User',
