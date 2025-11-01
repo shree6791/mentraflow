@@ -267,16 +267,40 @@ const Dashboard = () => {
           <Link to="/" className="dashboard-logo">MentraFlow</Link>
         </div>
         <div className="dashboard-user">
-          <div className="user-info">
-            {user?.picture && (
-              <img src={user.picture} alt={user.name} className="user-avatar" />
+          <div className="avatar-dropdown-container">
+            <div 
+              className="avatar-trigger" 
+              onClick={() => setShowDropdown(!showDropdown)}
+            >
+              {user?.picture && (
+                <img src={user.picture} alt={user.name} className="user-avatar-clickable" />
+              )}
+              <span className="user-name">{user?.name}</span>
+              <ChevronDown size={16} className={`dropdown-arrow ${showDropdown ? 'open' : ''}`} />
+            </div>
+            
+            {showDropdown && (
+              <div className="avatar-dropdown">
+                <button 
+                  className="dropdown-item"
+                  onClick={() => {
+                    setShowDropdown(false);
+                    setShowProfileModal(true);
+                  }}
+                >
+                  <User size={18} />
+                  Profile Settings
+                </button>
+                <button 
+                  className="dropdown-item logout-item"
+                  onClick={handleLogout}
+                >
+                  <LogOut size={18} />
+                  Logout
+                </button>
+              </div>
             )}
-            <span>{user?.name}</span>
           </div>
-          <button onClick={handleLogout} className="logout-btn">
-            <LogOut size={18} />
-            Logout
-          </button>
         </div>
       </header>
 
