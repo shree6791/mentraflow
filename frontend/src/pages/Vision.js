@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Linkedin, Twitter, Youtube, BookOpen, TrendingDown, RefreshCw, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Carousel from '../components/Carousel';
 
 const Vision = () => {
   const [scrolled, setScrolled] = useState(false);
