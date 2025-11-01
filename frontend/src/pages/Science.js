@@ -220,7 +220,7 @@ const Science = () => {
             <Link to="/" className="footer-link">Home</Link>
             <Link to="/science" className="footer-link">Science</Link>
             <Link to="/vision" className="footer-link">Vision</Link>
-            <a href="/#contact" className="footer-link">Contact</a>
+            <Link to="/contact" className="footer-link">Contact</Link>
           </div>
           <div className="social-links">
             <a href="#" className="social-link" aria-label="LinkedIn">
