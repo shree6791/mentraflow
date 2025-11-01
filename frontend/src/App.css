@@ -956,7 +956,7 @@ html {
 .science-hero h1 {
   font-size: var(--font-size-hero);
   font-weight: 700;
-  color: var(--contrast-indigo);
+  color: var(--heading-color);
   margin-bottom: 1.5rem;
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -964,7 +964,7 @@ html {
 
 .science-hero p {
   font-size: var(--font-size-body-lg);
-  color: var(--text-gray);
+  color: var(--muted-text);
   line-height: 1.7;
 }
 
