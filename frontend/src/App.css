@@ -1818,6 +1818,7 @@ html {
   font-weight: 600;
   color: var(--contrast-indigo);
   margin-bottom: 1rem;
+  white-space: nowrap;
 }
 
 .auth-header p {
