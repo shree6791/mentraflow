@@ -951,6 +951,17 @@ const Dashboard = () => {
                       </div>
                     )}
                     
+                    {/* Next Review Countdown */}
+                    {item.nextReview && (
+                      <div className={`next-review-countdown ${item.nextReviewDays < 0 ? 'overdue' : item.nextReviewDays <= 1 ? 'urgent' : 'normal'}`}>
+                        <Clock size={14} />
+                        <span>
+                          {item.nextReviewDays < 0 ? 'Review ' : 'Next review: '}
+                          {item.nextReview}
+                        </span>
+                      </div>
+                    )}
+                    
                     <p className="library-item-meta">
                       {item.filename} • Uploaded {new Date(item.uploadDate).toLocaleDateString()}
                     </p>
