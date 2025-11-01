@@ -320,7 +320,7 @@ const Dashboard = () => {
   
   // Pagination for Library
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 8;
   
   // Priority Review Session
   const [showReviewSession, setShowReviewSession] = useState(false);
