@@ -12,6 +12,11 @@ logger = logging.getLogger(__name__)
 # Database will be injected from server.py
 db = None
 
+def set_database(database):
+    """Set the database connection for auth module"""
+    global db
+    db = database
+
 auth_router = APIRouter(prefix="/auth", tags=["auth"])
 
 EMERGENT_SESSION_API = "https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data"
