@@ -531,7 +531,7 @@ const KnowledgeGraph = ({ topics, userAvatar, userName, onClose, onReinforce }) 
             </div>
             <div className="legend-item">
               <div className="legend-dot" style={{background: '#EF476F'}}></div>
-              <span>Fading (<50%)</span>
+              <span>Fading (&lt;50%)</span>
             </div>
           </div>
         </div>
