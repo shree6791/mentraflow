@@ -2059,6 +2059,7 @@
   border-radius: 12px;
   border: 1px solid var(--divider);
   transition: all 0.3s ease;
+  min-height: 110px;
 }
 
 .stat-banner-item:hover {
