@@ -61,6 +61,14 @@
   width: 100%;
   opacity: 1 !important;
   visibility: visible !important;
+  position: relative;
+  z-index: 1;
+}
+
+/* Make sure science card content is visible in carousel */
+.carousel-wrapper .science-card * {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 /* Navigation Arrows */
