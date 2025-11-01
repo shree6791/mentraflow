@@ -195,7 +195,7 @@ const Science = () => {
             MentraFlow builds on decades of cognitive science research from leading institutions.
           </p>
         </div>
-        <div className="research-grid fade-in">
+        <Carousel className="research-grid">
           <div className="research-card">
             <h4>Ebbinghaus (1885)</h4>
             <p>Discovered the forgetting curve — showing rapid memory decay without reinforcement.</p>
@@ -212,7 +212,7 @@ const Science = () => {
             <h4>Stanford & MIT Research</h4>
             <p>Modern neuroscience shows how spaced repetition physically strengthens neural pathways.</p>
           </div>
-        </div>
+        </Carousel>
       </section>
 
       {/* Footer */}
