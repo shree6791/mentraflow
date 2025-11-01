@@ -1392,7 +1392,7 @@ html {
 }
 
 .future-goals {
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  /* Grid columns handled by Carousel component */
 }
 
 .future-goal {
