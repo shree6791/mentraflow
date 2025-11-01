@@ -2202,21 +2202,23 @@ html {
 .submit-btn {
   width: 100%;
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-coral) 100%);
-  border: none;
+  background: transparent;
+  border: 2px solid var(--primary-main);
   border-radius: 50px;
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--contrast-indigo);
+  color: var(--primary-main);
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 0.5rem;
 }
 
 .submit-btn:hover {
+  background: var(--primary-main);
+  color: #FFFFFF;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+  box-shadow: 0 4px 12px rgba(14, 124, 123, 0.3);
 }
 
 .submit-btn:disabled {
