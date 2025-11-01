@@ -72,7 +72,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Problem Section */}
+      {/* Problem */}
       <section id="problem" className="section problem-section">
         <div className="fade-in">
           <h2 className="section-title">Most of what we learn fades within days.</h2>
