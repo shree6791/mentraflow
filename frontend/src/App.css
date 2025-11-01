@@ -1,29 +1,59 @@
-/* MentraFlow Brand System */
+/* MentraFlow Brand System with Light/Dark Mode Support */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&family=DM+Serif+Display:ital@1&display=swap');
 
+/* ========================================
+   LIGHT MODE (DEFAULT)
+   ======================================== */
 :root {
-  /* Brand Colors */
-  --primary-teal: #0E7C7B;
-  --secondary-blue: #118AB2;
-  --mind-blue: #118AB2;
-  --accent-yellow: #FFD166;
+  /* Primary Colors */
+  --primary-main: #0E7C7B;
+  --primary-accent: #118AB2;
+  --primary-gradient: linear-gradient(135deg, #0E7C7B, #118AB2);
+  
+  /* Secondary / Highlights */
   --neuro-yellow: #FFD166;
-  --accent-coral: #EF476F;
-  --contrast-indigo: #073B4C;
-  --bg-light: #F7FAFC;
-  --calm-white: #F7FAFC;
-  --text-dark: #1a202c;
-  --text-gray: #4a5568;
+  --coral: #EF476F;
+  --indigo: #073B4C;
+  
+  /* Background / Neutrals */
+  --bg-base: #F7FAFC;
+  --surface: #FFFFFF;
+  --divider: #E5E7EB;
+  --shadow: rgba(0, 0, 0, 0.06);
+  --shadow-hover: rgba(0, 0, 0, 0.12);
+  
+  /* Typography */
+  --heading-color: #073B4C;
+  --body-text: #2E2E2E;
+  --muted-text: #6B7280;
+  --link-color: #118AB2;
+  --inverse-text: #FFFFFF;
+  
+  /* CTA */
+  --cta-gradient: linear-gradient(135deg, #FFD166, #EF476F);
+  --focus-outline: 0 0 0 3px rgba(17, 138, 178, 0.35);
+  
+  /* Legacy Variables (mapped to new system) */
+  --primary-teal: var(--primary-main);
+  --secondary-blue: var(--primary-accent);
+  --mind-blue: var(--primary-accent);
+  --accent-yellow: var(--neuro-yellow);
+  --neuro-yellow: var(--neuro-yellow);
+  --accent-coral: var(--coral);
+  --contrast-indigo: var(--indigo);
+  --bg-light: var(--bg-base);
+  --calm-white: var(--bg-base);
+  --text-dark: var(--body-text);
+  --text-gray: var(--muted-text);
   --retention-green: #06D6A0;
   
   /* Design Tokens */
   --border-radius: 16px;
-  --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  --shadow-hover: 0 6px 24px rgba(0, 0, 0, 0.12);
+  --shadow: var(--shadow);
   
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #FFD166 0%, #EF476F 100%);
-  --gradient-teal-blue: linear-gradient(135deg, #0E7C7B 0%, #118AB2 100%);
+  --gradient-primary: var(--cta-gradient);
+  --gradient-teal-blue: var(--primary-gradient);
   --brand-gradient: linear-gradient(135deg, #0E7C7B 0%, #118AB2 40%, #FFD166 70%, #EF476F 100%);
   
   /* Typography */
@@ -41,6 +71,42 @@
   --section-padding: 5rem 2rem;
   --section-gap: 3rem;
   --card-padding: 2rem;
+}
+
+/* ========================================
+   DARK MODE
+   ======================================== */
+[data-theme="dark"] {
+  /* Primary Colors */
+  --primary-main: #0E7C7B;
+  --primary-accent: #2FA7C8;
+  --primary-gradient: linear-gradient(135deg, #0E7C7B, #2FA7C8);
+  
+  /* Secondary / Highlights */
+  --neuro-yellow: #FFD87A;
+  --coral: #F56A8A;
+  --indigo: #051F2C;
+  
+  /* Background / Neutrals */
+  --bg-base: #0A1A22;
+  --surface: #102731;
+  --divider: #1C3A45;
+  --shadow: rgba(0, 0, 0, 0.50);
+  --shadow-hover: rgba(0, 0, 0, 0.70);
+  
+  /* Typography */
+  --heading-color: #E6F0F2;
+  --body-text: #B7C4C9;
+  --muted-text: #82979E;
+  --link-color: #2FA7C8;
+  --inverse-text: #073B4C;
+  
+  /* CTA */
+  --cta-gradient: linear-gradient(135deg, #FFD87A, #F56A8A);
+  --focus-outline: 0 0 0 3px rgba(47, 167, 200, 0.40);
+  
+  /* Brand Gradient for Dark Mode */
+  --brand-gradient: linear-gradient(135deg, #0E7C7B 0%, #2FA7C8 40%, #FFD87A 70%, #F56A8A 100%);
 }
 
 * {
