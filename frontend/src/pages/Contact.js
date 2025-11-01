@@ -70,9 +70,9 @@ const Contact = () => {
           <Link to="/science" className="nav-link">Science</Link>
           <Link to="/vision" className="nav-link">Vision</Link>
           <Link to="/contact" className="nav-link">Contact</Link>
-          <button className="btn-login" onClick={() => setSubmitted(false)}>
+          <Link to="/login" className="btn-login">
             Login
-          </button>
+          </Link>
         </nav>
       </header>
 
