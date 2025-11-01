@@ -1,15 +1,68 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { LogOut, User, Mail } from 'lucide-react';
+import { LogOut, User, Upload, FileText, BarChart3, Brain, CheckCircle, XCircle, ChevronDown, ChevronUp, Menu, X } from 'lucide-react';
 import axios from 'axios';
+import KnowledgeGraph from '../components/KnowledgeGraph';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
+
+// Mock data
+const SAMPLE_TOPICS = [
+  { id: 't1', title: 'Transformer Attention Basics', status: 'medium', lastReview: '2 days ago' },
+  { id: 't2', title: 'Active Recall Benefits', status: 'high', lastReview: '1 week ago' },
+  { id: 't3', title: 'Forgetting Curve', status: 'fading', lastReview: '3 weeks ago' },
+  { id: 't4', title: 'Spacing Effect Principles', status: 'high', lastReview: '3 days ago' },
+  { id: 't5', title: 'Neuroplasticity Research', status: 'medium', lastReview: '5 days ago' }
+];
+
+const SAMPLE_SUMMARY = {
+  title: 'Spacing Effect Notes',
+  bullets: [
+    'Reviewing just before forgetting maximizes retention.',
+    'Intervals should expand over time (1d, 3d, 7d...).',
+    'Short, effortful recall beats passive re-reading.',
+    'Track what's fading to prioritize review.'
+  ],
+  keywords: ['Spacing Effect', 'Recall', 'Intervals', 'Prioritization']
+};
+
+const SAMPLE_QUIZ = [
+  {
+    q: 'What best describes the Spacing Effect?',
+    options: ['Reviewing many times in one day', 'Massed practice (cramming)', 'Reinforcing just before forgetting', 'Only reading summaries'],
+    correctIndex: 2
+  },
+  {
+    q: 'Which method strengthens memory most?',
+    options: ['Passive re-reading', 'Highlighting', 'Active recall', 'Long summaries'],
+    correctIndex: 2
+  },
+  {
+    q: 'Which schedule aligns with spacing?',
+    options: ['1-1-1 daily same time', '1d → 3d → 7d → 14d', 'Only monthly reviews', 'Random reminders'],
+    correctIndex: 1
+  }
+];
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  
+  // Dashboard state
+  const [retentionScore, setRetentionScore] = useState(82);
+  const [topics, setTopics] = useState(SAMPLE_TOPICS);
+  const [activeTab, setActiveTab] = useState('upload');
+  const [uploadedContent, setUploadedContent] = useState('');
+  const [summary, setSummary] = useState(null);
+  const [quiz, setQuiz] = useState(null);
+  const [quizAnswers, setQuizAnswers] = useState({});
+  const [quizResults, setQuizResults] = useState({});
+  const [showGraph, setShowGraph] = useState(false);
+  const [generating, setGenerating] = useState(false);
+  const [toast, setToast] = useState(null);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -28,6 +81,11 @@ const Dashboard = () => {
     fetchUser();
   }, [navigate]);
 
+  const showToast = (message, type = 'success') => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000);
+  };
+
   const handleLogout = async () => {
     try {
       await axios.post(`${API}/auth/logout`, {}, {
@@ -37,6 +95,73 @@ const Dashboard = () => {
     } catch (err) {
       console.error('Logout error:', err);
     }
+  };
+
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setUploadedContent(event.target.result);
+        showToast('File uploaded successfully!');
+      };
+      reader.readAsText(file);
+    }
+  };
+
+  const generateSummaryAndQuiz = () => {
+    if (!uploadedContent) {
+      showToast('Please upload or paste content first', 'error');
+      return;
+    }
+    
+    setGenerating(true);
+    
+    // Simulate API call
+    setTimeout(() => {
+      setSummary(SAMPLE_SUMMARY);
+      setQuiz(SAMPLE_QUIZ);
+      setQuizAnswers({});
+      setQuizResults({});
+      setGenerating(false);
+      showToast('Summary and quiz generated!');
+    }, 1500);
+  };
+
+  const handleQuizAnswer = (questionIndex, optionIndex) => {
+    if (quizResults[questionIndex] !== undefined) return; // Already answered
+    
+    setQuizAnswers({ ...quizAnswers, [questionIndex]: optionIndex });
+    
+    const isCorrect = quiz[questionIndex].correctIndex === optionIndex;
+    setQuizResults({ ...quizResults, [questionIndex]: isCorrect });
+    
+    if (isCorrect) {
+      showToast('Correct! 🎉', 'success');
+    } else {
+      showToast('Not quite. Try to remember for next time!', 'error');
+    }
+  };
+
+  const finishQuiz = () => {
+    const correctCount = Object.values(quizResults).filter(Boolean).length;
+    const scoreIncrease = correctCount;
+    
+    setRetentionScore(Math.min(100, retentionScore + scoreIncrease));
+    showToast(`Quiz complete! Retention score +${scoreIncrease}%`);
+    
+    // Reset for next round
+    setTimeout(() => {
+      setUploadedContent('');
+      setSummary(null);
+      setQuiz(null);
+      setQuizAnswers({});
+      setQuizResults({});
+    }, 2000);
+  };
+
+  const addToKnowledgeStore = () => {
+    showToast('Added to Knowledge Store! 📚');
   };
 
   if (loading) {
@@ -52,8 +177,14 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-page">
-      <div className="dashboard-header">
-        <Link to="/" className="dashboard-logo">MentraFlow</Link>
+      {/* Header */}
+      <header className="dashboard-header-new">
+        <div className="header-left">
+          <button className="menu-toggle" onClick={() => setSidebarOpen(!sidebarOpen)}>
+            {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+          <Link to="/" className="dashboard-logo">MentraFlow</Link>
+        </div>
         <div className="dashboard-user">
           <div className="user-info">
             {user?.picture && (
@@ -66,43 +197,245 @@ const Dashboard = () => {
             Logout
           </button>
         </div>
-      </div>
+      </header>
 
-      <div className="dashboard-container">
-        <div className="welcome-section">
-          <h1>Welcome back, {user?.name?.split(' ')[0]}!</h1>
-          <p>Your personalized memory workspace is ready.</p>
-        </div>
+      <div className="dashboard-layout">
+        {/* Left Sidebar */}
+        <aside className={`dashboard-sidebar ${sidebarOpen ? 'open' : 'closed'}`}>
+          {/* Create Knowledge */}
+          <div className="sidebar-card">
+            <h3>Create Knowledge Store</h3>
+            <button className="primary-btn" onClick={() => document.getElementById('file-upload').click()}>
+              <Upload size={18} />
+              New Upload or Paste Note
+            </button>
+            <p className="hint-text">PDF, text, chat excerpts</p>
+          </div>
 
-        <div className="dashboard-content">
-          <div className="info-card">
-            <User size={32} />
-            <h3>Profile</h3>
-            <div className="info-details">
-              <p><strong>Name:</strong> {user?.name}</p>
-              <p><strong>Email:</strong> {user?.email}</p>
+          {/* Knowledge Graph Preview */}
+          <div className="sidebar-card">
+            <h3>Knowledge Graph</h3>
+            <div className="graph-preview" onClick={() => setShowGraph(true)}>
+              <div className="preview-nodes">
+                <div className="node-dot high"></div>
+                <div className="node-dot medium"></div>
+                <div className="node-dot fading"></div>
+                <div className="node-dot high"></div>
+                <div className="node-dot medium"></div>
+              </div>
+              <div className="graph-legend">
+                <span className="legend-item"><span className="dot high"></span> High</span>
+                <span className="legend-item"><span className="dot medium"></span> Medium</span>
+                <span className="legend-item"><span className="dot fading"></span> Fading</span>
+              </div>
+            </div>
+            <button className="link-btn" onClick={() => setShowGraph(true)}>
+              Open full graph →
+            </button>
+          </div>
+
+          {/* Progress Score */}
+          <div className="sidebar-card score-card">
+            <h3>Progress</h3>
+            <div className="score-display">
+              <div className="score-number">{retentionScore}%</div>
+              <div className="score-change">+3% this week</div>
+            </div>
+            <div className="score-bars">
+              <div className="bar-item">
+                <span>Mastered</span>
+                <div className="bar"><div className="fill high" style={{width: '40%'}}></div></div>
+              </div>
+              <div className="bar-item">
+                <span>Fading</span>
+                <div className="bar"><div className="fill fading" style={{width: '25%'}}></div></div>
+              </div>
+              <div className="bar-item">
+                <span>New</span>
+                <div className="bar"><div className="fill medium" style={{width: '35%'}}></div></div>
+              </div>
             </div>
           </div>
 
-          <div className="info-card">
-            <Mail size={32} />
-            <h3>Stay Updated</h3>
-            <p>We're building something incredible. Check back soon for the full MentraFlow experience.</p>
+          {/* Knowledge Summary & Quizzes */}
+          <div className="sidebar-card">
+            <h3>Recent Topics</h3>
+            <div className="topic-list">
+              {topics.map(topic => (
+                <div key={topic.id} className="topic-item">
+                  <div className="topic-header">
+                    <span className={`status-dot ${topic.status}`}></span>
+                    <div className="topic-info">
+                      <div className="topic-title">{topic.title}</div>
+                      <div className="topic-time">{topic.lastReview}</div>
+                    </div>
+                  </div>
+                  <div className="topic-actions">
+                    <button className="action-btn">Summary</button>
+                    <button className="action-btn">Practice</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </aside>
+
+        {/* Right Workspace */}
+        <main className="dashboard-workspace">
+          {/* Upload/Paste Panel */}
+          <div className="workspace-card">
+            <div className="card-header">
+              <h2>Capture Knowledge</h2>
+            </div>
+            <div className="tabs">
+              <button 
+                className={`tab ${activeTab === 'upload' ? 'active' : ''}`}
+                onClick={() => setActiveTab('upload')}
+              >
+                <Upload size={16} /> Upload File
+              </button>
+              <button 
+                className={`tab ${activeTab === 'paste' ? 'active' : ''}`}
+                onClick={() => setActiveTab('paste')}
+              >
+                <FileText size={16} /> Paste Text
+              </button>
+            </div>
+            
+            {activeTab === 'upload' ? (
+              <div className="upload-zone">
+                <input 
+                  type="file" 
+                  id="file-upload" 
+                  accept=".txt,.pdf"
+                  onChange={handleFileUpload}
+                  style={{display: 'none'}}
+                />
+                <label htmlFor="file-upload" className="upload-label">
+                  <Upload size={48} />
+                  <p>Drag and drop or click to upload</p>
+                  <span className="upload-hint">PDF or TXT files</span>
+                </label>
+              </div>
+            ) : (
+              <textarea
+                className="paste-area"
+                placeholder="Paste your notes, articles, or chat excerpts here...\n\nRecommended: 200-400 words for optimal summary and quiz generation."
+                value={uploadedContent}
+                onChange={(e) => setUploadedContent(e.target.value)}
+                rows={10}
+              />
+            )}
+            
+            <button 
+              className="generate-btn"
+              onClick={generateSummaryAndQuiz}
+              disabled={generating || !uploadedContent}
+            >
+              {generating ? (
+                <><div className="btn-spinner"></div> Generating...</>
+              ) : (
+                <>Generate Summary & Quiz</>
+              )}
+            </button>
           </div>
 
-          <div className="info-card highlight">
-            <div className="card-content">
-              <h3>🚀 Coming Soon</h3>
-              <ul>
-                <li>Capture notes, chats, and ideas</li>
-                <li>AI-powered memory reinforcement</li>
-                <li>Spaced repetition reminders</li>
-                <li>Knowledge graph visualization</li>
+          {/* Auto Summary Panel */}
+          {summary && (
+            <div className="workspace-card summary-card">
+              <div className="card-header">
+                <h2>Summary: {summary.title}</h2>
+              </div>
+              <ul className="summary-bullets">
+                {summary.bullets.map((bullet, i) => (
+                  <li key={i}>{bullet}</li>
+                ))}
               </ul>
+              <div className="keyword-chips">
+                {summary.keywords.map((keyword, i) => (
+                  <span key={i} className="chip">{keyword}</span>
+                ))}
+              </div>
+              <button className="primary-btn" onClick={addToKnowledgeStore}>
+                Add to Knowledge Store
+              </button>
             </div>
+          )}
+
+          {/* Recall Quiz Panel */}
+          {quiz && (
+            <div className="workspace-card quiz-card">
+              <div className="card-header">
+                <h2>Recall Quiz</h2>
+                <p>Test your understanding with these questions</p>
+              </div>
+              {quiz.map((question, qIndex) => (
+                <div key={qIndex} className="quiz-question">
+                  <div className="question-text">
+                    <strong>Q{qIndex + 1}:</strong> {question.q}
+                  </div>
+                  <div className="quiz-options">
+                    {question.options.map((option, oIndex) => {
+                      const isSelected = quizAnswers[qIndex] === oIndex;
+                      const isCorrect = question.correctIndex === oIndex;
+                      const showResult = quizResults[qIndex] !== undefined;
+                      
+                      return (
+                        <button
+                          key={oIndex}
+                          className={`quiz-option ${
+                            isSelected && showResult
+                              ? isCorrect ? 'correct' : 'incorrect'
+                              : showResult && isCorrect
+                              ? 'correct'
+                              : ''
+                          }`}
+                          onClick={() => handleQuizAnswer(qIndex, oIndex)}
+                          disabled={showResult}
+                        >
+                          <span className="option-letter">{String.fromCharCode(65 + oIndex)}</span>
+                          <span className="option-text">{option}</span>
+                          {showResult && isSelected && (
+                            isCorrect ? <CheckCircle size={20} /> : <XCircle size={20} />
+                          )}
+                          {showResult && !isSelected && isCorrect && (
+                            <CheckCircle size={20} />
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+              {Object.keys(quizResults).length === quiz.length && (
+                <button className="finish-btn" onClick={finishQuiz}>
+                  Finish & Update Score
+                </button>
+              )}
+            </div>
+          )}
+        </main>
+      </div>
+
+      {/* Knowledge Graph Modal */}
+      {showGraph && (
+        <div className="modal-overlay" onClick={() => setShowGraph(false)}>
+          <div className="modal-content graph-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowGraph(false)}>
+              ×
+            </button>
+            <h2>Your Knowledge Graph</h2>
+            <KnowledgeGraph topics={topics} />
           </div>
         </div>
-      </div>
+      )}
+
+      {/* Toast Notifications */}
+      {toast && (
+        <div className={`toast ${toast.type}`}>
+          {toast.message}
+        </div>
+      )}
     </div>
   );
 };
