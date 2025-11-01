@@ -100,10 +100,10 @@
 
 .filter-btn {
   padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: white;
+  border: 1px solid var(--divider);
   border-radius: 8px;
-  color: white;
+  color: var(--text-dark);
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
@@ -111,27 +111,30 @@
 }
 
 .filter-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--bg-light);
+  border-color: var(--primary-teal);
 }
 
 .filter-btn.active {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.4);
+  background: var(--primary-teal);
+  border-color: var(--primary-teal);
+  color: white;
   font-weight: 600;
 }
 
 .filter-high.active {
-  background: rgba(6, 214, 160, 0.2);
+  background: #06D6A0;
   border-color: #06D6A0;
 }
 
 .filter-medium.active {
-  background: rgba(255, 209, 102, 0.2);
+  background: #FFD166;
   border-color: #FFD166;
+  color: var(--contrast-indigo);
 }
 
 .filter-fading.active {
-  background: rgba(239, 71, 111, 0.2);
+  background: #EF476F;
   border-color: #EF476F;
 }
 
