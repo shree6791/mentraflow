@@ -58,7 +58,7 @@ const Science = () => {
 
       {/* Core Science Section */}
       <section className="section core-science-section">
-        <Carousel className="science-grid fade-in">
+        <Carousel className="science-grid">
           <div className="science-card">
             <div className="science-icon spacing-icon">
               <div className="curve-animation"></div>
