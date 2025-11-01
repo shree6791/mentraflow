@@ -676,6 +676,25 @@ const Dashboard = () => {
                   {weeklyChange >= 0 ? '+' : ''}{weeklyChange}% this week
                 </span>
               </div>
+              
+              {/* Phase 3: Gamification Stats */}
+              <div className="gamification-stats">
+                <div className="stat-item streak-stat">
+                  <div className="stat-icon">🔥</div>
+                  <div className="stat-info">
+                    <h4>{streak} days</h4>
+                    <p>Streak</p>
+                  </div>
+                </div>
+                <div className="stat-item xp-stat">
+                  <div className="stat-icon">⭐</div>
+                  <div className="stat-info">
+                    <h4>{xp} XP</h4>
+                    <p>Total Points</p>
+                  </div>
+                </div>
+              </div>
+              
               <div className="progress-bars">
                 <div className="progress-bar-item">
                   <div className="bar-label">
