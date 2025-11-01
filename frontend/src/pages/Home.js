@@ -227,9 +227,9 @@ const Home = () => {
 
       {/* Demo Modal */}
       {showModal && (
-        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+        <div className="modal-overlay" onClick={() => setShowModal(false)} role="dialog" aria-modal="true">
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setShowModal(false)}>
+            <button className="modal-close" onClick={() => setShowModal(false)} aria-label="Close">
               ×
             </button>
             <h2>Demo Access Coming Soon</h2>
