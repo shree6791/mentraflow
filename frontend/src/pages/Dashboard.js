@@ -450,8 +450,11 @@ const Dashboard = () => {
       setGeneratedContentTab('summary');
       setShowGeneratedModal(true);
       
-      // Collapse the capture widget after generation
-      setIsCaptureExpanded(false);
+      // Close the FAB capture modal after generation
+      setShowFABCapture(false);
+      
+      // Stop pulse animation after first use
+      setFabAnimatePulse(false);
       
       showToast('Summary and quiz generated!');
     }, 2000);
