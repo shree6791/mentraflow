@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import AppHeader from '../components/AppHeader';
 import KnowledgeGraph from '../components/KnowledgeGraph';
 
 const KnowledgeGraphPage = () => {
