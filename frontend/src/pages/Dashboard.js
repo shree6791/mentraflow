@@ -711,46 +711,8 @@ const Dashboard = () => {
       
       {/* Main Dashboard Content */}
       <div className="dashboard-content-wrapper">
-        <Link to="/" className="dashboard-logo">
-          MentraFlow
-        </Link>
-        
-        <div className="header-actions">
-          <div className="avatar-dropdown-container">
-            <button 
-              className="avatar-button"
-              onClick={() => setShowDropdown(!showDropdown)}
-            >
-              <img src={user?.picture} alt="User avatar" className="avatar-image" />
-              <ChevronDown size={16} className={`dropdown-icon ${showDropdown ? 'rotate' : ''}`} />
-            </button>
-            
-            {showDropdown && (
-              <div className="avatar-dropdown">
-                <button onClick={() => { setShowProfileModal(true); setShowDropdown(false); }}>
-                  <User size={16} />
-                  Profile Settings
-                </button>
-                <button onClick={() => { navigate('/activity'); setShowDropdown(false); }}>
-                  <BarChart3 size={16} />
-                  Insights
-                </button>
-                <button onClick={() => { navigate('/billing'); setShowDropdown(false); }}>
-                  <CreditCard size={16} />
-                  Manage Plan
-                </button>
-                <button onClick={handleLogout}>
-                  <LogOut size={16} />
-                  Logout
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      </header>
-
-      {/* Stats Banner */}
-      <div className="dashboard-stats-banner">
+        {/* Stats Banner */}
+        <div className="dashboard-stats-banner">
         <div className="stat-banner-item">
           <div className="progress-ring-container">
             <svg className="progress-ring" width="80" height="80">
