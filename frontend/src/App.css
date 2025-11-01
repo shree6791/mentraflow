@@ -29,6 +29,18 @@
   /* Typography */
   --font-heading: 'Poppins', sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  
+  /* Consistent Typography Scale */
+  --font-size-hero: clamp(2.5rem, 5vw, 3.5rem);
+  --font-size-h2: clamp(2rem, 4vw, 2.75rem);
+  --font-size-h3: clamp(1.5rem, 3vw, 2rem);
+  --font-size-body-lg: clamp(1.1rem, 2vw, 1.25rem);
+  --font-size-body: 1rem;
+  
+  /* Consistent Spacing */
+  --section-padding: 5rem 2rem;
+  --section-gap: 3rem;
+  --card-padding: 2rem;
 }
 
 * {
