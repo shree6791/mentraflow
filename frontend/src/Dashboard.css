@@ -3240,6 +3240,7 @@
   background: var(--neural-coral);
   color: white;
   font-weight: 600;
+  justify-content: center;
 }
 
 .action-btn.action-urgent:hover {
