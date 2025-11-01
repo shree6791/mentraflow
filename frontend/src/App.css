@@ -1094,7 +1094,7 @@ html {
 
 .science-card h3 {
   font-size: 1.75rem;
-  color: var(--contrast-indigo);
+  color: var(--heading-color);
   margin-bottom: 1rem;
 }
 
