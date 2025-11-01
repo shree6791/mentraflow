@@ -42,12 +42,12 @@ const Home = () => {
     <div>
       {/* Header */}
       <header className={`header ${scrolled ? 'scrolled' : ''}`}>
-        <a href="#hero" className="logo">
+        <Link to="/" className="logo">
           MentraFlow
-        </a>
+        </Link>
         <nav className="nav">
           <a href="#hero" className="nav-link">Home</a>
-          <a href="#how" className="nav-link">Science</a>
+          <Link to="/science" className="nav-link">Science</Link>
           <a href="#vision" className="nav-link">Vision</a>
           <a href="#contact" className="nav-link">Contact</a>
           <button className="btn-login" onClick={() => setShowModal(true)}>
