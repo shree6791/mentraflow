@@ -509,15 +509,45 @@ const KnowledgeGraph = ({ topics, userAvatar, userName, onClose, onReinforce }) 
         ref={containerRef}
         className="graph-canvas-container"
       >
-        <canvas
-          ref={canvasRef}
-          className="graph-canvas"
-          onClick={handleCanvasClick}
-          onMouseMove={handleCanvasMouseMove}
-          onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-        />
+        {isLoading ? (
+          <div className="graph-loading-state">
+            <Loader className="loading-spinner" size={48} />
+            <p>Loading your knowledge network...</p>
+          </div>
+        ) : !hasResults ? (
+          <div className="graph-empty-state">
+            <Brain size={64} strokeWidth={1.5} />
+            <h3>No topics found</h3>
+            <p>
+              {searchQuery 
+                ? `No results for "${searchQuery}". Try a different search.`
+                : filterState !== 'all'
+                ? `No topics match the "${filterState}" filter. Try selecting "All".`
+                : 'Start adding knowledge to see your network grow!'}
+            </p>
+            {(searchQuery || filterState !== 'all') && (
+              <button 
+                className="btn-reset-filters" 
+                onClick={() => {
+                  setSearchQuery('');
+                  setFilterState('all');
+                }}
+              >
+                Clear filters
+              </button>
+            )}
+          </div>
+        ) : (
+          <>
+            <canvas
+              ref={canvasRef}
+              className="graph-canvas"
+              onClick={handleCanvasClick}
+              onMouseMove={handleCanvasMouseMove}
+              onMouseDown={handleMouseDown}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+            />
 
         {/* Hover Tooltip */}
         {hoveredNodeData && !selectedNode && (
