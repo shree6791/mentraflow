@@ -1013,22 +1013,22 @@ const Dashboard = () => {
               All Items
             </button>
             <button 
-              className={`quick-filter-btn urgent ${quickFilter === 'fading' ? 'active' : ''}`}
-              onClick={() => setQuickFilter('fading')}
-            >
-              🔴 Fading
-            </button>
-            <button 
               className={`quick-filter-btn warning ${quickFilter === 'due-soon' ? 'active' : ''}`}
               onClick={() => setQuickFilter('due-soon')}
             >
-              ⏰ Due Soon
+              ⏰  Due Soon
+            </button>
+            <button 
+              className={`quick-filter-btn urgent ${quickFilter === 'fading' ? 'active' : ''}`}
+              onClick={() => setQuickFilter('fading')}
+            >
+              🔴  Fading
             </button>
             <button 
               className={`quick-filter-btn success ${quickFilter === 'strong' ? 'active' : ''}`}
               onClick={() => setQuickFilter('strong')}
             >
-              ✅ Strong
+              ✅  Strong
             </button>
             
             <div className="sort-controls">
