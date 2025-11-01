@@ -92,8 +92,14 @@ const KnowledgeGraph = ({ topics, userAvatar, userName, onClose, onReinforce }) 
   };
 
   useEffect(() => {
+    // Simulate loading
+    setIsLoading(true);
+    const loadTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) return () => clearTimeout(loadTimer);
 
     const container = containerRef.current;
     const width = container.offsetWidth;
