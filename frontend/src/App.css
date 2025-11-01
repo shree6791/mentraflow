@@ -1010,17 +1010,17 @@ html {
 }
 
 .science-card {
-  background: var(--surface);
+  background: #FFFFFF !important;
   padding: 3rem 2rem;
   border-radius: 20px;
-  border: 2px solid rgba(14, 124, 123, 0.1);
+  border: 2px solid rgba(14, 124, 123, 0.3);
   transition: all 0.4s ease;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 450px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
 }
 
 /* Ensure cards display properly in carousel on mobile */
@@ -1028,7 +1028,8 @@ html {
   .science-card {
     min-height: 400px;
     width: 100%;
-    box-shadow: 0 8px 20px rgba(14, 124, 123, 0.15);
+    box-shadow: 0 8px 20px rgba(14, 124, 123, 0.2);
+    border: 3px solid #0E7C7B;
   }
 }
 
