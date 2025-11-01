@@ -1163,10 +1163,11 @@ html {
 }
 
 .graph-visual {
-  background: rgba(14, 124, 123, 0.03);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
   padding: 2rem;
   border-radius: 20px;
-  border: 1px solid rgba(14, 124, 123, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .graph-visual svg {
