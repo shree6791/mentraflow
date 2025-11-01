@@ -58,7 +58,7 @@ const Science = () => {
 
       {/* Core Science Section */}
       <section className="section core-science-section">
-        <div className="science-grid fade-in">
+        <Carousel className="science-grid fade-in">
           <div className="science-card">
             <div className="science-icon spacing-icon">
               <div className="curve-animation"></div>
@@ -91,7 +91,7 @@ const Science = () => {
               Your brain physically rewires itself when you learn. Each interaction with MentraFlow builds stronger, more interconnected memory networks.
             </p>
           </div>
-        </div>
+        </Carousel>
       </section>
 
       {/* Behavioral Memory Graph Section */}
