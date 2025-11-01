@@ -706,8 +706,11 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      {/* Header */}
-      <header className="dashboard-header">
+      {/* App Header */}
+      <AppHeader />
+      
+      {/* Main Dashboard Content */}
+      <div className="dashboard-content-wrapper">
         <Link to="/" className="dashboard-logo">
           MentraFlow
         </Link>
