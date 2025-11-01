@@ -2124,25 +2124,15 @@
   transform: translateX(2px);
 }
 
-/* Main Focus Area - Stacked Row Layout */
+/* Main Focus Area - Library First with Collapsible Capture */
 .dashboard-main-focus {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
-}
-
-/* Capture section should be first and prominent */
-.capture-section-main {
-  order: 1;
-}
-
-/* Library section comes second */
-.library-section-main {
-  order: 2;
 }
 
 .library-section-main,
