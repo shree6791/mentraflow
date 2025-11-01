@@ -3704,4 +3704,465 @@ html {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+
+
+/* ======================================
+   PRICING PAGE STYLES
+   ====================================== */
+
+.pricing-page {
+  min-height: 100vh;
+  background: var(--bg-light);
+}
+
+/* Pricing Hero Section */
+.pricing-hero-section {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 2rem 80px;
+  background: var(--bg-light);
+}
+
+.pricing-hero-content {
+  max-width: 800px;
+  text-align: center;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.pricing-hero-content h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--contrast-indigo);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.pricing-hero-content p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.25rem;
+  color: var(--text-gray);
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.pricing-hero-cta {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Pricing Plans Section */
+.pricing-plans-section {
+  padding: 80px 2rem;
+  background: white;
+}
+
+.pricing-cards-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.pricing-card {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  border: 2px solid transparent;
+}
+
+.pricing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.pricing-card-popular {
+  border: 2px solid var(--secondary-blue);
+  box-shadow: 0 4px 20px rgba(17, 138, 178, 0.15);
+}
+
+.pricing-card-popular:hover {
+  box-shadow: 0 8px 30px rgba(17, 138, 178, 0.25);
+}
+
+.popular-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-coral) 100%);
+  color: var(--contrast-indigo);
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.plan-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.plan-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-teal);
+  margin-bottom: 0.5rem;
+}
+
+.plan-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text-gray);
+}
+
+.plan-price {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.plan-price .price {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--contrast-indigo);
+}
+
+.plan-price .period {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: var(--text-gray);
+  margin-left: 0.5rem;
+}
+
+.plan-price .custom-note {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-gray);
+  margin-top: 0.5rem;
+}
+
+.plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+}
+
+.plan-features li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
+}
+
+.check-icon {
+  color: var(--retention-green);
+  flex-shrink: 0;
+}
+
+.plan-cta {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: white;
+  border: 2px solid var(--primary-teal);
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-teal);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.plan-cta:hover {
+  background: var(--primary-teal);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(14, 124, 123, 0.3);
+}
+
+.plan-cta-primary {
+  background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-coral) 100%);
+  border: none;
+  color: var(--contrast-indigo);
+}
+
+.plan-cta-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+}
+
+.pricing-footer-note {
+  text-align: center;
+  margin-top: 2.5rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--text-gray);
+}
+
+/* Benefits Section */
+.pricing-benefits-section {
+  padding: 80px 2rem;
+  background: var(--bg-light);
+}
+
+.benefits-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.benefits-illustration {
+  position: relative;
+}
+
+.benefits-visual {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.visual-node {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-teal) 0%, var(--secondary-blue) 100%);
+  box-shadow: 0 8px 24px rgba(14, 124, 123, 0.3);
+  animation: nodePulse 2s ease-in-out infinite;
+}
+
+.visual-node.node-1 {
+  top: 10%;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.visual-node.node-2 {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  animation-delay: 0.5s;
+}
+
+.visual-node.node-3 {
+  bottom: 10%;
+  left: 20%;
+  animation-delay: 1s;
+}
+
+.visual-node.node-4 {
+  top: 30%;
+  right: 15%;
+  animation-delay: 1.5s;
+}
+
+@keyframes nodePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.visual-connection {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-teal), var(--secondary-blue));
+  opacity: 0.5;
+}
+
+.visual-connection.conn-1 {
+  top: 25%;
+  left: 30%;
+  width: 150px;
+  transform: rotate(25deg);
+}
+
+.visual-connection.conn-2 {
+  bottom: 25%;
+  left: 30%;
+  width: 150px;
+  transform: rotate(-25deg);
+}
+
+.visual-connection.conn-3 {
+  top: 50%;
+  right: 30%;
+  width: 100px;
+  transform: rotate(-45deg);
+}
+
+.benefits-content h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: var(--contrast-indigo);
+  margin-bottom: 2rem;
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.benefits-list li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.5s ease;
+}
+
+.benefits-list li.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.benefits-list li.benefit-item-1.visible {
+  transition-delay: 0s;
+}
+
+.benefits-list li.benefit-item-2.visible {
+  transition-delay: 0.1s;
+}
+
+.benefits-list li.benefit-item-3.visible {
+  transition-delay: 0.2s;
+}
+
+.benefits-list li.benefit-item-4.visible {
+  transition-delay: 0.3s;
+}
+
+.benefit-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* CTA Footer Banner */
+.pricing-cta-banner {
+  padding: 80px 2rem;
+  background: linear-gradient(135deg, var(--primary-teal) 0%, var(--secondary-blue) 100%);
+  text-align: center;
+}
+
+.cta-banner-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cta-banner-content blockquote {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.cta-banner-content p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2.5rem;
+}
+
+.btn-cta-banner {
+  padding: 1rem 3rem;
+  background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-coral) 100%);
+  border: none;
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--contrast-indigo);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-cta-banner:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .pricing-hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .pricing-hero-content p {
+    font-size: 1.1rem;
+  }
+
+  .pricing-cards-container {
+    grid-template-columns: 1fr;
+  }
+
+  .benefits-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .benefits-visual {
+    height: 300px;
+  }
+
+  .visual-node {
+    width: 60px;
+    height: 60px;
+  }
+
+  .visual-node.node-2 {
+    width: 80px;
+    height: 80px;
+  }
+
+  .cta-banner-content blockquote {
+    font-size: 1.5rem;
+  }
+
+  .cta-banner-content p {
+    font-size: 1rem;
+  }
+}
+
 }
