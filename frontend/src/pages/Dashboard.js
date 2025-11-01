@@ -1034,20 +1034,20 @@ const Dashboard = () => {
 
       {/* Knowledge Graph Modal */}
       {showGraph && (
-        <div className="modal-overlay" onClick={() => setShowGraph(false)}>
-          <div className="modal-content graph-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h2>Your Knowledge Network</h2>
-              <button className="modal-close" onClick={() => setShowGraph(false)}>
-                <X size={24} />
-              </button>
-            </div>
-            <div className="modal-body">
-              <p className="graph-description">
-                Each node represents a concept. Color indicates retention strength.
-              </p>
-              <KnowledgeGraph topics={topics} />
-            </div>
+        <div className="modal-overlay modal-fullscreen" onClick={() => setShowGraph(false)}>
+          <div className="modal-content graph-modal-fullscreen" onClick={(e) => e.stopPropagation()}>
+            <KnowledgeGraph 
+              topics={topics} 
+              userAvatar={user?.picture}
+              userName={user?.name || 'Demo User'}
+              onClose={() => setShowGraph(false)}
+              onReinforce={(node) => {
+                // Handle reinforce action
+                setShowGraph(false);
+                // Could trigger a quiz or review for this topic
+                showToast(`Let's reinforce ${node.title}!`);
+              }}
+            />
           </div>
         </div>
       )}
