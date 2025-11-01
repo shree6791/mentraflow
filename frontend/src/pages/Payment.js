@@ -93,6 +93,28 @@ const Payment = () => {
     }, 2000);
   };
 
+  const handleApplePay = () => {
+    setProcessing(true);
+    
+    // Simulate Apple Pay processing
+    setTimeout(() => {
+      setProcessing(false);
+      navigate('/dashboard?payment=success');
+    }, 2000);
+    
+    // In production, implement actual Apple Pay integration:
+    // const paymentRequest = {
+    //   countryCode: 'US',
+    //   currencyCode: 'USD',
+    //   total: {
+    //     label: selectedPlan.name,
+    //     amount: totalPrice
+    //   }
+    // };
+    // const session = new ApplePaySession(3, paymentRequest);
+    // session.begin();
+  };
+
   return (
     <div className="payment-page">
       <div className="payment-container">
