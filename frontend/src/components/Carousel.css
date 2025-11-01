@@ -50,6 +50,17 @@
 .carousel-wrapper > * {
   flex: 0 0 85%;
   scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure content is visible in carousel items */
+.carousel-wrapper .science-card,
+.carousel-wrapper .pricing-card,
+.carousel-wrapper .future-goal {
+  width: 100%;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 /* Navigation Arrows */
