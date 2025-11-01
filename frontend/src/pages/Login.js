@@ -168,7 +168,7 @@ const Login = () => {
       <div className="login-content-wrapper">
         <div className="auth-card-glass">
           <div className="auth-header">
-            <h2>Welcome back to MentraFlow.</h2>
+            <h2>Welcome to MentraFlow.</h2>
             <p>Your personalized memory workspace.</p>
           </div>
 
