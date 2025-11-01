@@ -5,15 +5,30 @@
   /* Brand Colors */
   --primary-teal: #0E7C7B;
   --secondary-blue: #118AB2;
+  --mind-blue: #118AB2;
   --accent-yellow: #FFD166;
-  --accent-coral: #FF6B6B;
+  --neuro-yellow: #FFD166;
+  --accent-coral: #EF476F;
   --contrast-indigo: #073B4C;
   --bg-light: #F7FAFC;
+  --calm-white: #F7FAFC;
   --text-dark: #1a202c;
   --text-gray: #4a5568;
+  --retention-green: #06D6A0;
   
-  /* Gradient */
-  --brand-gradient: linear-gradient(135deg, #0E7C7B 0%, #118AB2 40%, #FFD166 70%, #FF6B6B 100%);
+  /* Design Tokens */
+  --border-radius: 16px;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 6px 24px rgba(0, 0, 0, 0.12);
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #FFD166 0%, #EF476F 100%);
+  --gradient-teal-blue: linear-gradient(135deg, #0E7C7B 0%, #118AB2 100%);
+  --brand-gradient: linear-gradient(135deg, #0E7C7B 0%, #118AB2 40%, #FFD166 70%, #EF476F 100%);
+  
+  /* Typography */
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 * {
