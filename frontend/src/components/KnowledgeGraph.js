@@ -677,6 +677,29 @@ const KnowledgeGraph = ({ topics, userAvatar, userName, onClose, onReinforce }) 
               </div>
             </div>
 
+            {/* Connected Topics */}
+            {selectedNode.connections && selectedNode.connections.length > 0 && (
+              <div className="detail-connections">
+                <h4>🔗 Connected Topics</h4>
+                <div className="connection-tags">
+                  {selectedNode.connections.map(connId => {
+                    const connectedNode = nodes.find(n => n.id === connId);
+                    if (!connectedNode) return null;
+                    return (
+                      <button
+                        key={connId}
+                        className="connection-tag"
+                        onClick={() => setSelectedNode(connectedNode)}
+                        style={{borderColor: getStateColor(connectedNode.state)}}
+                      >
+                        {connectedNode.title}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
             {selectedNode.state === 'fading' && (
               <div className="detail-warning">
                 ⚠️ This topic needs reinforcement soon to prevent forgetting
