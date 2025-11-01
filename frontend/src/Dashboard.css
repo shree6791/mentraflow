@@ -2038,12 +2038,10 @@
 
 /* Stats Banner */
 .dashboard-stats-banner {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  justify-content: center;
   gap: 1.5rem;
   padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
   background: white;
   border-bottom: 1px solid var(--divider);
   width: 100%;
@@ -2060,6 +2058,8 @@
   border: 1px solid var(--divider);
   transition: all 0.3s ease;
   min-height: 110px;
+  width: 280px;
+  max-width: 280px;
 }
 
 .stat-banner-item:hover {
