@@ -414,6 +414,36 @@ const KnowledgeGraph = ({ topics, userAvatar, userName, onClose, onReinforce }) 
     setPan({ x: 0, y: 0 });
   };
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        if (selectedNode) {
+          setSelectedNode(null);
+        } else {
+          onClose();
+        }
+      } else if (e.key === 'ArrowRight' && nodes.length > 0) {
+        setFocusedNodeIndex((prev) => {
+          const next = prev === null ? 0 : (prev + 1) % nodes.length;
+          setSelectedNode(nodes[next]);
+          return next;
+        });
+      } else if (e.key === 'ArrowLeft' && nodes.length > 0) {
+        setFocusedNodeIndex((prev) => {
+          const next = prev === null ? nodes.length - 1 : (prev - 1 + nodes.length) % nodes.length;
+          setSelectedNode(nodes[next]);
+          return next;
+        });
+      } else if (e.key === 'Enter' && focusedNodeIndex !== null) {
+        setSelectedNode(nodes[focusedNodeIndex]);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [nodes, selectedNode, focusedNodeIndex, onClose]);
+
   const hoveredNodeData = hoveredNode !== null ? nodes[hoveredNode] : null;
 
   return (
