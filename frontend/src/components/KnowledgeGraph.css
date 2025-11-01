@@ -278,17 +278,17 @@
   position: absolute;
   bottom: 1.5rem;
   right: 1.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  background: white;
   padding: 1rem 1.25rem;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--divider);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .graph-legend h4 {
   font-size: 0.875rem;
   font-weight: 600;
-  color: white;
+  color: var(--contrast-indigo);
   margin: 0 0 0.75rem 0;
   text-transform: uppercase;
   letter-spacing: 0.05em;
