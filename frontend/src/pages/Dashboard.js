@@ -706,10 +706,60 @@ const Dashboard = () => {
         {/* RIGHT COLUMN - Actions Zone */}
         <div className="dashboard-right">
           
+          {/* Today's Recall Tasks - Phase 2 */}
+          <section className="dashboard-section recall-tasks-section">
+            <div className="section-header">
+              <h2>⏰ Today's Recall Tasks</h2>
+            </div>
+            
+            {recallTasks.length > 0 ? (
+              <>
+                <p className="recall-subtitle">
+                  {recallTasks.length} {recallTasks.length === 1 ? 'item' : 'items'} due for recall today
+                </p>
+                <div className="recall-tasks-list">
+                  {recallTasks.map(task => (
+                    <div key={task.id} className="recall-task-item">
+                      <div className="recall-task-info">
+                        <h4>{task.title}</h4>
+                        <p className="recall-due">{task.dueIn}</p>
+                        {task.lastScore !== null && (
+                          <span className="last-score">Last score: {task.lastScore}%</span>
+                        )}
+                      </div>
+                      <button 
+                        className="btn-recall"
+                        onClick={() => startRecallTask(task)}
+                      >
+                        {task.type === 'quiz' ? '🧠 Quick Quiz' : '📝 Review Summary'}
+                        <span className="question-badge">{task.questionCount}Q</span>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <p className="recall-motivation">Each recall makes your memory stronger! 💪</p>
+              </>
+            ) : (
+              <div className="recall-empty">
+                <CheckCircle size={48} className="recall-empty-icon" />
+                <h3>All clear! ✨</h3>
+                <p>No items due for recall right now.</p>
+                <p className="next-recall">Next recall task in 12 hours</p>
+              </div>
+            )}
+          </section>
+
           {/* Capture Knowledge */}
           <section className="dashboard-section capture-section">
             <div className="section-header">
               <h2>Capture Knowledge</h2>
+              <button 
+                className="btn-customize"
+                onClick={() => setShowQuizCustomization(true)}
+                title="Customize quiz settings"
+              >
+                <Filter size={16} /> Customize
+              </button>
             </div>
             
             <div className="capture-tabs">
