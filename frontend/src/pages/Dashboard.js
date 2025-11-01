@@ -266,6 +266,18 @@ const Dashboard = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showQuizResults, setShowQuizResults] = useState(false);
   
+  // Phase 2: Recall Tasks & Quiz Customization
+  const [recallTasks, setRecallTasks] = useState(RECALL_TASKS);
+  const [showRecallQuiz, setShowRecallQuiz] = useState(false);
+  const [currentRecallTask, setCurrentRecallTask] = useState(null);
+  const [recallQuizData, setRecallQuizData] = useState(null);
+  const [showQuizCustomization, setShowQuizCustomization] = useState(false);
+  const [quizConfig, setQuizConfig] = useState({
+    questionCount: 5,
+    difficulty: 'balanced',
+    focusArea: 'all'
+  });
+  
   const [profileData, setProfileData] = useState({
     name: 'Demo User',
     email: 'demo@mentraflow.com',
