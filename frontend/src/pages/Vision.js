@@ -158,7 +158,7 @@ const Vision = () => {
           <p className="future-vision">
             MentraFlow will help millions of learners and teams turn knowledge into lasting capability.
           </p>
-          <div className="future-goals">
+          <Carousel className="future-goals">
             <div className="future-goal">
               <h4>For Individuals</h4>
               <p>Students, professionals, and lifelong learners will never lose another critical insight.</p>
@@ -171,7 +171,7 @@ const Vision = () => {
               <h4>For Humanity</h4>
               <p>We'll unlock collective intelligence at scale — where understanding compounds, not fades.</p>
             </div>
-          </div>
+          </Carousel>
           <div className="future-cta">
             <p className="future-tagline">The future of memory isn't about storage — it's about strength.</p>
           </div>
