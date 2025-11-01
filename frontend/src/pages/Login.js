@@ -239,15 +239,9 @@ const Login = () => {
             </div>
 
             <button type="submit" className="submit-btn" disabled={loading}>
-              {loading ? 'Processing...' : 'Access Demo'}
+              {loading ? 'Processing...' : 'Login'}
             </button>
           </form>
-
-          <div className="auth-footer">
-            <button className="early-access-link" onClick={() => setShowEarlyAccessModal(true)}>
-              Don't have access yet? <strong>Join Early Access</strong>
-            </button>
-          </div>
         </div>
       </div>
 
