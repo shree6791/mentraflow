@@ -5,12 +5,18 @@ import './Tooltip.css';
 const Tooltip = ({ children, content, position = 'top' }) => {
   const [isVisible, setIsVisible] = useState(false);
 
+  const handleToggle = (e) => {
+    e.stopPropagation();
+    setIsVisible(!isVisible);
+  };
+
   return (
     <div className="tooltip-wrapper">
       <span
         className="tooltip-trigger"
         onMouseEnter={() => setIsVisible(true)}
         onMouseLeave={() => setIsVisible(false)}
+        onClick={handleToggle}
       >
         {children || <HelpCircle size={16} className="tooltip-icon" />}
       </span>
