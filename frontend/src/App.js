@@ -8,6 +8,7 @@ import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Pricing from './pages/Pricing';
+import Billing from './pages/Billing';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/billing" element={<Billing />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
