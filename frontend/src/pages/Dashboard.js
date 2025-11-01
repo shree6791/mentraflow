@@ -130,9 +130,10 @@ const Dashboard = () => {
       await axios.post(`${API}/auth/logout`, {}, {
         withCredentials: true
       });
-      navigate('/login');
+      navigate('/');
     } catch (err) {
       console.error('Logout error:', err);
+      navigate('/');
     }
   };
 
