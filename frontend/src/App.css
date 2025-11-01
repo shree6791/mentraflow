@@ -1691,6 +1691,25 @@ html {
 }
 
 /* Responsive for Vision Page */
+@media (max-width: 1023px) {
+  .future-goal {
+    padding: 1.5rem 1.25rem !important;
+    min-height: 0 !important;
+    height: auto;
+    justify-content: flex-start;
+  }
+  
+  .future-goal h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .future-goal p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
+
 @media (max-width: 768px) {
   .timeline-line {
     display: none;
