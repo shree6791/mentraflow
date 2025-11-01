@@ -2611,6 +2611,26 @@
   margin: 0;
 }
 
+.priority-consequence {
+  font-size: 0.8rem;
+  color: var(--neural-coral);
+  margin: 0.5rem 0 0 0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.priority-next-review {
+  font-size: 0.8rem;
+  color: var(--primary-teal);
+  margin: 0.5rem 0 0 0;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
 .btn-quick-review {
   padding: 0.5rem 1rem;
   background: white;
