@@ -58,6 +58,28 @@ const LIBRARY_ITEMS = [
     quizScore: null,
     lastReview: null,
     retention: null
+  },
+  {
+    id: 'lib5',
+    title: 'Cognitive Load Theory',
+    filename: 'cognitive-load.pdf',
+    uploadDate: '2024-10-18',
+    status: 'summarized',
+    hasQuiz: true,
+    quizScore: 55,
+    lastReview: '3 weeks ago',
+    retention: 'fading'
+  },
+  {
+    id: 'lib6',
+    title: 'Working Memory Capacity',
+    filename: 'working-memory.txt',
+    uploadDate: '2024-10-22',
+    status: 'quiz-available',
+    hasQuiz: true,
+    quizScore: 70,
+    lastReview: '1 week ago',
+    retention: 'medium'
   }
 ];
 
