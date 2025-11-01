@@ -540,27 +540,37 @@ const Dashboard = () => {
           MentraFlow
         </Link>
         
-        <div className="avatar-dropdown-container">
+        <div className="header-actions">
           <button 
-            className="avatar-button"
-            onClick={() => setShowDropdown(!showDropdown)}
+            className="btn-guide"
+            onClick={() => setShowOnboarding(true)}
+            title="View quick start guide"
           >
-            <img src={user?.picture} alt="User avatar" className="avatar-image" />
-            <ChevronDown size={16} className={`dropdown-icon ${showDropdown ? 'rotate' : ''}`} />
+            <FileText size={16} /> Quick Start
           </button>
           
-          {showDropdown && (
-            <div className="avatar-dropdown">
-              <button onClick={() => { setShowProfileModal(true); setShowDropdown(false); }}>
-                <User size={16} />
-                Profile Settings
-              </button>
-              <button onClick={handleLogout}>
-                <LogOut size={16} />
-                Logout
-              </button>
-            </div>
-          )}
+          <div className="avatar-dropdown-container">
+            <button 
+              className="avatar-button"
+              onClick={() => setShowDropdown(!showDropdown)}
+            >
+              <img src={user?.picture} alt="User avatar" className="avatar-image" />
+              <ChevronDown size={16} className={`dropdown-icon ${showDropdown ? 'rotate' : ''}`} />
+            </button>
+            
+            {showDropdown && (
+              <div className="avatar-dropdown">
+                <button onClick={() => { setShowProfileModal(true); setShowDropdown(false); }}>
+                  <User size={16} />
+                  Profile Settings
+                </button>
+                <button onClick={handleLogout}>
+                  <LogOut size={16} />
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </header>
 
