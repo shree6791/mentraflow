@@ -2655,11 +2655,13 @@
 .priority-section.caught-up {
   border-color: var(--retention-green);
   text-align: center;
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.03) 0%, rgba(76, 175, 80, 0.05) 100%);
 }
 
 .caught-up-content h2 {
   color: var(--retention-green);
   margin-bottom: 0.5rem;
+  font-size: 1.75rem;
 }
 
 .caught-up-content p {
