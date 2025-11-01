@@ -48,6 +48,7 @@ const SAMPLE_QUIZ = [
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { logout: authLogout } = useAuth();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth > 968);
