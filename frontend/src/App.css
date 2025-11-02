@@ -498,6 +498,14 @@ html {
 /* Problem Section */
 .problem-section {
   background: var(--surface);
+  padding: 4rem 2rem;
+  max-width: none !important;
+}
+
+.problem-section > div,
+.problem-section > .carousel-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .stats-grid {
