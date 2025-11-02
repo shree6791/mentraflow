@@ -49,10 +49,10 @@ const KnowledgeGraphPage = () => {
       <AppHeader />
       
       {/* Page Header */}
-      <div className="page-header">
-        <h1>Your Knowledge Network</h1>
-        <p className="page-subtitle">Interactive memory visualization • Click nodes to explore</p>
-      </div>
+      <PageHeader 
+        title="Your Knowledge Network"
+        subtitle="Interactive memory visualization • Click nodes to explore"
+      />
       
       {/* Knowledge Graph Component */}
       <div className="graph-page-content">
