@@ -419,7 +419,7 @@ html {
 }
 
 .btn-primary {
-  background: var(--gradient-primary);
+  background: linear-gradient(135deg, #EF476F, #FFD166);
   color: white;
   padding: 1rem 2.5rem;
   border-radius: 50px;
@@ -436,8 +436,9 @@ html {
 }
 
 .btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(239, 71, 111, 0.4);
+  opacity: 0.95;
 }
 
 .btn-secondary {
