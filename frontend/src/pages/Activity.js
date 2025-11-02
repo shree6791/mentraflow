@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, TrendingUp, TrendingDown, Target, BookOpen, Zap, Brain, ExternalLink } from 'lucide-react';
 import AppHeader from '../components/AppHeader';
 import '../styles/Activity.css';
+import '../styles/PageHeader.css';
 
 const Activity = () => {
   const navigate = useNavigate();
