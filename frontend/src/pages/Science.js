@@ -119,6 +119,11 @@ const Science = () => {
                 opacity="0.6"
               />
               
+              {/* Inline label for forgetting curve */}
+              <text x="410" y="235" fill="#718096" fontSize="13" fontFamily="Inter" fontWeight="500">
+                Without MentraFlow
+              </text>
+              
               {/* Learning curve (with MentraFlow) */}
               <path
                 className="learning-curve"
@@ -127,6 +132,11 @@ const Science = () => {
                 stroke="url(#gradient)"
                 strokeWidth="4"
               />
+              
+              {/* Inline label for learning curve */}
+              <text x="470" y="60" fill="#0E7C7B" fontSize="13" fontFamily="Inter" fontWeight="600">
+                With MentraFlow
+              </text>
               
               {/* Gradient definition */}
               <defs>
@@ -149,16 +159,6 @@ const Science = () => {
               <text x="300" y="280" textAnchor="middle" fill="#4a5568" fontSize="14" fontFamily="Inter">Time</text>
               <text x="20" y="150" textAnchor="middle" fill="#4a5568" fontSize="14" fontFamily="Inter" transform="rotate(-90 20 150)">Memory Retention</text>
             </svg>
-          </div>
-          <div className="graph-legend">
-            <div className="legend-item">
-              <div className="legend-line dashed"></div>
-              <span>Without MentraFlow</span>
-            </div>
-            <div className="legend-item">
-              <div className="legend-line solid"></div>
-              <span>With MentraFlow</span>
-            </div>
           </div>
         </div>
       </section>
