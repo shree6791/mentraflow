@@ -72,6 +72,10 @@
   background: white;
   border-bottom: 1px solid var(--divider);
   flex-wrap: wrap;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .graph-search {
