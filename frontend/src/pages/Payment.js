@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, CreditCard, Lock, Check } from 'lucide-react';
-import AppHeader from '../components/AppHeader';
-import PageHeader from '../components/PageHeader';
+import AppLayout from '../components/AppLayout';
 import '../styles/Payment.css';
 
 const Payment = () => {
