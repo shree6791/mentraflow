@@ -668,21 +668,20 @@ const KnowledgeGraph = ({ topics, userAvatar, userName, onClose, onReinforce, hi
           </button>
         </div>
 
-            {/* Legend */}
-            <div className="graph-legend">
-              <h4>Retention Strength</h4>
-              <div className="legend-items">
-                <div className="legend-item">
-                  <div className="legend-dot" style={{background: '#06D6A0'}}></div>
-                  <span>High (≥80%)</span>
+            {/* Inline Legend Bar - Compact at top */}
+            <div className="graph-legend-inline">
+              <div className="legend-inline-items">
+                <div className="legend-inline-item">
+                  <div className="legend-inline-dot" style={{background: '#06D6A0'}}></div>
+                  <span>High</span>
                 </div>
-                <div className="legend-item">
-                  <div className="legend-dot" style={{background: '#FFD166'}}></div>
-                  <span>Medium (50-79%)</span>
+                <div className="legend-inline-item">
+                  <div className="legend-inline-dot" style={{background: '#FFD166'}}></div>
+                  <span>Medium</span>
                 </div>
-                <div className="legend-item">
-                  <div className="legend-dot" style={{background: '#EF476F'}}></div>
-                  <span>Fading (&lt;50%)</span>
+                <div className="legend-inline-item">
+                  <div className="legend-inline-dot" style={{background: '#EF476F'}}></div>
+                  <span>Fading</span>
                 </div>
               </div>
             </div>
