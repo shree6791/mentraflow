@@ -134,6 +134,18 @@ const AppHeader = ({ onSettingsClick }) => {
       {/* Mobile Menu */}
       {showMobileMenu && (
         <div className="mobile-menu">
+          {/* User Info at Top */}
+          <div className="mobile-menu-user-info">
+            <div className="mobile-user-avatar">
+              {user?.name?.charAt(0) || 'U'}
+            </div>
+            <div className="mobile-user-details">
+              <div className="mobile-user-name">{user?.name || 'User'}</div>
+              <div className="mobile-user-email">{user?.email || 'user@mentraflow.com'}</div>
+            </div>
+          </div>
+          <div className="mobile-menu-divider" />
+          
           <Link 
             to="/dashboard" 
             className={`mobile-menu-item ${isActive('/dashboard') ? 'active' : ''}`}
