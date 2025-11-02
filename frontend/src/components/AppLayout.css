@@ -1,0 +1,38 @@
+/* App Layout - Consistent wrapper for all authenticated pages */
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-light, #F8F9FA);
+}
+
+.app-layout-content {
+  flex: 1;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app-layout-body {
+  padding: 0 2rem 2rem 2rem;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .app-layout-body {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-layout-body {
+    padding: 0 1rem 1rem 1rem;
+  }
+}
+
+/* Override any container-specific styles that might cause overflow */
+.app-layout * {
+  box-sizing: border-box;
+}
