@@ -2165,6 +2165,11 @@
 
 /* Responsive */
 @media (max-width: 968px) {
+  .modal-overlay {
+    padding: 0;
+    align-items: flex-start;
+  }
+
   .library-detail-modal {
     max-width: 100%;
     width: 100%;
