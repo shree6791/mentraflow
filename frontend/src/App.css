@@ -1605,7 +1605,7 @@ html {
 .challenge-number {
   font-size: 4rem;
   font-weight: 700;
-  background: var(--brand-gradient);
+  background: linear-gradient(135deg, #EF476F, #FFD166);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
