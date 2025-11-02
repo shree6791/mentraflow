@@ -1201,6 +1201,10 @@
   align-items: center;
   padding: 1.5rem 2rem;
   border-bottom: 1px solid var(--divider);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: white;
 }
 
 .modal-header h2 {
