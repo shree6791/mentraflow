@@ -718,7 +718,6 @@ const Dashboard = () => {
     <AppLayout 
       title="Your Learning Dashboard"
       subtitle="Track progress, reinforce knowledge, and master retention"
-      onSettingsClick={() => setShowProfileModal(true)}
     >
       {/* Stats Banner */}
       <div className="dashboard-stats-banner">
