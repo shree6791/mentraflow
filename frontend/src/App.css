@@ -732,6 +732,11 @@ html {
   margin-bottom: 2.5rem;
 }
 
+.contact-section .btn-primary {
+  max-width: 280px;
+  width: auto;
+}
+
 .contact-section .founder-quote {
   font-family: 'DM Serif Display', serif;
   font-style: italic;
