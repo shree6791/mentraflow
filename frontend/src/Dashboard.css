@@ -3272,16 +3272,18 @@
 }
 
 .library-item.retention-fading {
-  border-left: 2px solid var(--neural-coral);
-  background: rgba(255, 107, 107, 0.015);
+  border-left: 3px solid var(--neural-coral);
+  background: rgba(239, 71, 111, 0.02);
 }
 
 .library-item.retention-medium {
-  border-left: 2px solid var(--neuro-yellow);
+  border-left: 3px solid var(--neuro-yellow);
+  background: rgba(255, 209, 102, 0.02);
 }
 
 .library-item.retention-high {
-  border-left: 2px solid var(--retention-green);
+  border-left: 3px solid var(--retention-green);
+  background: rgba(6, 214, 160, 0.02);
 }
 
 .action-btn.action-urgent {
