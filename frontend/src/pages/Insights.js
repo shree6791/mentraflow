@@ -181,7 +181,6 @@ const Insights = () => {
             <button className="view-graph-btn" onClick={() => navigate('/knowledge-graph')}>
               <BookOpen size={16} />
               View Knowledge Graph
-              <ExternalLink size={14} />
             </button>
           </div>
           <p className="section-description">Related topics you've mastered together</p>
