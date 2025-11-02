@@ -3320,6 +3320,10 @@
     display: none; /* Chrome, Safari */
   }
   
+  .dashboard-main-focus {
+    padding: 1rem;
+  }
+  
   .stat-banner-item {
     min-width: 280px;
     scroll-snap-align: start;
