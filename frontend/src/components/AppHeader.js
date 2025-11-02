@@ -154,8 +154,8 @@ const AppHeader = ({ onSettingsClick }) => {
             Dashboard
           </Link>
           <Link 
-            to="/activity" 
-            className={`mobile-menu-item ${isActive('/activity') ? 'active' : ''}`}
+            to="/insights" 
+            className={`mobile-menu-item ${isActive('/insights') ? 'active' : ''}`}
             onClick={() => setShowMobileMenu(false)}
           >
             <BarChart3 size={18} />
