@@ -312,6 +312,11 @@
   color: white;
 }
 
+.contact-section .btn-primary {
+  max-width: 280px;
+  width: auto;
+}
+
 .founder-quote {
   font-size: clamp(24px, 3.5vw, 36px);
   font-family: 'DM Serif Display', serif;
