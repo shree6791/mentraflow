@@ -334,6 +334,11 @@
     display: flex;
   }
 
+  /* Hide profile button on mobile - only show hamburger */
+  .profile-menu-container {
+    display: none;
+  }
+
   .profile-name {
     display: none;
   }
