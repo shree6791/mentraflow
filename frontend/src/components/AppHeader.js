@@ -101,9 +101,12 @@ const AppHeader = ({ onSettingsClick }) => {
                     <CreditCard size={18} />
                     Manage Plan
                   </Link>
-                  <button className="profile-menu-item">
+                  <button 
+                    className="profile-menu-item"
+                    onClick={handleSettingsClick}
+                  >
                     <Settings size={18} />
-                    Settings
+                    Profile Settings
                   </button>
                   <div className="profile-menu-divider" />
                   <button 
