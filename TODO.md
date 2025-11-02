@@ -10,6 +10,14 @@
 
 ## Dashboard Page
 
+### Card Border Visibility - Medium Retention
+- [ ] Yellow border not visible on medium retention cards ("Review Soon")
+  - Issue: Yellow border (3px solid) with yellow background tint not showing
+  - Expected: Yellow left border visible like red (fading) and green (strong) cards
+  - Current CSS: `.library-item.retention-medium` in Dashboard.css line 3279
+  - May need: Darker yellow color or thicker border
+  - Priority: High (affects visual hierarchy)
+
 ### Width Alignment Spacing
 - [ ] Fine-tune spacing/alignment between AppHeader and page sections
   - Issue: Minor spacing inconsistencies still visible
@@ -20,3 +28,4 @@
 ## Notes
 - Created: 2024
 - Updated: 2024
+
