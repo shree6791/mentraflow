@@ -856,7 +856,7 @@ const Dashboard = () => {
           style={{cursor: 'pointer'}}
         >
           <div className="progress-ring-container">
-            <svg className="progress-ring" width="80" height="80">
+            <svg className="progress-ring" width="60" height="60">
               <defs>
                 <linearGradient id="priorityGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stopColor="#EF476F" />
@@ -864,25 +864,25 @@ const Dashboard = () => {
                 </linearGradient>
               </defs>
               <circle
-                cx="40"
-                cy="40"
-                r="34"
+                cx="30"
+                cy="30"
+                r="25"
                 fill="none"
                 stroke="#f0f0f0"
-                strokeWidth="6"
+                strokeWidth="5"
               />
               <circle
                 className="progress-ring-circle"
-                cx="40"
-                cy="40"
-                r="34"
+                cx="30"
+                cy="30"
+                r="25"
                 fill="none"
                 stroke="url(#priorityGradient)"
-                strokeWidth="6"
-                strokeDasharray={`${(itemsNeedingReview.filter(i => i.retention === 'fading').length / Math.max(itemsNeedingReview.length, 1)) * 213.5} 213.5`}
+                strokeWidth="5"
+                strokeDasharray={`${(itemsNeedingReview.filter(i => i.retention === 'fading').length / Math.max(itemsNeedingReview.length, 1)) * 157} 157`}
                 strokeLinecap="round"
               />
-              <text x="40" y="40" className="progress-ring-text-large" textAnchor="middle" dominantBaseline="middle">
+              <text x="30" y="30" className="progress-ring-text-large" textAnchor="middle" dominantBaseline="middle">
                 {itemsNeedingReview.length}
               </text>
             </svg>
