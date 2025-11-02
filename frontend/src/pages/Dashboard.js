@@ -721,6 +721,12 @@ const Dashboard = () => {
       
       {/* Main Dashboard Content */}
       <div className="dashboard-content-wrapper">
+        {/* Page Header */}
+        <div className="page-header">
+          <h1>Your Learning Dashboard</h1>
+          <p className="page-subtitle">Track progress, reinforce knowledge, and master retention</p>
+        </div>
+
         {/* Stats Banner */}
         <div className="dashboard-stats-banner">
         <div className="stat-banner-item">
