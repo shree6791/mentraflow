@@ -1435,14 +1435,8 @@ html {
 /* Narrative Timeline Section */
 .narrative-timeline-section {
   background: var(--surface);
-  padding: 6rem 0;
-  width: 100%;
-}
-
-.narrative-timeline-section > div {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
+  padding: 6rem 2rem;
+  max-width: none !important;
 }
 
 .timeline-container {
