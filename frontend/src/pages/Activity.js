@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, TrendingUp, TrendingDown, Target, BookOpen, Zap, Brain, ExternalLink } from 'lucide-react';
-import AppHeader from '../components/AppHeader';
-import PageHeader from '../components/PageHeader';
+import AppLayout from '../components/AppLayout';
 import '../styles/Activity.css';
 
 const Activity = () => {
