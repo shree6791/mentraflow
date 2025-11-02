@@ -226,4 +226,4 @@ const Insights = () => {
   );
 };
 
-export default Activity;
+export default Insights;
