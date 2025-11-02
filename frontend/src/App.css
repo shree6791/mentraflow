@@ -460,8 +460,8 @@ html {
 .btn-secondary:hover {
   background: #0E7C7B;
   color: #FFFFFF;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(14, 124, 123, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(14, 124, 123, 0.4);
 }
 
 /* Section Styles */
