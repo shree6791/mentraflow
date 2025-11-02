@@ -2262,27 +2262,27 @@
 }
 
 .progress-ring-text {
+  font-size: 16px;
+  font-weight: 700;
+  fill: var(--text-dark);
+  transform: rotate(90deg);
+  transform-origin: 30px 30px;
+}
+
+.progress-ring-text-large {
   font-size: 18px;
   font-weight: 700;
   fill: var(--text-dark);
   transform: rotate(90deg);
-  transform-origin: 40px 40px;
-}
-
-.progress-ring-text-large {
-  font-size: 20px;
-  font-weight: 700;
-  fill: var(--text-dark);
-  transform: rotate(90deg);
-  transform-origin: 40px 40px;
+  transform-origin: 30px 30px;
 }
 
 .progress-ring-text-small {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
   fill: var(--text-gray);
   transform: rotate(90deg);
-  transform-origin: 40px 40px;
+  transform-origin: 30px 30px;
 }
 
 .stat-banner-item.recall-alert.has-tasks {
