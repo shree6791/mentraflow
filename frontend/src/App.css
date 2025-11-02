@@ -1147,7 +1147,14 @@ html {
 /* Memory Graph Section */
 .memory-graph-section {
   background: var(--surface);
-  padding: 6rem 2rem;
+  padding: 6rem 0;
+  width: 100%;
+}
+
+.memory-graph-section > div {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .memory-graph-section .section-title {
