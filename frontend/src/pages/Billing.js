@@ -4,6 +4,7 @@ import { CreditCard, Calendar, TrendingUp, X, Check, ArrowLeft } from 'lucide-re
 import AppHeader from '../components/AppHeader';
 import Carousel from '../components/Carousel';
 import '../styles/Billing.css';
+import '../styles/PageHeader.css';
 
 const Billing = () => {
   const navigate = useNavigate();
