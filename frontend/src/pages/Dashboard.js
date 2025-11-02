@@ -7,6 +7,7 @@ import AppHeader from '../components/AppHeader';
 import KnowledgeGraph from '../components/KnowledgeGraph';
 import Tooltip from '../components/Tooltip';
 import '../Dashboard.css';
+import '../styles/PageHeader.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
