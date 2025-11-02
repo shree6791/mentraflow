@@ -319,7 +319,7 @@ const Billing = () => {
           </div>
         </div>
       )}
-    </div>
+    </AppLayout>
   );
 };
 
