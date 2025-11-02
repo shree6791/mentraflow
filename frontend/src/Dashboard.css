@@ -217,10 +217,18 @@
   margin-bottom: 1rem;
 }
 
-/* Mobile - Single Column */
-@media (max-width: 968px) {
+/* Tablet Portrait & Mobile - Single Column */
+@media (max-width: 1024px) {
   .library-list {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Tablet Landscape - 2 Columns */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .library-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.875rem;
   }
 }
 
