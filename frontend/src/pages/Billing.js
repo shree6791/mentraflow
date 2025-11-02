@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CreditCard, Calendar, TrendingUp, X, Check, ArrowLeft } from 'lucide-react';
-import AppHeader from '../components/AppHeader';
-import PageHeader from '../components/PageHeader';
+import AppLayout from '../components/AppLayout';
 import Carousel from '../components/Carousel';
 import '../styles/Billing.css';
 
