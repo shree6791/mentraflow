@@ -419,8 +419,8 @@ html {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #EF476F, #FFD166);
-  color: white;
+  background: linear-gradient(135deg, #EF476F, #FFD166) !important;
+  color: white !important;
   padding: 1rem 2.5rem;
   border-radius: 50px;
   border: none;
