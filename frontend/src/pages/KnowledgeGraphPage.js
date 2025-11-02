@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppHeader from '../components/AppHeader';
+import PageHeader from '../components/PageHeader';
 import KnowledgeGraph from '../components/KnowledgeGraph';
-import '../styles/PageHeader.css';
 
 const KnowledgeGraphPage = () => {
   const navigate = useNavigate();
