@@ -58,8 +58,7 @@ const KnowledgeGraphPage = () => {
           }}
           hideHeader={true}
         />
-      </div>
-    </div>
+    </AppLayout>
   );
 };
 
