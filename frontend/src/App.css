@@ -452,6 +452,7 @@ html {
   text-decoration: none;
   display: inline-block;
   font-family: var(--font-body);
+  text-align: center;
 }
 
 .btn-secondary:hover {
