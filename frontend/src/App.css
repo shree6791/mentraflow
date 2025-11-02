@@ -420,7 +420,7 @@ html {
 
 .btn-primary {
   background: var(--gradient-primary);
-  color: var(--contrast-indigo);
+  color: white;
   padding: 1rem 2.5rem;
   border-radius: 50px;
   border: none;
