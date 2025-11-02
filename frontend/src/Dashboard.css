@@ -383,7 +383,6 @@
 .filename-text {
   color: var(--text-gray);
   font-size: 0.75rem;
-  margin-left: auto;
 }
 
 .library-item-review {
