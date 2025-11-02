@@ -11,6 +11,7 @@ import Pricing from './pages/Pricing';
 import Billing from './pages/Billing';
 import Payment from './pages/Payment';
 import Insights from './pages/Insights';
+import Settings from './pages/Settings';
 import KnowledgeGraphPage from './pages/KnowledgeGraphPage';
 
 function App() {
