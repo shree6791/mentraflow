@@ -171,7 +171,6 @@ const Billing = () => {
             </div>
           </section>
         )}
-      </div>
 
       {/* Upgrade Modal */}
       {showUpgradeModal && (
