@@ -715,20 +715,13 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="dashboard-container">
-      {/* App Header */}
-      <AppHeader onSettingsClick={() => setShowProfileModal(true)} />
-      
-      {/* Main Dashboard Content */}
-      <div className="dashboard-content-wrapper">
-        {/* Page Header */}
-        <PageHeader 
-          title="Your Learning Dashboard"
-          subtitle="Track progress, reinforce knowledge, and master retention"
-        />
-
-        {/* Stats Banner */}
-        <div className="dashboard-stats-banner">
+    <AppLayout 
+      title="Your Learning Dashboard"
+      subtitle="Track progress, reinforce knowledge, and master retention"
+      onSettingsClick={() => setShowProfileModal(true)}
+    >
+      {/* Stats Banner */}
+      <div className="dashboard-stats-banner">
         <div className="stat-banner-item">
           <div className="progress-ring-container">
             <svg className="progress-ring" width="80" height="80">
