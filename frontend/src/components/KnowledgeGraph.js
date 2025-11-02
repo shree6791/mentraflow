@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, Search, Filter, Eye, Brain, ZoomIn, ZoomOut, Loader, X } from 'lucide-react';
 import './KnowledgeGraph.css';
 
-const KnowledgeGraph = ({ topics, userAvatar, userName, onClose, onReinforce }) => {
+const KnowledgeGraph = ({ topics, userAvatar, userName, onClose, onReinforce, hideHeader }) => {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
   
