@@ -431,6 +431,7 @@ html {
   display: inline-block;
   font-family: var(--font-body);
   box-shadow: var(--shadow);
+  text-align: center;
 }
 
 .btn-primary:hover {
