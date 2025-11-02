@@ -3283,16 +3283,16 @@
 }
 
 .action-btn.action-warning {
-  background: #F57C00;
-  color: white;
+  background: linear-gradient(135deg, #FFD166, #FFC130);
+  color: #1A1A1A;
   font-weight: 600;
   justify-content: center;
 }
 
 .action-btn.action-warning:hover {
-  background: #FF9800;
+  background: linear-gradient(135deg, #FFC130, #FFD166);
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(245, 124, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 209, 102, 0.4);
 }
 
 /* Mobile Responsive */
