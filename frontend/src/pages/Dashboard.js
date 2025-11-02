@@ -2095,8 +2095,7 @@ const Dashboard = () => {
           {toast.message}
         </div>
       )}
-      </div> {/* Close dashboard-content-wrapper */}
-    </div>
+    </AppLayout>
   );
 };
 
