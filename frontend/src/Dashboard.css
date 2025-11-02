@@ -3311,7 +3311,6 @@
   .dashboard-stats-banner::-webkit-scrollbar {
     display: none; /* Chrome, Safari */
   }
-}
   
   .stat-banner-item {
     min-width: 280px;
