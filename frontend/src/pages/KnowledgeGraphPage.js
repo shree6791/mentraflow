@@ -43,19 +43,12 @@ const KnowledgeGraphPage = () => {
   ];
 
   return (
-    <div className="knowledge-graph-page-wrapper">
-      {/* App Header */}
-      <AppHeader />
-      
-      {/* Page Header */}
-      <PageHeader 
-        title="Your Knowledge Network"
-        subtitle="Interactive memory visualization • Click nodes to explore"
-      />
-      
-      {/* Knowledge Graph Component */}
-      <div className="graph-page-content">
-        <KnowledgeGraph 
+    <AppLayout 
+      title="Your Knowledge Network"
+      subtitle="Interactive memory visualization • Click nodes to explore"
+      maxWidth="100%"
+    >
+      <KnowledgeGraph 
           topics={topics} 
           userAvatar="/default-avatar.png"
           userName="Demo User"
