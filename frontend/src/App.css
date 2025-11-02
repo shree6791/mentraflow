@@ -736,6 +736,12 @@ html {
   background: linear-gradient(135deg, var(--primary-teal) 0%, var(--mind-blue) 100%);
   padding: 5rem 2rem;
   text-align: center;
+  max-width: none !important;
+}
+
+.contact-section > div {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .contact-section .section-title {
