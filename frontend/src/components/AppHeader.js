@@ -4,7 +4,7 @@ import { LogOut, User, BarChart3, Brain, CreditCard, Settings, Menu, X } from 'l
 import { useAuth } from '../context/AuthContext';
 import './AppHeader.css';
 
-const AppHeader = ({ onSettingsClick }) => {
+const AppHeader = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, logout } = useAuth();
