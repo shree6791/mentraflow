@@ -52,8 +52,8 @@ const AppHeader = ({ onSettingsClick }) => {
             Dashboard
           </Link>
           <Link 
-            to="/activity" 
-            className={`nav-link ${isActive('/activity') ? 'active' : ''}`}
+            to="/insights" 
+            className={`nav-link ${isActive('/insights') ? 'active' : ''}`}
           >
             <BarChart3 size={18} />
             Insights
