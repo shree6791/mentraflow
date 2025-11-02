@@ -146,7 +146,7 @@ const Home = () => {
             "We built MentraFlow because we were tired of losing the ideas that shaped us."
           </blockquote>
           <p className="section-subtitle">Our goal is simple — make forgetting optional.</p>
-          <div style={{ marginTop: '1rem' }}>
+          <div style={{ marginTop: '1rem', textAlign: 'center' }}>
             <Link to="/login" className="btn-primary">
               Try MentraFlow
             </Link>
