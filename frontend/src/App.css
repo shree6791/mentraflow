@@ -1464,11 +1464,20 @@ html {
   max-width: none !important;
 }
 
+/* Desktop Timeline - Show by default */
 .timeline-container {
   position: relative;
   max-width: 1100px;
   margin: 4rem auto 0;
   padding: 2rem 0;
+}
+
+/* Mobile Carousel - Hide by default */
+.timeline-carousel-mobile {
+  display: none;
+  max-width: 500px;
+  margin: 3rem auto 0;
+  padding: 0 1rem;
 }
 
 .timeline-line {
