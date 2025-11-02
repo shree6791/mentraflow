@@ -3247,13 +3247,25 @@
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-  /* Stats Banner - single column on small mobile */
+  /* Stats Banner - Horizontal Carousel on Mobile */
   .dashboard-stats-banner {
-    grid-template-columns: 1fr;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
     gap: 1rem;
+    grid-template-columns: none;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  .dashboard-stats-banner::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
   }
   
   .stat-banner-item {
+    min-width: 280px;
+    scroll-snap-align: start;
+    flex-shrink: 0;
     padding: 1rem;
   }
   
