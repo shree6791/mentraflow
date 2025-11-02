@@ -1402,7 +1402,22 @@ html {
   
   .graph-legend {
     flex-direction: column;
+    gap: 1.25rem;
+    align-items: flex-start;
+    margin-top: 1.5rem;
+  }
+
+  .legend-item {
     gap: 1rem;
+  }
+
+  .legend-line {
+    width: 50px;
+    height: 4px;
+  }
+
+  .legend-item span {
+    font-size: 1rem;
   }
 }
 
