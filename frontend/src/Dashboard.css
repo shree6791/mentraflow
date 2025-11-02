@@ -2351,15 +2351,15 @@
 }
 
 .stat-banner-content h3 {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--contrast-indigo);
   margin: 0;
-  line-height: 1;
+  line-height: 1.2;
 }
 
 .stat-banner-content p {
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: var(--text-gray);
   margin: 0.25rem 0 0 0;
 }
