@@ -54,10 +54,10 @@ const Activity = () => {
       
       <div className="activity-container">
         {/* Page Header */}
-        <div className="page-header">
-          <h1>Your Learning Insights</h1>
-          <p className="page-subtitle">Track progress, identify patterns, and optimize retention</p>
-        </div>
+        <PageHeader 
+          title="Your Learning Insights"
+          subtitle="Track progress, identify patterns, and optimize retention"
+        />
 
         {/* Quick Stats */}
         <div className="quick-stats-grid">
