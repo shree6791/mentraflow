@@ -32,7 +32,7 @@ const Pricing = () => {
     document.getElementById('plans').scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleAccessDemo = () => {
+  const handleTryMentraFlow = () => {
     navigate('/login');
   };
 
@@ -51,7 +51,7 @@ const Pricing = () => {
             <button className="btn-primary" onClick={scrollToPlans}>
               Explore Plans
             </button>
-            <button className="btn-secondary" onClick={handleAccessDemo}>
+            <button className="btn-secondary" onClick={handleTryMentraFlow}>
               Access Demo
             </button>
           </div>
@@ -85,7 +85,7 @@ const Pricing = () => {
                 Weekly progress tracking
               </li>
             </ul>
-            <button className="plan-cta" onClick={handleAccessDemo}>
+            <button className="plan-cta" onClick={handleTryMentraFlow}>
               Start Free
             </button>
           </div>
@@ -119,7 +119,7 @@ const Pricing = () => {
                 Recall reminders
               </li>
             </ul>
-            <button className="plan-cta plan-cta-primary" onClick={handleAccessDemo}>
+            <button className="plan-cta plan-cta-primary" onClick={handleTryMentraFlow}>
               Try Pro
             </button>
           </div>
@@ -211,8 +211,8 @@ const Pricing = () => {
           <p className="fade-in">
             Start free, stay consistent, and watch your learning evolve.
           </p>
-          <button className="btn-cta-banner fade-in" onClick={handleAccessDemo}>
-            Access Demo
+          <button className="btn-cta-banner fade-in" onClick={handleTryMentraFlow}>
+            Try MentraFlow
           </button>
         </div>
       </section>
