@@ -2537,8 +2537,6 @@
   .dashboard-stats-banner {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
   }
 
   .stat-banner-item {
@@ -2546,7 +2544,6 @@
   }
 
   .dashboard-main-focus {
-    padding: 1rem;
     gap: 1rem;
   }
 }
