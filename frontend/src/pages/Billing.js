@@ -69,19 +69,12 @@ const Billing = () => {
   };
 
   return (
-    <div className="billing-page">
-      {/* App Header */}
-      <AppHeader />
-      
-      {/* Page Header */}
-      <PageHeader 
-        title="Billing & Plans"
-        subtitle="Manage your subscription and view usage details"
-      />
-
-      <div className="billing-content">
-        {/* Current Plan Card */}
-        <section className="billing-section">
+    <AppLayout 
+      title="Billing & Plans"
+      subtitle="Manage your subscription and view usage details"
+    >
+      {/* Current Plan Card */}
+      <section className="billing-section">
           <h2>Current Plan</h2>
           <div className="current-plan-card">
             <div className="plan-info">
