@@ -1003,7 +1003,7 @@ const Dashboard = () => {
                           <Brain size={18} /> Review Soon
                         </button>
                       ) : (
-                        <button className="action-btn action-primary" onClick={() => openLibraryItem(item, 'quiz')}>
+                        <button className="action-btn action-success" onClick={() => openLibraryItem(item, 'quiz')}>
                           <Brain size={18} /> Take Quiz
                         </button>
                       )}
