@@ -21,17 +21,7 @@ const AppHeader = ({ onSettingsClick }) => {
   const handleSettingsClick = () => {
     setShowProfileMenu(false);
     setShowMobileMenu(false);
-    if (onSettingsClick) {
-      onSettingsClick();
-    } else {
-      // Default behavior: navigate to dashboard and open settings
-      navigate('/dashboard');
-      setTimeout(() => {
-        // Trigger settings modal if on dashboard
-        const event = new CustomEvent('openProfileSettings');
-        window.dispatchEvent(event);
-      }, 100);
-    }
+    navigate('/settings');
   };
 
   return (
