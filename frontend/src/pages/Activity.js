@@ -52,12 +52,10 @@ const Activity = () => {
       <AppHeader />
       
       <div className="activity-container">
-        {/* Page Title */}
-        <div className="activity-header">
-          <div className="header-content">
-            <h1>Your Learning Insights</h1>
-            <p className="subtitle">Track your progress and discover patterns</p>
-          </div>
+        {/* Page Header */}
+        <div className="page-header">
+          <h1>Your Learning Insights</h1>
+          <p className="page-subtitle">Track progress, identify patterns, and optimize retention</p>
         </div>
 
         {/* Quick Stats */}
