@@ -6,14 +6,13 @@ import './AppLayout.css';
 const AppLayout = ({ 
   title, 
   subtitle, 
-  children, 
-  onSettingsClick,
+  children,
   maxWidth = '1400px' 
 }) => {
   return (
     <div className="app-layout">
       {/* App Header - Navigation */}
-      <AppHeader onSettingsClick={onSettingsClick} />
+      <AppHeader />
       
       {/* Page Content Container */}
       <div className="app-layout-content" style={{ maxWidth }}>
