@@ -4,7 +4,7 @@ import { LogOut, User, BarChart3, Brain, CreditCard, Settings, Menu, X } from 'l
 import { useAuth } from '../context/AuthContext';
 import './AppHeader.css';
 
-const AppHeader = () => {
+const AppHeader = ({ onSettingsClick }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, logout } = useAuth();
@@ -17,6 +17,22 @@ const AppHeader = () => {
   };
 
   const isActive = (path) => location.pathname === path;
+
+  const handleSettingsClick = () => {
+    setShowProfileMenu(false);
+    setShowMobileMenu(false);
+    if (onSettingsClick) {
+      onSettingsClick();
+    } else {
+      // Default behavior: navigate to dashboard and open settings
+      navigate('/dashboard');
+      setTimeout(() => {
+        // Trigger settings modal if on dashboard
+        const event = new CustomEvent('openProfileSettings');
+        window.dispatchEvent(event);
+      }, 100);
+    }
+  };
 
   return (
     <header className="app-header">
