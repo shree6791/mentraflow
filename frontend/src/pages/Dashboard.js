@@ -1947,7 +1947,7 @@ const Dashboard = () => {
                               <Brain size={18} /> Review Soon
                             </button>
                           ) : (
-                            <button className="action-btn action-primary" onClick={() => {
+                            <button className="action-btn action-success" onClick={() => {
                               setShowPriorityModal(false);
                               openLibraryItem(item, 'quiz');
                             }}>
