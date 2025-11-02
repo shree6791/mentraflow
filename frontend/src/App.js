@@ -30,6 +30,7 @@ function App() {
             <Route path="/billing" element={<Billing />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/insights" element={<Insights />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="/knowledge-graph" element={<KnowledgeGraphPage />} />
           </Routes>
         </BrowserRouter>
