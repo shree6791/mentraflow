@@ -117,19 +117,11 @@ const Payment = () => {
   };
 
   return (
-    <div className="payment-page">
-      {/* App Header */}
-      <AppHeader />
-      
-      {/* Page Header */}
-      <PageHeader 
-        title="Complete Your Purchase"
-        subtitle="Secure checkout • Upgrade your learning experience"
-      />
-      
-      <div className="payment-container">
-
-        <div className="payment-content">
+    <AppLayout 
+      title="Complete Your Purchase"
+      subtitle="Secure checkout • Upgrade your learning experience"
+    >
+      <div className="payment-content">
           {/* Left: Payment Form */}
           <div className="payment-form-section">
             <div className="payment-form-header">
