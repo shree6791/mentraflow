@@ -28,7 +28,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/billing" element={<Billing />} />
             <Route path="/payment" element={<Payment />} />
-            <Route path="/activity" element={<Activity />} />
+            <Route path="/insights" element={<Insights />} />
             <Route path="/knowledge-graph" element={<KnowledgeGraphPage />} />
           </Routes>
         </BrowserRouter>
