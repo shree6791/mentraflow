@@ -306,7 +306,6 @@
   display: flex;
   align-items: center;
   gap: 0.625rem;
-  margin-left: auto;
 }
 
 .link-btn-compact {
