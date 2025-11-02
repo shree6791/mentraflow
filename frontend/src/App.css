@@ -608,6 +608,14 @@ html {
 /* Visualization Section */
 .viz-section {
   background: var(--surface);
+  padding: 4rem 2rem;
+  max-width: none !important;
+}
+
+.viz-section > div,
+.viz-section > .carousel-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .viz-container {
