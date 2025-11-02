@@ -808,25 +808,25 @@ const Dashboard = () => {
 
         <div className="stat-banner-item">
           <div className="progress-ring-container">
-            <svg className="progress-ring" width="80" height="80">
+            <svg className="progress-ring" width="60" height="60">
               <circle
                 className="progress-ring-circle-bg"
                 stroke="#E0E0E0"
-                strokeWidth="6"
+                strokeWidth="5"
                 fill="transparent"
-                r="34"
-                cx="40"
-                cy="40"
+                r="25"
+                cx="30"
+                cy="30"
               />
               <circle
                 className="progress-ring-circle xp-ring"
                 stroke="url(#xpGradient)"
-                strokeWidth="6"
+                strokeWidth="5"
                 fill="transparent"
-                r="34"
-                cx="40"
-                cy="40"
-                strokeDasharray={`${((xp % 500) / 500) * 213.6} 213.6`}
+                r="25"
+                cx="30"
+                cy="30"
+                strokeDasharray={`${((xp % 500) / 500) * 157} 157`}
                 strokeLinecap="round"
               />
               <defs>
@@ -835,7 +835,7 @@ const Dashboard = () => {
                   <stop offset="100%" stopColor="#FFC130" />
                 </linearGradient>
               </defs>
-              <text x="40" y="45" textAnchor="middle" className="progress-ring-text">
+              <text x="30" y="34" textAnchor="middle" className="progress-ring-text">
                 {xp}
               </text>
             </svg>
