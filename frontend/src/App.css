@@ -735,6 +735,7 @@ html {
 .contact-section .btn-primary {
   max-width: 280px;
   width: auto;
+  margin: 0 auto;
 }
 
 .contact-section .founder-quote {
