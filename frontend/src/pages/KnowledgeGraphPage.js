@@ -48,6 +48,12 @@ const KnowledgeGraphPage = () => {
       {/* App Header */}
       <AppHeader />
       
+      {/* Page Header */}
+      <div className="page-header">
+        <h1>Your Knowledge Network</h1>
+        <p className="page-subtitle">Interactive memory visualization • Click nodes to explore</p>
+      </div>
+      
       {/* Knowledge Graph Component */}
       <div className="graph-page-content">
         <KnowledgeGraph 
@@ -58,6 +64,7 @@ const KnowledgeGraphPage = () => {
           onReinforce={(node) => {
             console.log(`Reinforce ${node.title}`);
           }}
+          hideHeader={true}
         />
       </div>
     </div>
