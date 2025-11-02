@@ -73,9 +73,10 @@ const Billing = () => {
       {/* App Header */}
       <AppHeader />
       
-      {/* Page Title */}
-      <div className="billing-header">
+      {/* Page Header */}
+      <div className="page-header">
         <h1>Billing & Plans</h1>
+        <p className="page-subtitle">Manage your subscription and view usage details</p>
       </div>
 
       <div className="billing-content">
