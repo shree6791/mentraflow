@@ -309,7 +309,6 @@ const Payment = () => {
               </div>
             </div>
           </div>
-        </div>
       </div>
     </AppLayout>
   );
