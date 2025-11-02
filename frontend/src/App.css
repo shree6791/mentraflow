@@ -1198,87 +1198,15 @@ html {
 }
 
 .graph-container {
-  max-width: 700px;
+  max-width: 800px;
   margin: 3rem auto 0;
 }
 
 .graph-visual {
-  background: rgba(14, 124, 123, 0.03);
+  background: white;
   padding: 2rem;
   border-radius: 20px;
-  border: 1px solid rgba(14, 124, 123, 0.1);
-}
-
-.graph-visual svg {
-  width: 100%;
-  height: auto;
-}
-
-.learning-curve {
-  animation: drawCurve 2s ease-out forwards;
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-}
-
-@keyframes drawCurve {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-.data-point {
-  animation: pointAppear 0.5s ease-out forwards;
-  opacity: 0;
-}
-
-.data-point:nth-child(7) { animation-delay: 0.3s; }
-.data-point:nth-child(8) { animation-delay: 0.6s; }
-.data-point:nth-child(9) { animation-delay: 0.9s; }
-.data-point:nth-child(10) { animation-delay: 1.2s; }
-.data-point:nth-child(11) { animation-delay: 1.5s; }
-.data-point:nth-child(12) { animation-delay: 1.8s; }
-
-@keyframes pointAppear {
-  from {
-    opacity: 0;
-    transform: scale(0);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.graph-legend {
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
-  margin-top: 2rem;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.legend-line {
-  width: 40px;
-  height: 3px;
-}
-
-.legend-line.dashed {
-  background: #CBD5E0;
-  opacity: 0.6;
-}
-
-.legend-line.solid {
-  background: linear-gradient(to right, #0E7C7B 0%, #118AB2 50%, #FFD166 100%);
-}
-
-.legend-item span {
-  font-size: 0.95rem;
-  color: var(--text-gray);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 /* Research Section */
