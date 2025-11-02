@@ -953,7 +953,7 @@ const Dashboard = () => {
                       <h3>{item.title}</h3>
                     </div>
                     
-                    {/* Compact Meta Row - Status, Countdown, Filename, Summary & Score all in one line */}
+                    {/* Status Chips Row */}
                     <div className="library-item-meta-row">
                       {item.retention && (
                         <span className={`retention-chip retention-chip-${item.retention}`}>
@@ -969,12 +969,17 @@ const Dashboard = () => {
                           {item.nextReview}
                         </span>
                       )}
-                      
+                    </div>
+                    
+                    {/* Filename Row */}
+                    <div className="library-item-filename-row">
                       <span className="filename-text">
                         {item.filename}
                       </span>
-                      
-                      {/* Quick Action Links */}
+                    </div>
+                    
+                    {/* Quick Action Links Row */}
+                    <div className="library-item-actions-row">
                       <div className="quick-action-links">
                         <button className="link-btn-compact" onClick={() => openLibraryItem(item, 'summary')}>
                           <Eye size={12} /> Summary
