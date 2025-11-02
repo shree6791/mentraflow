@@ -3312,6 +3312,8 @@
     grid-template-columns: none;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none; /* Firefox */
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
   
   .dashboard-stats-banner::-webkit-scrollbar {
