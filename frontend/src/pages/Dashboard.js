@@ -402,6 +402,16 @@ const Dashboard = () => {
     setLoading(false);
   }, [navigate]);
 
+  // Listen for profile settings event from AppHeader
+  useEffect(() => {
+    const handleOpenProfileSettings = () => {
+      setShowProfileModal(true);
+    };
+
+    window.addEventListener('openProfileSettings', handleOpenProfileSettings);
+    return () => window.removeEventListener('openProfileSettings', handleOpenProfileSettings);
+  }, []);
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
