@@ -445,4 +445,28 @@
   .upgrade-plans-carousel {
     display: block;
   }
+
+  /* Improve modal spacing on mobile */
+  .upgrade-modal {
+    padding: 1.5rem;
+    max-height: 100vh;
+    width: 100%;
+  }
+
+  .upgrade-modal .plan-price .price {
+    font-size: 2.5rem;
+  }
+
+  .upgrade-modal .plan-price .period {
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  .upgrade-modal .plan-features li {
+    gap: 0.875rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9375rem;
+  }
 }
