@@ -717,7 +717,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       {/* App Header */}
-      <AppHeader />
+      <AppHeader onSettingsClick={() => setShowProfileModal(true)} />
       
       {/* Main Dashboard Content */}
       <div className="dashboard-content-wrapper">
