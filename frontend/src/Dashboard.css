@@ -2168,13 +2168,19 @@
   .library-detail-modal {
     max-width: 100%;
     width: 100%;
-    max-height: 95vh;
-    border-radius: 16px 16px 0 0;
+    max-height: 100vh;
+    height: 100vh;
+    border-radius: 0;
+    margin: 0;
   }
 
   .library-modal-tabs {
     padding: 0 1rem;
     overflow-x: auto;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg-light);
   }
 
   .library-tab {
