@@ -2492,20 +2492,11 @@
 @media (max-width: 968px) {
   .dashboard-stats-banner {
     grid-template-columns: repeat(2, 1fr);
-    padding: 1rem;
     gap: 1rem;
   }
 
   .stat-banner-item {
     padding: 1rem;
-  }
-
-  .stat-banner-icon {
-    font-size: 2rem;
-  }
-
-  .stat-banner-content h3 {
-    font-size: 1.5rem;
   }
 
   .dashboard-main-focus {
