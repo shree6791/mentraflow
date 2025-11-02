@@ -2201,6 +2201,43 @@
   border-color: var(--primary-teal);
 }
 
+/* Progress Ring Styles */
+.progress-ring-container {
+  flex-shrink: 0;
+}
+
+.progress-ring {
+  transform: rotate(-90deg);
+}
+
+.progress-ring-circle {
+  transition: stroke-dasharray 0.5s ease;
+}
+
+.progress-ring-text {
+  font-size: 18px;
+  font-weight: 700;
+  fill: var(--text-dark);
+  transform: rotate(90deg);
+  transform-origin: 40px 40px;
+}
+
+.progress-ring-text-large {
+  font-size: 20px;
+  font-weight: 700;
+  fill: var(--text-dark);
+  transform: rotate(90deg);
+  transform-origin: 40px 40px;
+}
+
+.progress-ring-text-small {
+  font-size: 10px;
+  font-weight: 600;
+  fill: var(--text-gray);
+  transform: rotate(90deg);
+  transform-origin: 40px 40px;
+}
+
 .stat-banner-item.recall-alert.has-tasks {
   background: linear-gradient(135deg, rgba(255, 209, 102, 0.1), rgba(239, 71, 111, 0.05));
   border-color: var(--neuro-yellow);
