@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, CreditCard, Lock, Check } from 'lucide-react';
 import AppHeader from '../components/AppHeader';
+import PageHeader from '../components/PageHeader';
 import '../styles/Payment.css';
-import '../styles/PageHeader.css';
 
 const Payment = () => {
   const navigate = useNavigate();
