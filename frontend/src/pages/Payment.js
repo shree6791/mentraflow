@@ -123,10 +123,10 @@ const Payment = () => {
       <AppHeader />
       
       {/* Page Header */}
-      <div className="page-header">
-        <h1>Complete Your Purchase</h1>
-        <p className="page-subtitle">Secure checkout • Upgrade your learning experience</p>
-      </div>
+      <PageHeader 
+        title="Complete Your Purchase"
+        subtitle="Secure checkout • Upgrade your learning experience"
+      />
       
       <div className="payment-container">
 
