@@ -509,18 +509,20 @@ const KnowledgeGraph = ({ topics, userAvatar, userName, onClose, onReinforce, hi
 
   return (
     <div className="knowledge-graph-modal">
-      {/* Header with Search and Filters */}
-      <div className="graph-modal-header">
-        <div className="graph-header-left">
-          <button className="back-btn-inline" onClick={onClose} aria-label="Go back">
-            <ArrowLeft size={20} />
-          </button>
-          <div>
-            <h2>Your Knowledge Network</h2>
-            <p className="graph-subtitle">Interactive memory visualization • Click nodes to explore</p>
+      {/* Header with Search and Filters - conditionally render */}
+      {!hideHeader && (
+        <div className="graph-modal-header">
+          <div className="graph-header-left">
+            <button className="back-btn-inline" onClick={onClose} aria-label="Go back">
+              <ArrowLeft size={20} />
+            </button>
+            <div>
+              <h2>Your Knowledge Network</h2>
+              <p className="graph-subtitle">Interactive memory visualization • Click nodes to explore</p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Controls Bar */}
       <div className="graph-controls-bar">
