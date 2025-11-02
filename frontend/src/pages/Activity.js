@@ -47,19 +47,12 @@ const Activity = () => {
   ];
 
   return (
-    <div className="activity-page">
-      {/* App Header */}
-      <AppHeader />
-      
-      <div className="activity-container">
-        {/* Page Header */}
-        <PageHeader 
-          title="Your Learning Insights"
-          subtitle="Track progress, identify patterns, and optimize retention"
-        />
-
-        {/* Quick Stats */}
-        <div className="quick-stats-grid">
+    <AppLayout 
+      title="Your Learning Insights"
+      subtitle="Track progress, identify patterns, and optimize retention"
+    >
+      {/* Quick Stats */}
+      <div className="quick-stats-grid">
           <div className="stat-card">
             <div className="stat-icon" style={{background: 'rgba(14, 124, 123, 0.1)'}}>
               <Brain size={24} color="#0E7C7B" />
