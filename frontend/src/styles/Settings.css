@@ -1,13 +1,16 @@
 /* Settings Page */
 .settings-container {
-  max-width: 800px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
 }
 
 .settings-form {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .settings-section {
