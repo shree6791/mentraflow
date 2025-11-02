@@ -198,12 +198,12 @@ const Settings = () => {
 
           {/* Action Buttons */}
           <div className="settings-actions">
-            <button type="button" className="btn-secondary" onClick={() => navigate(-1)}>
-              Cancel
-            </button>
             <button type="submit" className="btn-primary">
               <Save size={18} />
               Save Changes
+            </button>
+            <button type="button" className="btn-secondary" onClick={() => navigate(-1)}>
+              Cancel
             </button>
           </div>
 
