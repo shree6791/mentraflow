@@ -48,7 +48,9 @@ const Vision = () => {
             Every idea follows the same path — but MentraFlow changes the ending.
           </p>
         </div>
-        <div className="timeline-container fade-in">
+        
+        {/* Desktop: Timeline Layout */}
+        <div className="timeline-container timeline-desktop fade-in">
           <div className="timeline-line"></div>
           <div className="timeline-steps">
             <div className="timeline-step">
@@ -83,6 +85,43 @@ const Vision = () => {
               <p>The idea becomes part of you, strengthening with every recall.</p>
             </div>
           </div>
+        </div>
+
+        {/* Mobile: Carousel Layout */}
+        <div className="timeline-carousel-mobile fade-in">
+          <Carousel showDots={true} showArrows={true}>
+            <div className="timeline-step">
+              <div className="timeline-icon learn-icon">
+                <BookOpen size={32} strokeWidth={2} />
+              </div>
+              <h3>Learn</h3>
+              <p>You discover a powerful idea that could change everything.</p>
+            </div>
+
+            <div className="timeline-step">
+              <div className="timeline-icon forget-icon">
+                <TrendingDown size={32} strokeWidth={2} />
+              </div>
+              <h3>Forget</h3>
+              <p>Days pass. The insight fades into the background of daily life.</p>
+            </div>
+
+            <div className="timeline-step">
+              <div className="timeline-icon reinforce-icon">
+                <RefreshCw size={32} strokeWidth={2} />
+              </div>
+              <h3>Reinforce</h3>
+              <p>MentraFlow brings it back — right when your brain needs it most.</p>
+            </div>
+
+            <div className="timeline-step">
+              <div className="timeline-icon retain-icon">
+                <Award size={32} strokeWidth={2} />
+              </div>
+              <h3>Retain</h3>
+              <p>The idea becomes part of you, strengthening with every recall.</p>
+            </div>
+          </Carousel>
         </div>
       </section>
 
