@@ -30,7 +30,7 @@
   --inverse-text: #FFFFFF;
   
   /* CTA */
-  --cta-gradient: linear-gradient(135deg, #FFD166, #EF476F);
+  --cta-gradient: linear-gradient(135deg, #EF476F, #FFD166);
   --focus-outline: 0 0 0 3px rgba(17, 138, 178, 0.35);
   
   /* Legacy Variables (mapped to new system) */
