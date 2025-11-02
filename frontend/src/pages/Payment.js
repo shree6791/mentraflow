@@ -121,13 +121,18 @@ const Payment = () => {
       {/* App Header */}
       <AppHeader />
       
+      {/* Page Header */}
+      <div className="page-header">
+        <h1>Complete Your Purchase</h1>
+        <p className="page-subtitle">Secure checkout • Upgrade your learning experience</p>
+      </div>
+      
       <div className="payment-container">
 
         <div className="payment-content">
           {/* Left: Payment Form */}
           <div className="payment-form-section">
-            <div className="payment-header">
-              <h1>Complete Your Purchase</h1>
+            <div className="payment-form-header">
               <div className="secure-badge">
                 <Lock size={16} />
                 <span>Secure Checkout</span>
