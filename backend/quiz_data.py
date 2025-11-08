@@ -132,7 +132,7 @@ QUIZ_CONTENT = {
             }
         ]
     },
-    "t7": {
+    "q7": {
         "questions": [
             {
                 "q": "What is retrieval practice?",
