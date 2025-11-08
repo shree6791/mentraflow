@@ -320,31 +320,48 @@ LIBRARY_ITEMS = [
 ]
 
 # ========================================
-# RECALL TASKS (Items due for review today)
+# RECALL TASKS (Dynamically generated from NODES)
 # ========================================
-RECALL_TASKS = [
-    {
-        "id": "recall1",
-        "title": "Spacing Effect",
-        "dueTime": "2 hours ago",
-        "priority": "high",
-        "nodeId": "t3"
-    },
-    {
-        "id": "recall2",
-        "title": "Working Memory",
-        "dueTime": "Overdue (2 weeks)",
-        "priority": "critical",
-        "nodeId": "t4"
-    },
-    {
-        "id": "recall3",
-        "title": "Chunking",
-        "dueTime": "Overdue (3 weeks)",
-        "priority": "critical",
-        "nodeId": "t8"
-    }
-]
+# Items that need review are identified by:
+# - state: "fading" (needs immediate review)
+# - Low score (< 60%)
+# This is computed dynamically, not stored
+def get_recall_tasks():
+    """Generate recall tasks from nodes that need review"""
+    tasks = []
+    
+    for node in NODES:
+        # Add to recall if fading or low score
+        if node["state"] == "fading" or node["score"] < 60:
+            # Determine priority
+            if node["state"] == "fading" and node["score"] < 50:
+                priority = "critical"
+            elif node["state"] == "fading":
+                priority = "high"
+            else:
+                priority = "medium"
+            
+            # Calculate due time based on lastReview
+            due_time = "Overdue"
+            if "2 weeks" in node["lastReview"]:
+                due_time = "Overdue (2 weeks)"
+            elif "3 weeks" in node["lastReview"]:
+                due_time = "Overdue (3 weeks)"
+            elif "1 week" in node["lastReview"]:
+                due_time = "2 hours ago"
+            
+            tasks.append({
+                "id": f"recall_{node['id']}",
+                "title": node["title"],
+                "dueTime": due_time,
+                "priority": priority,
+                "nodeId": node["id"]
+            })
+    
+    return tasks
+
+# For API compatibility - call function to get current recall tasks
+RECALL_TASKS = get_recall_tasks()
 
 # ========================================
 # KNOWLEDGE CLUSTERS (For Insights page)
