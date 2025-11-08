@@ -201,6 +201,7 @@ const Dashboard = () => {
   // Library Item Detail Modal
   const [selectedLibraryItem, setSelectedLibraryItem] = useState(null);
   const [libraryModalTab, setLibraryModalTab] = useState('summary'); // summary | quiz | performance
+  const [libraryQuizData, setLibraryQuizData] = useState(null); // Quiz data from API
   
   // Generated Content Modal
   const [showGeneratedModal, setShowGeneratedModal] = useState(false);
