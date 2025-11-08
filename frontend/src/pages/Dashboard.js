@@ -394,7 +394,10 @@ const Dashboard = () => {
   };
 
   const handleQuizAnswer = (questionIndex, optionIndex) => {
-    setQuizAnswers({ ...quizAnswers, [questionIndex]: optionIndex });
+    console.log('handleQuizAnswer called:', { questionIndex, optionIndex, currentAnswers: quizAnswers });
+    const newAnswers = { ...quizAnswers, [questionIndex]: optionIndex };
+    console.log('Setting new answers:', newAnswers);
+    setQuizAnswers(newAnswers);
   };
 
   const submitQuiz = () => {
