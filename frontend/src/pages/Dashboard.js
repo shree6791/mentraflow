@@ -158,7 +158,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   
   // Library state
-  const [libraryItems, setLibraryItems] = useState(LIBRARY_ITEMS);
+  const [libraryItems, setLibraryItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
   
