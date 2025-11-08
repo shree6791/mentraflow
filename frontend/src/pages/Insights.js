@@ -30,9 +30,9 @@ const Insights = () => {
   useEffect(() => {
     const fetchInsightsData = async () => {
       try {
-        const [statsResponse, topicsResponse, clustersResponse, recommendationsResponse] = await Promise.all([
+        const [statsResponse, nodesResponse, clustersResponse, recommendationsResponse] = await Promise.all([
           axios.get(`${API}/stats`),
-          axios.get(`${API}/topics`),
+          axios.get(`${API}/nodes`),
           axios.get(`${API}/clusters`),
           axios.get(`${API}/recommendations`)
         ]);
@@ -40,7 +40,7 @@ const Insights = () => {
         setStats(statsResponse.data?.insights || stats);
         
         // Process topics data into performance categories
-        const topics = topicsResponse.data?.topics || [];
+        const topics = nodesResponse.data?.nodes || [];
         const categorizedTopics = {
           strong: topics.filter(t => t.score >= 80),
           medium: topics.filter(t => t.score >= 60 && t.score < 80),
