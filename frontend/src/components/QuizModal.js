@@ -167,19 +167,21 @@ const QuizModal = ({
                       </div>
                     </div>
 
-                    <div className="quiz-navigation">
-                      <button 
-                        className="btn-secondary"
-                        onClick={onPreviousQuestion}
-                        disabled={currentQuestionIndex === 0}
-                      >
-                        Previous
-                      </button>
+                    <div className="quiz-navigation" style={{marginTop: '2rem'}}>
+                      {currentQuestionIndex > 0 && (
+                        <button 
+                          className="btn-secondary"
+                          onClick={onPreviousQuestion}
+                        >
+                          Previous
+                        </button>
+                      )}
                       {currentQuestionIndex < quizData.questions.length - 1 ? (
                         <button 
                           className="btn-primary"
                           onClick={onNextQuestion}
                           disabled={quizAnswers[currentQuestionIndex] === undefined}
+                          style={{marginLeft: currentQuestionIndex === 0 ? '0' : 'auto'}}
                         >
                           Next Question
                         </button>
@@ -188,6 +190,7 @@ const QuizModal = ({
                           className="btn-primary"
                           onClick={onSubmitQuiz}
                           disabled={Object.keys(quizAnswers).length !== quizData.questions.length}
+                          style={{marginLeft: currentQuestionIndex === 0 ? '0' : 'auto'}}
                         >
                           Submit Quiz
                         </button>
