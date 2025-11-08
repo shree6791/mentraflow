@@ -442,8 +442,8 @@ const Dashboard = () => {
         }
       } catch (error) {
         console.error('Error fetching quiz data:', error);
-        // Fallback to local SAMPLE_QUIZ if API fails
-        setLibraryQuizData({ questions: SAMPLE_QUIZ });
+        // Set to null if API fails
+        setLibraryQuizData(null);
       }
     } else {
       setLibraryQuizData(null);
