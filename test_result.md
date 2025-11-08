@@ -121,6 +121,42 @@ backend:
         - comment: "COMPREHENSIVE BACKEND API TESTING COMPLETED - ALL 7 ENDPOINTS PASSED ✅\n\n**Test Results:**\n1. GET /api/stats - ✅ PASSED\n   - Returns all statistics (dashboard, insights, knowledge)\n   - Verified avgRetention: 72, streakDays: 7\n   - Verified totalQuizzes: 23, avgScore: 75\n   - All required keys present and properly structured\n\n2. GET /api/topics - ✅ PASSED\n   - Returns 8 topics as expected\n   - Each topic has all required fields: id, title, state, lastReview, score, connections, libraryId, quizzesTaken\n   - Connections array properly formatted\n   - Sample verified: 'Forgetting Curve' with 3 connections, score 85\n\n3. GET /api/library - ✅ PASSED\n   - Returns 6 library items\n   - All required fields present: id, title, filename, retention, nextReview, quizScore\n   - Sample verified: 'The Forgetting Curve & Memory Retention' with high retention, quiz score 80\n\n4. GET /api/recall-tasks - ✅ PASSED\n   - Returns 3 recall tasks due today\n   - All required fields present: id, title, libraryId, type, dueIn\n   - Sample verified: 'Forgetting Curve' quiz due now\n\n5. GET /api/clusters - ✅ PASSED\n   - Returns 4 knowledge clusters\n   - All required fields present: name, topics, avgScore, color\n   - Sample verified: 'Memory Techniques' cluster with 5 topics, avg score 85\n\n6. GET /api/recommendations - ✅ PASSED\n   - Returns 3 personalized recommendations\n   - All required fields present: text, priority\n   - Recommendations properly formatted with priority levels\n\n7. GET /api/quiz/Forgetting%20Curve - ✅ PASSED\n   - Returns quiz with 2 questions for 'Forgetting Curve' topic\n   - All required fields present: title, questions array\n   - Each question has: q, options (array), correctIndex\n   - URL encoding handled correctly\n\n**Backend Status:** All consolidated API endpoints are working perfectly. Data structures match expected formats. No missing fields. Arrays properly formatted. All critical data points present. Backend is ready for frontend integration."
 
 frontend:
+  - task: "Prominent Yellow Borders for Review Soon Cards"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/Dashboard.css"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+        - agent: "main"
+        - comment: "IMPLEMENTED: Enhanced retention status borders for library cards. Changed border width from 3px to 4px for all retention states. Added subtle box shadows for better prominence: Fading cards (red #FF6B6B with rgba shadow), Review Soon/Medium cards (yellow #FFD166 with stronger rgba(255, 209, 102, 0.15) shadow), Strong cards (green #06D6A0 with light shadow). Yellow border now highly visible and matches app color palette (#FFD166). Background tints slightly increased for medium cards."
+  
+  - task: "Dashboard Card Spacing Alignment"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/Dashboard.css"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+        - working: true
+        - agent: "main"
+        - comment: "VERIFIED: Card spacing is already consistent and well-aligned. Grid uses 2-column layout with 1rem gap on desktop, single column on mobile. Responsive breakpoints properly configured. No changes needed - spacing was already optimal."
+  
+  - task: "Inline Filter Bar - Single Line Layout (Desktop)"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/Dashboard.js, /app/frontend/src/Dashboard.css"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+        - agent: "main"
+        - comment: "IMPLEMENTED: Created inline filter bar above library section. Layout: filters on left (All Items, Due Soon, Fading, Strong), sort dropdown on right. Added comprehensive CSS for filter-btn-inline with proper hover states and active states using app color palette. Warning class (yellow #FFD166) for Due Soon, urgent class (red #FF6B6B) for Fading, success class (green #06D6A0) for Strong. Sort dropdown styled with custom arrow icon. Mobile: inline bar hidden (display: none), modal button shown instead. Desktop: full horizontal layout with flex justify-space-between. All interactive states working correctly."
+
   - task: "Dashboard API Integration"
     implemented: true
     working: "NA"
