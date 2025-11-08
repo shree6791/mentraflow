@@ -548,7 +548,12 @@ const Dashboard = () => {
     // Fetch quiz data from API (same as Knowledge Graph)
     if (item.hasQuiz) {
       try {
-        const response = await axios.get(`${API}/node/${encodeURIComponent(item.title)}`);
+        // Map library item title to node title (extract base topic name)
+        // "Forgetting Curve & Memory Retention" -> "Forgetting Curve"
+        // "Spacing Effect Research Paper" -> "Spacing Effect"
+        const topicTitle = item.title.split(/&|Research|Theory|Study/)[0].trim();
+        
+        const response = await axios.get(`${API}/node/${encodeURIComponent(topicTitle)}`);
         const data = response.data;
         
         if (data.quiz && data.quiz.questions) {
