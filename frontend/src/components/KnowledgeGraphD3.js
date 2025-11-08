@@ -214,18 +214,18 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       const tooltipY = event.clientY - containerRect.top - 15;
       
       tooltip.html(`
-        <div class="tooltip-content">
-          <strong>${d.title}</strong>
-          <div class="tooltip-stats">
-            <div>Last Review: <span>${d.lastReview}</span></div>
-            <div>Score: <span>${d.score}%</span></div>
-            <div>Connections: <span>${d.connections.length}</span></div>
+        <div class="tooltip-content" style="background: white; color: #1F2937;">
+          <strong style="display: block; font-size: 1rem; color: #1A1A2E; margin-bottom: 0.75rem; font-weight: 700;">${d.title}</strong>
+          <div class="tooltip-stats" style="display: flex; flex-direction: column; gap: 0.375rem; font-size: 0.875rem; color: #6B7280; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid #E0E0E0;">
+            <div>Last Review: <span style="color: #1F2937; font-weight: 600;">${d.lastReview}</span></div>
+            <div>Score: <span style="color: #1F2937; font-weight: 600;">${d.score}%</span></div>
+            <div>Connections: <span style="color: #1F2937; font-weight: 600;">${d.connections.length}</span></div>
           </div>
-          <div class="tooltip-actions">
-            <button class="tooltip-btn tooltip-btn-primary" data-id="${d.id}" data-action="quiz">
+          <div class="tooltip-actions" style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <button class="tooltip-btn tooltip-btn-primary" data-id="${d.id}" data-action="quiz" style="padding: 0.5rem 1rem; border-radius: 6px; border: none; font-size: 0.875rem; font-weight: 600; cursor: pointer; background: linear-gradient(135deg, #FFD166, #FFC130); color: #1A1A1A;">
               Take Quiz
             </button>
-            <button class="tooltip-btn tooltip-btn-secondary" data-id="${d.id}" data-action="summary">
+            <button class="tooltip-btn tooltip-btn-secondary" data-id="${d.id}" data-action="summary" style="padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.875rem; font-weight: 600; cursor: pointer; background: #F3F4F6; color: #0E7C7B; border: 1px solid #E0E0E0;">
               View Summary
             </button>
           </div>
