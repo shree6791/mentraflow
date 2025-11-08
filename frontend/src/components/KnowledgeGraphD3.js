@@ -22,6 +22,17 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
   useEffect(() => {
     onTakeQuizRef.current = onTakeQuiz;
     onViewSummaryRef.current = onViewSummary;
+    
+    // Also attach to window for D3 to access
+    window._knowledgeGraphCallbacks = {
+      onTakeQuiz,
+      onViewSummary
+    };
+    
+    console.log('Callbacks updated:', { 
+      onTakeQuiz: typeof onTakeQuiz,
+      onViewSummary: typeof onViewSummary 
+    });
   }, [onTakeQuiz, onViewSummary]);
 
   // Use topics from props (fetched from backend API)
