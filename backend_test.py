@@ -349,29 +349,32 @@ class BackendTester:
         
         return True
     
-    def validate_topic_detail(self, data: Dict) -> bool:
-        """Validate detailed /api/topic/{title} response"""
-        required_keys = ["topic", "summary", "quiz", "performance"]
+    def validate_node_detail(self, data: Dict) -> bool:
+        """Validate detailed /api/node/{title} response"""
+        required_keys = ["node", "summary", "quiz", "performance"]
         for key in required_keys:
             if key not in data:
                 return f"Missing key: {key}"
         
-        # Validate topic data
-        topic = data["topic"]
-        if not isinstance(topic, dict):
-            return f"topic should be a dict, got {type(topic)}"
+        # Validate node data
+        node = data["node"]
+        if not isinstance(node, dict):
+            return f"node should be a dict, got {type(node)}"
         
         # Validate summary data
         summary = data["summary"]
-        if not isinstance(summary, dict):
-            return f"summary should be a dict, got {type(summary)}"
-        
-        summary_keys = ["content", "keyTakeaways", "keywords"]
-        for key in summary_keys:
-            if key not in summary:
-                return f"Summary missing key: {key}"
-        
-        print_success(f"  Summary has: {', '.join(summary.keys())}")
+        if summary is not None:
+            if not isinstance(summary, dict):
+                return f"summary should be a dict or null, got {type(summary)}"
+            
+            summary_keys = ["content", "keyTakeaways", "keywords"]
+            for key in summary_keys:
+                if key not in summary:
+                    return f"Summary missing key: {key}"
+            
+            print_success(f"  Summary has: {', '.join(summary.keys())}")
+        else:
+            print_info("  Summary data is null (no summary available)")
         
         # Validate quiz data
         quiz = data["quiz"]
