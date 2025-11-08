@@ -3272,18 +3272,21 @@
 }
 
 .library-item.retention-fading {
-  border-left: 3px solid var(--neural-coral);
+  border-left: 4px solid var(--neural-coral);
   background: rgba(239, 71, 111, 0.02);
+  box-shadow: -2px 0 8px rgba(239, 71, 111, 0.1);
 }
 
 .library-item.retention-medium {
-  border-left: 3px solid var(--neuro-yellow);
-  background: rgba(255, 209, 102, 0.02);
+  border-left: 4px solid #FFD166;
+  background: rgba(255, 209, 102, 0.03);
+  box-shadow: -2px 0 8px rgba(255, 209, 102, 0.15);
 }
 
 .library-item.retention-high {
-  border-left: 3px solid var(--retention-green);
+  border-left: 4px solid var(--retention-green);
   background: rgba(6, 214, 160, 0.02);
+  box-shadow: -2px 0 8px rgba(6, 214, 160, 0.08);
 }
 
 .action-btn.action-urgent {
