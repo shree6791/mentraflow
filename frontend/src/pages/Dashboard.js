@@ -286,9 +286,9 @@ const Dashboard = () => {
           axios.get(`${API}/recall-tasks`, { withCredentials: true })
         ]);
 
-        setLibraryItems(libraryResponse.data || []);
-        setTopics(topicsResponse.data || []);
-        setRecallTasks(recallResponse.data || []);
+        setLibraryItems(libraryResponse.data?.items || []);
+        setTopics(topicsResponse.data?.topics || []);
+        setRecallTasks(recallResponse.data?.tasks || []);
         
         setLoading(false);
       } catch (error) {
