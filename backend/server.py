@@ -11,6 +11,16 @@ import uuid
 from datetime import datetime, timezone
 from auth import auth_router, set_database
 
+# Import dashboard mock data
+from dashboard_data import (
+    LIBRARY_ITEMS,
+    SAMPLE_TOPICS,
+    RECALL_TASKS,
+    QUICK_RECALL_QUIZ,
+    DASHBOARD_STATS
+)
+
+
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
