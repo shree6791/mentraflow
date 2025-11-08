@@ -4,7 +4,6 @@ import { LogOut, User, Upload, FileText, BarChart3, Brain, CheckCircle, XCircle,
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import AppLayout from '../components/AppLayout';
-import KnowledgeGraph from '../components/KnowledgeGraph';
 import Tooltip from '../components/Tooltip';
 import '../Dashboard.css';
 
