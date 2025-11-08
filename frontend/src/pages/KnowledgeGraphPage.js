@@ -27,6 +27,17 @@ const KnowledgeGraphPage = () => {
     fetchTopics();
   }, [API]);
 
+  if (loading) {
+    return (
+      <AppLayout title="Your Knowledge Network">
+        <div className="knowledge-graph-loading">
+          <div className="loading-spinner"></div>
+          <p>Loading your knowledge network...</p>
+        </div>
+      </AppLayout>
+    );
+  }
+
   return (
     <AppLayout 
       title="Your Knowledge Network"
