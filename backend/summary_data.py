@@ -23,7 +23,7 @@ SUMMARY_CONTENT = {
         ],
         "keywords": ["Active Recall", "Testing Effect", "Retrieval Practice", "Learning Strategies"]
     },
-    "t3": {
+    "s3": {
         "content": "The spacing effect demonstrates that learning is more effective when study sessions are spaced out over time rather than massed together in a single session. This phenomenon has been consistently demonstrated across various types of learning.\n\nWhen you space out your learning, you give your brain time to consolidate the information. Each time you return to the material, you're strengthening the neural connections associated with that knowledge.\n\nOptimal spacing intervals typically follow an expanding pattern: review after 1 day, then 3 days, then 7 days, then 14 days, and so on.",
         "keyTakeaways": [
             "Distributed practice beats massed practice (cramming)",
