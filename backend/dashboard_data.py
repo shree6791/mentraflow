@@ -222,33 +222,8 @@ NODES = [
         "connections": ["t3", "t5"],
         "libraryId": "lib6",
         "quizzesTaken": 2,
-        "questions": [
-            {
-                "q": "What is the typical capacity of working memory?",
-                "options": ["3-5 items", "7±2 items", "15-20 items", "Unlimited"],
-                "correctIndex": 1
-            },
-            {
-                "q": "What happens when working memory is overloaded?",
-                "options": [
-                    "Learning becomes more effective",
-                    "Information is lost or not processed",
-                    "Long-term memory improves",
-                    "Attention span increases"
-                ],
-                "correctIndex": 1
-            }
-        ],
-        "summary": {
-            "content": "Working memory is a cognitive system responsible for temporarily holding and manipulating information needed for complex tasks. Research suggests working memory has a limited capacity of about 7±2 items (Miller's Law).\n\nWorking memory is crucial for learning, reasoning, and comprehension. When overloaded, it becomes a bottleneck that impairs learning and performance.\n\nStrategies to optimize working memory include chunking information, reducing cognitive load, and using external aids like notes or diagrams.",
-            "keyTakeaways": [
-                "Limited capacity of approximately 7±2 items",
-                "Essential for complex cognitive tasks",
-                "Can be overloaded, reducing learning effectiveness",
-                "Chunking and external aids help manage load"
-            ],
-            "keywords": ["Working Memory", "Miller's Law", "Cognitive Load", "Chunking"]
-        }
+        "quizId": "t4",
+        "summaryId": "t4"
     },
     {
         "id": "t5",
