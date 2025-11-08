@@ -110,19 +110,15 @@ async def get_node_detail(title: str):
     decoded_title = urllib.parse.unquote(title)
     
     # Find the node
-    node = next((t for t in TOPICS if t["title"] == decoded_title), None)
+    node = next((n for n in NODES if n["title"] == decoded_title), None)
     if not node:
         raise HTTPException(status_code=404, detail="Node not found")
     
-    # Get quiz data
-    quiz = QUICK_RECALL_QUIZ.get(decoded_title, [])
+    # Get quiz questions from node
+    questions = node.get("questions", [])
     
-    # Get summary data
-    summary = TOPIC_SUMMARIES.get(decoded_title, {
-        "content": "Summary content not available yet.",
-        "keyTakeaways": [],
-        "keywords": []
-    })
+    # Get summary from node
+    summary = node.get("summary", None)
     
     # Build comprehensive response
     return {
@@ -130,8 +126,8 @@ async def get_node_detail(title: str):
         "summary": summary,
         "quiz": {
             "title": decoded_title,
-            "questions": quiz
-        } if quiz else None,
+            "questions": questions
+        } if questions else None,
         "performance": {
             "quizzesTaken": node.get("quizzesTaken", 0),
             "currentScore": node.get("score", 0),
