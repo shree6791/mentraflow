@@ -182,10 +182,12 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       .attr('font-weight', '600')
       .text(d => d.title);
 
-    // Create tooltip
-    const tooltip = d3.select('body').append('div')
+    // Create tooltip inside container (not body) to preserve CSS variable context
+    const tooltip = d3.select(containerRef.current).append('div')
       .attr('class', 'graph-tooltip')
-      .style('opacity', 0);
+      .style('opacity', 0)
+      .style('position', 'absolute')
+      .style('pointer-events', 'auto');
 
     // Node interactions
     node.on('click', function(event, d) {
