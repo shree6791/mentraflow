@@ -133,8 +133,33 @@ NODES = [
         "connections": ["t3", "t5"],
         "libraryId": "lib6",
         "quizzesTaken": 2,
-        "questions": [],
-        "summary": None
+        "questions": [
+            {
+                "q": "What is the typical capacity of working memory?",
+                "options": ["3-5 items", "7±2 items", "15-20 items", "Unlimited"],
+                "correctIndex": 1
+            },
+            {
+                "q": "What happens when working memory is overloaded?",
+                "options": [
+                    "Learning becomes more effective",
+                    "Information is lost or not processed",
+                    "Long-term memory improves",
+                    "Attention span increases"
+                ],
+                "correctIndex": 1
+            }
+        ],
+        "summary": {
+            "content": "Working memory is a cognitive system responsible for temporarily holding and manipulating information needed for complex tasks. Research suggests working memory has a limited capacity of about 7±2 items (Miller's Law).\n\nWorking memory is crucial for learning, reasoning, and comprehension. When overloaded, it becomes a bottleneck that impairs learning and performance.\n\nStrategies to optimize working memory include chunking information, reducing cognitive load, and using external aids like notes or diagrams.",
+            "keyTakeaways": [
+                "Limited capacity of approximately 7±2 items",
+                "Essential for complex cognitive tasks",
+                "Can be overloaded, reducing learning effectiveness",
+                "Chunking and external aids help manage load"
+            ],
+            "keywords": ["Working Memory", "Miller's Law", "Cognitive Load", "Chunking"]
+        }
     },
     {
         "id": "t5",
@@ -145,8 +170,38 @@ NODES = [
         "connections": ["t1", "t2", "t4"],
         "libraryId": "lib4",
         "quizzesTaken": 3,
-        "questions": [],
-        "summary": None
+        "questions": [
+            {
+                "q": "What is interleaved practice?",
+                "options": [
+                    "Practicing one skill repeatedly until mastered",
+                    "Mixing different topics or skills in a single study session",
+                    "Taking breaks between study sessions",
+                    "Reviewing material in the same order every time"
+                ],
+                "correctIndex": 1
+            },
+            {
+                "q": "How does interleaved practice differ from blocked practice?",
+                "options": [
+                    "Blocked practice is always more effective",
+                    "Interleaved practice mixes topics, blocked practice focuses on one",
+                    "They are the same thing",
+                    "Blocked practice requires more effort"
+                ],
+                "correctIndex": 1
+            }
+        ],
+        "summary": {
+            "content": "Interleaved practice involves mixing different topics or types of problems during a study session, rather than focusing on one topic at a time (blocked practice).\n\nWhile blocked practice may feel easier and produce faster initial gains, interleaved practice leads to better long-term retention and transfer of knowledge. The difficulty of switching between topics forces deeper processing.\n\nInterleaved practice is particularly effective for subjects that require discrimination between different concepts or problem types.",
+            "keyTakeaways": [
+                "Mix different topics rather than blocking by topic",
+                "Feels harder but produces better long-term learning",
+                "Improves ability to discriminate between concepts",
+                "Particularly effective for math and science problems"
+            ],
+            "keywords": ["Interleaved Practice", "Blocked Practice", "Discrimination", "Transfer"]
+        }
     },
     {
         "id": "t6",
@@ -157,8 +212,38 @@ NODES = [
         "connections": ["t3", "t7"],
         "libraryId": "lib5",
         "quizzesTaken": 4,
-        "questions": [],
-        "summary": None
+        "questions": [
+            {
+                "q": "What is metacognition?",
+                "options": [
+                    "Memory of facts and figures",
+                    "Thinking about one's own thinking",
+                    "The ability to focus attention",
+                    "Speed of information processing"
+                ],
+                "correctIndex": 1
+            },
+            {
+                "q": "Why is metacognition important for learning?",
+                "options": [
+                    "It increases reading speed",
+                    "It helps monitor understanding and adjust strategies",
+                    "It makes studying feel easier",
+                    "It eliminates the need for practice"
+                ],
+                "correctIndex": 1
+            }
+        ],
+        "summary": {
+            "content": "Metacognition refers to awareness and understanding of one's own thought processes. It involves monitoring what you know, recognizing when you don't understand something, and adjusting learning strategies accordingly.\n\nEffective learners use metacognitive strategies to assess their understanding, identify gaps in knowledge, and select appropriate study methods. This self-regulation is a key predictor of academic success.\n\nCommon metacognitive strategies include self-testing, reflection on learning, and conscious evaluation of comprehension during study.",
+            "keyTakeaways": [
+                "Awareness of your own thinking and learning processes",
+                "Essential for self-regulated learning",
+                "Includes planning, monitoring, and evaluating learning",
+                "Strong predictor of academic achievement"
+            ],
+            "keywords": ["Metacognition", "Self-Regulation", "Learning Strategies", "Self-Assessment"]
+        }
     },
     {
         "id": "t7",
@@ -169,8 +254,38 @@ NODES = [
         "connections": ["t1", "t6"],
         "libraryId": "lib7",
         "quizzesTaken": 2,
-        "questions": [],
-        "summary": None
+        "questions": [
+            {
+                "q": "What is retrieval practice?",
+                "options": [
+                    "Re-reading material multiple times",
+                    "Actively recalling information from memory",
+                    "Highlighting important text",
+                    "Listening to lectures repeatedly"
+                ],
+                "correctIndex": 1
+            },
+            {
+                "q": "What is the testing effect?",
+                "options": [
+                    "Tests cause anxiety that improves focus",
+                    "Taking tests improves long-term retention more than studying",
+                    "More tests lead to lower grades",
+                    "Testing is only useful for assessment, not learning"
+                ],
+                "correctIndex": 1
+            }
+        ],
+        "summary": {
+            "content": "Retrieval practice involves actively recalling information from memory rather than passively reviewing it. This practice strengthens memory and is one of the most powerful learning strategies.\n\nThe testing effect demonstrates that the act of retrieving information strengthens the memory trace more than additional study. Even unsuccessful retrieval attempts can enhance subsequent learning.\n\nEffective retrieval practice includes flashcards, practice tests, free recall, and self-quizzing without looking at notes.",
+            "keyTakeaways": [
+                "Active recall is more effective than passive review",
+                "Testing effect: retrieval strengthens memory",
+                "Even failed retrieval attempts benefit learning",
+                "Should be frequent and low-stakes"
+            ],
+            "keywords": ["Retrieval Practice", "Testing Effect", "Active Recall", "Self-Quizzing"]
+        }
     },
     {
         "id": "t8",
@@ -181,8 +296,38 @@ NODES = [
         "connections": ["t4"],
         "libraryId": "lib8",
         "quizzesTaken": 1,
-        "questions": [],
-        "summary": None
+        "questions": [
+            {
+                "q": "What is chunking in cognitive psychology?",
+                "options": [
+                    "Breaking study time into small sessions",
+                    "Grouping individual pieces of information into larger units",
+                    "Memorizing information word-for-word",
+                    "Taking breaks during study sessions"
+                ],
+                "correctIndex": 1
+            },
+            {
+                "q": "How does chunking help working memory?",
+                "options": [
+                    "It increases working memory capacity",
+                    "It reduces the number of items to remember",
+                    "It makes studying more enjoyable",
+                    "It eliminates the need for practice"
+                ],
+                "correctIndex": 1
+            }
+        ],
+        "summary": {
+            "content": "Chunking is a memory strategy that involves grouping individual pieces of information into larger, meaningful units. This technique effectively expands working memory capacity by reducing the number of items to remember.\n\nFor example, the sequence '2-0-2-4-1-2-2-5' is easier to remember as '2024-12-25' (a date). Expert knowledge is often characterized by sophisticated chunking of domain information.\n\nChunking is most effective when the grouped information is meaningful and follows familiar patterns or schemas.",
+            "keyTakeaways": [
+                "Groups individual items into meaningful larger units",
+                "Expands effective working memory capacity",
+                "More effective with meaningful patterns",
+                "Underlies expert performance in many domains"
+            ],
+            "keywords": ["Chunking", "Working Memory", "Information Processing", "Pattern Recognition"]
+        }
     }
 ]
 
