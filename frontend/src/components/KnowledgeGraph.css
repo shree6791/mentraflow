@@ -1058,8 +1058,25 @@
   }
 
   .graph-controls-bar {
-    flex-direction: column;
+    flex-wrap: wrap;
     padding: 1rem;
+    gap: 0.75rem;
+  }
+
+  .search-container {
+    max-width: 100%;
+    order: 1;
+  }
+
+  .filter-group {
+    flex: 1;
+    min-width: 150px;
+    order: 2;
+  }
+
+  .zoom-controls {
+    margin-left: 0;
+    order: 3;
   }
 
   .graph-search {
@@ -1102,11 +1119,14 @@
   .graph-legend-inline {
     top: 0.75rem;
     right: 0.75rem;
+    left: 0.75rem;
     padding: 0.625rem 0.875rem;
+    max-width: calc(100% - 1.5rem);
   }
 
   .legend-inline-items {
     gap: 0.75rem;
+    justify-content: center;
   }
 
   .legend-inline-item span {
@@ -1132,6 +1152,11 @@
   .graph-zoom-controls .reset-btn {
     padding: 0 0.5rem;
     font-size: 0.75rem;
+  }
+
+  .zoom-btn {
+    width: 32px;
+    height: 32px;
   }
 
   /* Larger touch targets on mobile */
