@@ -1,9 +1,9 @@
 # Quiz Content Data
 # Centralized storage for all quiz questions
-# Referenced by NODES via quizId
+# Referenced by NODES via quizId (q1, q2, q3, etc.)
 
 QUIZ_CONTENT = {
-    "t1": {
+    "q1": {
         "questions": [
             {
                 "q": "What percentage of information do we typically forget within 24 hours?",
