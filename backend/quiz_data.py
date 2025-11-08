@@ -156,7 +156,7 @@ QUIZ_CONTENT = {
             }
         ]
     },
-    "t8": {
+    "q8": {
         "questions": [
             {
                 "q": "What is chunking in cognitive psychology?",
