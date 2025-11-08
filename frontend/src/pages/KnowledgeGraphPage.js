@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Brain, Eye, BarChart3, X, CheckCircle, XCircle } from 'lucide-react';
 import AppLayout from '../components/AppLayout';
 import KnowledgeGraphD3 from '../components/KnowledgeGraphD3';
+import QuizModal from '../components/QuizModal';
 import '../Dashboard.css';
 
 const KnowledgeGraphPage = () => {
