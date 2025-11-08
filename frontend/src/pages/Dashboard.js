@@ -424,28 +424,32 @@ const Dashboard = () => {
     setSelectedLibraryItem(item);
     setLibraryModalTab(tab);
     
-    // Fetch quiz data from API (same as Knowledge Graph)
-    if (item.hasQuiz) {
-      try {
-        // Map library item title to node title (extract base topic name)
-        // "Forgetting Curve & Memory Retention" -> "Forgetting Curve"
-        // "Spacing Effect Research Paper" -> "Spacing Effect"
-        const topicTitle = item.title.split(/&|Research|Theory|Study/)[0].trim();
-        
-        const response = await axios.get(`${API}/node/${encodeURIComponent(topicTitle)}`);
-        const data = response.data;
-        
-        if (data.quiz && data.quiz.questions) {
-          setLibraryQuizData(data.quiz);
-        } else {
-          setLibraryQuizData(null);
-        }
-      } catch (error) {
-        console.error('Error fetching quiz data:', error);
-        // Set to null if API fails
+    // Fetch complete data from API (quiz + summary)
+    try {
+      // Map library item title to node title (extract base topic name)
+      // "Forgetting Curve & Memory Retention" -> "Forgetting Curve"
+      // "Spacing Effect Research Paper" -> "Spacing Effect"
+      const topicTitle = item.title.split(/&|Research|Theory|Study/)[0].trim();
+      
+      const response = await axios.get(`${API}/node/${encodeURIComponent(topicTitle)}`);
+      const data = response.data;
+      
+      // Set quiz data
+      if (data.quiz && data.quiz.questions) {
+        setLibraryQuizData(data.quiz);
+      } else {
         setLibraryQuizData(null);
       }
-    } else {
+      
+      // Update selected item with summary from API
+      setSelectedLibraryItem({
+        ...item,
+        summary: data.summary || null
+      });
+      
+    } catch (error) {
+      console.error('Error fetching node data:', error);
+      // Keep the item but without additional data
       setLibraryQuizData(null);
     }
   };
