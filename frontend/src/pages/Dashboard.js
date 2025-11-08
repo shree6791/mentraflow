@@ -272,16 +272,16 @@ const Dashboard = () => {
         setLoading(true);
         
         // Fetch all dashboard data including stats
-        const [libraryResponse, topicsResponse, recallResponse, statsResponse] = await Promise.all([
+        const [libraryResponse, nodesResponse, recallResponse, statsResponse] = await Promise.all([
           axios.get(`${API}/library`),
-          axios.get(`${API}/topics`),
+          axios.get(`${API}/nodes`),
           axios.get(`${API}/recall-tasks`),
           axios.get(`${API}/stats`)
         ]);
 
         // Set data from API responses
         setLibraryItems(libraryResponse.data?.items || []);
-        setTopics(topicsResponse.data?.topics || []);
+        setTopics(nodesResponse.data?.nodes || []);
         setRecallTasks(recallResponse.data?.tasks || []);
         
         // Set dashboard statistics
