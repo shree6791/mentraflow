@@ -482,6 +482,19 @@ html {
   box-shadow: 0 4px 20px rgba(14, 124, 123, 0.4);
 }
 
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary:disabled:hover {
+  background: var(--surface);
+  color: #0E7C7B;
+  transform: none;
+  box-shadow: none;
+}
+
 /* Section Styles */
 .section {
   padding: var(--section-padding);
