@@ -114,6 +114,49 @@ async def get_quiz(title: str):
         return {"error": "Quiz not found"}, 404
     return {"title": decoded_title, "questions": quiz}
 
+
+
+# ========================================
+# INSIGHTS API ENDPOINTS
+# ========================================
+
+@api_router.get("/insights/performance")
+async def get_insights_performance():
+    """Get performance data grouped by strength (strong, medium, weak)"""
+    return INSIGHTS_PERFORMANCE_DATA
+
+@api_router.get("/insights/clusters")
+async def get_knowledge_clusters():
+    """Get knowledge clusters with topics and average scores"""
+    return {"clusters": INSIGHTS_KNOWLEDGE_CLUSTERS}
+
+@api_router.get("/insights/stats")
+async def get_insights_stats():
+    """Get insights page statistics"""
+    return INSIGHTS_STATS
+
+@api_router.get("/insights/recommendations")
+async def get_recommendations():
+    """Get personalized recommendations"""
+    return {"recommendations": INSIGHTS_RECOMMENDATIONS}
+
+# ========================================
+# KNOWLEDGE GRAPH API ENDPOINTS
+# ========================================
+
+@api_router.get("/knowledge-graph/nodes")
+async def get_graph_nodes():
+    """Get all knowledge graph nodes with connections"""
+    return {"nodes": KNOWLEDGE_GRAPH_NODES}
+
+@api_router.get("/knowledge-graph/node/{node_id}")
+async def get_graph_node(node_id: str):
+    """Get a specific node by ID"""
+    node = next((n for n in KNOWLEDGE_GRAPH_NODES if n["id"] == node_id), None)
+    if not node:
+        return {"error": "Node not found"}, 404
+    return node
+
 @api_router.get("/dashboard/stats")
 async def get_dashboard_stats():
     """Get dashboard statistics"""
