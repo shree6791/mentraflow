@@ -489,7 +489,7 @@
   position: absolute;
   pointer-events: auto;
   background: white;
-  border: 1px solid var(--divider);
+  border: 1px solid #E0E0E0;
   border-radius: 12px;
   padding: 1rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
@@ -500,7 +500,7 @@
 .tooltip-content strong {
   display: block;
   font-size: 1rem;
-  color: var(--contrast-indigo);
+  color: #1A1A2E;
   margin-bottom: 0.75rem;
   font-weight: 700;
 }
@@ -510,14 +510,14 @@
   flex-direction: column;
   gap: 0.375rem;
   font-size: 0.875rem;
-  color: var(--text-gray);
+  color: #6B7280;
   margin-bottom: 0.75rem;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--divider);
+  border-bottom: 1px solid #E0E0E0;
 }
 
 .tooltip-stats span {
-  color: var(--text-dark);
+  color: #1F2937;
   font-weight: 600;
 }
 
@@ -550,15 +550,15 @@
 }
 
 .tooltip-btn-secondary {
-  background: var(--bg-light);
-  color: var(--primary-teal);
-  border: 1px solid var(--divider);
+  background: #F3F4F6;
+  color: #0E7C7B;
+  border: 1px solid #E0E0E0;
 }
 
 .tooltip-btn-secondary:hover {
-  background: var(--primary-teal);
+  background: #0E7C7B;
   color: white;
-  border-color: var(--primary-teal);
+  border-color: #0E7C7B;
 }
 
 /* Filter Group Styling */
