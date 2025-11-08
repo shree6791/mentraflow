@@ -426,12 +426,8 @@ const Dashboard = () => {
     
     // Fetch complete data from API (quiz + summary)
     try {
-      // Map library item title to node title (extract base topic name)
-      // "Forgetting Curve & Memory Retention" -> "Forgetting Curve"
-      // "Spacing Effect Research Paper" -> "Spacing Effect"
-      const topicTitle = item.title.split(/&|Research|Theory|Study/)[0].trim();
-      
-      const response = await axios.get(`${API}/node/${encodeURIComponent(topicTitle)}`);
+      // Title now matches exactly - no mapping needed!
+      const response = await axios.get(`${API}/node/${encodeURIComponent(item.title)}`);
       const data = response.data;
       
       // Set quiz data
