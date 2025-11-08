@@ -541,17 +541,39 @@ const Dashboard = () => {
   };
 
   // Library Item Detail Modal Handlers
-  const openLibraryItem = (item, tab = 'summary') => {
+  const openLibraryItem = async (item, tab = 'summary') => {
     setSelectedLibraryItem(item);
     setLibraryModalTab(tab);
+    
+    // Fetch quiz data from API (same as Knowledge Graph)
+    if (item.hasQuiz) {
+      try {
+        const response = await axios.get(`${API}/node/${encodeURIComponent(item.title)}`);
+        const data = response.data;
+        
+        if (data.quiz && data.quiz.questions) {
+          setLibraryQuizData(data.quiz);
+        } else {
+          setLibraryQuizData(null);
+        }
+      } catch (error) {
+        console.error('Error fetching quiz data:', error);
+        // Fallback to local SAMPLE_QUIZ if API fails
+        setLibraryQuizData({ questions: SAMPLE_QUIZ });
+      }
+    } else {
+      setLibraryQuizData(null);
+    }
   };
 
   const closeLibraryItem = () => {
     setSelectedLibraryItem(null);
     setLibraryModalTab('summary');
+    setLibraryQuizData(null);
     setQuizAnswers({});
     setQuizResults({});
     setCurrentQuestionIndex(0);
+    setShowQuizResults(false);
   };
   
   // Start Priority Review Session
