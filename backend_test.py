@@ -369,7 +369,7 @@ class BackendTester:
         return True
     
     def validate_node_detail(self, data: Dict) -> bool:
-        """Validate detailed /api/node/{title} response"""
+        """Validate detailed /api/node/{title} response (lazy loading architecture)"""
         required_keys = ["node", "summary", "quiz", "performance"]
         for key in required_keys:
             if key not in data:
@@ -380,7 +380,7 @@ class BackendTester:
         if not isinstance(node, dict):
             return f"node should be a dict, got {type(node)}"
         
-        # Validate summary data
+        # Validate summary data (LAZY LOADED from SUMMARY_CONTENT)
         summary = data["summary"]
         if summary is not None:
             if not isinstance(summary, dict):
@@ -391,11 +391,14 @@ class BackendTester:
                 if key not in summary:
                     return f"Summary missing key: {key}"
             
-            print_success(f"  Summary has: {', '.join(summary.keys())}")
+            print_success(f"  ✅ LAZY LOADED SUMMARY: {', '.join(summary.keys())}")
+            print_success(f"  Summary content length: {len(summary['content'])} chars")
+            print_success(f"  Key takeaways: {len(summary['keyTakeaways'])} items")
+            print_success(f"  Keywords: {len(summary['keywords'])} items")
         else:
             print_info("  Summary data is null (no summary available)")
         
-        # Validate quiz data
+        # Validate quiz data (LAZY LOADED from QUIZ_CONTENT)
         quiz = data["quiz"]
         if quiz is not None:
             if not isinstance(quiz, dict):
@@ -409,7 +412,22 @@ class BackendTester:
             if not isinstance(quiz["questions"], list):
                 return f"quiz questions should be a list, got {type(quiz['questions'])}"
             
-            print_success(f"  Quiz has {len(quiz['questions'])} questions")
+            # Validate question structure
+            if len(quiz["questions"]) > 0:
+                question = quiz["questions"][0]
+                question_keys = ["q", "options", "correctIndex"]
+                for key in question_keys:
+                    if key not in question:
+                        return f"Quiz question missing key: {key}"
+                
+                if not isinstance(question["options"], list):
+                    return f"Question options should be a list, got {type(question['options'])}"
+                
+                print_success(f"  ✅ LAZY LOADED QUIZ: {len(quiz['questions'])} questions")
+                print_success(f"  Sample question: {question['q'][:50]}...")
+                print_success(f"  Options per question: {len(question['options'])}")
+            else:
+                return "Quiz has no questions"
         else:
             print_info("  Quiz data is null (no quiz available)")
         
