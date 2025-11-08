@@ -810,18 +810,21 @@
   border: 1px solid var(--divider);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   z-index: 10;
+  max-width: calc(100% - 2rem);
 }
 
 .legend-inline-items {
   display: flex;
   gap: 1rem;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .legend-inline-item {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  white-space: nowrap;
 }
 
 .legend-inline-dot {
@@ -836,7 +839,6 @@
   font-size: 0.8125rem;
   color: var(--text-dark);
   font-weight: 500;
-  white-space: nowrap;
 }
 
 /* Node Detail Modal */
