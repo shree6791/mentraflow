@@ -78,18 +78,18 @@ async def create_status_check(input: StatusCheckCreate):
 # ========================================
 
 # --------------------------------------
-# TOPICS (Unified - used by Dashboard, Insights, Knowledge Graph)
+# KNOWLEDGE GRAPH NODES (Lightweight & Detail)
 # --------------------------------------
 
-@api_router.get("/topics")
-async def get_all_topics():
+@api_router.get("/nodes")
+async def get_all_nodes():
     """
-    LIGHTWEIGHT API - Get minimal topic data for graph display
+    LIGHTWEIGHT API - Get minimal node data for graph display
     Returns: id, title, state, lastReview, score, connections
     Used by: Knowledge Graph for initial render
     """
     # Return only essential fields for graph visualization
-    lightweight_topics = [{
+    lightweight_nodes = [{
         "id": topic["id"],
         "title": topic["title"],
         "state": topic["state"],
@@ -98,22 +98,22 @@ async def get_all_topics():
         "connections": topic["connections"]
     } for topic in TOPICS]
     
-    return {"topics": lightweight_topics}
+    return {"nodes": lightweight_nodes}
 
-@api_router.get("/topic/{title}")
-async def get_topic_detail(title: str):
+@api_router.get("/node/{title}")
+async def get_node_detail(title: str):
     """
-    DETAIL API - Get comprehensive topic data
-    Returns: All topic data + summary + quiz + performance
-    Used by: Modal when user clicks on a topic
+    DETAIL API - Get comprehensive node data
+    Returns: All node data + summary + quiz + performance
+    Used by: Modal when user clicks on a node
     """
     import urllib.parse
     decoded_title = urllib.parse.unquote(title)
     
-    # Find the topic
-    topic = next((t for t in TOPICS if t["title"] == decoded_title), None)
-    if not topic:
-        raise HTTPException(status_code=404, detail="Topic not found")
+    # Find the node
+    node = next((t for t in TOPICS if t["title"] == decoded_title), None)
+    if not node:
+        raise HTTPException(status_code=404, detail="Node not found")
     
     # Get quiz data
     quiz = QUICK_RECALL_QUIZ.get(decoded_title, [])
@@ -127,17 +127,17 @@ async def get_topic_detail(title: str):
     
     # Build comprehensive response
     return {
-        "topic": topic,
+        "node": node,
         "summary": summary,
         "quiz": {
             "title": decoded_title,
             "questions": quiz
         } if quiz else None,
         "performance": {
-            "quizzesTaken": topic.get("quizzesTaken", 0),
-            "currentScore": topic.get("score", 0),
-            "state": topic.get("state", "unknown"),
-            "lastReview": topic.get("lastReview", "Never")
+            "quizzesTaken": node.get("quizzesTaken", 0),
+            "currentScore": node.get("score", 0),
+            "state": node.get("state", "unknown"),
+            "lastReview": node.get("lastReview", "Never")
         }
     }
 
