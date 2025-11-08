@@ -40,16 +40,16 @@ const Insights = () => {
         setStats(statsResponse.data || stats);
         
         // Process topics data into performance categories
-        const topics = topicsResponse.data || [];
+        const topics = topicsResponse.data?.topics || [];
         const categorizedTopics = {
-          strong: topics.filter(t => t.avgScore >= 80),
-          medium: topics.filter(t => t.avgScore >= 60 && t.avgScore < 80),
-          weak: topics.filter(t => t.avgScore < 60)
+          strong: topics.filter(t => t.score >= 80),
+          medium: topics.filter(t => t.score >= 60 && t.score < 80),
+          weak: topics.filter(t => t.score < 60)
         };
         setPerformanceData(categorizedTopics);
         
-        setKnowledgeClusters(clustersResponse.data || []);
-        setRecommendations(recommendationsResponse.data || []);
+        setKnowledgeClusters(clustersResponse.data?.clusters || []);
+        setRecommendations(recommendationsResponse.data?.recommendations || []);
         
         setLoading(false);
       } catch (error) {
