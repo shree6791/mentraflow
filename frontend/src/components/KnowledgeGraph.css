@@ -545,6 +545,11 @@
   min-width: 220px;
 }
 
+.tooltip-close:hover {
+  background: #F3F4F6 !important;
+  color: #1F2937 !important;
+}
+
 .tooltip-content strong {
   display: block;
   font-size: 1rem;
