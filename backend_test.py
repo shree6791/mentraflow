@@ -324,7 +324,7 @@ class BackendTester:
         return True
     
     def validate_lightweight_nodes(self, data: Dict) -> bool:
-        """Validate lightweight /api/nodes response (optimized)"""
+        """Validate lightweight /api/nodes response (lazy loading architecture)"""
         if "nodes" not in data:
             return "Missing 'nodes' key"
         
@@ -337,7 +337,7 @@ class BackendTester:
         
         print_success(f"  Found {len(nodes)} nodes")
         
-        # Validate lightweight structure (should only have minimal fields)
+        # Validate lightweight structure (should only have minimal fields for lazy loading)
         if nodes:
             node = nodes[0]
             expected_keys = ["id", "title", "state", "lastReview", "score", "connections"]
@@ -345,15 +345,22 @@ class BackendTester:
                 if key not in node:
                     return f"Node missing key: {key}"
             
-            # Check that it's lightweight (shouldn't have extra fields like libraryId, quizzesTaken)
-            extra_fields = [k for k in node.keys() if k not in expected_keys]
-            if extra_fields:
-                print_warning(f"  Extra fields found (not lightweight): {extra_fields}")
+            # CRITICAL: Check that lazy loading is working - should NOT have quiz/summary content
+            forbidden_fields = ["questions", "summary"]
+            found_forbidden = [k for k in node.keys() if k in forbidden_fields]
+            if found_forbidden:
+                return f"LAZY LOADING FAILED: Found quiz/summary content in lightweight nodes: {found_forbidden}"
+            
+            # Check for reference fields (quizId, summaryId should be in full node data, not lightweight)
+            reference_fields = [k for k in node.keys() if k in ["quizId", "summaryId"]]
+            if reference_fields:
+                print_info(f"  Reference fields present: {reference_fields} (acceptable)")
             
             # Validate connections is an array
             if not isinstance(node["connections"], list):
                 return f"connections should be a list, got {type(node['connections'])}"
             
+            print_success(f"  ✅ LAZY LOADING VERIFIED: No quiz/summary content in lightweight response")
             print_success(f"  Sample node: {node['title']}")
             print_success(f"  Connections: {len(node['connections'])} connections")
             print_success(f"  Score: {node['score']}")
