@@ -58,19 +58,31 @@ const KnowledgeGraphPage = () => {
   // Modal Handlers  
   const openTopicModal = async (topic, tab = 'summary') => {
     console.log('openTopicModal called with topic:', topic, 'tab:', tab);
-    // alert(`Opening modal for: ${topic?.title || 'unknown'}`);
     setSelectedTopic(topic);
     setModalTab(tab);
     
-    // Fetch quiz data if opening quiz tab
-    if (tab === 'quiz') {
-      try {
-        const response = await axios.get(`${API}/quiz/${encodeURIComponent(topic.title)}`);
-        setQuizData(response.data);
-      } catch (error) {
-        console.error('Error fetching quiz:', error);
+    // Fetch complete topic details (summary + quiz + performance)
+    try {
+      const response = await axios.get(`${API}/topic/${encodeURIComponent(topic.title)}`);
+      const data = response.data;
+      
+      // Set quiz data if available
+      if (data.quiz && data.quiz.questions) {
+        setQuizData(data.quiz);
+      } else {
         setQuizData(null);
       }
+      
+      // Store the full topic data for use in tabs
+      setSelectedTopic({
+        ...topic,
+        summary: data.summary,
+        performance: data.performance
+      });
+      
+    } catch (error) {
+      console.error('Error fetching topic details:', error);
+      setQuizData(null);
     }
   };
   
