@@ -1,5 +1,122 @@
 # Dashboard Mock Data
-# This file contains all mock data that will be returned by API endpoints
+# Consolidated and optimized data structure
+
+# ========================================
+# UNIFIED TOPICS/NODES DATA (Single Source of Truth)
+# ========================================
+# Used by: Dashboard, Insights, Knowledge Graph
+TOPICS = [
+    {
+        "id": "t1",
+        "title": "Forgetting Curve",
+        "state": "high",
+        "lastReview": "2 days ago",
+        "score": 85,
+        "connections": ["t2", "t5", "t7"],
+        "libraryId": "lib1",
+        "quizzesTaken": 5
+    },
+    {
+        "id": "t2",
+        "title": "Active Recall",
+        "state": "high",
+        "lastReview": "1 day ago",
+        "score": 92,
+        "connections": ["t1", "t3", "t5"],
+        "libraryId": "lib2",
+        "quizzesTaken": 4
+    },
+    {
+        "id": "t3",
+        "title": "Spacing Effect",
+        "state": "medium",
+        "lastReview": "1 week ago",
+        "score": 68,
+        "connections": ["t2", "t4", "t6"],
+        "libraryId": "lib3",
+        "quizzesTaken": 3
+    },
+    {
+        "id": "t4",
+        "title": "Working Memory",
+        "state": "fading",
+        "lastReview": "2 weeks ago",
+        "score": 45,
+        "connections": ["t3", "t5"],
+        "libraryId": "lib6",
+        "quizzesTaken": 2
+    },
+    {
+        "id": "t5",
+        "title": "Cognitive Load",
+        "state": "high",
+        "lastReview": "3 days ago",
+        "score": 88,
+        "connections": ["t1", "t2", "t4", "t6"],
+        "libraryId": "lib5",
+        "quizzesTaken": 6
+    },
+    {
+        "id": "t6",
+        "title": "Neuroplasticity",
+        "state": "medium",
+        "lastReview": "5 days ago",
+        "score": 72,
+        "connections": ["t3", "t5", "t7"],
+        "libraryId": "lib4",
+        "quizzesTaken": 3
+    },
+    {
+        "id": "t7",
+        "title": "Memory Consolidation",
+        "state": "fading",
+        "lastReview": "3 weeks ago",
+        "score": 38,
+        "connections": ["t1", "t6"],
+        "libraryId": "lib1",
+        "quizzesTaken": 1
+    },
+    {
+        "id": "t8",
+        "title": "Metacognition",
+        "state": "high",
+        "lastReview": "1 day ago",
+        "score": 90,
+        "connections": ["t2", "t5"],
+        "libraryId": "lib2",
+        "quizzesTaken": 5
+    }
+]
+
+# ========================================
+# UNIFIED STATISTICS (Single Source of Truth)
+# ========================================
+# Used by: Dashboard, Insights
+STATS = {
+    "dashboard": {
+        "totalItems": 6,
+        "itemsDueToday": 3,
+        "avgRetention": 72,
+        "streakDays": 7
+    },
+    "insights": {
+        "totalQuizzes": 23,
+        "avgScore": 75,
+        "strongTopics": 3,
+        "needsReview": 2,
+        "streak": 4,
+        "totalNotes": 12
+    },
+    "knowledge": {
+        "totalTopics": 8,
+        "totalConnections": 24,
+        "avgConnectionsPerTopic": 3
+    }
+}
+
+# ========================================
+# LIBRARY ITEMS (Dashboard specific)
+# ========================================
 
 LIBRARY_ITEMS = [
     {
