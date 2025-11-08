@@ -604,6 +604,7 @@
   background: white;
   border: 1px solid var(--divider);
   border-radius: 8px;
+  flex-shrink: 0;
 }
 
 .filter-group svg {
@@ -619,6 +620,43 @@
   cursor: pointer;
   outline: none;
   padding: 0;
+  min-width: 140px;
+}
+
+/* Zoom Controls - Embedded in Graph */
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.zoom-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-light);
+  border: 1px solid var(--divider);
+  border-radius: 8px;
+  color: var(--primary-teal);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.zoom-btn:hover {
+  background: var(--primary-teal);
+  color: white;
+  border-color: var(--primary-teal);
+  transform: scale(1.05);
+}
+
+.zoom-btn.recenter-btn {
+  border-left: 1px solid var(--divider);
+  padding-left: 0.5rem;
+  margin-left: 0.25rem;
 }
 
 /* Graph Hint */
