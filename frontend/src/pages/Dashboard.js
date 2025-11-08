@@ -274,15 +274,23 @@ const Dashboard = () => {
   };
 
   const submitQuiz = () => {
+    // Check all possible quiz data sources
+    const activeQuiz = libraryQuizData?.questions || recallQuizData || quiz;
+    
+    if (!activeQuiz) {
+      console.error('No quiz data available');
+      return;
+    }
+    
     const results = {};
-    quiz.forEach((q, idx) => {
+    activeQuiz.forEach((q, idx) => {
       results[idx] = quizAnswers[idx] === q.correctIndex;
     });
     setQuizResults(results);
     setShowQuizResults(true);
     
     const score = Object.values(results).filter(Boolean).length;
-    const percentage = Math.round((score / quiz.length) * 100);
+    const percentage = Math.round((score / activeQuiz.length) * 100);
     
     // Update mastery score
     const change = percentage > masteryScore ? 2 : -1;
