@@ -13,13 +13,14 @@
 /* Graph Visualization Container */
 .graph-visualization {
   position: relative;
-  flex: 1;
+  height: 600px;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
+  padding: 0 2rem;
   overflow: hidden;
   background: linear-gradient(135deg, #F7FAFC 0%, rgba(17, 138, 178, 0.08) 100%);
-  padding: 0 2rem;
+  border-radius: 16px;
   box-sizing: border-box;
 }
 
