@@ -648,7 +648,7 @@ class BackendTester:
             "Node Detail - Forgetting Curve (q1, s1)",
             f"{BACKEND_URL}/node/Forgetting%20Curve",
             expected_keys=["node", "summary", "quiz", "performance"],
-            validate_func=self.validate_node_detail
+            validate_func=self.validate_node_detail_naming_convention
         )
         
         # Test 3: GET /api/node/Active%20Recall - Second lazy loading test
@@ -660,7 +660,7 @@ class BackendTester:
             "Node Detail - Active Recall (q2, s2)",
             f"{BACKEND_URL}/node/Active%20Recall",
             expected_keys=["node", "summary", "quiz", "performance"],
-            validate_func=self.validate_node_detail
+            validate_func=self.validate_node_detail_naming_convention
         )
         
         # Test 4: GET /api/library - Verify DOCUMENTS renamed
