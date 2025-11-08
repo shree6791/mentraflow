@@ -4,7 +4,7 @@ Endpoints for spaced repetition recall tasks
 """
 
 from fastapi import APIRouter
-from dashboard_data import RECALL_TASKS
+from db.repository.dashboard_data import RECALL_TASKS
 
 router = APIRouter()
 
