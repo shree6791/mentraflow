@@ -353,7 +353,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       simulation.stop();
       d3.select('.graph-tooltip').remove();
     };
-  }, [filterState, searchQuery, expandedNode]);
+  }, [activeFilters, searchQuery, expandedNode]);
 
   const handleRecenter = () => {
     const svg = d3.select(svgRef.current);
