@@ -2,6 +2,18 @@
    KNOWLEDGE GRAPH - INTERACTIVE VISUALIZATION
    ======================================== */
 
+/* Knowledge Graph Page Wrapper */
+.knowledge-graph-page {
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  background: linear-gradient(135deg, #F7FAFC 0%, rgba(17, 138, 178, 0.08) 100%);
+  border-radius: 16px;
+  overflow: hidden;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 .knowledge-graph-modal {
   display: flex;
   flex-direction: column;
