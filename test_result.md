@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Phase 2: UI/UX Fixes - Dashboard card spacing, prominent yellow borders for Review Soon cards, and inline filter bar layout"
+user_problem_statement: "Add Dashboard-style modal to KnowledgeGraphPage - When clicking 'Take Quiz' or 'View Summary' in Knowledge Graph, show the same comprehensive modal (with Summary, Quiz, Performance tabs) that appears on Dashboard page"
 
 backend:
   - task: "Consolidated Backend API Endpoints"
