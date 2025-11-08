@@ -105,6 +105,42 @@
 user_problem_statement: "UI Polish & Bug Fixes: Knowledge Graph tooltip visibility, Dashboard retention borders, and Knowledge Graph legend spacing"
 
 frontend:
+  - task: "Knowledge Graph - Hover Tooltip Visibility"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/KnowledgeGraphD3.js, /app/frontend/src/components/KnowledgeGraph.css"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+        - agent: "main"
+        - comment: "FIXED: Tooltip now renders correctly on node hover. Root cause identified by troubleshoot_agent: CSS variable inheritance broken when tooltip appended to body outside React component tree. Solution: (1) Changed tooltip container from d3.select('body') to d3.select(containerRef.current) to keep it within component context, (2) Updated positioning from pageX/pageY to container-relative coordinates (clientX/clientY with container offset), (3) Added explicit inline styles for background, colors, and all styling to override any CSS conflicts. Result: Tooltip displays perfectly with white background, readable text, node details (title, last review, score, connections), and working action buttons (Take Quiz, View Summary)."
+  
+  - task: "Dashboard - Color-Coded Retention Borders"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/Dashboard.css, /app/frontend/src/pages/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+        - agent: "main"
+        - comment: "VERIFIED WORKING: All retention status borders are displaying correctly. Red (3px solid #FF6B6B) for 'Fading' cards, Yellow (3px solid #FFD166) for 'Review Soon/Medium' cards, Green (3px solid #06D6A0) for 'Strong/High' cards. Cards also have subtle background tints matching their status. Visual testing confirms all borders are prominent and properly color-coded. No changes needed - feature was already working correctly."
+  
+  - task: "Knowledge Graph - Legend Spacing & Visibility"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/KnowledgeGraphD3.js, /app/frontend/src/components/KnowledgeGraph.css"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+        - working: true
+        - agent: "main"
+        - comment: "VERIFIED WORKING: Inline legend positioned in top-right corner with proper spacing. Displays colored dots (green, yellow, red) with labels (High, Medium, Fading). Has white background with backdrop blur, rounded corners, and proper shadow. Responsive styles in place for mobile. Legend is clearly visible and does not interfere with graph interaction. No changes needed - feature was already working correctly."
+
   - task: "Quick Filters - Spacing and Order"
     implemented: true
     working: true
