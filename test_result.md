@@ -365,21 +365,20 @@ frontend:
 
 metadata:
   created_by: "main_agent"
-  version: "4.1"
-  test_sequence: 5
+  version: "5.0"
+  test_sequence: 6
   run_ui: false
 
 test_plan:
   current_focus:
-    - "Dashboard API Integration"
-    - "Knowledge Graph API Integration"
-    - "Consolidated Backend API Endpoints"
+    - "Prominent Yellow Borders for Review Soon Cards"
+    - "Inline Filter Bar - Single Line Layout (Desktop)"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
 
 agent_communication:
     - agent: "main"
-    - message: "✅ Phase 1: Frontend-Backend API Integration COMPLETE:\n\n**Backend API Setup:**\n   - Created 7 consolidated endpoints in /app/backend/server.py\n   - All mock data consolidated in /app/backend/dashboard_data.py\n   - Endpoints: /api/stats, /api/topics, /api/library, /api/recall-tasks, /api/quiz/{title}, /api/clusters, /api/recommendations\n   - Backend endpoints tested successfully via curl\n\n**Frontend Integration:**\n   1. Dashboard.js:\n      - Added /api/stats call to existing useEffect\n      - Now fetches masteryScore (avgRetention) and streak (streakDays) from backend\n      - Already fetching library items, topics, and recall tasks from backend\n      - Removed local mock data dependencies\n   \n   2. Insights.js:\n      - Already fully integrated with backend APIs\n      - No changes needed - verified working correctly\n   \n   3. KnowledgeGraphD3.js:\n      - Updated to use topics prop from backend API instead of local graphData\n      - KnowledgeGraphPage.js already fetching from /api/topics\n      - Removed 8 hardcoded topic entries\n      - Graph now renders with backend data\n\n**Ready for Testing:**\n   - Backend endpoints need verification via curl\n   - Dashboard needs frontend testing to verify stats display\n   - Knowledge Graph needs testing to verify graph renders with API data"
+    - message: "✅ Phase 2: UI/UX Fixes COMPLETE:\n\n**1. Prominent Yellow Borders for Review Soon Cards** ✅\n   - Increased border width from 3px to 4px for all retention states\n   - Added subtle box shadows for better visual prominence\n   - Yellow cards (#FFD166) now highly visible with stronger shadow\n   - Matches app color palette perfectly\n   - Red (Fading) and Green (Strong) borders also enhanced\n\n**2. Dashboard Card Spacing Alignment** ✅\n   - Verified spacing is already optimal\n   - 2-column grid with 1rem gap on desktop\n   - Responsive layout working correctly\n   - No changes needed\n\n**3. Inline Filter Bar - Single Line Layout** ✅\n   - Created inline filter bar with horizontal layout\n   - Filters on left: All Items, Due Soon, Fading, Strong\n   - Sort dropdown on right with custom styling\n   - Active states using app colors (teal, yellow, red, green)\n   - Mobile: hidden (uses modal instead)\n   - Desktop: full width single-line layout\n   - All interactions working correctly\n\n**Testing:**\n   - Visual verification via screenshots completed\n   - Filter interactions tested (All Items, Due Soon active states)\n   - Yellow borders highly visible on Review Soon cards\n   - Layout responsive and clean"
     - agent: "testing"
     - message: "✅ BACKEND API TESTING COMPLETE - ALL ENDPOINTS WORKING PERFECTLY\n\n**Testing Summary:**\n- Created comprehensive backend_test.py with 7 endpoint tests\n- All 7 API endpoints passed validation: /api/stats, /api/topics, /api/library, /api/recall-tasks, /api/clusters, /api/recommendations, /api/quiz/{title}\n- Verified all data structures, required fields, and data types\n- Confirmed proper array formatting and nested object structures\n- Backend URL tested: https://knowledge-hub-232.preview.emergentagent.com/api\n\n**Key Findings:**\n- avgRetention (72) and streakDays (7) available for Dashboard\n- 8 topics with complete connection data for Knowledge Graph\n- 6 library items with retention and quiz scores\n- 3 recall tasks properly formatted\n- Quiz endpoint handles URL encoding correctly\n\n**Status:** Backend is production-ready. All consolidated APIs working as expected. No issues found."
