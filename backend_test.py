@@ -767,9 +767,16 @@ if __name__ == "__main__":
     tester = BackendTester()
     
     # Check if we should run specific tests
-    if len(sys.argv) > 1 and sys.argv[1] == "all":
-        tester.run_all_tests()
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "all":
+            tester.run_all_tests()
+        elif sys.argv[1] == "refactored":
+            tester.run_refactored_api_tests()
+            tester.print_summary()
+        else:
+            print("Usage: python backend_test.py [all|refactored|lazy]")
+            print("Default: lazy loading tests")
     else:
-        # Run refactored API tests by default for this review
-        tester.run_refactored_api_tests()
+        # Run lazy loading tests by default for this review request
+        tester.run_lazy_loading_tests()
         tester.print_summary()
