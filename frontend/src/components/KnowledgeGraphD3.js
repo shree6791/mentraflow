@@ -205,11 +205,10 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         .duration(200)
         .style('opacity', 1);
       
-      // Position tooltip near the clicked node
-      const nodeRect = this.getBoundingClientRect();
-      const containerRect = containerRef.current.getBoundingClientRect();
-      const tooltipX = nodeRect.left - containerRect.left + nodeRect.width / 2;
-      const tooltipY = nodeRect.top - containerRect.top - 10;
+      // Use the node's actual simulation coordinates (d.x, d.y)
+      // Position tooltip above the node
+      const tooltipX = d.x;
+      const tooltipY = d.y - getNodeRadius(d.connections) - 20; // Position above node with gap
       
       tooltip.html(`
         <div class="tooltip-content" style="background: white; color: #1F2937; position: relative;">
