@@ -14,7 +14,6 @@ from auth import auth_router, set_database
 # Import dashboard mock data
 from dashboard_data import (
     NODES,
-    TOPICS,  # Backward compatibility alias
     STATS,
     LIBRARY_ITEMS,
     RECALL_TASKS,
