@@ -233,13 +233,14 @@ class BackendTester:
         # Validate task structure if tasks exist
         if tasks:
             task = tasks[0]
-            required_keys = ["id", "title", "libraryId", "type", "dueIn"]
+            required_keys = ["id", "title", "dueTime", "priority", "nodeId"]
             for key in required_keys:
                 if key not in task:
                     return f"Recall task missing key: {key}"
             
             print_success(f"  Sample task: {task['title']}")
-            print_success(f"  Due: {task['dueIn']}")
+            print_success(f"  Due: {task['dueTime']}")
+            print_success(f"  Priority: {task['priority']}")
         
         return True
     
