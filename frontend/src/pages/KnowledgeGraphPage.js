@@ -98,15 +98,55 @@ const KnowledgeGraphPage = () => {
     }));
   };
 
-  const submitQuiz = () => {
+  const submitQuiz = async () => {
     if (!quizData || !quizData.questions) return;
     
     const results = {};
+    const answers = [];
+    
     quizData.questions.forEach((question, idx) => {
-      results[idx] = quizAnswers[idx] === question.correctIndex;
+      const isCorrect = quizAnswers[idx] === question.correctIndex;
+      results[idx] = isCorrect;
+      answers.push({
+        questionIndex: idx,
+        selectedAnswer: quizAnswers[idx],
+        isCorrect: isCorrect
+      });
     });
+    
     setQuizResults(results);
     setShowQuizResults(true);
+    
+    const score = Object.values(results).filter(Boolean).length;
+    const percentage = Math.round((score / quizData.questions.length) * 100);
+    
+    // Submit quiz results to backend
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/quiz-results`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nodeId: selectedTopic?.id || 't1',
+          quizId: selectedTopic?.quizId || 'q1',
+          answers: answers,
+          score: score,
+          percentage: percentage,
+          totalQuestions: quizData.questions.length
+        })
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Quiz result submitted:', data);
+        console.log(data.message); // Log the motivational message
+      } else {
+        console.error('Failed to submit quiz result');
+      }
+    } catch (error) {
+      console.error('Error submitting quiz:', error);
+    }
   };
 
   const retakeQuiz = () => {
