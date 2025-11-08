@@ -395,7 +395,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Backend refactoring validation completed"
+    - "Lazy loading architecture validation completed"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
