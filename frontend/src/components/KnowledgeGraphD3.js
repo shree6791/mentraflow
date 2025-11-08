@@ -407,21 +407,6 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
             className="search-input"
           />
         </div>
-
-        {/* Filter */}
-        <div className="filter-group">
-          <Filter size={18} />
-          <select
-            value={filterState}
-            onChange={(e) => setFilterState(e.target.value)}
-            className="filter-select"
-          >
-            <option value="all">All Concepts</option>
-            <option value="high">Strong Retention</option>
-            <option value="medium">Medium Retention</option>
-            <option value="fading">Needs Review</option>
-          </select>
-        </div>
       </div>
 
       {/* Graph Container */}
