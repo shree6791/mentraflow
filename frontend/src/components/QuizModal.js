@@ -82,7 +82,7 @@ const QuizModal = ({
           {modalTab === 'summary' && (
             <div className="library-tab-content">
               <div className="summary-content">
-                {item.summary ? (
+                {item.summary && item.summary.content ? (
                   <>
                     <h3>Overview</h3>
                     <p>{item.summary.content}</p>
@@ -108,9 +108,12 @@ const QuizModal = ({
                     )}
                   </>
                 ) : (
-                  <div style={{textAlign: 'center', padding: '2rem'}}>
-                    <div className="loading-spinner" style={{margin: '0 auto 1rem'}}></div>
-                    <p>Loading summary...</p>
+                  <div style={{textAlign: 'center', padding: '3rem'}}>
+                    <Eye size={48} style={{color: '#ccc', margin: '0 auto 1rem'}} />
+                    <h3 style={{marginBottom: '0.5rem'}}>No Summary Available</h3>
+                    <p style={{color: '#666'}}>
+                      Summary content for this topic hasn't been created yet.
+                    </p>
                   </div>
                 )}
               </div>
