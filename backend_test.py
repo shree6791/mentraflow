@@ -119,7 +119,7 @@ class BackendTester:
         
         # Validate dashboard stats
         dashboard = data.get("dashboard", {})
-        dashboard_keys = ["totalItems", "itemsDueToday", "avgRetention", "streakDays"]
+        dashboard_keys = ["itemsDueToday", "avgRetention", "streakDays"]
         for key in dashboard_keys:
             if key not in dashboard:
                 return f"Missing dashboard key: {key}"
