@@ -5,9 +5,9 @@ Endpoints for knowledge graph nodes and topic details
 
 from fastapi import APIRouter, HTTPException
 import urllib.parse
-from db.repository.dashboard_data import NODES
-from db.repository.quiz_data import QUIZ_CONTENT
-from db.repository.summary_data import SUMMARY_CONTENT
+from db.dashboard_data import NODES
+from db.quiz_data import QUIZ_CONTENT
+from db.summary_data import SUMMARY_CONTENT
 
 router = APIRouter()
 
