@@ -6,42 +6,26 @@ import KnowledgeGraphD3 from '../components/KnowledgeGraphD3';
 
 const KnowledgeGraphPage = () => {
   const navigate = useNavigate();
+  const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+  
+  const [topics, setTopics] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Sample topics data (same as Dashboard)
-  const topics = [
-    { 
-      id: 'spacing-effect', 
-      title: 'Spacing Effect', 
-      category: 'Memory Technique', 
-      retention: 85,
-      lastReviewed: '2 days ago',
-      connections: ['working-memory', 'interleaving']
-    },
-    { 
-      id: 'working-memory', 
-      title: 'Working Memory', 
-      category: 'Cognitive Science', 
-      retention: 72,
-      lastReviewed: '5 days ago',
-      connections: ['spacing-effect', 'cognitive-load']
-    },
-    { 
-      id: 'cognitive-load', 
-      title: 'Cognitive Load', 
-      category: 'Learning Theory', 
-      retention: 55,
-      lastReviewed: '2 weeks ago',
-      connections: ['working-memory']
-    },
-    { 
-      id: 'interleaving', 
-      title: 'Interleaving Practice', 
-      category: 'Memory Technique', 
-      retention: 68,
-      lastReviewed: '1 week ago',
-      connections: ['spacing-effect']
-    }
-  ];
+  useEffect(() => {
+    const fetchTopics = async () => {
+      try {
+        const response = await axios.get(`${API}/topics`, { withCredentials: true });
+        setTopics(response.data || []);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching topics:', error);
+        setTopics([]);
+        setLoading(false);
+      }
+    };
+
+    fetchTopics();
+  }, [API]);
 
   return (
     <AppLayout 
