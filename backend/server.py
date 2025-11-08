@@ -89,13 +89,13 @@ async def get_all_nodes():
     """
     # Return only essential fields for graph visualization
     lightweight_nodes = [{
-        "id": topic["id"],
-        "title": topic["title"],
-        "state": topic["state"],
-        "lastReview": topic["lastReview"],
-        "score": topic["score"],
-        "connections": topic["connections"]
-    } for topic in TOPICS]
+        "id": node["id"],
+        "title": node["title"],
+        "state": node["state"],
+        "lastReview": node["lastReview"],
+        "score": node["score"],
+        "connections": node["connections"]
+    } for node in NODES]
     
     return {"nodes": lightweight_nodes}
 
