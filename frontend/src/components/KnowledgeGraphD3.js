@@ -284,9 +284,13 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
     });
 
     node.on('mousemove', function(event) {
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const tooltipX = event.clientX - containerRect.left + 15;
+      const tooltipY = event.clientY - containerRect.top - 15;
+      
       tooltip
-        .style('left', (event.pageX + 15) + 'px')
-        .style('top', (event.pageY - 15) + 'px');
+        .style('left', tooltipX + 'px')
+        .style('top', tooltipY + 'px');
     });
 
     // Simulation tick
