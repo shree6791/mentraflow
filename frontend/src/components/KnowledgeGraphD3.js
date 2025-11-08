@@ -201,6 +201,11 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         .duration(200)
         .style('opacity', 1);
       
+      // Get container offset for proper positioning
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const tooltipX = event.clientX - containerRect.left + 15;
+      const tooltipY = event.clientY - containerRect.top - 15;
+      
       tooltip.html(`
         <div class="tooltip-content">
           <strong>${d.title}</strong>
@@ -219,8 +224,8 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
           </div>
         </div>
       `)
-        .style('left', (event.pageX + 15) + 'px')
-        .style('top', (event.pageY - 15) + 'px');
+        .style('left', tooltipX + 'px')
+        .style('top', tooltipY + 'px');
       
       // Add click handlers to tooltip buttons
       d3.selectAll('.tooltip-btn').on('click', function() {
