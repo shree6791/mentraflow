@@ -14,7 +14,7 @@ const KnowledgeGraphPage = () => {
   useEffect(() => {
     const fetchTopics = async () => {
       try {
-        const response = await axios.get(`${API}/topics`, { withCredentials: true });
+        const response = await axios.get(`${API}/topics`);
         setTopics(response.data?.topics || []);
         setLoading(false);
       } catch (error) {
