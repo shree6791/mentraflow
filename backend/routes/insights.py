@@ -4,7 +4,7 @@ Endpoints for knowledge clusters and personalized recommendations
 """
 
 from fastapi import APIRouter
-from db.repository.dashboard_data import KNOWLEDGE_CLUSTERS, RECOMMENDATIONS
+from db.dashboard_data import KNOWLEDGE_CLUSTERS, RECOMMENDATIONS
 
 router = APIRouter()
 
