@@ -330,12 +330,22 @@ const Dashboard = () => {
   };
 
   // Phase 2: Recall Tasks Handlers
-  const startRecallTask = (task) => {
+  const startRecallTask = async (task) => {
     setCurrentRecallTask(task);
-    setRecallQuizData(QUICK_RECALL_QUIZ[task.title]);
     setQuizAnswers({});
     setQuizResults({});
     setCurrentQuestionIndex(0);
+    
+    try {
+      // Fetch recall quiz data from API
+      const response = await axios.get(`${API}/recall-quiz/${encodeURIComponent(task.title)}`);
+      setRecallQuizData(response.data?.questions || []);
+    } catch (error) {
+      console.error('Error fetching recall quiz data:', error);
+      // Fallback to empty array if API fails
+      setRecallQuizData([]);
+    }
+    
     setShowRecallQuiz(true);
   };
 
