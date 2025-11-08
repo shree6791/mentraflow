@@ -61,6 +61,17 @@ const Insights = () => {
     fetchInsightsData();
   }, [API]);
 
+  if (loading) {
+    return (
+      <AppLayout title="Your Learning Insights">
+        <div className="insights-loading">
+          <div className="loading-spinner"></div>
+          <p>Loading your insights...</p>
+        </div>
+      </AppLayout>
+    );
+  }
+
   return (
     <AppLayout 
       title="Your Learning Insights"
