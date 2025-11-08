@@ -276,10 +276,10 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
             <div>Connections: <span>${d.connections.length}</span></div>
           </div>
           <div class="tooltip-actions">
-            <button class="tooltip-btn tooltip-btn-primary" data-action="quiz">
+            <button class="tooltip-btn tooltip-btn-primary" id="btn-quiz-${d.id}">
               Take Quiz
             </button>
-            <button class="tooltip-btn tooltip-btn-secondary" data-action="summary">
+            <button class="tooltip-btn tooltip-btn-secondary" id="btn-summary-${d.id}">
               View Summary
             </button>
           </div>
@@ -288,6 +288,42 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         .style('left', tooltipX + 'px')
         .style('top', tooltipY + 'px')
         .style('transform', tooltipY < d.y ? 'translate(-50%, -100%)' : 'translate(-50%, 0)');
+      
+      // Attach listeners directly to buttons after HTML is set
+      const quizBtn = tooltip.select(`#btn-quiz-${d.id}`).node();
+      const summaryBtn = tooltip.select(`#btn-summary-${d.id}`).node();
+      const closeBtn = tooltip.select('.tooltip-close').node();
+      
+      console.log('Buttons found:', { quizBtn: !!quizBtn, summaryBtn: !!summaryBtn, closeBtn: !!closeBtn });
+      
+      if (quizBtn) {
+        quizBtn.addEventListener('click', function(e) {
+          console.log('Quiz button clicked directly!');
+          e.stopPropagation();
+          if (window._knowledgeGraphCallbacks?.onTakeQuiz) {
+            window._knowledgeGraphCallbacks.onTakeQuiz(d);
+          }
+          tooltip.transition().duration(200).style('opacity', 0);
+        });
+      }
+      
+      if (summaryBtn) {
+        summaryBtn.addEventListener('click', function(e) {
+          console.log('Summary button clicked directly!');
+          e.stopPropagation();
+          if (window._knowledgeGraphCallbacks?.onViewSummary) {
+            window._knowledgeGraphCallbacks.onViewSummary(d);
+          }
+          tooltip.transition().duration(200).style('opacity', 0);
+        });
+      }
+      
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          tooltip.transition().duration(200).style('opacity', 0);
+        });
+      }
       
       // Use event delegation - add listener directly to tooltip element
       const tooltipElement = tooltip.node();
