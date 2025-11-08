@@ -446,52 +446,98 @@ class BackendTester:
             self.errors.append(f"{name}: Request error - {str(e)}")
             return False
 
-    def run_optimized_api_tests(self):
-        """Run tests for the new optimized API architecture"""
-        print_header("OPTIMIZED API ARCHITECTURE TESTING")
+    def run_refactored_api_tests(self):
+        """Run tests for the refactored dashboard_data.py API endpoints"""
+        print_header("REFACTORED DASHBOARD_DATA.PY API TESTING")
         
-        # Test 1: Lightweight List API
-        print_header("Test 1: GET /api/topics - Lightweight List API")
-        print_info("Should return minimal data: id, title, state, lastReview, score, connections")
-        print_info("Should be fast (< 100ms) and return all topics")
-        
-        self.test_endpoint(
-            "Lightweight Topics API",
-            f"{BACKEND_URL}/topics",
-            expected_keys=["topics"],
-            validate_func=self.validate_lightweight_topics
-        )
-        
-        # Test 2: Detail API with specific topic
-        print_header("Test 2: GET /api/topic/Forgetting%20Curve - Detail API")
-        print_info("Should return: topic data + summary + quiz + performance")
-        print_info("Should have nested structure with all comprehensive data")
+        # Test 1: Lightweight Nodes API
+        print_header("Test 1: GET /api/nodes - Lightweight Nodes API")
+        print_info("Should return minimal node data: id, title, state, lastReview, score, connections")
+        print_info("Used by Knowledge Graph for initial render")
         
         self.test_endpoint(
-            "Topic Detail API - Forgetting Curve",
-            f"{BACKEND_URL}/topic/Forgetting%20Curve",
-            expected_keys=["topic", "summary", "quiz", "performance"],
-            validate_func=self.validate_topic_detail
+            "Lightweight Nodes API",
+            f"{BACKEND_URL}/nodes",
+            expected_keys=["nodes"],
+            validate_func=self.validate_lightweight_nodes
         )
         
-        # Test 3: Detail API with URL encoding
-        print_header("Test 3: GET /api/topic/Active%20Recall - URL Encoding Test")
-        print_info("Should properly decode the title and return correct data")
+        # Test 2: Node Detail API with specific node
+        print_header("Test 2: GET /api/node/Forgetting%20Curve - Node Detail API")
+        print_info("Should return: node data + summary + quiz + performance")
+        print_info("Should have comprehensive data for modal display")
         
         self.test_endpoint(
-            "Topic Detail API - Active Recall (URL encoded)",
-            f"{BACKEND_URL}/topic/Active%20Recall",
-            expected_keys=["topic", "summary", "quiz", "performance"],
-            validate_func=self.validate_topic_detail
+            "Node Detail API - Forgetting Curve",
+            f"{BACKEND_URL}/node/Forgetting%20Curve",
+            expected_keys=["node", "summary", "quiz", "performance"],
+            validate_func=self.validate_node_detail
         )
         
-        # Test 4: Detail API - Not found
-        print_header("Test 4: GET /api/topic/NonExistent - 404 Error Test")
-        print_info("Should return 404 error with error message")
+        # Test 3: All Statistics API
+        print_header("Test 3: GET /api/stats - All Statistics")
+        print_info("Should return dashboard, insights, and knowledge stats")
+        print_info("Verify: dashboard.itemsDueToday, dashboard.avgRetention, dashboard.streakDays")
+        
+        self.test_endpoint(
+            "All Statistics API",
+            f"{BACKEND_URL}/stats",
+            expected_keys=["dashboard", "insights", "knowledge"],
+            validate_func=self.validate_stats
+        )
+        
+        # Test 4: Library Items API
+        print_header("Test 4: GET /api/library - Library Items")
+        print_info("Should return all library items with metadata")
+        print_info("Verify: items array with id, title, retention, quizScore, hasQuiz")
+        
+        self.test_endpoint(
+            "Library Items API",
+            f"{BACKEND_URL}/library",
+            expected_keys=["items"],
+            validate_func=self.validate_library
+        )
+        
+        # Test 5: Recall Tasks API
+        print_header("Test 5: GET /api/recall-tasks - Recall Tasks")
+        print_info("Should return tasks array with priority levels")
+        
+        self.test_endpoint(
+            "Recall Tasks API",
+            f"{BACKEND_URL}/recall-tasks",
+            expected_keys=["tasks"],
+            validate_func=self.validate_recall_tasks
+        )
+        
+        # Test 6: Knowledge Clusters API
+        print_header("Test 6: GET /api/clusters - Knowledge Clusters")
+        print_info("Should return clusters array with topics and strength")
+        
+        self.test_endpoint(
+            "Knowledge Clusters API",
+            f"{BACKEND_URL}/clusters",
+            expected_keys=["clusters"],
+            validate_func=self.validate_clusters
+        )
+        
+        # Test 7: Personalized Recommendations API
+        print_header("Test 7: GET /api/recommendations - Personalized Recommendations")
+        print_info("Should return recommendations array with type and priority")
+        
+        self.test_endpoint(
+            "Personalized Recommendations API",
+            f"{BACKEND_URL}/recommendations",
+            expected_keys=["recommendations"],
+            validate_func=self.validate_recommendations
+        )
+        
+        # Test 8: Node Detail API - Not found
+        print_header("Test 8: GET /api/node/NonExistent - 404 Error Test")
+        print_info("Should return 404 error with proper error message")
         
         self.test_404_endpoint(
-            "Topic Detail API - Not Found",
-            f"{BACKEND_URL}/topic/NonExistent"
+            "Node Detail API - Not Found",
+            f"{BACKEND_URL}/node/NonExistent"
         )
 
     def run_all_tests(self):
