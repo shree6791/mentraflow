@@ -322,3 +322,40 @@ QUICK_RECALL_QUIZ = {
     ]
 }
 
+# ========================================
+# TOPIC SUMMARIES (Detailed content)
+# ========================================
+
+TOPIC_SUMMARIES = {
+    "Forgetting Curve": {
+        "content": "The forgetting curve, discovered by Hermann Ebbinghaus in 1885, shows how memory retention declines exponentially over time without reinforcement. Within 24 hours, we forget approximately 70% of new information unless we actively review it.\n\nThe key to combating the forgetting curve is spaced repetition — reviewing material at increasing intervals (1 day, 3 days, 7 days, 14 days). Each review strengthens the memory trace, making it more resistant to decay.\n\nActive recall, where you actively retrieve information from memory rather than passively re-reading, is the most effective review method. This effortful retrieval process strengthens neural pathways and creates more durable memories.",
+        "keyTakeaways": [
+            "Review just before forgetting to maximize retention efficiency",
+            "Spacing intervals should expand: 1d → 3d → 7d → 14d → 1m",
+            "Active recall strengthens memory better than passive re-reading",
+            "Each successful recall makes the next forgetting curve flatter"
+        ],
+        "keywords": ["Forgetting Curve", "Spaced Repetition", "Active Recall", "Memory Consolidation"]
+    },
+    "Active Recall": {
+        "content": "Active recall is a learning technique that involves actively retrieving information from memory rather than passively reviewing notes. This method has been proven to be one of the most effective study strategies.\n\nWhen you practice active recall, you're forcing your brain to reconstruct the information, which strengthens neural pathways. This is much more effective than simply re-reading or highlighting text.\n\nResearch shows that testing yourself regularly leads to better long-term retention than spending the same amount of time reviewing material.",
+        "keyTakeaways": [
+            "Actively retrieve information rather than passively reviewing",
+            "Testing effect: Taking practice tests improves long-term memory",
+            "Combines well with spaced repetition for maximum effect",
+            "Initial difficulty during retrieval leads to stronger memories"
+        ],
+        "keywords": ["Active Recall", "Testing Effect", "Retrieval Practice", "Learning Strategies"]
+    },
+    "Spacing Effect": {
+        "content": "The spacing effect demonstrates that learning is more effective when study sessions are spaced out over time rather than massed together in a single session. This phenomenon has been consistently demonstrated across various types of learning.\n\nWhen you space out your learning, you give your brain time to consolidate the information. Each time you return to the material, you're strengthening the neural connections associated with that knowledge.\n\nOptimal spacing intervals typically follow an expanding pattern: review after 1 day, then 3 days, then 7 days, then 14 days, and so on.",
+        "keyTakeaways": [
+            "Distributed practice beats massed practice (cramming)",
+            "Optimal intervals expand over time as memory strengthens",
+            "Spacing creates opportunities for memory consolidation",
+            "Works across all types of learning and skill acquisition"
+        ],
+        "keywords": ["Spacing Effect", "Distributed Practice", "Memory Consolidation", "Study Schedule"]
+    }
+}
+
