@@ -112,17 +112,34 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
     const filteredNodes = getFilteredNodes();
     const filteredLinks = getFilteredLinks(filteredNodes);
 
-    // Create force simulation
+    // Bounding box function to keep nodes within viewport
+    const boundingBox = (x, y, radius) => {
+      const padding = radius + 20;
+      return {
+        x: Math.max(padding, Math.min(width - padding, x)),
+        y: Math.max(padding, Math.min(height - padding, y))
+      };
+    };
+
+    // Create force simulation with bounds
     const simulation = d3.forceSimulation(filteredNodes)
       .force('link', d3.forceLink(filteredLinks)
         .id(d => d.id)
-        .distance(100)
+        .distance(120)
         .strength(0.5))
       .force('charge', d3.forceManyBody()
-        .strength(-300))
+        .strength(-400))
       .force('center', d3.forceCenter(width / 2, height / 2))
       .force('collision', d3.forceCollide()
-        .radius(d => getNodeRadius(d.connections) + 10));
+        .radius(d => getNodeRadius(d.connections) + 15))
+      .force('bounds', () => {
+        filteredNodes.forEach(node => {
+          const radius = getNodeRadius(node.connections);
+          const bounded = boundingBox(node.x, node.y, radius);
+          node.x = bounded.x;
+          node.y = bounded.y;
+        });
+      });
 
     simulationRef.current = simulation;
 
