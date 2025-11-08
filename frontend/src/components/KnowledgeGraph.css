@@ -1145,6 +1145,14 @@
     max-height: 500px;
   }
 
+  .knowledge-graph-container {
+    min-height: calc(100vh - 180px);
+  }
+
+  .graph-visualization {
+    min-height: 500px;
+  }
+
   .graph-controls-bar {
     flex-wrap: wrap;
     padding: 1rem 1.5rem;
@@ -1278,6 +1286,14 @@
 }
 
 @media (max-width: 640px) {
+  .knowledge-graph-container {
+    min-height: calc(100vh - 160px);
+  }
+
+  .graph-visualization {
+    min-height: 450px;
+  }
+
   .graph-controls-bar {
     padding: 1rem;
   }
