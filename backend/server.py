@@ -13,16 +13,13 @@ from auth import auth_router, set_database
 
 # Import dashboard mock data
 from dashboard_data import (
+    TOPICS,
+    STATS,
     LIBRARY_ITEMS,
-    SAMPLE_TOPICS,
     RECALL_TASKS,
     QUICK_RECALL_QUIZ,
-    DASHBOARD_STATS,
-    INSIGHTS_PERFORMANCE_DATA,
-    INSIGHTS_KNOWLEDGE_CLUSTERS,
-    INSIGHTS_STATS,
-    INSIGHTS_RECOMMENDATIONS,
-    KNOWLEDGE_GRAPH_NODES
+    KNOWLEDGE_CLUSTERS,
+    RECOMMENDATIONS
 )
 
 
