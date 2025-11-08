@@ -228,104 +228,115 @@ const KnowledgeGraphPage = () => {
               )}
 
               {/* Quiz Tab */}
-              {modalTab === 'quiz' && quizData && quizData.questions && (
+              {modalTab === 'quiz' && (
                 <div className="library-tab-content">
-                  {!showQuizResults ? (
-                    <>
-                      <div className="quiz-progress-bar">
-                        <div 
-                          className="quiz-progress-fill"
-                          style={{width: `${((currentQuestionIndex + 1) / quizData.questions.length) * 100}%`}}
-                        ></div>
-                      </div>
-                      
-                      <div className="quiz-question-card">
-                        <div className="question-number">
-                          Question {currentQuestionIndex + 1} of {quizData.questions.length}
+                  {!quizData ? (
+                    <div style={{textAlign: 'center', padding: '2rem'}}>
+                      <div className="loading-spinner" style={{margin: '0 auto 1rem'}}></div>
+                      <p>Loading quiz...</p>
+                    </div>
+                  ) : quizData.questions && quizData.questions.length > 0 ? (
+                    !showQuizResults ? (
+                      <>
+                        <div className="quiz-progress-bar">
+                          <div 
+                            className="quiz-progress-fill"
+                            style={{width: `${((currentQuestionIndex + 1) / quizData.questions.length) * 100}%`}}
+                          ></div>
                         </div>
-                        <h3 className="quiz-question">{quizData.questions[currentQuestionIndex].q}</h3>
-                        <div className="quiz-options">
-                          {quizData.questions[currentQuestionIndex].options.map((option, idx) => (
-                            <button
-                              key={idx}
-                              className={`quiz-option ${quizAnswers[currentQuestionIndex] === idx ? 'selected' : ''}`}
-                              onClick={() => handleQuizAnswer(currentQuestionIndex, idx)}
+                        
+                        <div className="quiz-question-card">
+                          <div className="question-number">
+                            Question {currentQuestionIndex + 1} of {quizData.questions.length}
+                          </div>
+                          <h3 className="quiz-question">{quizData.questions[currentQuestionIndex].q}</h3>
+                          <div className="quiz-options">
+                            {quizData.questions[currentQuestionIndex].options.map((option, idx) => (
+                              <button
+                                key={idx}
+                                className={`quiz-option ${quizAnswers[currentQuestionIndex] === idx ? 'selected' : ''}`}
+                                onClick={() => handleQuizAnswer(currentQuestionIndex, idx)}
+                              >
+                                {option}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="quiz-navigation">
+                          {currentQuestionIndex > 0 && (
+                            <button 
+                              className="btn-secondary"
+                              onClick={() => setCurrentQuestionIndex(currentQuestionIndex - 1)}
                             >
-                              {option}
+                              Previous
                             </button>
+                          )}
+                          <div style={{flex: 1}}></div>
+                          {currentQuestionIndex < quizData.questions.length - 1 ? (
+                            <button 
+                              className="btn-primary"
+                              onClick={() => setCurrentQuestionIndex(currentQuestionIndex + 1)}
+                              disabled={quizAnswers[currentQuestionIndex] === undefined}
+                            >
+                              Next
+                            </button>
+                          ) : (
+                            <button 
+                              className="btn-primary"
+                              onClick={submitQuiz}
+                              disabled={Object.keys(quizAnswers).length !== quizData.questions.length}
+                            >
+                              Submit Quiz
+                            </button>
+                          )}
+                        </div>
+                      </>
+                    ) : (
+                      <div className="quiz-results">
+                        <div className="results-header">
+                          <h3>Quiz Complete!</h3>
+                          <div className="results-score">{calculateScore()}%</div>
+                          <p className="results-message">
+                            {calculateScore() >= 80 ? '🎉 Excellent work! Your memory is strong.' :
+                             calculateScore() >= 60 ? '👍 Good job! Keep practicing.' :
+                             '💪 Keep going! Review and try again.'}
+                          </p>
+                        </div>
+
+                        <div className="results-breakdown">
+                          {quizData.questions.map((question, idx) => (
+                            <div key={idx} className={`result-item ${quizResults[idx] ? 'correct' : 'incorrect'}`}>
+                              <div className="result-icon">
+                                {quizResults[idx] ? <CheckCircle size={20} /> : <XCircle size={20} />}
+                              </div>
+                              <div className="result-details">
+                                <p className="result-question">{question.q}</p>
+                                <p className="result-answer">
+                                  Your answer: <strong>{question.options[quizAnswers[idx]]}</strong>
+                                  {!quizResults[idx] && (
+                                    <span className="correct-answer">
+                                      {' '}(Correct: {question.options[question.correctIndex]})
+                                    </span>
+                                  )}
+                                </p>
+                              </div>
+                            </div>
                           ))}
                         </div>
-                      </div>
 
-                      <div className="quiz-navigation">
-                        {currentQuestionIndex > 0 && (
-                          <button 
-                            className="btn-secondary"
-                            onClick={() => setCurrentQuestionIndex(currentQuestionIndex - 1)}
-                          >
-                            Previous
-                          </button>
-                        )}
-                        <div style={{flex: 1}}></div>
-                        {currentQuestionIndex < quizData.questions.length - 1 ? (
-                          <button 
-                            className="btn-primary"
-                            onClick={() => setCurrentQuestionIndex(currentQuestionIndex + 1)}
-                            disabled={quizAnswers[currentQuestionIndex] === undefined}
-                          >
-                            Next
-                          </button>
-                        ) : (
-                          <button 
-                            className="btn-primary"
-                            onClick={submitQuiz}
-                            disabled={Object.keys(quizAnswers).length !== quizData.questions.length}
-                          >
-                            Submit Quiz
-                          </button>
-                        )}
+                        <button 
+                          className="btn-primary"
+                          style={{marginTop: '1rem', width: '100%'}}
+                          onClick={retakeQuiz}
+                        >
+                          Retake Quiz
+                        </button>
                       </div>
-                    </>
+                    )
                   ) : (
-                    <div className="quiz-results">
-                      <div className="results-header">
-                        <h3>Quiz Complete!</h3>
-                        <div className="results-score">{calculateScore()}%</div>
-                        <p className="results-message">
-                          {calculateScore() >= 80 ? '🎉 Excellent work! Your memory is strong.' :
-                           calculateScore() >= 60 ? '👍 Good job! Keep practicing.' :
-                           '💪 Keep going! Review and try again.'}
-                        </p>
-                      </div>
-
-                      <div className="results-breakdown">
-                        {quizData.questions.map((question, idx) => (
-                          <div key={idx} className={`result-item ${quizResults[idx] ? 'correct' : 'incorrect'}`}>
-                            <div className="result-icon">
-                              {quizResults[idx] ? <CheckCircle size={20} /> : <XCircle size={20} />}
-                            </div>
-                            <div className="result-details">
-                              <p className="result-question">{question.q}</p>
-                              <p className="result-answer">
-                                Your answer: <strong>{question.options[quizAnswers[idx]]}</strong>
-                                {!quizResults[idx] && (
-                                  <span className="correct-answer">
-                                    {' '}(Correct: {question.options[question.correctIndex]})
-                                  </span>
-                                )}
-                              </p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-
-                      <button 
-                        className="btn-primary"
-                        style={{marginTop: '1rem', width: '100%'}}
-                        onClick={retakeQuiz}
-                      >
-                        Retake Quiz
-                      </button>
+                    <div style={{textAlign: 'center', padding: '2rem'}}>
+                      <p>No quiz available for this topic yet.</p>
                     </div>
                   )}
                 </div>
