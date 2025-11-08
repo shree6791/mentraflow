@@ -17,7 +17,7 @@ QUIZ_CONTENT = {
             }
         ]
     },
-    "t2": {
+    "q2": {
         "questions": [
             {
                 "q": "What is active recall?",
