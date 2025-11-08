@@ -120,12 +120,22 @@ const QuizModal = ({
           {/* Quiz Tab */}
           {modalTab === 'quiz' && (
             <div className="library-tab-content">
-              {!quizData ? (
-                <div style={{textAlign: 'center', padding: '2rem'}}>
-                  <div className="loading-spinner" style={{margin: '0 auto 1rem'}}></div>
-                  <p>Loading quiz...</p>
+              {!quizData || !quizData.questions || quizData.questions.length === 0 ? (
+                <div style={{textAlign: 'center', padding: '3rem'}}>
+                  <Brain size={48} style={{color: '#ccc', margin: '0 auto 1rem'}} />
+                  <h3 style={{marginBottom: '0.5rem'}}>No Quiz Available</h3>
+                  <p style={{color: '#666'}}>
+                    Quiz questions for this topic haven't been created yet.
+                  </p>
+                  <button 
+                    className="btn-secondary"
+                    style={{marginTop: '1.5rem'}}
+                    onClick={() => onTabChange('summary')}
+                  >
+                    View Summary Instead
+                  </button>
                 </div>
-              ) : quizData.questions && quizData.questions.length > 0 ? (
+              ) : (
                 !showQuizResults ? (
                   <>
                     <div className="quiz-progress-bar">
