@@ -210,6 +210,127 @@
   border-color: var(--primary-teal);
 }
 
+/* ========================================
+   INLINE FILTER BAR (Desktop)
+   ======================================== */
+
+.inline-filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filter-buttons-inline {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn-inline {
+  padding: 0.5rem 1rem;
+  border: 1.5px solid var(--divider);
+  border-radius: 8px;
+  background: white;
+  color: var(--text-dark);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.filter-btn-inline:hover {
+  border-color: var(--primary-teal);
+  background: rgba(14, 124, 123, 0.05);
+}
+
+.filter-btn-inline.active {
+  border-color: var(--primary-teal);
+  background: var(--primary-teal);
+  color: white;
+  font-weight: 600;
+}
+
+.filter-btn-inline.warning:not(.active) {
+  border-color: #FFD166;
+  color: #F57C00;
+}
+
+.filter-btn-inline.warning.active {
+  background: #FFD166;
+  border-color: #FFD166;
+  color: #1A1A1A;
+}
+
+.filter-btn-inline.urgent:not(.active) {
+  border-color: #FF6B6B;
+  color: #EF476F;
+}
+
+.filter-btn-inline.urgent.active {
+  background: #FF6B6B;
+  border-color: #FF6B6B;
+  color: white;
+}
+
+.filter-btn-inline.success:not(.active) {
+  border-color: #06D6A0;
+  color: #06D6A0;
+}
+
+.filter-btn-inline.success.active {
+  background: #06D6A0;
+  border-color: #06D6A0;
+  color: white;
+}
+
+.sort-dropdown-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sort-dropdown-inline label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-gray);
+}
+
+.sort-dropdown-inline select {
+  padding: 0.5rem 2rem 0.5rem 1rem;
+  border: 1.5px solid var(--divider);
+  border-radius: 8px;
+  background: white;
+  color: var(--text-dark);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+}
+
+.sort-dropdown-inline select:hover,
+.sort-dropdown-inline select:focus {
+  border-color: var(--primary-teal);
+}
+
+/* Hide inline filter bar on mobile, show modal button */
+@media (max-width: 768px) {
+  .inline-filter-bar {
+    display: none;
+  }
+}
+
 .library-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
