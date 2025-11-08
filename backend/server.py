@@ -73,15 +73,59 @@ async def create_status_check(input: StatusCheckCreate):
 
 
 # ========================================
-# DASHBOARD API ENDPOINTS
+# CONSOLIDATED API ENDPOINTS
 # ========================================
 
-@api_router.get("/dashboard/library")
+# --------------------------------------
+# TOPICS (Unified - used by Dashboard, Insights, Knowledge Graph)
+# --------------------------------------
+
+@api_router.get("/topics")
+async def get_all_topics():
+    """
+    Get all topics with complete data
+    Used by: Dashboard, Insights, Knowledge Graph
+    Frontend can filter/transform as needed
+    """
+    return {"topics": TOPICS}
+
+@api_router.get("/topics/{topic_id}")
+async def get_topic(topic_id: str):
+    """Get a specific topic by ID"""
+    topic = next((t for t in TOPICS if t["id"] == topic_id), None)
+    if not topic:
+        return {"error": "Topic not found"}, 404
+    return topic
+
+# --------------------------------------
+# STATS (Unified - all statistics in one place)
+# --------------------------------------
+
+@api_router.get("/stats")
+async def get_all_stats():
+    """
+    Get all statistics (dashboard, insights, knowledge graph)
+    Frontend picks what it needs
+    """
+    return STATS
+
+@api_router.get("/stats/{section}")
+async def get_section_stats(section: str):
+    """Get statistics for a specific section (dashboard, insights, knowledge)"""
+    if section not in STATS:
+        return {"error": "Section not found"}, 404
+    return STATS[section]
+
+# --------------------------------------
+# LIBRARY (Dashboard specific)
+# --------------------------------------
+
+@api_router.get("/library")
 async def get_library_items():
     """Get all library items"""
     return {"items": LIBRARY_ITEMS}
 
-@api_router.get("/dashboard/library/{item_id}")
+@api_router.get("/library/{item_id}")
 async def get_library_item(item_id: str):
     """Get a specific library item by ID"""
     item = next((item for item in LIBRARY_ITEMS if item["id"] == item_id), None)
@@ -89,20 +133,22 @@ async def get_library_item(item_id: str):
         return {"error": "Item not found"}, 404
     return item
 
-@api_router.get("/dashboard/topics")
-async def get_topics():
-    """Get all topics for knowledge graph"""
-    return {"topics": SAMPLE_TOPICS}
+# --------------------------------------
+# RECALL TASKS
+# --------------------------------------
 
-@api_router.get("/dashboard/recall-tasks")
+@api_router.get("/recall-tasks")
 async def get_recall_tasks():
     """Get recall tasks due today"""
     return {"tasks": RECALL_TASKS}
 
-@api_router.get("/dashboard/quiz/{title}")
+# --------------------------------------
+# QUIZ
+# --------------------------------------
+
+@api_router.get("/quiz/{title}")
 async def get_quiz(title: str):
     """Get quiz questions for a specific topic"""
-    # URL decode the title
     import urllib.parse
     decoded_title = urllib.parse.unquote(title)
     
@@ -111,53 +157,19 @@ async def get_quiz(title: str):
         return {"error": "Quiz not found"}, 404
     return {"title": decoded_title, "questions": quiz}
 
+# --------------------------------------
+# INSIGHTS SPECIFIC
+# --------------------------------------
 
-
-# ========================================
-# INSIGHTS API ENDPOINTS
-# ========================================
-
-@api_router.get("/insights/performance")
-async def get_insights_performance():
-    """Get performance data grouped by strength (strong, medium, weak)"""
-    return INSIGHTS_PERFORMANCE_DATA
-
-@api_router.get("/insights/clusters")
+@api_router.get("/clusters")
 async def get_knowledge_clusters():
     """Get knowledge clusters with topics and average scores"""
-    return {"clusters": INSIGHTS_KNOWLEDGE_CLUSTERS}
+    return {"clusters": KNOWLEDGE_CLUSTERS}
 
-@api_router.get("/insights/stats")
-async def get_insights_stats():
-    """Get insights page statistics"""
-    return INSIGHTS_STATS
-
-@api_router.get("/insights/recommendations")
+@api_router.get("/recommendations")
 async def get_recommendations():
     """Get personalized recommendations"""
-    return {"recommendations": INSIGHTS_RECOMMENDATIONS}
-
-# ========================================
-# KNOWLEDGE GRAPH API ENDPOINTS
-# ========================================
-
-@api_router.get("/knowledge-graph/nodes")
-async def get_graph_nodes():
-    """Get all knowledge graph nodes with connections"""
-    return {"nodes": KNOWLEDGE_GRAPH_NODES}
-
-@api_router.get("/knowledge-graph/node/{node_id}")
-async def get_graph_node(node_id: str):
-    """Get a specific node by ID"""
-    node = next((n for n in KNOWLEDGE_GRAPH_NODES if n["id"] == node_id), None)
-    if not node:
-        return {"error": "Node not found"}, 404
-    return node
-
-@api_router.get("/dashboard/stats")
-async def get_dashboard_stats():
-    """Get dashboard statistics"""
-    return DASHBOARD_STATS
+    return {"recommendations": RECOMMENDATIONS}
 
 @api_router.get("/status", response_model=List[StatusCheck])
 async def get_status_checks():
