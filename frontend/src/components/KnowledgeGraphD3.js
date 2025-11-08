@@ -297,6 +297,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
     // Cleanup
     return () => {
       simulation.stop();
+      d3.select('.graph-tooltip').remove();
     };
   }, [filterState, searchQuery, expandedNode]);
 
