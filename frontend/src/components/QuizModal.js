@@ -235,10 +235,6 @@ const QuizModal = ({
                     </button>
                   </div>
                 )
-              ) : (
-                <div style={{textAlign: 'center', padding: '2rem'}}>
-                  <p>No quiz available for this topic yet.</p>
-                </div>
               )}
             </div>
           )}
