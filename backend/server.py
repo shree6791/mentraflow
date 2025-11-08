@@ -206,7 +206,7 @@ async def get_quiz(title: str):
     
     quiz = QUICK_RECALL_QUIZ.get(decoded_title, [])
     if not quiz:
-        return {"error": "Quiz not found"}, 404
+        raise HTTPException(status_code=404, detail="Quiz not found")
     return {"title": decoded_title, "questions": quiz}
 
 # --------------------------------------
