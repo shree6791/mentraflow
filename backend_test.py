@@ -139,13 +139,23 @@ class BackendTester:
         
         # Validate insights stats
         insights = data.get("insights", {})
-        insights_keys = ["totalQuizzes", "avgScore", "strongTopics", "needsReview"]
+        insights_keys = ["totalTopics", "strongRetention", "needingReview"]
         for key in insights_keys:
             if key not in insights:
                 return f"Missing insights key: {key}"
         
-        print_success(f"  totalQuizzes: {insights.get('totalQuizzes')}")
-        print_success(f"  avgScore: {insights.get('avgScore')}")
+        print_success(f"  totalTopics: {insights.get('totalTopics')}")
+        print_success(f"  strongRetention: {insights.get('strongRetention')}")
+        
+        # Validate knowledge stats
+        knowledge = data.get("knowledge", {})
+        knowledge_keys = ["totalNodes", "totalConnections"]
+        for key in knowledge_keys:
+            if key not in knowledge:
+                return f"Missing knowledge key: {key}"
+        
+        print_success(f"  totalNodes: {knowledge.get('totalNodes')}")
+        print_success(f"  totalConnections: {knowledge.get('totalConnections')}")
         
         return True
     
