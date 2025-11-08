@@ -246,38 +246,8 @@ NODES = [
         "connections": ["t3", "t7"],
         "libraryId": "lib5",
         "quizzesTaken": 4,
-        "questions": [
-            {
-                "q": "What is metacognition?",
-                "options": [
-                    "Memory of facts and figures",
-                    "Thinking about one's own thinking",
-                    "The ability to focus attention",
-                    "Speed of information processing"
-                ],
-                "correctIndex": 1
-            },
-            {
-                "q": "Why is metacognition important for learning?",
-                "options": [
-                    "It increases reading speed",
-                    "It helps monitor understanding and adjust strategies",
-                    "It makes studying feel easier",
-                    "It eliminates the need for practice"
-                ],
-                "correctIndex": 1
-            }
-        ],
-        "summary": {
-            "content": "Metacognition refers to awareness and understanding of one's own thought processes. It involves monitoring what you know, recognizing when you don't understand something, and adjusting learning strategies accordingly.\n\nEffective learners use metacognitive strategies to assess their understanding, identify gaps in knowledge, and select appropriate study methods. This self-regulation is a key predictor of academic success.\n\nCommon metacognitive strategies include self-testing, reflection on learning, and conscious evaluation of comprehension during study.",
-            "keyTakeaways": [
-                "Awareness of your own thinking and learning processes",
-                "Essential for self-regulated learning",
-                "Includes planning, monitoring, and evaluating learning",
-                "Strong predictor of academic achievement"
-            ],
-            "keywords": ["Metacognition", "Self-Regulation", "Learning Strategies", "Self-Assessment"]
-        }
+        "quizId": "t6",
+        "summaryId": "t6"
     },
     {
         "id": "t7",
