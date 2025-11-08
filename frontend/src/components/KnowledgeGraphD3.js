@@ -313,8 +313,15 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
           tooltip.transition().duration(200).style('opacity', 0);
         } else if (action === 'quiz') {
           console.log('Calling onTakeQuiz with node:', d);
-          // Use the callback from parent to open quiz modal
-          if (onTakeQuizRef.current) {
+          console.log('Ref value:', onTakeQuizRef.current);
+          console.log('Window value:', window._knowledgeGraphCallbacks?.onTakeQuiz);
+          
+          // Try window first
+          if (window._knowledgeGraphCallbacks?.onTakeQuiz) {
+            console.log('Calling via window');
+            window._knowledgeGraphCallbacks.onTakeQuiz(d);
+          } else if (onTakeQuizRef.current) {
+            console.log('Calling via ref');
             onTakeQuizRef.current(d);
           } else {
             console.error('onTakeQuiz callback not available');
@@ -322,8 +329,13 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
           tooltip.transition().duration(200).style('opacity', 0);
         } else if (action === 'summary') {
           console.log('Calling onViewSummary with node:', d);
-          // Use the callback from parent to open summary modal
-          if (onViewSummaryRef.current) {
+          
+          // Try window first
+          if (window._knowledgeGraphCallbacks?.onViewSummary) {
+            console.log('Calling via window');
+            window._knowledgeGraphCallbacks.onViewSummary(d);
+          } else if (onViewSummaryRef.current) {
+            console.log('Calling via ref');
             onViewSummaryRef.current(d);
           } else {
             console.error('onViewSummary callback not available');
