@@ -4,21 +4,15 @@ import * as d3 from 'd3';
 import './KnowledgeGraph.css';
 
 const KnowledgeGraph = ({ topics, userAvatar, userName, onClose, onReinforce, hideHeader }) => {
-  const canvasRef = useRef(null);
+  const svgRef = useRef(null);
   const containerRef = useRef(null);
+  const simulationRef = useRef(null);
   
-  const [nodes, setNodes] = useState([]);
-  const [centerNode, setCenterNode] = useState(null);
-  const [hoveredNode, setHoveredNode] = useState(null);
-  const [selectedNode, setSelectedNode] = useState(null);
   const [filterState, setFilterState] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [zoom, setZoom] = useState(1);
-  const [pan, setPan] = useState({ x: 0, y: 0 });
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [isLoading, setIsLoading] = useState(true);
-  const [focusedNodeIndex, setFocusedNodeIndex] = useState(null);
+  const [selectedNode, setSelectedNode] = useState(null);
+  const [showQuickReview, setShowQuickReview] = useState(false);
 
   // Enhanced graph data with richer connections and variety
   const graphData = [
