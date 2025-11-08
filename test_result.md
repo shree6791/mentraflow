@@ -398,7 +398,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Knowledge Graph Modal Integration"
+    - "Backend refactoring validation completed"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
