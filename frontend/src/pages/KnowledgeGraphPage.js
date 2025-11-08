@@ -6,23 +6,6 @@ import AppLayout from '../components/AppLayout';
 import KnowledgeGraphD3 from '../components/KnowledgeGraphD3';
 import '../Dashboard.css';
 
-// Sample Summary Data
-const SAMPLE_SUMMARY = {
-  title: 'The Forgetting Curve & Memory Retention',
-  content: `The forgetting curve, discovered by Hermann Ebbinghaus in 1885, shows how memory retention declines exponentially over time without reinforcement. Within 24 hours, we forget approximately 70% of new information unless we actively review it.
-
-The key to combating the forgetting curve is spaced repetition — reviewing material at increasing intervals (1 day, 3 days, 7 days, 14 days). Each review strengthens the memory trace, making it more resistant to decay.
-
-Active recall, where you actively retrieve information from memory rather than passively re-reading, is the most effective review method. This effortful retrieval process strengthens neural pathways and creates more durable memories.`,
-  bullets: [
-    'Review just before forgetting to maximize retention efficiency',
-    'Spacing intervals should expand: 1d → 3d → 7d → 14d → 1m',
-    'Active recall strengthens memory better than passive re-reading',
-    'Each successful recall makes the next forgetting curve flatter'
-  ],
-  keywords: ['Forgetting Curve', 'Spaced Repetition', 'Active Recall', 'Memory Consolidation']
-};
-
 const KnowledgeGraphPage = () => {
   const navigate = useNavigate();
   const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
