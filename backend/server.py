@@ -146,7 +146,7 @@ async def get_topic(topic_id: str):
     """Get a specific topic by ID (legacy endpoint)"""
     topic = next((t for t in TOPICS if t["id"] == topic_id), None)
     if not topic:
-        return {"error": "Topic not found"}, 404
+        raise HTTPException(status_code=404, detail="Topic not found")
     return topic
 
 # --------------------------------------
