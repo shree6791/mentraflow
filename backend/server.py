@@ -68,6 +68,52 @@ async def create_status_check(input: StatusCheckCreate):
     _ = await db.status_checks.insert_one(doc)
     return status_obj
 
+
+
+# ========================================
+# DASHBOARD API ENDPOINTS
+# ========================================
+
+@api_router.get("/dashboard/library")
+async def get_library_items():
+    """Get all library items"""
+    return {"items": LIBRARY_ITEMS}
+
+@api_router.get("/dashboard/library/{item_id}")
+async def get_library_item(item_id: str):
+    """Get a specific library item by ID"""
+    item = next((item for item in LIBRARY_ITEMS if item["id"] == item_id), None)
+    if not item:
+        return {"error": "Item not found"}, 404
+    return item
+
+@api_router.get("/dashboard/topics")
+async def get_topics():
+    """Get all topics for knowledge graph"""
+    return {"topics": SAMPLE_TOPICS}
+
+@api_router.get("/dashboard/recall-tasks")
+async def get_recall_tasks():
+    """Get recall tasks due today"""
+    return {"tasks": RECALL_TASKS}
+
+@api_router.get("/dashboard/quiz/{title}")
+async def get_quiz(title: str):
+    """Get quiz questions for a specific topic"""
+    # URL decode the title
+    import urllib.parse
+    decoded_title = urllib.parse.unquote(title)
+    
+    quiz = QUICK_RECALL_QUIZ.get(decoded_title, [])
+    if not quiz:
+        return {"error": "Quiz not found"}, 404
+    return {"title": decoded_title, "questions": quiz}
+
+@api_router.get("/dashboard/stats")
+async def get_dashboard_stats():
+    """Get dashboard statistics"""
+    return DASHBOARD_STATS
+
 @api_router.get("/status", response_model=List[StatusCheck])
 async def get_status_checks():
     # Exclude MongoDB's _id field from the query results
