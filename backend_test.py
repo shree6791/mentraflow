@@ -585,11 +585,11 @@ class BackendTester:
         print_info("- QUIZ_CONTENT: keys changed from 't1' → 'q1', 't2' → 'q2', etc.")
         print_info("- SUMMARY_CONTENT: keys changed from 't1' → 's1', 't2' → 's2', etc.")
         
-        # Test 1: GET /api/nodes - Verify new field names
-        print_header("Test 1: GET /api/nodes - Verify New Field Names")
-        print_info("Should have: docId (not libraryId)")
-        print_info("Should have: quizId with values like 'q1', 'q2'")
-        print_info("Should have: summaryId with values like 's1', 's2'")
+        # Test 1: GET /api/nodes - Verify lightweight structure
+        print_header("Test 1: GET /api/nodes - Verify Lightweight Structure")
+        print_info("Should return lightweight nodes for graph visualization")
+        print_info("New naming convention verified in detailed endpoints")
+        print_info("Essential fields: id, title, state, lastReview, score, connections")
         
         self.test_endpoint(
             "Nodes API - New Naming Convention",
