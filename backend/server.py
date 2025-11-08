@@ -84,15 +84,66 @@ async def create_status_check(input: StatusCheckCreate):
 @api_router.get("/topics")
 async def get_all_topics():
     """
-    Get all topics with complete data
-    Used by: Dashboard, Insights, Knowledge Graph
-    Frontend can filter/transform as needed
+    LIGHTWEIGHT API - Get minimal topic data for graph display
+    Returns: id, title, state, lastReview, score, connections
+    Used by: Knowledge Graph for initial render
     """
-    return {"topics": TOPICS}
+    # Return only essential fields for graph visualization
+    lightweight_topics = [{
+        "id": topic["id"],
+        "title": topic["title"],
+        "state": topic["state"],
+        "lastReview": topic["lastReview"],
+        "score": topic["score"],
+        "connections": topic["connections"]
+    } for topic in TOPICS]
+    
+    return {"topics": lightweight_topics}
+
+@api_router.get("/topic/{title}")
+async def get_topic_detail(title: str):
+    """
+    DETAIL API - Get comprehensive topic data
+    Returns: All topic data + summary + quiz + performance
+    Used by: Modal when user clicks on a topic
+    """
+    import urllib.parse
+    decoded_title = urllib.parse.unquote(title)
+    
+    # Find the topic
+    topic = next((t for t in TOPICS if t["title"] == decoded_title), None)
+    if not topic:
+        return {"error": "Topic not found"}, 404
+    
+    # Get quiz data
+    quiz = QUICK_RECALL_QUIZ.get(decoded_title, [])
+    
+    # Get summary data
+    summary = TOPIC_SUMMARIES.get(decoded_title, {
+        "content": "Summary content not available yet.",
+        "keyTakeaways": [],
+        "keywords": []
+    })
+    
+    # Build comprehensive response
+    return {
+        "topic": topic,
+        "summary": summary,
+        "quiz": {
+            "title": decoded_title,
+            "questions": quiz
+        } if quiz else None,
+        "performance": {
+            "quizzesTaken": topic.get("quizzesTaken", 0),
+            "currentScore": topic.get("score", 0),
+            "state": topic.get("state", "unknown"),
+            "lastReview": topic.get("lastReview", "Never")
+        }
+    }
 
 @api_router.get("/topics/{topic_id}")
 async def get_topic(topic_id: str):
-    """Get a specific topic by ID"""
+    """Get a specific topic by ID (legacy endpoint)"""
     topic = next((t for t in TOPICS if t["id"] == topic_id), None)
     if not topic:
         return {"error": "Topic not found"}, 404
