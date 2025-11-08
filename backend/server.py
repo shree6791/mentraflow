@@ -1,31 +1,14 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
-from pydantic import BaseModel, Field, ConfigDict
-from typing import List
-import uuid
-from datetime import datetime, timezone
 from auth import auth_router, set_database
 
-# Import dashboard mock data (lean nodes only)
-from dashboard_data import (
-    NODES,
-    STATS,
-    DOCUMENTS,
-    RECALL_TASKS,
-    KNOWLEDGE_CLUSTERS,
-    RECOMMENDATIONS
-)
-
-# Import content data (lazy loaded on-demand)
-from quiz_data import QUIZ_CONTENT
-from summary_data import SUMMARY_CONTENT
-
-
+# Import modular routes
+from routes import health, nodes, library, stats, recall, insights, quiz
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -39,7 +22,11 @@ db = client[os.environ['DB_NAME']]
 set_database(db)
 
 # Create the main app without a prefix
-app = FastAPI()
+app = FastAPI(
+    title="Knowledge Retention API",
+    description="API for knowledge retention and learning platform",
+    version="1.0.0"
+)
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
