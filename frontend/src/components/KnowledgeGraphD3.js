@@ -505,14 +505,23 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
             <X size={16} />
           </button>
           
-          <strong style={{paddingRight: '1.5rem', display: 'block', marginBottom: '0.75rem'}}>
+          <strong style={{paddingRight: '1.5rem', display: 'block', marginBottom: '0.75rem', color: '#1a1a1a', fontSize: '1.1rem'}}>
             {tooltipData.node.title}
           </strong>
           
-          <div className="tooltip-stats" style={{marginBottom: '1rem'}}>
-            <div>Last Review: <span>{tooltipData.node.lastReview}</span></div>
-            <div>Score: <span>{tooltipData.node.score}%</span></div>
-            <div>Connections: <span>{tooltipData.node.connections.length}</span></div>
+          <div className="tooltip-stats" style={{marginBottom: '1rem', fontSize: '0.9rem', color: '#666'}}>
+            <div style={{marginBottom: '0.25rem'}}>
+              <span style={{color: '#888'}}>Last Review:</span>{' '}
+              <span style={{color: '#1a1a1a', fontWeight: 500}}>{tooltipData.node.lastReview}</span>
+            </div>
+            <div style={{marginBottom: '0.25rem'}}>
+              <span style={{color: '#888'}}>Score:</span>{' '}
+              <span style={{color: '#1a1a1a', fontWeight: 500}}>{tooltipData.node.score}%</span>
+            </div>
+            <div>
+              <span style={{color: '#888'}}>Connections:</span>{' '}
+              <span style={{color: '#1a1a1a', fontWeight: 500}}>{tooltipData.node.connections.length}</span>
+            </div>
           </div>
           
           <div className="tooltip-actions" style={{display: 'flex', gap: '0.5rem'}}>
