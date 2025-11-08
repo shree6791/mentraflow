@@ -187,7 +187,14 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       .attr('class', 'graph-tooltip')
       .style('opacity', 0)
       .style('position', 'absolute')
-      .style('pointer-events', 'auto');
+      .style('pointer-events', 'auto')
+      .style('background', 'white')
+      .style('border', '1px solid #E0E0E0')
+      .style('border-radius', '12px')
+      .style('padding', '1rem')
+      .style('box-shadow', '0 8px 24px rgba(0, 0, 0, 0.2)')
+      .style('z-index', '1000')
+      .style('min-width', '220px');
 
     // Node interactions
     node.on('click', function(event, d) {
