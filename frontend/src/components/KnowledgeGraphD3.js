@@ -218,9 +218,9 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         .duration(200)
         .style('opacity', 1);
       
-      // Use the node's actual simulation coordinates (d.x, d.y)
-      // Position tooltip above the node
-      const tooltipX = d.x;
+      // Account for graph container padding (2rem = 32px)
+      const containerPadding = 32;
+      const tooltipX = d.x + containerPadding;
       const tooltipY = d.y - getNodeRadius(d.connections) - 20; // Position above node with gap
       
       tooltip.html(`
