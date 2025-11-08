@@ -25,11 +25,11 @@ const KnowledgeGraphPage = () => {
   useEffect(() => {
     const fetchTopics = async () => {
       try {
-        const response = await axios.get(`${API}/topics`);
-        setTopics(response.data?.topics || []);
+        const response = await axios.get(`${API}/nodes`);
+        setTopics(response.data?.nodes || []);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching topics:', error);
+        console.error('Error fetching nodes:', error);
         setTopics([]);
         setLoading(false);
       }
@@ -44,9 +44,9 @@ const KnowledgeGraphPage = () => {
     setSelectedTopic(topic);
     setModalTab(tab);
     
-    // Fetch complete topic details (summary + quiz + performance)
+    // Fetch complete node details (summary + quiz + performance)
     try {
-      const response = await axios.get(`${API}/topic/${encodeURIComponent(topic.title)}`);
+      const response = await axios.get(`${API}/node/${encodeURIComponent(topic.title)}`);
       const data = response.data;
       
       // Set quiz data if available
@@ -64,7 +64,7 @@ const KnowledgeGraphPage = () => {
       });
       
     } catch (error) {
-      console.error('Error fetching topic details:', error);
+      console.error('Error fetching node details:', error);
       setQuizData(null);
     }
   };
