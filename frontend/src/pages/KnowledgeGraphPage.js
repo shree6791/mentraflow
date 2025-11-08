@@ -15,7 +15,7 @@ const KnowledgeGraphPage = () => {
     const fetchTopics = async () => {
       try {
         const response = await axios.get(`${API}/topics`, { withCredentials: true });
-        setTopics(response.data || []);
+        setTopics(response.data?.topics || []);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching topics:', error);
