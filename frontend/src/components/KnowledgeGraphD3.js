@@ -422,19 +422,6 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
             <option value="fading">Needs Review</option>
           </select>
         </div>
-
-        {/* Zoom Controls */}
-        <div className="zoom-controls">
-          <button onClick={handleZoomIn} className="zoom-btn" title="Zoom In">
-            <ZoomIn size={18} />
-          </button>
-          <button onClick={handleZoomOut} className="zoom-btn" title="Zoom Out">
-            <ZoomOut size={18} />
-          </button>
-          <button onClick={handleRecenter} className="zoom-btn recenter-btn" title="Recenter">
-            <RotateCcw size={18} />
-          </button>
-        </div>
       </div>
 
       {/* Graph Container */}
@@ -447,6 +434,19 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         )}
 
         <svg ref={svgRef} className="knowledge-graph-svg"></svg>
+
+        {/* Zoom Controls - Embedded in Graph (Google Maps style) */}
+        <div className="graph-embedded-zoom-controls">
+          <button onClick={handleZoomIn} className="embedded-zoom-btn" title="Zoom In">
+            <ZoomIn size={20} />
+          </button>
+          <button onClick={handleZoomOut} className="embedded-zoom-btn" title="Zoom Out">
+            <ZoomOut size={20} />
+          </button>
+          <button onClick={handleRecenter} className="embedded-zoom-btn embedded-recenter-btn" title="Reset View">
+            <RotateCcw size={20} />
+          </button>
+        </div>
 
         {/* Inline Legend */}
         <div className="graph-legend-inline">
