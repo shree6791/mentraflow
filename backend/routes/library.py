@@ -4,7 +4,7 @@ Endpoints for user's uploaded study materials
 """
 
 from fastapi import APIRouter
-from dashboard_data import DOCUMENTS
+from db.repository.dashboard_data import DOCUMENTS
 
 router = APIRouter()
 
