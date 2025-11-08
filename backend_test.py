@@ -541,6 +541,106 @@ class BackendTester:
             self.errors.append(f"{name}: Request error - {str(e)}")
             return False
 
+    def run_naming_convention_tests(self):
+        """Run tests for the new naming convention refactor as requested"""
+        print_header("NAMING CONVENTION REFACTOR TESTING")
+        print_info("Testing all backend API endpoints with the new naming convention refactor")
+        print_info("Backend URL: https://learnmap-6.preview.emergentagent.com/api")
+        print_info("")
+        print_info("NAMING CONVENTION CHANGES:")
+        print_info("- LIBRARY_ITEMS renamed to DOCUMENTS")
+        print_info("- Document IDs: 'lib1' → 'doc1', 'lib2' → 'doc2', etc.")
+        print_info("- NODES: libraryId → docId")
+        print_info("- NODES: quizId values changed from 't1' → 'q1', 't2' → 'q2', etc.")
+        print_info("- NODES: summaryId values changed from 't1' → 's1', 't2' → 's2', etc.")
+        print_info("- QUIZ_CONTENT: keys changed from 't1' → 'q1', 't2' → 'q2', etc.")
+        print_info("- SUMMARY_CONTENT: keys changed from 't1' → 's1', 't2' → 's2', etc.")
+        
+        # Test 1: GET /api/nodes - Verify new field names
+        print_header("Test 1: GET /api/nodes - Verify New Field Names")
+        print_info("Should have: docId (not libraryId)")
+        print_info("Should have: quizId with values like 'q1', 'q2'")
+        print_info("Should have: summaryId with values like 's1', 's2'")
+        
+        self.test_endpoint(
+            "Nodes API - New Naming Convention",
+            f"{BACKEND_URL}/nodes",
+            expected_keys=["nodes"],
+            validate_func=self.validate_nodes_naming_convention
+        )
+        
+        # Test 2: GET /api/node/Forgetting%20Curve - Verify lazy loading still works
+        print_header("Test 2: GET /api/node/Forgetting%20Curve - Verify Lazy Loading Still Works")
+        print_info("Should fetch quiz from QUIZ_CONTENT['q1']")
+        print_info("Should fetch summary from SUMMARY_CONTENT['s1']")
+        print_info("Verify quiz and summary content loads correctly")
+        
+        self.test_endpoint(
+            "Node Detail - Forgetting Curve (q1, s1)",
+            f"{BACKEND_URL}/node/Forgetting%20Curve",
+            expected_keys=["node", "summary", "quiz", "performance"],
+            validate_func=self.validate_node_detail
+        )
+        
+        # Test 3: GET /api/node/Active%20Recall - Second lazy loading test
+        print_header("Test 3: GET /api/node/Active%20Recall - Second Lazy Loading Test")
+        print_info("Should fetch from q2 and s2")
+        print_info("Verify content matches")
+        
+        self.test_endpoint(
+            "Node Detail - Active Recall (q2, s2)",
+            f"{BACKEND_URL}/node/Active%20Recall",
+            expected_keys=["node", "summary", "quiz", "performance"],
+            validate_func=self.validate_node_detail
+        )
+        
+        # Test 4: GET /api/library - Verify DOCUMENTS renamed
+        print_header("Test 4: GET /api/library - Verify DOCUMENTS Renamed")
+        print_info("Should return documents with doc1, doc2, doc3, etc. IDs")
+        
+        self.test_endpoint(
+            "Library API - Documents with New IDs",
+            f"{BACKEND_URL}/library",
+            expected_keys=["items"],
+            validate_func=self.validate_library_naming_convention
+        )
+        
+        # Test 5: GET /api/stats - Should still work
+        print_header("Test 5: GET /api/stats - Should Still Work")
+        self.test_endpoint(
+            "Statistics API",
+            f"{BACKEND_URL}/stats",
+            expected_keys=["dashboard", "insights", "knowledge"],
+            validate_func=self.validate_stats
+        )
+        
+        # Test 6: GET /api/recall-tasks - Should still work
+        print_header("Test 6: GET /api/recall-tasks - Should Still Work")
+        self.test_endpoint(
+            "Recall Tasks API",
+            f"{BACKEND_URL}/recall-tasks",
+            expected_keys=["tasks"],
+            validate_func=self.validate_recall_tasks
+        )
+        
+        # Test 7: GET /api/clusters - Should still work
+        print_header("Test 7: GET /api/clusters - Should Still Work")
+        self.test_endpoint(
+            "Clusters API",
+            f"{BACKEND_URL}/clusters",
+            expected_keys=["clusters"],
+            validate_func=self.validate_clusters
+        )
+        
+        # Test 8: GET /api/recommendations - Should still work
+        print_header("Test 8: GET /api/recommendations - Should Still Work")
+        self.test_endpoint(
+            "Recommendations API",
+            f"{BACKEND_URL}/recommendations",
+            expected_keys=["recommendations"],
+            validate_func=self.validate_recommendations
+        )
+
     def run_lazy_loading_tests(self):
         """Run tests for the new lazy loading architecture as requested"""
         print_header("LAZY LOADING ARCHITECTURE TESTING")
