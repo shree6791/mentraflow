@@ -198,38 +198,8 @@ NODES = [
         "connections": ["t1", "t3", "t5"],
         "libraryId": "lib2",
         "quizzesTaken": 4,
-        "questions": [
-            {
-                "q": "What is active recall?",
-                "options": [
-                    "Re-reading your notes carefully",
-                    "Highlighting important information",
-                    "Testing yourself without looking at notes",
-                    "Listening to lectures repeatedly"
-                ],
-                "correctIndex": 2
-            },
-            {
-                "q": "Why is active recall more effective than passive review?",
-                "options": [
-                    "It takes less time",
-                    "It strengthens neural pathways through retrieval",
-                    "It is easier to do",
-                    "It requires no effort"
-                ],
-                "correctIndex": 1
-            }
-        ],
-        "summary": {
-            "content": "Active recall is a learning technique that involves actively retrieving information from memory rather than passively reviewing notes. This method has been proven to be one of the most effective study strategies.\n\nWhen you practice active recall, you're forcing your brain to reconstruct the information, which strengthens neural pathways. This is much more effective than simply re-reading or highlighting text.\n\nResearch shows that testing yourself regularly leads to better long-term retention than spending the same amount of time reviewing material.",
-            "keyTakeaways": [
-                "Actively retrieve information rather than passively reviewing",
-                "Testing effect: Taking practice tests improves long-term memory",
-                "Combines well with spaced repetition for maximum effect",
-                "Initial difficulty during retrieval leads to stronger memories"
-            ],
-            "keywords": ["Active Recall", "Testing Effect", "Retrieval Practice", "Learning Strategies"]
-        }
+        "quizId": "t2",
+        "summaryId": "t2"
     },
     {
         "id": "t3",
