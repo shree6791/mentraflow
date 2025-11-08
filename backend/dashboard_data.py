@@ -414,109 +414,111 @@ RECALL_TASKS = get_recall_tasks()
 # ========================================
 # LIBRARY ITEMS (User's uploaded documents)
 # ========================================
+# Each library item links to a node via nodeId
+# Title MUST match the corresponding node's title exactly
 LIBRARY_ITEMS = [
     {
         "id": "lib1",
-        "title": "Forgetting Curve & Memory Retention",
+        "title": "Forgetting Curve",  # ✅ Matches NODES[0].title
         "filename": "forgetting-curve.pdf",
         "uploadDate": "2024-10-25",
-        "lastReview": "2 days ago",
+        "lastReview": "2 days ago",  # ✅ Matches NODES[0].lastReview
         "status": "completed",
-        "retention": "high",
+        "retention": "high",  # ✅ Matches NODES[0].state
         "nextReview": "In 5 days",
-        "quizScore": 85,
-        "hasQuiz": True,
-        "nodeId": "t1"  # Links to node for quiz questions
+        "quizScore": 85,  # ✅ Matches NODES[0].score
+        "hasQuiz": True,  # ✅ NODES[0].questions is not empty
+        "nodeId": "t1"
     },
     {
         "id": "lib2",
-        "title": "Active Recall Strategies",
+        "title": "Active Recall",  # ✅ Matches NODES[1].title
         "filename": "active-recall-notes.txt",
         "uploadDate": "2024-10-27",
-        "lastReview": "1 day ago",
+        "lastReview": "1 day ago",  # ✅ Matches NODES[1].lastReview
         "status": "completed",
-        "retention": "high",
+        "retention": "high",  # ✅ Matches NODES[1].state
         "nextReview": "In 6 days",
-        "quizScore": 92,
-        "hasQuiz": True,
+        "quizScore": 92,  # ✅ Matches NODES[1].score
+        "hasQuiz": True,  # ✅ NODES[1].questions is not empty
         "nodeId": "t2"
     },
     {
         "id": "lib3",
-        "title": "Spacing Effect Research Paper",
+        "title": "Spacing Effect",  # ✅ Matches NODES[2].title
         "filename": "spacing-effect.pdf",
         "uploadDate": "2024-10-20",
-        "lastReview": "1 week ago",
+        "lastReview": "1 week ago",  # ✅ Matches NODES[2].lastReview
         "status": "completed",
-        "retention": "medium",
+        "retention": "medium",  # ✅ Matches NODES[2].state
         "nextReview": "Due today",
-        "quizScore": 68,
-        "hasQuiz": True,
+        "quizScore": 68,  # ✅ Matches NODES[2].score
+        "hasQuiz": True,  # ✅ NODES[2].questions is not empty
         "nodeId": "t3"
     },
     {
         "id": "lib4",
-        "title": "Interleaved Practice Study",
+        "title": "Interleaved Practice",  # ✅ Matches NODES[4].title
         "filename": "interleaved-practice.pdf",
         "uploadDate": "2024-10-22",
-        "lastReview": "4 days ago",
+        "lastReview": "4 days ago",  # ✅ Matches NODES[4].lastReview
         "status": "completed",
-        "retention": "medium",
+        "retention": "medium",  # ✅ Matches NODES[4].state
         "nextReview": "In 3 days",
-        "quizScore": 75,
-        "hasQuiz": False,
+        "quizScore": 75,  # ✅ Matches NODES[4].score
+        "hasQuiz": True,  # ✅ NODES[4].questions is not empty
         "nodeId": "t5"
     },
     {
         "id": "lib5",
-        "title": "Metacognition & Learning",
+        "title": "Metacognition",  # ✅ Matches NODES[5].title
         "filename": "metacognition.pdf",
         "uploadDate": "2024-10-28",
-        "lastReview": "3 days ago",
+        "lastReview": "3 days ago",  # ✅ Matches NODES[5].lastReview
         "status": "completed",
-        "retention": "high",
+        "retention": "high",  # ✅ Matches NODES[5].state
         "nextReview": "In 4 days",
-        "quizScore": 88,
-        "hasQuiz": False,
+        "quizScore": 88,  # ✅ Matches NODES[5].score
+        "hasQuiz": True,  # ✅ NODES[5].questions is not empty
         "nodeId": "t6"
     },
     {
         "id": "lib6",
-        "title": "Working Memory Capacity",
+        "title": "Working Memory",  # ✅ Matches NODES[3].title
         "filename": "working-memory.txt",
         "uploadDate": "2024-10-10",
-        "lastReview": "2 weeks ago",
+        "lastReview": "2 weeks ago",  # ✅ Matches NODES[3].lastReview
         "status": "needs-review",
-        "retention": "fading",
+        "retention": "fading",  # ✅ Matches NODES[3].state
         "nextReview": "Overdue",
-        "quizScore": 45,
-        "hasQuiz": False,
+        "quizScore": 45,  # ✅ Matches NODES[3].score
+        "hasQuiz": True,  # ✅ NODES[3].questions is not empty
         "nodeId": "t4"
     },
     {
         "id": "lib7",
-        "title": "Retrieval Practice Techniques",
+        "title": "Retrieval Practice",  # ✅ Matches NODES[6].title
         "filename": "retrieval-practice.pdf",
         "uploadDate": "2024-10-23",
-        "lastReview": "5 days ago",
+        "lastReview": "5 days ago",  # ✅ Matches NODES[6].lastReview
         "status": "completed",
-        "retention": "medium",
+        "retention": "medium",  # ✅ Matches NODES[6].state
         "nextReview": "In 2 days",
-        "quizScore": 72,
-        "hasQuiz": False,
+        "quizScore": 72,  # ✅ Matches NODES[6].score
+        "hasQuiz": True,  # ✅ NODES[6].questions is not empty
         "nodeId": "t7"
     },
     {
         "id": "lib8",
-        "title": "Chunking Information Guide",
+        "title": "Chunking",  # ✅ Matches NODES[7].title
         "filename": "chunking.txt",
         "uploadDate": "2024-10-05",
-        "lastReview": "3 weeks ago",
+        "lastReview": "3 weeks ago",  # ✅ Matches NODES[7].lastReview
         "status": "needs-review",
-        "retention": "fading",
+        "retention": "fading",  # ✅ Matches NODES[7].state
         "nextReview": "Overdue",
-        "quizScore": 52,
-        "hasQuiz": False,
+        "quizScore": 52,  # ✅ Matches NODES[7].score
+        "hasQuiz": True,  # ✅ NODES[7].questions is not empty
         "nodeId": "t8"
     }
 ]
