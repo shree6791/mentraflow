@@ -638,9 +638,10 @@ if __name__ == "__main__":
     
     tester = BackendTester()
     
-    # Check if we should run optimized API tests specifically
-    if len(sys.argv) > 1 and sys.argv[1] == "optimized":
-        tester.run_optimized_api_tests()
+    # Check if we should run specific tests
+    if len(sys.argv) > 1 and sys.argv[1] == "all":
+        tester.run_all_tests()
     else:
-        # Run optimized API tests by default for this review
-        tester.run_optimized_api_tests()
+        # Run refactored API tests by default for this review
+        tester.run_refactored_api_tests()
+        tester.print_summary()
