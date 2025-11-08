@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "UI Polish & Bug Fixes: Knowledge Graph tooltip visibility, Dashboard retention borders, and Knowledge Graph legend spacing"
+user_problem_statement: "Phase 1: Frontend-Backend API Integration - Connect Dashboard, Insights, and Knowledge Graph components to consolidated backend APIs"
 
 frontend:
   - task: "Knowledge Graph - UX Improvements (Controls & Layout)"
