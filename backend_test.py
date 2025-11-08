@@ -191,6 +191,64 @@ class BackendTester:
         
         return True
     
+    def validate_nodes_naming_convention(self, data: Dict) -> bool:
+        """Validate /api/nodes response with new naming convention"""
+        if "nodes" not in data:
+            return "Missing 'nodes' key"
+        
+        nodes = data["nodes"]
+        if not isinstance(nodes, list):
+            return f"nodes should be a list, got {type(nodes)}"
+        
+        if len(nodes) == 0:
+            return "No nodes found"
+        
+        print_success(f"  Found {len(nodes)} nodes")
+        
+        # Validate naming convention in nodes
+        if nodes:
+            node = nodes[0]
+            expected_keys = ["id", "title", "state", "lastReview", "score", "connections"]
+            for key in expected_keys:
+                if key not in node:
+                    return f"Node missing key: {key}"
+            
+            # CRITICAL: Check for new naming convention fields
+            # Should have docId (not libraryId)
+            if "docId" not in node:
+                return "Node missing 'docId' field (new naming convention)"
+            
+            # Check docId format (should be doc1, doc2, etc.)
+            doc_id = node.get("docId")
+            if not doc_id.startswith("doc"):
+                return f"docId should start with 'doc', got: {doc_id}"
+            
+            print_success(f"  ✅ NEW NAMING: docId = {doc_id}")
+            
+            # Check for quizId and summaryId if present in full node data
+            if "quizId" in node:
+                quiz_id = node.get("quizId")
+                if not quiz_id.startswith("q"):
+                    return f"quizId should start with 'q', got: {quiz_id}"
+                print_success(f"  ✅ NEW NAMING: quizId = {quiz_id}")
+            
+            if "summaryId" in node:
+                summary_id = node.get("summaryId")
+                if not summary_id.startswith("s"):
+                    return f"summaryId should start with 's', got: {summary_id}"
+                print_success(f"  ✅ NEW NAMING: summaryId = {summary_id}")
+            
+            # Validate connections is an array
+            if not isinstance(node["connections"], list):
+                return f"connections should be a list, got {type(node['connections'])}"
+            
+            print_success(f"  Sample node: {node['title']}")
+            print_success(f"  Connections: {len(node['connections'])} connections")
+            print_success(f"  Score: {node['score']}")
+            print_success(f"  State: {node['state']}")
+        
+        return True
+    
     def validate_library(self, data: Dict) -> bool:
         """Validate /api/library response"""
         if "items" not in data:
