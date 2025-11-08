@@ -39,6 +39,17 @@ const KnowledgeGraphPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showQuizResults, setShowQuizResults] = useState(false);
 
+  // Memoize callbacks to prevent recreating them on every render
+  const handleTakeQuiz = React.useCallback((node) => {
+    console.log('handleTakeQuiz called:', node);
+    openTopicModal(node, 'quiz');
+  }, []);
+
+  const handleViewSummary = React.useCallback((node) => {
+    console.log('handleViewSummary called:', node);
+    openTopicModal(node, 'summary');
+  }, []);
+
   useEffect(() => {
     const fetchTopics = async () => {
       try {
