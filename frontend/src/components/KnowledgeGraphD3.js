@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, Search, Filter, Eye, Brain, ZoomIn, ZoomOut, Loader, X, RotateCcw } from 'lucide-react';
 import * as d3 from 'd3';
@@ -10,13 +11,14 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
   const onTakeQuizRef = useRef(onTakeQuiz);
   const onViewSummaryRef = useRef(onViewSummary);
   
-  const [activeFilters, setActiveFilters] = useState(['high', 'medium', 'fading']); // All active by default
+  const [activeFilters, setActiveFilters] = useState(['high', 'medium', 'fading']);
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [selectedNode, setSelectedNode] = useState(null);
   const [expandedNode, setExpandedNode] = useState(null);
   const [showQuickReview, setShowQuickReview] = useState(false);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
+  const [tooltipData, setTooltipData] = useState(null);
   
   // Keep refs up to date
   useEffect(() => {
@@ -57,7 +59,6 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
 
   const getLinkOpacity = (source, target) => {
     // Higher opacity for stronger connections
-    // In a real app, this could be based on quiz performance, review frequency, etc.
     return 0.3 + (Math.random() * 0.4); // 0.3 to 0.7
   };
 
@@ -93,7 +94,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
           links.push({
             source: node.id,
             target: targetId,
-            strength: Math.random() // In real app, based on relationship strength
+            strength: Math.random()
           });
         }
       });
@@ -117,7 +118,9 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
 
     const svg = d3.select(svgRef.current)
       .attr('width', width)
-      .attr('height', height);
+      .attr('height', height)
+      .style('position', 'relative')
+      .style('z-index', '1');
 
     // Create zoom behavior
     const zoomBehavior = d3.zoom()
@@ -135,10 +138,10 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
     const filteredNodes = getFilteredNodes();
     const filteredLinks = getFilteredLinks(filteredNodes);
 
-    // Bounding box function to keep nodes FULLY within viewport
+    // Bounding box function
     const boundingBox = (node) => {
       const radius = getNodeRadius(node.connections);
-      const padding = radius + 30; // Extra padding to ensure full visibility
+      const padding = radius + 30;
       
       if (node.x !== undefined) {
         node.x = Math.max(padding, Math.min(width - padding, node.x));
@@ -148,7 +151,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       }
     };
 
-    // Create force simulation with strict bounds
+    // Create force simulation
     const simulation = d3.forceSimulation(filteredNodes)
       .force('link', d3.forceLink(filteredLinks)
         .id(d => d.id)
@@ -160,7 +163,6 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       .force('collision', d3.forceCollide()
         .radius(d => getNodeRadius(d.connections) + 15))
       .on('tick', () => {
-        // Apply bounds on every tick
         filteredNodes.forEach(boundingBox);
       });
 
@@ -205,125 +207,21 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       .attr('font-weight', '600')
       .text(d => d.title);
 
-    // Create tooltip inside container (not body) to preserve CSS variable context
-    const tooltip = d3.select(containerRef.current).append('div')
-      .attr('class', 'graph-tooltip')
-      .style('opacity', 0)
-      .style('position', 'absolute')
-      .style('pointer-events', 'auto')
-      .style('background', 'white')
-      .style('border', '1px solid #E0E0E0')
-      .style('border-radius', '12px')
-      .style('padding', '1rem')
-      .style('box-shadow', '0 8px 24px rgba(0, 0, 0, 0.2)')
-      .style('z-index', '1000')
-      .style('min-width', '220px');
-
-    // Node interactions - Show tooltip on CLICK instead of hover
+    // Node interactions - Show tooltip on CLICK
     node.on('click', function(event, d) {
       event.stopPropagation();
       
-      // Show tooltip with node details
-      tooltip.transition()
-        .duration(200)
-        .style('opacity', 1);
-      
-      // Get graph container dimensions
-      const containerPadding = 32; // 2rem
+      // Get screen position for tooltip
       const containerBounds = containerRef.current.getBoundingClientRect();
-      const tooltipWidth = 240; // Approximate tooltip width
-      const tooltipHeight = 200; // Approximate tooltip height
+      const tooltipX = containerBounds.left + d.x;
+      const tooltipY = containerBounds.top + d.y - getNodeRadius(d.connections) - 20;
       
-      // Calculate initial position
-      let tooltipX = d.x + containerPadding;
-      let tooltipY = d.y - getNodeRadius(d.connections) - 20;
-      
-      // Boundary checks - keep tooltip within graph container
-      const leftBound = containerPadding + tooltipWidth / 2;
-      const rightBound = dimensions.width - containerPadding - tooltipWidth / 2;
-      const topBound = tooltipHeight + 20;
-      const bottomBound = dimensions.height - 20;
-      
-      // Adjust horizontal position
-      if (tooltipX < leftBound) {
-        tooltipX = leftBound;
-      } else if (tooltipX > rightBound) {
-        tooltipX = rightBound;
-      }
-      
-      // Adjust vertical position - if too close to top, show below node
-      if (tooltipY < topBound) {
-        tooltipY = d.y + getNodeRadius(d.connections) + 20; // Show below node
-      }
-      
-      // Prevent going below bottom
-      if (tooltipY > bottomBound) {
-        tooltipY = bottomBound;
-      }
-      
-      tooltip.html(`
-        <div class="tooltip-content">
-          <button class="tooltip-close" data-action="close" style="position: absolute; top: 0.5rem; right: 0.5rem; background: transparent; border: none; cursor: pointer; color: rgba(255, 255, 255, 0.7); padding: 0.25rem; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: all 0.2s;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-          <strong style="padding-right: 1.5rem;">${d.title}</strong>
-          <div class="tooltip-stats">
-            <div>Last Review: <span>${d.lastReview}</span></div>
-            <div>Score: <span>${d.score}%</span></div>
-            <div>Connections: <span>${d.connections.length}</span></div>
-          </div>
-          <div class="tooltip-actions">
-            <button class="tooltip-btn tooltip-btn-primary" id="btn-quiz-${d.id}" onclick="alert('QUIZ BUTTON CLICKED!'); console.log('Inline onclick fired');">
-              Take Quiz
-            </button>
-            <button class="tooltip-btn tooltip-btn-secondary" id="btn-summary-${d.id}" onclick="alert('SUMMARY BUTTON CLICKED!'); console.log('Inline onclick fired');">
-              View Summary
-            </button>
-          </div>
-        </div>
-      `)
-        .style('left', tooltipX + 'px')
-        .style('top', tooltipY + 'px')
-        .style('transform', tooltipY < d.y ? 'translate(-50%, -100%)' : 'translate(-50%, 0)');
-      
-      // Attach listeners directly to buttons after HTML is set
-      const quizBtn = tooltip.select(`#btn-quiz-${d.id}`).node();
-      const summaryBtn = tooltip.select(`#btn-summary-${d.id}`).node();
-      const closeBtn = tooltip.select('.tooltip-close').node();
-      
-      console.log('Buttons found:', { quizBtn: !!quizBtn, summaryBtn: !!summaryBtn, closeBtn: !!closeBtn });
-      
-      if (quizBtn) {
-        quizBtn.addEventListener('click', function(e) {
-          console.log('Quiz button clicked directly!');
-          e.stopPropagation();
-          if (window._knowledgeGraphCallbacks?.onTakeQuiz) {
-            window._knowledgeGraphCallbacks.onTakeQuiz(d);
-          }
-          tooltip.transition().duration(200).style('opacity', 0);
-        });
-      }
-      
-      if (summaryBtn) {
-        summaryBtn.addEventListener('click', function(e) {
-          console.log('Summary button clicked directly!');
-          e.stopPropagation();
-          if (window._knowledgeGraphCallbacks?.onViewSummary) {
-            window._knowledgeGraphCallbacks.onViewSummary(d);
-          }
-          tooltip.transition().duration(200).style('opacity', 0);
-        });
-      }
-      
-      if (closeBtn) {
-        closeBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          tooltip.transition().duration(200).style('opacity', 0);
-        });
-      }
+      // Set tooltip data in React state
+      setTooltipData({
+        node: d,
+        x: tooltipX,
+        y: tooltipY
+      });
       
       // Highlight connected nodes
       const connectedIds = new Set([d.id, ...d.connections]);
@@ -345,9 +243,10 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         );
     });
 
-    // Click outside to close tooltip and reset highlights
-    svg.on('click', function() {
-      tooltip.transition().duration(200).style('opacity', 0);
+    // Click outside to close tooltip
+    svg.on('click', function(event) {
+      console.log('SVG clicked, closing tooltip');
+      setTooltipData(null);
       
       // Reset all highlights
       node.select('circle')
@@ -374,7 +273,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       node.attr('transform', d => `translate(${d.x},${d.y})`);
     });
 
-    // Drag functions with bounds checking
+    // Drag functions
     function dragstarted(event, d) {
       if (!event.active) simulation.alphaTarget(0.3).restart();
       d.fx = d.x;
@@ -382,7 +281,6 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
     }
 
     function dragged(event, d) {
-      // Apply bounds during drag
       const radius = getNodeRadius(d.connections);
       const padding = radius + 30;
       
@@ -392,7 +290,6 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
 
     function dragended(event, d) {
       if (!event.active) simulation.alphaTarget(0);
-      // Keep node fixed at bounded position
       const radius = getNodeRadius(d.connections);
       const padding = radius + 30;
       
@@ -406,7 +303,6 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
     // Cleanup
     return () => {
       simulation.stop();
-      d3.select('.graph-tooltip').remove();
     };
   }, [activeFilters, searchQuery, expandedNode, onTakeQuizRef, onViewSummaryRef]);
 
@@ -419,7 +315,6 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         d3.zoomIdentity
       );
     
-    // Reset all fixed positions
     if (simulationRef.current) {
       simulationRef.current.nodes().forEach(node => {
         node.fx = null;
@@ -464,7 +359,6 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       )}
 
       <div className="graph-controls-bar">
-        {/* Search */}
         <div className="search-container">
           <Search size={18} />
           <input
@@ -477,7 +371,6 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         </div>
       </div>
 
-      {/* Graph Container */}
       <div className="graph-visualization">
         {isLoading && (
           <div className="graph-loading">
@@ -488,7 +381,6 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
 
         <svg ref={svgRef} className="knowledge-graph-svg"></svg>
 
-        {/* Zoom Controls - Embedded in Graph (Google Maps style) */}
         <div className="graph-embedded-zoom-controls">
           <button onClick={handleZoomIn} className="embedded-zoom-btn" title="Zoom In">
             <ZoomIn size={20} />
@@ -501,7 +393,6 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
           </button>
         </div>
 
-        {/* Interactive Legend - Click to filter */}
         <div className="graph-legend-inline">
           <div className="legend-inline-items">
             <div 
@@ -531,13 +422,11 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
           </div>
         </div>
 
-        {/* Hint */}
         <div className="graph-hint">
           💡 Drag nodes to explore • Click to view details • Click background to close
         </div>
       </div>
 
-      {/* Quick Review Modal */}
       {showQuickReview && selectedNode && (
         <div className="modal-overlay" onClick={() => setShowQuickReview(false)}>
           <div className="quick-review-modal" onClick={(e) => e.stopPropagation()}>
@@ -576,6 +465,101 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
                 Take Quiz
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {tooltipData && (
+        <div 
+          className="graph-tooltip"
+          style={{
+            position: 'fixed',
+            left: `${tooltipData.x}px`,
+            top: `${tooltipData.y}px`,
+            transform: 'translate(-50%, -100%)',
+            opacity: 1,
+            pointerEvents: 'auto',
+            background: 'white',
+            border: '1px solid #E0E0E0',
+            borderRadius: '12px',
+            padding: '1rem',
+            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.2)',
+            zIndex: 10000,
+            minWidth: '220px'
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button 
+            className="tooltip-close"
+            style={{
+              position: 'absolute',
+              top: '0.5rem',
+              right: '0.5rem',
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '0.25rem'
+            }}
+            onClick={() => setTooltipData(null)}
+          >
+            <X size={16} />
+          </button>
+          
+          <strong style={{paddingRight: '1.5rem', display: 'block', marginBottom: '0.75rem'}}>
+            {tooltipData.node.title}
+          </strong>
+          
+          <div className="tooltip-stats" style={{marginBottom: '1rem'}}>
+            <div>Last Review: <span>{tooltipData.node.lastReview}</span></div>
+            <div>Score: <span>{tooltipData.node.score}%</span></div>
+            <div>Connections: <span>{tooltipData.node.connections.length}</span></div>
+          </div>
+          
+          <div className="tooltip-actions" style={{display: 'flex', gap: '0.5rem'}}>
+            <button 
+              className="tooltip-btn tooltip-btn-primary"
+              style={{
+                flex: 1,
+                padding: '0.5rem 1rem',
+                border: 'none',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontWeight: 600,
+                background: '#0E7C7B',
+                color: 'white'
+              }}
+              onClick={() => {
+                console.log('🎯 React Quiz Button Clicked!');
+                if (onTakeQuiz) {
+                  onTakeQuiz(tooltipData.node);
+                }
+                setTooltipData(null);
+              }}
+            >
+              Take Quiz
+            </button>
+            <button 
+              className="tooltip-btn tooltip-btn-secondary"
+              style={{
+                flex: 1,
+                padding: '0.5rem 1rem',
+                border: 'none',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontWeight: 600,
+                background: '#E0E0E0',
+                color: '#333'
+              }}
+              onClick={() => {
+                console.log('📄 React Summary Button Clicked!');
+                if (onViewSummary) {
+                  onViewSummary(tooltipData.node);
+                }
+                setTooltipData(null);
+              }}
+            >
+              View Summary
+            </button>
           </div>
         </div>
       )}
