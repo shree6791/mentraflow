@@ -268,10 +268,10 @@ NODES = [
         "lastReview": "3 weeks ago",
         "score": 52,
         "connections": ["t4"],
-        "libraryId": "lib8",
+        "docId": "doc8",
         "quizzesTaken": 1,
-        "quizId": "t8",
-        "summaryId": "t8"
+        "quizId": "q8",
+        "summaryId": "s8"
     }
 ]
 
