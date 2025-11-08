@@ -65,7 +65,7 @@ QUIZ_CONTENT = {
             }
         ]
     },
-    "t4": {
+    "q4": {
         "questions": [
             {
                 "q": "What is the typical capacity of working memory?",
