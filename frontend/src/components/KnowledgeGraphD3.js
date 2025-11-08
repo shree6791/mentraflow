@@ -196,26 +196,30 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       .style('z-index', '1000')
       .style('min-width', '220px');
 
-    // Node interactions
+    // Node interactions - Show tooltip on CLICK instead of hover
     node.on('click', function(event, d) {
       event.stopPropagation();
-      handleNodeClick(d);
-    });
-
-    node.on('mouseenter', function(event, d) {
-      // Show tooltip with actions
+      
+      // Show tooltip with node details
       tooltip.transition()
         .duration(200)
         .style('opacity', 1);
       
-      // Get container offset for proper positioning
+      // Position tooltip near the clicked node
+      const nodeRect = this.getBoundingClientRect();
       const containerRect = containerRef.current.getBoundingClientRect();
-      const tooltipX = event.clientX - containerRect.left + 15;
-      const tooltipY = event.clientY - containerRect.top - 15;
+      const tooltipX = nodeRect.left - containerRect.left + nodeRect.width / 2;
+      const tooltipY = nodeRect.top - containerRect.top - 10;
       
       tooltip.html(`
-        <div class="tooltip-content" style="background: white; color: #1F2937;">
-          <strong style="display: block; font-size: 1rem; color: #1A1A2E; margin-bottom: 0.75rem; font-weight: 700;">${d.title}</strong>
+        <div class="tooltip-content" style="background: white; color: #1F2937; position: relative;">
+          <button class="tooltip-close" style="position: absolute; top: 0.5rem; right: 0.5rem; background: transparent; border: none; cursor: pointer; color: #6B7280; padding: 0.25rem; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: all 0.2s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+          <strong style="display: block; font-size: 1rem; color: #1A1A2E; margin-bottom: 0.75rem; font-weight: 700; padding-right: 1.5rem;">${d.title}</strong>
           <div class="tooltip-stats" style="display: flex; flex-direction: column; gap: 0.375rem; font-size: 0.875rem; color: #6B7280; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid #E0E0E0;">
             <div>Last Review: <span style="color: #1F2937; font-weight: 600;">${d.lastReview}</span></div>
             <div>Score: <span style="color: #1F2937; font-weight: 600;">${d.score}%</span></div>
@@ -232,24 +236,29 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         </div>
       `)
         .style('left', tooltipX + 'px')
-        .style('top', tooltipY + 'px');
+        .style('top', tooltipY + 'px')
+        .style('transform', 'translate(-50%, -100%)');
       
       // Add click handlers to tooltip buttons
-      d3.selectAll('.tooltip-btn').on('click', function() {
+      d3.selectAll('.tooltip-btn').on('click', function(e) {
+        e.stopPropagation();
         const action = d3.select(this).attr('data-action');
         if (action === 'quiz') {
           setSelectedNode(d);
           setShowQuickReview(true);
         } else if (action === 'summary') {
-          // Open summary view
           console.log('Open summary for:', d.title);
         }
-        tooltip.style('opacity', 0);
+        tooltip.transition().duration(200).style('opacity', 0);
+      });
+      
+      // Add close button handler
+      d3.select('.tooltip-close').on('click', function(e) {
+        e.stopPropagation();
+        tooltip.transition().duration(200).style('opacity', 0);
       });
       
       // Highlight connected nodes
-      if (expandedNode && expandedNode !== d.id) return;
-      
       const connectedIds = new Set([d.id, ...d.connections]);
       
       node.select('circle')
@@ -269,14 +278,11 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         );
     });
 
-    node.on('mouseleave', function(event, d) {
-      // Hide tooltip
-      tooltip.transition()
-        .duration(200)
-        .style('opacity', 0);
+    // Click outside to close tooltip and reset highlights
+    svg.on('click', function() {
+      tooltip.transition().duration(200).style('opacity', 0);
       
-      if (expandedNode) return;
-      
+      // Reset all highlights
       node.select('circle')
         .transition()
         .duration(200)
@@ -288,16 +294,6 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         .duration(200)
         .attr('stroke-opacity', linkD => getLinkOpacity(linkD.source, linkD.target))
         .attr('stroke-width', 2);
-    });
-
-    node.on('mousemove', function(event) {
-      const containerRect = containerRef.current.getBoundingClientRect();
-      const tooltipX = event.clientX - containerRect.left + 15;
-      const tooltipY = event.clientY - containerRect.top - 15;
-      
-      tooltip
-        .style('left', tooltipX + 'px')
-        .style('top', tooltipY + 'px');
     });
 
     // Simulation tick
