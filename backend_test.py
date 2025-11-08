@@ -532,6 +532,46 @@ class BackendTester:
         
         return True
     
+    def validate_node_detail_naming_convention(self, data: Dict) -> bool:
+        """Validate detailed /api/node/{title} response with new naming convention"""
+        # First run the standard validation
+        result = self.validate_node_detail(data)
+        if result is not True:
+            return result
+        
+        # Now validate the naming convention specifically
+        node = data["node"]
+        
+        # CRITICAL: Check for new naming convention fields in detailed node
+        if "docId" not in node:
+            return "Node missing 'docId' field (new naming convention)"
+        
+        if "quizId" not in node:
+            return "Node missing 'quizId' field (new naming convention)"
+        
+        if "summaryId" not in node:
+            return "Node missing 'summaryId' field (new naming convention)"
+        
+        # Check naming convention formats
+        doc_id = node.get("docId")
+        if not doc_id.startswith("doc"):
+            return f"docId should start with 'doc', got: {doc_id}"
+        
+        quiz_id = node.get("quizId")
+        if not quiz_id.startswith("q"):
+            return f"quizId should start with 'q', got: {quiz_id}"
+        
+        summary_id = node.get("summaryId")
+        if not summary_id.startswith("s"):
+            return f"summaryId should start with 's', got: {summary_id}"
+        
+        print_success(f"  ✅ NEW NAMING CONVENTION VERIFIED:")
+        print_success(f"    docId = {doc_id}")
+        print_success(f"    quizId = {quiz_id}")
+        print_success(f"    summaryId = {summary_id}")
+        
+        return True
+    
     def test_404_endpoint(self, name: str, url: str) -> bool:
         """Test endpoint that should return 404"""
         print(f"\n{Colors.BOLD}Testing: {name}{Colors.RESET}")
