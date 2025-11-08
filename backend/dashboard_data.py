@@ -234,38 +234,8 @@ NODES = [
         "connections": ["t1", "t2", "t4"],
         "libraryId": "lib4",
         "quizzesTaken": 3,
-        "questions": [
-            {
-                "q": "What is interleaved practice?",
-                "options": [
-                    "Practicing one skill repeatedly until mastered",
-                    "Mixing different topics or skills in a single study session",
-                    "Taking breaks between study sessions",
-                    "Reviewing material in the same order every time"
-                ],
-                "correctIndex": 1
-            },
-            {
-                "q": "How does interleaved practice differ from blocked practice?",
-                "options": [
-                    "Blocked practice is always more effective",
-                    "Interleaved practice mixes topics, blocked practice focuses on one",
-                    "They are the same thing",
-                    "Blocked practice requires more effort"
-                ],
-                "correctIndex": 1
-            }
-        ],
-        "summary": {
-            "content": "Interleaved practice involves mixing different topics or types of problems during a study session, rather than focusing on one topic at a time (blocked practice).\n\nWhile blocked practice may feel easier and produce faster initial gains, interleaved practice leads to better long-term retention and transfer of knowledge. The difficulty of switching between topics forces deeper processing.\n\nInterleaved practice is particularly effective for subjects that require discrimination between different concepts or problem types.",
-            "keyTakeaways": [
-                "Mix different topics rather than blocking by topic",
-                "Feels harder but produces better long-term learning",
-                "Improves ability to discriminate between concepts",
-                "Particularly effective for math and science problems"
-            ],
-            "keywords": ["Interleaved Practice", "Blocked Practice", "Discrimination", "Transfer"]
-        }
+        "quizId": "t5",
+        "summaryId": "t5"
     },
     {
         "id": "t6",
