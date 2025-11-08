@@ -108,7 +108,7 @@ QUIZ_CONTENT = {
             }
         ]
     },
-    "t6": {
+    "q6": {
         "questions": [
             {
                 "q": "What is metacognition?",
