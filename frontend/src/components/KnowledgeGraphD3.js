@@ -292,16 +292,29 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         
         const action = button.getAttribute('data-action');
         console.log('Button clicked:', action, 'for node:', d.title);
+        console.log('Current states - selectedNode:', selectedNode, 'showQuickReview:', showQuickReview);
         
         if (action === 'close') {
           tooltip.transition().duration(200).style('opacity', 0);
         } else if (action === 'quiz') {
-          console.log('Opening quiz modal for:', d.title);
-          setSelectedNode(d);
-          setShowQuickReview(true);
+          console.log('Setting selectedNode to:', d);
+          console.log('Setting showQuickReview to: true');
+          
+          // Force state updates
+          setSelectedNode({...d}); // Create new object to force update
+          setTimeout(() => {
+            setShowQuickReview(true);
+            console.log('State updates triggered');
+          }, 0);
+          
           tooltip.transition().duration(200).style('opacity', 0);
         } else if (action === 'summary') {
           console.log('Opening summary for:', d.title);
+          // For now, just show an alert or open quiz
+          setSelectedNode({...d});
+          setTimeout(() => {
+            setShowQuickReview(true);
+          }, 0);
           tooltip.transition().duration(200).style('opacity', 0);
         }
       };
