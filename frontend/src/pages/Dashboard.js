@@ -270,16 +270,9 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        // TEMPORARY: Bypass authentication for demo
-        const mockUser = {
-          id: 'demo-user',
-          email: 'demo@mentraflow.com',
-          name: 'Demo User',
-          picture: 'https://ui-avatars.com/api/?name=Demo+User&background=0E7C7B&color=fff&size=150'
-        };
-        setUser(mockUser);
-
-        // Fetch dashboard data from API
+        setLoading(true);
+        
+        // Fetch all dashboard data
         const [libraryResponse, topicsResponse, recallResponse] = await Promise.all([
           axios.get(`${API}/library`, { withCredentials: true }),
           axios.get(`${API}/topics`, { withCredentials: true }),
@@ -293,16 +286,12 @@ const Dashboard = () => {
         setLoading(false);
       } catch (error) {
         console.error('Error fetching dashboard data:', error);
-        // Set empty arrays on error
-        setLibraryItems([]);
-        setTopics([]);
-        setRecallTasks([]);
         setLoading(false);
       }
     };
 
     fetchDashboardData();
-  }, [navigate, API]);
+  }, [API]);
 
   // Listen for profile settings event from AppHeader
   useEffect(() => {
