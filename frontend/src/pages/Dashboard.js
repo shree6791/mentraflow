@@ -457,8 +457,9 @@ const Dashboard = () => {
     setCurrentQuestionIndex(0);
   };
 
-  const calculateScore = (results, totalQuestions) => {
-    const correctAnswers = Object.values(results).filter(Boolean).length;
+  const calculateScore = () => {
+    const correctAnswers = Object.values(quizResults).filter(Boolean).length;
+    const totalQuestions = SAMPLE_QUIZ.length;
     return Math.round((correctAnswers / totalQuestions) * 100);
   };
 
