@@ -58,6 +58,7 @@ const KnowledgeGraphPage = () => {
   // Modal Handlers
   const openTopicModal = async (topic, tab = 'summary') => {
     console.log('openTopicModal called with topic:', topic, 'tab:', tab);
+    alert(`Opening modal for: ${topic?.title || 'unknown'}`);
     setSelectedTopic(topic);
     setModalTab(tab);
     
