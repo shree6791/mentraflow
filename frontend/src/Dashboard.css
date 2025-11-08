@@ -1086,6 +1086,10 @@
   transition: width 0.3s ease;
 }
 
+.quiz-question-card {
+  margin-bottom: 0;
+}
+
 .quiz-question {
   margin-bottom: 1.5rem;
 }
