@@ -277,6 +277,48 @@ class BackendTester:
         
         return True
     
+    def validate_library_naming_convention(self, data: Dict) -> bool:
+        """Validate /api/library response with new naming convention"""
+        if "items" not in data:
+            return "Missing 'items' key"
+        
+        items = data["items"]
+        if not isinstance(items, list):
+            return f"items should be a list, got {type(items)}"
+        
+        if len(items) == 0:
+            return "No library items found"
+        
+        print_success(f"  Found {len(items)} library items")
+        
+        # Validate naming convention in library items
+        if items:
+            item = items[0]
+            required_keys = ["id", "title", "filename", "retention", "nextReview", "quizScore"]
+            for key in required_keys:
+                if key not in item:
+                    return f"Library item missing key: {key}"
+            
+            # CRITICAL: Check for new naming convention - IDs should be doc1, doc2, etc.
+            item_id = item.get("id")
+            if not item_id.startswith("doc"):
+                return f"Document ID should start with 'doc', got: {item_id}"
+            
+            print_success(f"  ✅ NEW NAMING: Document ID = {item_id}")
+            print_success(f"  Sample item: {item['title']}")
+            print_success(f"  Retention: {item['retention']}")
+            print_success(f"  Quiz Score: {item['quizScore']}")
+            
+            # Check all items have proper doc IDs
+            doc_ids = [item.get("id", "") for item in items]
+            invalid_ids = [doc_id for doc_id in doc_ids if not doc_id.startswith("doc")]
+            if invalid_ids:
+                return f"Found invalid document IDs (should start with 'doc'): {invalid_ids}"
+            
+            print_success(f"  ✅ ALL DOCUMENT IDs: {', '.join(doc_ids)}")
+        
+        return True
+    
     def validate_recall_tasks(self, data: Dict) -> bool:
         """Validate /api/recall-tasks response"""
         if "tasks" not in data:
