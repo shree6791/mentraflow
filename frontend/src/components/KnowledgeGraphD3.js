@@ -253,7 +253,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       
       tooltip.html(`
         <div class="tooltip-content">
-          <button class="tooltip-close" style="position: absolute; top: 0.5rem; right: 0.5rem; background: transparent; border: none; cursor: pointer; color: rgba(255, 255, 255, 0.7); padding: 0.25rem; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: all 0.2s;">
+          <button class="tooltip-close" data-action="close" style="position: absolute; top: 0.5rem; right: 0.5rem; background: transparent; border: none; cursor: pointer; color: rgba(255, 255, 255, 0.7); padding: 0.25rem; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: all 0.2s;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -266,10 +266,10 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
             <div>Connections: <span>${d.connections.length}</span></div>
           </div>
           <div class="tooltip-actions">
-            <button class="tooltip-btn tooltip-btn-primary" data-id="${d.id}" data-action="quiz">
+            <button class="tooltip-btn tooltip-btn-primary" data-action="quiz">
               Take Quiz
             </button>
-            <button class="tooltip-btn tooltip-btn-secondary" data-id="${d.id}" data-action="summary">
+            <button class="tooltip-btn tooltip-btn-secondary" data-action="summary">
               View Summary
             </button>
           </div>
@@ -279,54 +279,39 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         .style('top', tooltipY + 'px')
         .style('transform', tooltipY < d.y ? 'translate(-50%, -100%)' : 'translate(-50%, 0)');
       
-      // Use native DOM event listeners for reliability
+      // Use event delegation - listen on tooltip container
       const tooltipElement = tooltip.node();
       
-      // Remove any existing listeners first
-      const oldCloseBtn = tooltipElement.querySelector('.tooltip-close');
-      const oldQuizBtn = tooltipElement.querySelector('[data-action="quiz"]');
-      const oldSummaryBtn = tooltipElement.querySelector('[data-action="summary"]');
+      // Remove any existing click listener on tooltip
+      const newTooltip = tooltipElement.cloneNode(true);
+      tooltipElement.parentNode.replaceChild(newTooltip, tooltipElement);
       
-      if (oldCloseBtn) {
-        oldCloseBtn.replaceWith(oldCloseBtn.cloneNode(true));
-      }
-      if (oldQuizBtn) {
-        oldQuizBtn.replaceWith(oldQuizBtn.cloneNode(true));
-      }
-      if (oldSummaryBtn) {
-        oldSummaryBtn.replaceWith(oldSummaryBtn.cloneNode(true));
-      }
+      // Re-reference tooltip after replacement
+      const activeTooltip = d3.select(newTooltip);
       
-      // Attach fresh event listeners
-      const closeBtn = tooltipElement.querySelector('.tooltip-close');
-      const quizBtn = tooltipElement.querySelector('[data-action="quiz"]');
-      const summaryBtn = tooltipElement.querySelector('[data-action="summary"]');
-      
-      if (closeBtn) {
-        closeBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          console.log('Close button clicked');
-          tooltip.transition().duration(200).style('opacity', 0);
-        });
-      }
-      
-      if (quizBtn) {
-        quizBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          console.log('Take Quiz clicked for:', d.title);
+      // Add single click listener using event delegation
+      newTooltip.addEventListener('click', function(e) {
+        e.stopPropagation();
+        
+        // Find which button was clicked
+        const button = e.target.closest('button[data-action]');
+        if (!button) return;
+        
+        const action = button.getAttribute('data-action');
+        console.log('Button clicked:', action, 'for node:', d.title);
+        
+        if (action === 'close') {
+          activeTooltip.transition().duration(200).style('opacity', 0);
+        } else if (action === 'quiz') {
+          console.log('Opening quiz modal for:', d.title);
           setSelectedNode(d);
           setShowQuickReview(true);
-          tooltip.transition().duration(200).style('opacity', 0);
-        });
-      }
-      
-      if (summaryBtn) {
-        summaryBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          console.log('View Summary clicked for:', d.title);
-          tooltip.transition().duration(200).style('opacity', 0);
-        });
-      }
+          activeTooltip.transition().duration(200).style('opacity', 0);
+        } else if (action === 'summary') {
+          console.log('Opening summary for:', d.title);
+          activeTooltip.transition().duration(200).style('opacity', 0);
+        }
+      });
       
       // Highlight connected nodes
       const connectedIds = new Set([d.id, ...d.connections]);
