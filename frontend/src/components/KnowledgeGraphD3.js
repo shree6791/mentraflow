@@ -182,6 +182,11 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       .attr('font-weight', '600')
       .text(d => d.title);
 
+    // Create tooltip
+    const tooltip = d3.select('body').append('div')
+      .attr('class', 'graph-tooltip')
+      .style('opacity', 0);
+
     // Node interactions
     node.on('click', function(event, d) {
       event.stopPropagation();
@@ -189,6 +194,24 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
     });
 
     node.on('mouseenter', function(event, d) {
+      // Show tooltip
+      tooltip.transition()
+        .duration(200)
+        .style('opacity', 1);
+      
+      tooltip.html(`
+        <div class="tooltip-content">
+          <strong>${d.title}</strong>
+          <div class="tooltip-stats">
+            <div>Last Review: ${d.lastReview}</div>
+            <div>Score: ${d.score}%</div>
+            <div>Connections: ${d.connections.length}</div>
+          </div>
+        </div>
+      `)
+        .style('left', (event.pageX + 15) + 'px')
+        .style('top', (event.pageY - 15) + 'px');
+      
       // Highlight connected nodes
       if (expandedNode && expandedNode !== d.id) return;
       
@@ -212,6 +235,11 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
     });
 
     node.on('mouseleave', function(event, d) {
+      // Hide tooltip
+      tooltip.transition()
+        .duration(200)
+        .style('opacity', 0);
+      
       if (expandedNode) return;
       
       node.select('circle')
@@ -225,6 +253,12 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         .duration(200)
         .attr('stroke-opacity', linkD => getLinkOpacity(linkD.source, linkD.target))
         .attr('stroke-width', 2);
+    });
+
+    node.on('mousemove', function(event) {
+      tooltip
+        .style('left', (event.pageX + 15) + 'px')
+        .style('top', (event.pageY - 15) + 'px');
     });
 
     // Simulation tick
