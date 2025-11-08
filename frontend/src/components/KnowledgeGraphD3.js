@@ -252,24 +252,24 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       }
       
       tooltip.html(`
-        <div class="tooltip-content" style="background: white; color: #1F2937; position: relative;">
-          <button class="tooltip-close" style="position: absolute; top: 0.5rem; right: 0.5rem; background: transparent; border: none; cursor: pointer; color: #6B7280; padding: 0.25rem; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: all 0.2s;">
+        <div class="tooltip-content">
+          <button class="tooltip-close" style="position: absolute; top: 0.5rem; right: 0.5rem; background: transparent; border: none; cursor: pointer; color: rgba(255, 255, 255, 0.7); padding: 0.25rem; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: all 0.2s;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
           </button>
-          <strong style="display: block; font-size: 1rem; color: #1A1A2E; margin-bottom: 0.75rem; font-weight: 700; padding-right: 1.5rem;">${d.title}</strong>
-          <div class="tooltip-stats" style="display: flex; flex-direction: column; gap: 0.375rem; font-size: 0.875rem; color: #6B7280; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid #E0E0E0;">
-            <div>Last Review: <span style="color: #1F2937; font-weight: 600;">${d.lastReview}</span></div>
-            <div>Score: <span style="color: #1F2937; font-weight: 600;">${d.score}%</span></div>
-            <div>Connections: <span style="color: #1F2937; font-weight: 600;">${d.connections.length}</span></div>
+          <strong style="padding-right: 1.5rem;">${d.title}</strong>
+          <div class="tooltip-stats">
+            <div>Last Review: <span>${d.lastReview}</span></div>
+            <div>Score: <span>${d.score}%</span></div>
+            <div>Connections: <span>${d.connections.length}</span></div>
           </div>
-          <div class="tooltip-actions" style="display: flex; flex-direction: column; gap: 0.5rem;">
-            <button class="tooltip-btn tooltip-btn-primary" data-id="${d.id}" data-action="quiz" style="padding: 0.5rem 1rem; border-radius: 6px; border: none; font-size: 0.875rem; font-weight: 600; cursor: pointer; background: linear-gradient(135deg, #FFD166, #FFC130); color: #1A1A1A;">
+          <div class="tooltip-actions">
+            <button class="tooltip-btn tooltip-btn-primary" data-id="${d.id}" data-action="quiz">
               Take Quiz
             </button>
-            <button class="tooltip-btn tooltip-btn-secondary" data-id="${d.id}" data-action="summary" style="padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.875rem; font-weight: 600; cursor: pointer; background: #F3F4F6; color: #0E7C7B; border: 1px solid #E0E0E0;">
+            <button class="tooltip-btn tooltip-btn-secondary" data-id="${d.id}" data-action="summary">
               View Summary
             </button>
           </div>
@@ -279,24 +279,30 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         .style('top', tooltipY + 'px')
         .style('transform', tooltipY < d.y ? 'translate(-50%, -100%)' : 'translate(-50%, 0)');
       
-      // Add click handlers to tooltip buttons
-      d3.selectAll('.tooltip-btn').on('click', function(e) {
-        e.stopPropagation();
-        const action = d3.select(this).attr('data-action');
-        if (action === 'quiz') {
+      // IMPORTANT: Attach event handlers AFTER HTML is set
+      setTimeout(() => {
+        // Close button handler
+        tooltip.select('.tooltip-close').on('click', function(e) {
+          e.stopPropagation();
+          tooltip.transition().duration(200).style('opacity', 0);
+        });
+        
+        // Quiz button handler
+        tooltip.select('[data-action="quiz"]').on('click', function(e) {
+          e.stopPropagation();
+          console.log('Take Quiz clicked for:', d.title);
           setSelectedNode(d);
           setShowQuickReview(true);
-        } else if (action === 'summary') {
-          console.log('Open summary for:', d.title);
-        }
-        tooltip.transition().duration(200).style('opacity', 0);
-      });
-      
-      // Add close button handler
-      d3.select('.tooltip-close').on('click', function(e) {
-        e.stopPropagation();
-        tooltip.transition().duration(200).style('opacity', 0);
-      });
+          tooltip.transition().duration(200).style('opacity', 0);
+        });
+        
+        // Summary button handler
+        tooltip.select('[data-action="summary"]').on('click', function(e) {
+          e.stopPropagation();
+          console.log('View Summary clicked for:', d.title);
+          tooltip.transition().duration(200).style('opacity', 0);
+        });
+      }, 10);
       
       // Highlight connected nodes
       const connectedIds = new Set([d.id, ...d.connections]);
