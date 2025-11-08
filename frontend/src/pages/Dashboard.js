@@ -424,7 +424,7 @@ const Dashboard = () => {
     setSelectedLibraryItem(item);
     setLibraryModalTab(tab);
     
-    // Fetch complete data from API (quiz + summary)
+    // Fetch complete data from API (quiz + summary + all node fields)
     try {
       // Title now matches exactly - no mapping needed!
       const response = await axios.get(`${API}/node/${encodeURIComponent(item.title)}`);
@@ -437,9 +437,10 @@ const Dashboard = () => {
         setLibraryQuizData(null);
       }
       
-      // Update selected item with summary from API
+      // Update selected item with ALL node data (summary, score, quizzesTaken, etc)
       setSelectedLibraryItem({
         ...item,
+        ...data.node,  // ✅ Include all node fields (score, quizzesTaken, state, etc)
         summary: data.summary || null
       });
       
