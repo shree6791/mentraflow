@@ -13,7 +13,7 @@ SUMMARY_CONTENT = {
         ],
         "keywords": ["Forgetting Curve", "Spaced Repetition", "Active Recall", "Memory Consolidation"]
     },
-    "t2": {
+    "s2": {
         "content": "Active recall is a learning technique that involves actively retrieving information from memory rather than passively reviewing notes. This method has been proven to be one of the most effective study strategies.\n\nWhen you practice active recall, you're forcing your brain to reconstruct the information, which strengthens neural pathways. This is much more effective than simply re-reading or highlighting text.\n\nResearch shows that testing yourself regularly leads to better long-term retention than spending the same amount of time reviewing material.",
         "keyTakeaways": [
             "Actively retrieve information rather than passively reviewing",
