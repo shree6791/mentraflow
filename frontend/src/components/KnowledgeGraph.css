@@ -67,15 +67,49 @@
 /* Controls Bar */
 .graph-controls-bar {
   display: flex;
+  align-items: center;
   gap: 1rem;
   padding: 1rem 2rem;
   background: white;
   border-bottom: 1px solid var(--divider);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
+}
+
+/* Search Container */
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-light);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  flex: 1;
+  min-width: 200px;
+  max-width: 400px;
+  border: 1px solid var(--divider);
+}
+
+.search-container svg {
+  color: var(--text-gray);
+  flex-shrink: 0;
+}
+
+.search-input {
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  flex: 1;
+  min-width: 0;
+}
+
+.search-input::placeholder {
+  color: var(--text-gray);
 }
 
 .graph-search {
