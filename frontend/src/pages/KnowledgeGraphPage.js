@@ -217,22 +217,35 @@ const KnowledgeGraphPage = () => {
               {modalTab === 'summary' && (
                 <div className="library-tab-content">
                   <div className="summary-content">
-                    <h3>Overview</h3>
-                    <p>{SAMPLE_SUMMARY.content}</p>
+                    {selectedTopic.summary ? (
+                      <>
+                        <h3>Overview</h3>
+                        <p>{selectedTopic.summary.content}</p>
 
-                    <h4>Key Takeaways</h4>
-                    <ul className="summary-bullets">
-                      {SAMPLE_SUMMARY.bullets.map((bullet, idx) => (
-                        <li key={idx}>{bullet}</li>
-                      ))}
-                    </ul>
+                        {selectedTopic.summary.keyTakeaways && selectedTopic.summary.keyTakeaways.length > 0 && (
+                          <>
+                            <h4>Key Takeaways</h4>
+                            <ul className="summary-bullets">
+                              {selectedTopic.summary.keyTakeaways.map((bullet, idx) => (
+                                <li key={idx}>{bullet}</li>
+                              ))}
+                            </ul>
+                          </>
+                        )}
 
-                    {SAMPLE_SUMMARY.keywords && SAMPLE_SUMMARY.keywords.length > 0 && (
-                      <div className="summary-keywords">
-                        <h4>Key Concepts</h4>
-                        {SAMPLE_SUMMARY.keywords.map((keyword, idx) => (
-                          <span key={idx} className="keyword-tag">{keyword}</span>
-                        ))}
+                        {selectedTopic.summary.keywords && selectedTopic.summary.keywords.length > 0 && (
+                          <div className="summary-keywords">
+                            <h4>Key Concepts</h4>
+                            {selectedTopic.summary.keywords.map((keyword, idx) => (
+                              <span key={idx} className="keyword-tag">{keyword}</span>
+                            ))}
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <div style={{textAlign: 'center', padding: '2rem'}}>
+                        <div className="loading-spinner" style={{margin: '0 auto 1rem'}}></div>
+                        <p>Loading summary...</p>
                       </div>
                     )}
                   </div>
