@@ -84,7 +84,7 @@ QUIZ_CONTENT = {
             }
         ]
     },
-    "t5": {
+    "q5": {
         "questions": [
             {
                 "q": "What is interleaved practice?",
