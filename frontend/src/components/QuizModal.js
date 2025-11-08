@@ -168,15 +168,13 @@ const QuizModal = ({
                     </div>
 
                     <div className="quiz-navigation">
-                      {currentQuestionIndex > 0 && (
-                        <button 
-                          className="btn-secondary"
-                          onClick={onPreviousQuestion}
-                        >
-                          Previous
-                        </button>
-                      )}
-                      <div style={{flex: 1}}></div>
+                      <button 
+                        className="btn-secondary"
+                        onClick={onPreviousQuestion}
+                        disabled={currentQuestionIndex === 0}
+                      >
+                        Previous
+                      </button>
                       {currentQuestionIndex < quizData.questions.length - 1 ? (
                         <button 
                           className="btn-primary"
