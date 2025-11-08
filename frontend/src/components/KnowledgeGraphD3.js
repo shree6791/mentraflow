@@ -469,7 +469,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
 
         {/* Hint */}
         <div className="graph-hint">
-          💡 Drag nodes to explore • Click once to expand • Click again to review
+          💡 Drag nodes to explore • Click to view details • Click background to close
         </div>
       </div>
 
