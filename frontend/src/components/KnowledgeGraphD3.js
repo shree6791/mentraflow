@@ -276,10 +276,10 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
             <div>Connections: <span>${d.connections.length}</span></div>
           </div>
           <div class="tooltip-actions">
-            <button class="tooltip-btn tooltip-btn-primary" id="btn-quiz-${d.id}">
+            <button class="tooltip-btn tooltip-btn-primary" id="btn-quiz-${d.id}" onclick="alert('QUIZ BUTTON CLICKED!'); console.log('Inline onclick fired');">
               Take Quiz
             </button>
-            <button class="tooltip-btn tooltip-btn-secondary" id="btn-summary-${d.id}">
+            <button class="tooltip-btn tooltip-btn-secondary" id="btn-summary-${d.id}" onclick="alert('SUMMARY BUTTON CLICKED!'); console.log('Inline onclick fired');">
               View Summary
             </button>
           </div>
