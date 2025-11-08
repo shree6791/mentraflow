@@ -279,30 +279,54 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         .style('top', tooltipY + 'px')
         .style('transform', tooltipY < d.y ? 'translate(-50%, -100%)' : 'translate(-50%, 0)');
       
-      // IMPORTANT: Attach event handlers AFTER HTML is set
-      setTimeout(() => {
-        // Close button handler
-        tooltip.select('.tooltip-close').on('click', function(e) {
+      // Use native DOM event listeners for reliability
+      const tooltipElement = tooltip.node();
+      
+      // Remove any existing listeners first
+      const oldCloseBtn = tooltipElement.querySelector('.tooltip-close');
+      const oldQuizBtn = tooltipElement.querySelector('[data-action="quiz"]');
+      const oldSummaryBtn = tooltipElement.querySelector('[data-action="summary"]');
+      
+      if (oldCloseBtn) {
+        oldCloseBtn.replaceWith(oldCloseBtn.cloneNode(true));
+      }
+      if (oldQuizBtn) {
+        oldQuizBtn.replaceWith(oldQuizBtn.cloneNode(true));
+      }
+      if (oldSummaryBtn) {
+        oldSummaryBtn.replaceWith(oldSummaryBtn.cloneNode(true));
+      }
+      
+      // Attach fresh event listeners
+      const closeBtn = tooltipElement.querySelector('.tooltip-close');
+      const quizBtn = tooltipElement.querySelector('[data-action="quiz"]');
+      const summaryBtn = tooltipElement.querySelector('[data-action="summary"]');
+      
+      if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
           e.stopPropagation();
+          console.log('Close button clicked');
           tooltip.transition().duration(200).style('opacity', 0);
         });
-        
-        // Quiz button handler
-        tooltip.select('[data-action="quiz"]').on('click', function(e) {
+      }
+      
+      if (quizBtn) {
+        quizBtn.addEventListener('click', (e) => {
           e.stopPropagation();
           console.log('Take Quiz clicked for:', d.title);
           setSelectedNode(d);
           setShowQuickReview(true);
           tooltip.transition().duration(200).style('opacity', 0);
         });
-        
-        // Summary button handler
-        tooltip.select('[data-action="summary"]').on('click', function(e) {
+      }
+      
+      if (summaryBtn) {
+        summaryBtn.addEventListener('click', (e) => {
           e.stopPropagation();
           console.log('View Summary clicked for:', d.title);
           tooltip.transition().duration(200).style('opacity', 0);
         });
-      }, 10);
+      }
       
       // Highlight connected nodes
       const connectedIds = new Set([d.id, ...d.connections]);
