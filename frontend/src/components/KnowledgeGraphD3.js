@@ -54,9 +54,22 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
   // Filter and search logic
   const getFilteredNodes = () => {
     return graphData.filter(node => {
-      const matchesFilter = filterState === 'all' || node.state === filterState;
+      const matchesFilter = activeFilters.includes(node.state);
       const matchesSearch = !searchQuery || node.title.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesFilter && matchesSearch;
+    });
+  };
+
+  // Toggle filter for legend items
+  const toggleFilter = (filterType) => {
+    setActiveFilters(prev => {
+      if (prev.includes(filterType)) {
+        // If only one filter left, don't allow removing it
+        if (prev.length === 1) return prev;
+        return prev.filter(f => f !== filterType);
+      } else {
+        return [...prev, filterType];
+      }
     });
   };
 
