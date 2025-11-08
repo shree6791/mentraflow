@@ -585,5 +585,13 @@ class BackendTester:
             sys.exit(0)
 
 if __name__ == "__main__":
+    import sys
+    
     tester = BackendTester()
-    tester.run_all_tests()
+    
+    # Check if we should run optimized API tests specifically
+    if len(sys.argv) > 1 and sys.argv[1] == "optimized":
+        tester.run_optimized_api_tests()
+    else:
+        # Run optimized API tests by default for this review
+        tester.run_optimized_api_tests()
