@@ -483,6 +483,97 @@ class BackendTester:
             self.errors.append(f"{name}: Request error - {str(e)}")
             return False
 
+    def run_lazy_loading_tests(self):
+        """Run tests for the new lazy loading architecture as requested"""
+        print_header("LAZY LOADING ARCHITECTURE TESTING")
+        print_info("Testing the new architecture with lean NODES and on-demand content loading")
+        print_info("Backend URL: https://learnmap-6.preview.emergentagent.com/api")
+        
+        # Test 1: Lightweight Nodes API (Critical - should NOT have quiz/summary content)
+        print_header("Test 1: GET /api/nodes - Lightweight Nodes (Lazy Loading)")
+        print_info("CRITICAL: Should return lean nodes WITHOUT quiz/summary content")
+        print_info("Verify: id, title, state, score, connections, quizId, summaryId fields present")
+        print_info("Verify: NO 'questions' or 'summary' fields in response (lazy loading)")
+        
+        self.test_endpoint(
+            "Lightweight Nodes API - Lazy Loading",
+            f"{BACKEND_URL}/nodes",
+            expected_keys=["nodes"],
+            validate_func=self.validate_lightweight_nodes
+        )
+        
+        # Test 2: Lazy Loading Test - Forgetting Curve
+        print_header("Test 2: GET /api/node/Forgetting%20Curve - Lazy Loading Test")
+        print_info("Should fetch quiz from QUIZ_CONTENT using quizId")
+        print_info("Should fetch summary from SUMMARY_CONTENT using summaryId")
+        print_info("Verify: quiz.questions array has 2 questions")
+        print_info("Verify: summary has content, keyTakeaways, keywords")
+        print_info("Verify: All quiz questions have q, options, correctIndex")
+        
+        self.test_endpoint(
+            "Lazy Loading - Forgetting Curve",
+            f"{BACKEND_URL}/node/Forgetting%20Curve",
+            expected_keys=["node", "summary", "quiz", "performance"],
+            validate_func=self.validate_node_detail
+        )
+        
+        # Test 3: Second Lazy Loading Test - Active Recall
+        print_header("Test 3: GET /api/node/Active%20Recall - Second Lazy Loading Test")
+        print_info("Test with different node to verify lazy loading works for all")
+        print_info("Should return quiz and summary correctly")
+        
+        self.test_endpoint(
+            "Lazy Loading - Active Recall",
+            f"{BACKEND_URL}/node/Active%20Recall",
+            expected_keys=["node", "summary", "quiz", "performance"],
+            validate_func=self.validate_node_detail
+        )
+        
+        # Test 4: Statistics (should still work)
+        print_header("Test 4: GET /api/stats - Statistics (should still work)")
+        self.test_endpoint(
+            "Statistics API",
+            f"{BACKEND_URL}/stats",
+            expected_keys=["dashboard", "insights", "knowledge"],
+            validate_func=self.validate_stats
+        )
+        
+        # Test 5: Library (should still work)
+        print_header("Test 5: GET /api/library - Library items (should still work)")
+        self.test_endpoint(
+            "Library API",
+            f"{BACKEND_URL}/library",
+            expected_keys=["items"],
+            validate_func=self.validate_library
+        )
+        
+        # Test 6: Recall Tasks (should still work)
+        print_header("Test 6: GET /api/recall-tasks - Recall tasks (should still work)")
+        self.test_endpoint(
+            "Recall Tasks API",
+            f"{BACKEND_URL}/recall-tasks",
+            expected_keys=["tasks"],
+            validate_func=self.validate_recall_tasks
+        )
+        
+        # Test 7: Clusters (should still work)
+        print_header("Test 7: GET /api/clusters - Clusters (should still work)")
+        self.test_endpoint(
+            "Clusters API",
+            f"{BACKEND_URL}/clusters",
+            expected_keys=["clusters"],
+            validate_func=self.validate_clusters
+        )
+        
+        # Test 8: Recommendations (should still work)
+        print_header("Test 8: GET /api/recommendations - Recommendations (should still work)")
+        self.test_endpoint(
+            "Recommendations API",
+            f"{BACKEND_URL}/recommendations",
+            expected_keys=["recommendations"],
+            validate_func=self.validate_recommendations
+        )
+
     def run_refactored_api_tests(self):
         """Run tests for the refactored dashboard_data.py API endpoints"""
         print_header("REFACTORED DASHBOARD_DATA.PY API TESTING")
