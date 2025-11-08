@@ -63,7 +63,7 @@ SUMMARY_CONTENT = {
         ],
         "keywords": ["Metacognition", "Self-Regulation", "Learning Strategies", "Self-Assessment"]
     },
-    "t7": {
+    "s7": {
         "content": "Retrieval practice involves actively recalling information from memory rather than passively reviewing it. This practice strengthens memory and is one of the most powerful learning strategies.\n\nThe testing effect demonstrates that the act of retrieving information strengthens the memory trace more than additional study. Even unsuccessful retrieval attempts can enhance subsequent learning.\n\nEffective retrieval practice includes flashcards, practice tests, free recall, and self-quizzing without looking at notes.",
         "keyTakeaways": [
             "Active recall is more effective than passive review",
