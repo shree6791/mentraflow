@@ -194,7 +194,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
     });
 
     node.on('mouseenter', function(event, d) {
-      // Show tooltip
+      // Show tooltip with actions
       tooltip.transition()
         .duration(200)
         .style('opacity', 1);
@@ -203,14 +203,35 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         <div class="tooltip-content">
           <strong>${d.title}</strong>
           <div class="tooltip-stats">
-            <div>Last Review: ${d.lastReview}</div>
-            <div>Score: ${d.score}%</div>
-            <div>Connections: ${d.connections.length}</div>
+            <div>Last Review: <span>${d.lastReview}</span></div>
+            <div>Score: <span>${d.score}%</span></div>
+            <div>Connections: <span>${d.connections.length}</span></div>
+          </div>
+          <div class="tooltip-actions">
+            <button class="tooltip-btn tooltip-btn-primary" data-id="${d.id}" data-action="quiz">
+              Take Quiz
+            </button>
+            <button class="tooltip-btn tooltip-btn-secondary" data-id="${d.id}" data-action="summary">
+              View Summary
+            </button>
           </div>
         </div>
       `)
         .style('left', (event.pageX + 15) + 'px')
         .style('top', (event.pageY - 15) + 'px');
+      
+      // Add click handlers to tooltip buttons
+      d3.selectAll('.tooltip-btn').on('click', function() {
+        const action = d3.select(this).attr('data-action');
+        if (action === 'quiz') {
+          setSelectedNode(d);
+          setShowQuickReview(true);
+        } else if (action === 'summary') {
+          // Open summary view
+          console.log('Open summary for:', d.title);
+        }
+        tooltip.style('opacity', 0);
+      });
       
       // Highlight connected nodes
       if (expandedNode && expandedNode !== d.id) return;
