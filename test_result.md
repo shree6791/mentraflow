@@ -105,6 +105,18 @@
 user_problem_statement: "UI Polish & Bug Fixes: Knowledge Graph tooltip visibility, Dashboard retention borders, and Knowledge Graph legend spacing"
 
 frontend:
+  - task: "Knowledge Graph - UX Improvements (Controls & Layout)"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/KnowledgeGraphD3.js, /app/frontend/src/components/KnowledgeGraph.css"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+        - agent: "main"
+        - comment: "IMPLEMENTED: Three UX improvements for better user experience: (1) Search and Filter Same Line - Search bar and filter dropdown now on same horizontal line with proper flex layout and spacing, (2) Zoom Controls Embedded - Zoom in, zoom out, and reset buttons now embedded in the controls bar with margin-left: auto for right alignment, styled consistently with other controls, (3) Layout Constraints - Added max-width constraints to legend (calc(100% - 2rem)) and proper flex-wrap on legend items, search container has max-width: 400px to prevent overflow, all controls stay within app layout boundaries. Result: Cleaner, more organized interface with intuitive control placement."
+  
   - task: "Knowledge Graph - Hover Tooltip Visibility"
     implemented: true
     working: true
