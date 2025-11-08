@@ -8,7 +8,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
   const containerRef = useRef(null);
   const simulationRef = useRef(null);
   
-  const [filterState, setFilterState] = useState('all');
+  const [activeFilters, setActiveFilters] = useState(['high', 'medium', 'fading']); // All active by default
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [selectedNode, setSelectedNode] = useState(null);
