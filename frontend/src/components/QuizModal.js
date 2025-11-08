@@ -168,32 +168,49 @@ const QuizModal = ({
                     </div>
 
                     <div className="quiz-navigation" style={{marginTop: '2rem'}}>
-                      {currentQuestionIndex > 0 && (
-                        <button 
-                          className="btn-secondary"
-                          onClick={onPreviousQuestion}
-                        >
-                          Previous
-                        </button>
-                      )}
-                      {currentQuestionIndex < quizData.questions.length - 1 ? (
-                        <button 
-                          className="btn-primary"
-                          onClick={onNextQuestion}
-                          disabled={quizAnswers[currentQuestionIndex] === undefined}
-                          style={{marginLeft: currentQuestionIndex === 0 ? '0' : 'auto'}}
-                        >
-                          Next Question
-                        </button>
+                      {currentQuestionIndex > 0 ? (
+                        <>
+                          <button 
+                            className="btn-secondary"
+                            onClick={onPreviousQuestion}
+                          >
+                            Previous
+                          </button>
+                          {currentQuestionIndex < quizData.questions.length - 1 ? (
+                            <button 
+                              className="btn-primary"
+                              onClick={onNextQuestion}
+                              disabled={quizAnswers[currentQuestionIndex] === undefined}
+                            >
+                              Next Question
+                            </button>
+                          ) : (
+                            <button 
+                              className="btn-primary"
+                              onClick={onSubmitQuiz}
+                              disabled={Object.keys(quizAnswers).length !== quizData.questions.length}
+                            >
+                              Submit Quiz
+                            </button>
+                          )}
+                        </>
                       ) : (
-                        <button 
-                          className="btn-primary"
-                          onClick={onSubmitQuiz}
-                          disabled={Object.keys(quizAnswers).length !== quizData.questions.length}
-                          style={{marginLeft: currentQuestionIndex === 0 ? '0' : 'auto'}}
-                        >
-                          Submit Quiz
-                        </button>
+                        <>
+                          <button 
+                            className="btn-secondary"
+                            onClick={onPreviousQuestion}
+                            style={{visibility: 'hidden'}}
+                          >
+                            Previous
+                          </button>
+                          <button 
+                            className="btn-primary"
+                            onClick={onNextQuestion}
+                            disabled={quizAnswers[currentQuestionIndex] === undefined}
+                          >
+                            Next Question
+                          </button>
+                        </>
                       )}
                     </div>
                   </>
