@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "UI Polish: Fix Quick Filters spacing/order in Knowledge Library and declutter library cards (reduce color, spacing, visual noise)"
+user_problem_statement: "UI Polish & Bug Fixes: Knowledge Graph tooltip visibility, Dashboard retention borders, and Knowledge Graph legend spacing"
 
 frontend:
   - task: "Quick Filters - Spacing and Order"
