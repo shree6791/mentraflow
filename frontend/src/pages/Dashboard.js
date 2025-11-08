@@ -274,10 +274,10 @@ const Dashboard = () => {
         
         // Fetch all dashboard data including stats
         const [libraryResponse, topicsResponse, recallResponse, statsResponse] = await Promise.all([
-          axios.get(`${API}/library`, { withCredentials: true }),
-          axios.get(`${API}/topics`, { withCredentials: true }),
-          axios.get(`${API}/recall-tasks`, { withCredentials: true }),
-          axios.get(`${API}/stats`, { withCredentials: true })
+          axios.get(`${API}/library`),
+          axios.get(`${API}/topics`),
+          axios.get(`${API}/recall-tasks`),
+          axios.get(`${API}/stats`)
         ]);
 
         // Set data from API responses
