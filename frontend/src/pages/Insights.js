@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, TrendingUp, TrendingDown, Target, BookOpen, Zap, Brain, ExternalLink } from 'lucide-react';
+import axios from 'axios';
 import AppLayout from '../components/AppLayout';
 import '../styles/Insights.css';
 
