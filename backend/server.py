@@ -141,14 +141,6 @@ async def get_topic_detail(title: str):
         }
     }
 
-@api_router.get("/topics/{topic_id}")
-async def get_topic(topic_id: str):
-    """Get a specific topic by ID (legacy endpoint)"""
-    topic = next((t for t in TOPICS if t["id"] == topic_id), None)
-    if not topic:
-        raise HTTPException(status_code=404, detail="Topic not found")
-    return topic
-
 # --------------------------------------
 # STATS (Unified - all statistics in one place)
 # --------------------------------------
