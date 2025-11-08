@@ -371,7 +371,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
           <Search size={18} />
           <input
             type="text"
-            placeholder="Search concepts..."
+            placeholder="Search by topics..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-input"
@@ -379,7 +379,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         </div>
 
         {/* Filter */}
-        <div className="filter-container">
+        <div className="filter-group">
           <Filter size={18} />
           <select
             value={filterState}
