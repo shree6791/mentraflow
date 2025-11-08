@@ -232,10 +232,10 @@ NODES = [
         "lastReview": "4 days ago",
         "score": 75,
         "connections": ["t1", "t2", "t4"],
-        "libraryId": "lib4",
+        "docId": "doc4",
         "quizzesTaken": 3,
-        "quizId": "t5",
-        "summaryId": "t5"
+        "quizId": "q5",
+        "summaryId": "s5"
     },
     {
         "id": "t6",
