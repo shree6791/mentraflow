@@ -282,12 +282,13 @@ class BackendTester:
         # Validate recommendation structure
         if recommendations:
             rec = recommendations[0]
-            required_keys = ["text", "priority"]
+            required_keys = ["id", "type", "title", "description", "priority"]
             for key in required_keys:
                 if key not in rec:
                     return f"Recommendation missing key: {key}"
             
-            print_success(f"  Sample: {rec['text'][:50]}...")
+            print_success(f"  Sample: {rec['title']}")
+            print_success(f"  Type: {rec['type']}, Priority: {rec['priority']}")
         
         return True
     
