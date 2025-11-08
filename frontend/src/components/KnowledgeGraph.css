@@ -644,45 +644,57 @@
   min-width: 120px;
 }
 
-/* Zoom Controls - Embedded in Graph */
-.zoom-controls {
+/* Embedded Zoom Controls - Google Maps Style */
+.graph-embedded-zoom-controls {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-left: auto;
-  flex-shrink: 0;
+  flex-direction: column;
+  gap: 0;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  z-index: 10;
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-.zoom-btn {
-  width: 36px;
-  height: 36px;
+.embedded-zoom-btn {
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-light);
-  border: 1px solid var(--divider);
-  border-radius: 8px;
-  color: var(--primary-teal);
+  background: white;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  color: #5F6368;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  position: relative;
 }
 
-.zoom-btn svg {
-  width: 18px;
-  height: 18px;
+.embedded-zoom-btn:last-child {
+  border-bottom: none;
 }
 
-.zoom-btn:hover {
-  background: var(--primary-teal);
-  color: white;
-  border-color: var(--primary-teal);
-  transform: scale(1.05);
+.embedded-zoom-btn svg {
+  width: 20px;
+  height: 20px;
 }
 
-.zoom-btn.recenter-btn {
-  border-left: 1px solid var(--divider);
-  padding-left: 0.5rem;
-  margin-left: 0.25rem;
+.embedded-zoom-btn:hover {
+  background: #F8F9FA;
+  color: #1A1A1A;
+}
+
+.embedded-zoom-btn:active {
+  background: #E8EAED;
+}
+
+.embedded-recenter-btn {
+  border-top: 2px solid rgba(0, 0, 0, 0.12);
 }
 
 /* Graph Hint */
