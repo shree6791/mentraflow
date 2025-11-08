@@ -306,7 +306,7 @@ DOCUMENTS = [
         "nodeId": "t2"
     },
     {
-        "id": "lib3",
+        "id": "doc3",
         "title": "Spacing Effect",
         "filename": "spacing-effect.pdf",
         "uploadDate": "2024-10-20",
