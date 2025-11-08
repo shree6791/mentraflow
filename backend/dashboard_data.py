@@ -258,38 +258,8 @@ NODES = [
         "connections": ["t1", "t6"],
         "libraryId": "lib7",
         "quizzesTaken": 2,
-        "questions": [
-            {
-                "q": "What is retrieval practice?",
-                "options": [
-                    "Re-reading material multiple times",
-                    "Actively recalling information from memory",
-                    "Highlighting important text",
-                    "Listening to lectures repeatedly"
-                ],
-                "correctIndex": 1
-            },
-            {
-                "q": "What is the testing effect?",
-                "options": [
-                    "Tests cause anxiety that improves focus",
-                    "Taking tests improves long-term retention more than studying",
-                    "More tests lead to lower grades",
-                    "Testing is only useful for assessment, not learning"
-                ],
-                "correctIndex": 1
-            }
-        ],
-        "summary": {
-            "content": "Retrieval practice involves actively recalling information from memory rather than passively reviewing it. This practice strengthens memory and is one of the most powerful learning strategies.\n\nThe testing effect demonstrates that the act of retrieving information strengthens the memory trace more than additional study. Even unsuccessful retrieval attempts can enhance subsequent learning.\n\nEffective retrieval practice includes flashcards, practice tests, free recall, and self-quizzing without looking at notes.",
-            "keyTakeaways": [
-                "Active recall is more effective than passive review",
-                "Testing effect: retrieval strengthens memory",
-                "Even failed retrieval attempts benefit learning",
-                "Should be frequent and low-stakes"
-            ],
-            "keywords": ["Retrieval Practice", "Testing Effect", "Active Recall", "Self-Quizzing"]
-        }
+        "quizId": "t7",
+        "summaryId": "t7"
     },
     {
         "id": "t8",
