@@ -850,7 +850,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   z-index: 50;
   max-width: calc(100% - 2rem);
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 .legend-inline-items {
@@ -865,6 +865,28 @@
   align-items: center;
   gap: 0.5rem;
   white-space: nowrap;
+  cursor: pointer;
+  padding: 0.375rem 0.625rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.legend-inline-item:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.legend-inline-item.active {
+  opacity: 1;
+}
+
+.legend-inline-item.inactive {
+  opacity: 0.4;
+}
+
+.legend-inline-item.inactive:hover {
+  opacity: 0.6;
+  background: rgba(0, 0, 0, 0.06);
 }
 
 .legend-inline-dot {
@@ -874,6 +896,12 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   flex-shrink: 0;
   border: 2px solid white;
+  transition: all 0.2s ease;
+}
+
+.legend-inline-item.inactive .legend-inline-dot {
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .legend-inline-item span {
@@ -881,6 +909,11 @@
   color: #1F2937;
   font-weight: 600;
   letter-spacing: 0.01em;
+  transition: all 0.2s ease;
+}
+
+.legend-inline-item.inactive span {
+  color: #9CA3AF;
 }
 
 /* Node Detail Modal */
