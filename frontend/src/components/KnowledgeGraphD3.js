@@ -283,11 +283,16 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       
       // Remove old listener by removing the attribute (if exists)
       const handleClick = function(e) {
+        console.log('=== HANDLE CLICK TRIGGERED ===', e);
         e.stopPropagation();
         
         // Find which button was clicked
         const button = e.target.closest('button[data-action]');
-        if (!button) return;
+        console.log('Button element:', button);
+        if (!button) {
+          console.log('No button found, returning');
+          return;
+        }
         
         const action = button.getAttribute('data-action');
         console.log('Button clicked:', action, 'for node:', d.title);
