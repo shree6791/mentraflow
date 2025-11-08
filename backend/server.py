@@ -162,8 +162,8 @@ async def get_all_stats():
 
 @api_router.get("/library")
 async def get_library_items():
-    """Get all library items"""
-    return {"items": LIBRARY_ITEMS}
+    """Get all documents (user's uploaded study materials)"""
+    return {"items": DOCUMENTS}
 
 # --------------------------------------
 # RECALL TASKS
