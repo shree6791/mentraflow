@@ -31,10 +31,10 @@ const Insights = () => {
     const fetchInsightsData = async () => {
       try {
         const [statsResponse, topicsResponse, clustersResponse, recommendationsResponse] = await Promise.all([
-          axios.get(`${API}/stats`, { withCredentials: true }),
-          axios.get(`${API}/topics`, { withCredentials: true }),
-          axios.get(`${API}/clusters`, { withCredentials: true }),
-          axios.get(`${API}/recommendations`, { withCredentials: true })
+          axios.get(`${API}/stats`),
+          axios.get(`${API}/topics`),
+          axios.get(`${API}/clusters`),
+          axios.get(`${API}/recommendations`)
         ]);
 
         setStats(statsResponse.data?.insights || stats);
