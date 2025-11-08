@@ -105,9 +105,11 @@ async def get_all_nodes():
 @api_router.get("/node/{title}")
 async def get_node_detail(title: str):
     """
-    DETAIL API - Get comprehensive node data
+    DETAIL API - Get comprehensive node data (with lazy loading)
     Returns: All node data + summary + quiz + performance
     Used by: Modal when user clicks on a node
+    
+    LAZY LOADING: Quiz and summary content loaded on-demand from separate files
     """
     import urllib.parse
     decoded_title = urllib.parse.unquote(title)
@@ -117,11 +119,14 @@ async def get_node_detail(title: str):
     if not node:
         raise HTTPException(status_code=404, detail="Node not found")
     
-    # Get quiz questions from node
-    questions = node.get("questions", [])
+    # LAZY LOAD: Get quiz questions from QUIZ_CONTENT using quizId
+    quiz_id = node.get("quizId")
+    quiz_data = QUIZ_CONTENT.get(quiz_id) if quiz_id else None
+    questions = quiz_data.get("questions", []) if quiz_data else []
     
-    # Get summary from node
-    summary = node.get("summary", None)
+    # LAZY LOAD: Get summary from SUMMARY_CONTENT using summaryId
+    summary_id = node.get("summaryId")
+    summary = SUMMARY_CONTENT.get(summary_id) if summary_id else None
     
     # Build comprehensive response
     return {
