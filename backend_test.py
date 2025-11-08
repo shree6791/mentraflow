@@ -311,6 +311,186 @@ class BackendTester:
         
         return True
     
+    def validate_lightweight_topics(self, data: Dict) -> bool:
+        """Validate lightweight /api/topics response (optimized)"""
+        if "topics" not in data:
+            return "Missing 'topics' key"
+        
+        topics = data["topics"]
+        if not isinstance(topics, list):
+            return f"topics should be a list, got {type(topics)}"
+        
+        if len(topics) == 0:
+            return "No topics found"
+        
+        print_success(f"  Found {len(topics)} topics")
+        
+        # Validate lightweight structure (should only have minimal fields)
+        if topics:
+            topic = topics[0]
+            expected_keys = ["id", "title", "state", "lastReview", "score", "connections"]
+            for key in expected_keys:
+                if key not in topic:
+                    return f"Topic missing key: {key}"
+            
+            # Check that it's lightweight (shouldn't have extra fields like libraryId, quizzesTaken)
+            extra_fields = [k for k in topic.keys() if k not in expected_keys]
+            if extra_fields:
+                print_warning(f"  Extra fields found (not lightweight): {extra_fields}")
+            
+            # Validate connections is an array
+            if not isinstance(topic["connections"], list):
+                return f"connections should be a list, got {type(topic['connections'])}"
+            
+            print_success(f"  Sample topic: {topic['title']}")
+            print_success(f"  Connections: {len(topic['connections'])} connections")
+            print_success(f"  Score: {topic['score']}")
+            print_success(f"  State: {topic['state']}")
+        
+        return True
+    
+    def validate_topic_detail(self, data: Dict) -> bool:
+        """Validate detailed /api/topic/{title} response"""
+        required_keys = ["topic", "summary", "quiz", "performance"]
+        for key in required_keys:
+            if key not in data:
+                return f"Missing key: {key}"
+        
+        # Validate topic data
+        topic = data["topic"]
+        if not isinstance(topic, dict):
+            return f"topic should be a dict, got {type(topic)}"
+        
+        # Validate summary data
+        summary = data["summary"]
+        if not isinstance(summary, dict):
+            return f"summary should be a dict, got {type(summary)}"
+        
+        summary_keys = ["content", "keyTakeaways", "keywords"]
+        for key in summary_keys:
+            if key not in summary:
+                return f"Summary missing key: {key}"
+        
+        print_success(f"  Summary has: {', '.join(summary.keys())}")
+        
+        # Validate quiz data
+        quiz = data["quiz"]
+        if quiz is not None:
+            if not isinstance(quiz, dict):
+                return f"quiz should be a dict or null, got {type(quiz)}"
+            
+            quiz_keys = ["title", "questions"]
+            for key in quiz_keys:
+                if key not in quiz:
+                    return f"Quiz missing key: {key}"
+            
+            if not isinstance(quiz["questions"], list):
+                return f"quiz questions should be a list, got {type(quiz['questions'])}"
+            
+            print_success(f"  Quiz has {len(quiz['questions'])} questions")
+        else:
+            print_info("  Quiz data is null (no quiz available)")
+        
+        # Validate performance data
+        performance = data["performance"]
+        if not isinstance(performance, dict):
+            return f"performance should be a dict, got {type(performance)}"
+        
+        performance_keys = ["quizzesTaken", "currentScore", "state", "lastReview"]
+        for key in performance_keys:
+            if key not in performance:
+                return f"Performance missing key: {key}"
+        
+        print_success(f"  Performance - Score: {performance['currentScore']}, State: {performance['state']}")
+        
+        return True
+    
+    def test_404_endpoint(self, name: str, url: str) -> bool:
+        """Test endpoint that should return 404"""
+        print(f"\n{Colors.BOLD}Testing: {name}{Colors.RESET}")
+        print(f"URL: {url}")
+        
+        try:
+            response = requests.get(url, timeout=10)
+            
+            # Check status code should be 404
+            if response.status_code != 404:
+                print_error(f"Expected 404, got status code: {response.status_code}")
+                print_error(f"Response: {response.text}")
+                self.failed += 1
+                self.errors.append(f"{name}: Expected 404, got {response.status_code}")
+                return False
+            
+            print_success(f"Status code: 404 (as expected)")
+            
+            # Try to parse JSON for error message
+            try:
+                data = response.json()
+                if "error" in data:
+                    print_success(f"Error message: {data['error']}")
+                else:
+                    print_warning("No error message in response")
+            except json.JSONDecodeError:
+                print_warning("Response is not JSON")
+            
+            print_success(f"{name} - PASSED")
+            self.passed += 1
+            return True
+            
+        except requests.exceptions.RequestException as e:
+            print_error(f"Request failed: {e}")
+            self.failed += 1
+            self.errors.append(f"{name}: Request error - {str(e)}")
+            return False
+
+    def run_optimized_api_tests(self):
+        """Run tests for the new optimized API architecture"""
+        print_header("OPTIMIZED API ARCHITECTURE TESTING")
+        
+        # Test 1: Lightweight List API
+        print_header("Test 1: GET /api/topics - Lightweight List API")
+        print_info("Should return minimal data: id, title, state, lastReview, score, connections")
+        print_info("Should be fast (< 100ms) and return all topics")
+        
+        self.test_endpoint(
+            "Lightweight Topics API",
+            f"{BACKEND_URL}/topics",
+            expected_keys=["topics"],
+            validate_func=self.validate_lightweight_topics
+        )
+        
+        # Test 2: Detail API with specific topic
+        print_header("Test 2: GET /api/topic/Forgetting%20Curve - Detail API")
+        print_info("Should return: topic data + summary + quiz + performance")
+        print_info("Should have nested structure with all comprehensive data")
+        
+        self.test_endpoint(
+            "Topic Detail API - Forgetting Curve",
+            f"{BACKEND_URL}/topic/Forgetting%20Curve",
+            expected_keys=["topic", "summary", "quiz", "performance"],
+            validate_func=self.validate_topic_detail
+        )
+        
+        # Test 3: Detail API with URL encoding
+        print_header("Test 3: GET /api/topic/Active%20Recall - URL Encoding Test")
+        print_info("Should properly decode the title and return correct data")
+        
+        self.test_endpoint(
+            "Topic Detail API - Active Recall (URL encoded)",
+            f"{BACKEND_URL}/topic/Active%20Recall",
+            expected_keys=["topic", "summary", "quiz", "performance"],
+            validate_func=self.validate_topic_detail
+        )
+        
+        # Test 4: Detail API - Not found
+        print_header("Test 4: GET /api/topic/NonExistent - 404 Error Test")
+        print_info("Should return 404 error with error message")
+        
+        self.test_404_endpoint(
+            "Topic Detail API - Not Found",
+            f"{BACKEND_URL}/topic/NonExistent"
+        )
+
     def run_all_tests(self):
         """Run all backend API tests"""
         print_header("BACKEND API TESTING - Phase 1 Integration")
