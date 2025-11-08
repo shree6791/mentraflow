@@ -41,7 +41,7 @@ QUIZ_CONTENT = {
             }
         ]
     },
-    "t3": {
+    "q3": {
         "questions": [
             {
                 "q": "What is the spacing effect?",
