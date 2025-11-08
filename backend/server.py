@@ -182,7 +182,7 @@ async def get_library_item(item_id: str):
     """Get a specific library item by ID"""
     item = next((item for item in LIBRARY_ITEMS if item["id"] == item_id), None)
     if not item:
-        return {"error": "Item not found"}, 404
+        raise HTTPException(status_code=404, detail="Item not found")
     return item
 
 # --------------------------------------
