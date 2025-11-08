@@ -190,24 +190,46 @@ NODES = [
 TOPICS = NODES
 
 # ========================================
-# STATISTICS
+# STATISTICS (Dynamically calculated from NODES)
 # ========================================
-STATS = {
-    "dashboard": {
-        "itemsDueToday": 3,
-        "avgRetention": 72,
-        "streakDays": 7
-    },
-    "insights": {
-        "totalTopics": 8,
-        "strongRetention": 4,
-        "needingReview": 2
-    },
-    "knowledge": {
-        "totalNodes": 8,
-        "totalConnections": 18
+def get_stats():
+    """Calculate statistics from nodes and library items"""
+    # Calculate items due today (from recall tasks)
+    recall_tasks = get_recall_tasks()
+    items_due_today = len(recall_tasks)
+    
+    # Calculate average retention (average score across all nodes)
+    total_score = sum(n["score"] for n in NODES)
+    avg_retention = total_score // len(NODES) if NODES else 0
+    
+    # Streak days (hardcoded for now, would be user-specific in real app)
+    streak_days = 7
+    
+    # Count nodes by retention state
+    strong_retention = len([n for n in NODES if n["state"] == "high"])
+    needing_review = len([n for n in NODES if n["state"] == "fading"])
+    
+    # Count total connections
+    total_connections = sum(len(n["connections"]) for n in NODES)
+    
+    return {
+        "dashboard": {
+            "itemsDueToday": items_due_today,
+            "avgRetention": avg_retention,
+            "streakDays": streak_days
+        },
+        "insights": {
+            "totalTopics": len(NODES),
+            "strongRetention": strong_retention,
+            "needingReview": needing_review
+        },
+        "knowledge": {
+            "totalNodes": len(NODES),
+            "totalConnections": total_connections
+        }
     }
-}
+
+STATS = get_stats()
 
 # ========================================
 # LIBRARY ITEMS (User's uploaded documents)
