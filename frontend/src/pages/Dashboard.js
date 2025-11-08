@@ -1565,7 +1565,7 @@ const Dashboard = () => {
           modalTab={libraryModalTab}
           onTabChange={setLibraryModalTab}
           onClose={closeLibraryItem}
-          quizData={selectedLibraryItem.hasQuiz ? { questions: SAMPLE_QUIZ } : null}
+          quizData={libraryQuizData}
           quizAnswers={quizAnswers}
           currentQuestionIndex={currentQuestionIndex}
           showQuizResults={showQuizResults}
