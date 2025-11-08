@@ -311,41 +311,41 @@ class BackendTester:
         
         return True
     
-    def validate_lightweight_topics(self, data: Dict) -> bool:
-        """Validate lightweight /api/topics response (optimized)"""
-        if "topics" not in data:
-            return "Missing 'topics' key"
+    def validate_lightweight_nodes(self, data: Dict) -> bool:
+        """Validate lightweight /api/nodes response (optimized)"""
+        if "nodes" not in data:
+            return "Missing 'nodes' key"
         
-        topics = data["topics"]
-        if not isinstance(topics, list):
-            return f"topics should be a list, got {type(topics)}"
+        nodes = data["nodes"]
+        if not isinstance(nodes, list):
+            return f"nodes should be a list, got {type(nodes)}"
         
-        if len(topics) == 0:
-            return "No topics found"
+        if len(nodes) == 0:
+            return "No nodes found"
         
-        print_success(f"  Found {len(topics)} topics")
+        print_success(f"  Found {len(nodes)} nodes")
         
         # Validate lightweight structure (should only have minimal fields)
-        if topics:
-            topic = topics[0]
+        if nodes:
+            node = nodes[0]
             expected_keys = ["id", "title", "state", "lastReview", "score", "connections"]
             for key in expected_keys:
-                if key not in topic:
-                    return f"Topic missing key: {key}"
+                if key not in node:
+                    return f"Node missing key: {key}"
             
             # Check that it's lightweight (shouldn't have extra fields like libraryId, quizzesTaken)
-            extra_fields = [k for k in topic.keys() if k not in expected_keys]
+            extra_fields = [k for k in node.keys() if k not in expected_keys]
             if extra_fields:
                 print_warning(f"  Extra fields found (not lightweight): {extra_fields}")
             
             # Validate connections is an array
-            if not isinstance(topic["connections"], list):
-                return f"connections should be a list, got {type(topic['connections'])}"
+            if not isinstance(node["connections"], list):
+                return f"connections should be a list, got {type(node['connections'])}"
             
-            print_success(f"  Sample topic: {topic['title']}")
-            print_success(f"  Connections: {len(topic['connections'])} connections")
-            print_success(f"  Score: {topic['score']}")
-            print_success(f"  State: {topic['state']}")
+            print_success(f"  Sample node: {node['title']}")
+            print_success(f"  Connections: {len(node['connections'])} connections")
+            print_success(f"  Score: {node['score']}")
+            print_success(f"  State: {node['state']}")
         
         return True
     
