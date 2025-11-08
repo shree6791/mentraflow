@@ -19,7 +19,8 @@ from dashboard_data import (
     RECALL_TASKS,
     QUICK_RECALL_QUIZ,
     KNOWLEDGE_CLUSTERS,
-    RECOMMENDATIONS
+    RECOMMENDATIONS,
+    TOPIC_SUMMARIES
 )
 
 
