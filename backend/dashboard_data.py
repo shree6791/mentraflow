@@ -210,38 +210,8 @@ NODES = [
         "connections": ["t2", "t4", "t6"],
         "libraryId": "lib3",
         "quizzesTaken": 3,
-        "questions": [
-            {
-                "q": "What is the spacing effect?",
-                "options": [
-                    "Studying in a quiet space",
-                    "Learning is more effective when spaced over time",
-                    "Taking breaks during study sessions",
-                    "Organizing notes with proper spacing"
-                ],
-                "correctIndex": 1
-            },
-            {
-                "q": "Which study pattern demonstrates the spacing effect?",
-                "options": [
-                    "Reviewing 1 hour per day for 5 days",
-                    "Reviewing 5 hours in one day",
-                    "Reviewing only before exams",
-                    "Never reviewing material"
-                ],
-                "correctIndex": 0
-            }
-        ],
-        "summary": {
-            "content": "The spacing effect demonstrates that learning is more effective when study sessions are spaced out over time rather than massed together in a single session. This phenomenon has been consistently demonstrated across various types of learning.\n\nWhen you space out your learning, you give your brain time to consolidate the information. Each time you return to the material, you're strengthening the neural connections associated with that knowledge.\n\nOptimal spacing intervals typically follow an expanding pattern: review after 1 day, then 3 days, then 7 days, then 14 days, and so on.",
-            "keyTakeaways": [
-                "Distributed practice beats massed practice (cramming)",
-                "Optimal intervals expand over time as memory strengthens",
-                "Spacing creates opportunities for memory consolidation",
-                "Works across all types of learning and skill acquisition"
-            ],
-            "keywords": ["Spacing Effect", "Distributed Practice", "Memory Consolidation", "Study Schedule"]
-        }
+        "quizId": "t3",
+        "summaryId": "t3"
     },
     {
         "id": "t4",
