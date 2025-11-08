@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import AppLayout from '../components/AppLayout';
 import Tooltip from '../components/Tooltip';
+import QuizModal from '../components/QuizModal';
 import '../Dashboard.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
