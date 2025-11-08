@@ -55,6 +55,65 @@ const KnowledgeGraphPage = () => {
     fetchTopics();
   }, [API]);
 
+  // Modal Handlers
+  const openTopicModal = async (topic, tab = 'summary') => {
+    setSelectedTopic(topic);
+    setModalTab(tab);
+    
+    // Fetch quiz data if opening quiz tab
+    if (tab === 'quiz') {
+      try {
+        const response = await axios.get(`${API}/quiz/${encodeURIComponent(topic.title)}`);
+        setQuizData(response.data);
+      } catch (error) {
+        console.error('Error fetching quiz:', error);
+        setQuizData(null);
+      }
+    }
+  };
+
+  const closeTopicModal = () => {
+    setSelectedTopic(null);
+    setModalTab('summary');
+    setQuizData(null);
+    setQuizAnswers({});
+    setQuizResults({});
+    setCurrentQuestionIndex(0);
+    setShowQuizResults(false);
+  };
+
+  // Quiz Handlers
+  const handleQuizAnswer = (questionIndex, answerIndex) => {
+    setQuizAnswers(prev => ({
+      ...prev,
+      [questionIndex]: answerIndex
+    }));
+  };
+
+  const submitQuiz = () => {
+    if (!quizData || !quizData.questions) return;
+    
+    const results = {};
+    quizData.questions.forEach((question, idx) => {
+      results[idx] = quizAnswers[idx] === question.correctIndex;
+    });
+    setQuizResults(results);
+    setShowQuizResults(true);
+  };
+
+  const retakeQuiz = () => {
+    setQuizAnswers({});
+    setQuizResults({});
+    setCurrentQuestionIndex(0);
+    setShowQuizResults(false);
+  };
+
+  const calculateScore = () => {
+    const correct = Object.values(quizResults).filter(Boolean).length;
+    const total = quizData?.questions?.length || 0;
+    return total > 0 ? Math.round((correct / total) * 100) : 0;
+  };
+
   if (loading) {
     return (
       <AppLayout title="Your Knowledge Network">
