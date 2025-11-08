@@ -428,6 +428,33 @@
   overflow: hidden;
 }
 
+.graph-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  z-index: 100;
+}
+
+.graph-loading .spinner {
+  animation: spin 1s linear infinite;
+  color: var(--primary-teal);
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.graph-loading p {
+  color: var(--text-gray);
+  font-size: 0.9375rem;
+}
+
 .knowledge-graph-svg {
   width: 100%;
   height: 100%;
