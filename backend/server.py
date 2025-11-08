@@ -165,7 +165,7 @@ async def get_all_stats():
 async def get_section_stats(section: str):
     """Get statistics for a specific section (dashboard, insights, knowledge)"""
     if section not in STATS:
-        return {"error": "Section not found"}, 404
+        raise HTTPException(status_code=404, detail="Section not found")
     return STATS[section]
 
 # --------------------------------------
