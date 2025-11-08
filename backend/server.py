@@ -162,14 +162,6 @@ async def get_library_items():
     """Get all library items"""
     return {"items": LIBRARY_ITEMS}
 
-@api_router.get("/library/{item_id}")
-async def get_library_item(item_id: str):
-    """Get a specific library item by ID"""
-    item = next((item for item in LIBRARY_ITEMS if item["id"] == item_id), None)
-    if not item:
-        raise HTTPException(status_code=404, detail="Item not found")
-    return item
-
 # --------------------------------------
 # RECALL TASKS
 # --------------------------------------
