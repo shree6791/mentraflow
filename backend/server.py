@@ -141,6 +141,25 @@ async def get_node_detail(title: str):
         }
     }
 
+# Legacy endpoint for backward compatibility (Dashboard, Insights still use /api/topics)
+@api_router.get("/topics")
+async def get_all_topics_legacy():
+    """
+    LEGACY ENDPOINT - Returns same data as /api/nodes
+    Used by: Dashboard (quiz dropdown), Insights (topics data)
+    Note: Kept for backward compatibility. Use /api/nodes for new features.
+    """
+    lightweight_nodes = [{
+        "id": topic["id"],
+        "title": topic["title"],
+        "state": topic["state"],
+        "lastReview": topic["lastReview"],
+        "score": topic["score"],
+        "connections": topic["connections"]
+    } for topic in TOPICS]
+    
+    return {"topics": lightweight_nodes}
+
 # --------------------------------------
 # STATS (Unified - all statistics in one place)
 # --------------------------------------
