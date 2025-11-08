@@ -104,6 +104,56 @@
 
 user_problem_statement: "Phase 1: Frontend-Backend API Integration - Connect Dashboard, Insights, and Knowledge Graph components to consolidated backend APIs"
 
+backend:
+  - task: "Consolidated Backend API Endpoints"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py, /app/backend/dashboard_data.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: true
+        - agent: "main"
+        - comment: "Created 7 consolidated API endpoints: /api/stats (all statistics), /api/topics (unified topic data), /api/library (dashboard library items), /api/recall-tasks (recall tasks), /api/quiz/{title} (quiz questions), /api/clusters (knowledge clusters), /api/recommendations (personalized recommendations). All mock data consolidated in dashboard_data.py. Backend endpoints tested and working correctly."
+
+frontend:
+  - task: "Dashboard API Integration"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/Dashboard.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+        - agent: "main"
+        - comment: "Integrated /api/stats endpoint into Dashboard.js. Added stats fetching to existing useEffect that already fetches library, topics, and recall-tasks. Dashboard now fetches avgRetention for masteryScore and streakDays for streak from backend API. Removed dependency on local mock data for these values. All data now comes from backend APIs."
+  
+  - task: "Insights API Integration"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Insights.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+        - agent: "main"
+        - comment: "Verified that Insights.js is already fully integrated with backend APIs. Fetches data from /api/stats, /api/topics, /api/clusters, and /api/recommendations. No local mock data found. Already working correctly - no changes needed."
+  
+  - task: "Knowledge Graph API Integration"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/KnowledgeGraphD3.js, /app/frontend/src/pages/KnowledgeGraphPage.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+        - agent: "main"
+        - comment: "Connected KnowledgeGraphD3 component to backend API. KnowledgeGraphPage.js already fetches topics from /api/topics and passes to KnowledgeGraphD3 component. Updated KnowledgeGraphD3.js to use topics prop instead of local graphData array. Removed local mock data (8 hardcoded topics). Graph now renders using backend data with connections, scores, and states."
+
 frontend:
   - task: "Knowledge Graph - UX Improvements (Controls & Layout)"
     implemented: true
