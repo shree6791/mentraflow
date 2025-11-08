@@ -73,7 +73,7 @@ SUMMARY_CONTENT = {
         ],
         "keywords": ["Retrieval Practice", "Testing Effect", "Active Recall", "Self-Quizzing"]
     },
-    "t8": {
+    "s8": {
         "content": "Chunking is a memory strategy that involves grouping individual pieces of information into larger, meaningful units. This technique effectively expands working memory capacity by reducing the number of items to remember.\n\nFor example, the sequence '2-0-2-4-1-2-2-5' is easier to remember as '2024-12-25' (a date). Expert knowledge is often characterized by sophisticated chunking of domain information.\n\nChunking is most effective when the grouped information is meaningful and follows familiar patterns or schemas.",
         "keyTakeaways": [
             "Groups individual items into meaningful larger units",
