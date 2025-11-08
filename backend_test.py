@@ -973,10 +973,16 @@ if __name__ == "__main__":
         elif sys.argv[1] == "refactored":
             tester.run_refactored_api_tests()
             tester.print_summary()
+        elif sys.argv[1] == "lazy":
+            tester.run_lazy_loading_tests()
+            tester.print_summary()
+        elif sys.argv[1] == "naming":
+            tester.run_naming_convention_tests()
+            tester.print_summary()
         else:
-            print("Usage: python backend_test.py [all|refactored|lazy]")
-            print("Default: lazy loading tests")
+            print("Usage: python backend_test.py [all|refactored|lazy|naming]")
+            print("Default: naming convention tests")
     else:
-        # Run lazy loading tests by default for this review request
-        tester.run_lazy_loading_tests()
+        # Run naming convention tests by default for this review request
+        tester.run_naming_convention_tests()
         tester.print_summary()
