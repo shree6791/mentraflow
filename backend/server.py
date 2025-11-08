@@ -113,7 +113,7 @@ async def get_topic_detail(title: str):
     # Find the topic
     topic = next((t for t in TOPICS if t["title"] == decoded_title), None)
     if not topic:
-        return {"error": "Topic not found"}, 404
+        raise HTTPException(status_code=404, detail="Topic not found")
     
     # Get quiz data
     quiz = QUICK_RECALL_QUIZ.get(decoded_title, [])
