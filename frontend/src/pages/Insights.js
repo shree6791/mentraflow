@@ -37,7 +37,7 @@ const Insights = () => {
           axios.get(`${API}/recommendations`, { withCredentials: true })
         ]);
 
-        setStats(statsResponse.data || stats);
+        setStats(statsResponse.data?.insights || stats);
         
         // Process topics data into performance categories
         const topics = topicsResponse.data?.topics || [];
