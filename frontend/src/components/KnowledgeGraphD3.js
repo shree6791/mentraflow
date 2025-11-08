@@ -7,6 +7,8 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
   const svgRef = useRef(null);
   const containerRef = useRef(null);
   const simulationRef = useRef(null);
+  const onTakeQuizRef = useRef(onTakeQuiz);
+  const onViewSummaryRef = useRef(onViewSummary);
   
   const [activeFilters, setActiveFilters] = useState(['high', 'medium', 'fading']); // All active by default
   const [searchQuery, setSearchQuery] = useState('');
@@ -15,6 +17,12 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
   const [expandedNode, setExpandedNode] = useState(null);
   const [showQuickReview, setShowQuickReview] = useState(false);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
+  
+  // Keep refs up to date
+  useEffect(() => {
+    onTakeQuizRef.current = onTakeQuiz;
+    onViewSummaryRef.current = onViewSummary;
+  }, [onTakeQuiz, onViewSummary]);
 
   // Use topics from props (fetched from backend API)
   const graphData = topics || [];
