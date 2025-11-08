@@ -1,9 +1,9 @@
 # Summary Content Data
 # Centralized storage for all topic summaries
-# Referenced by NODES via summaryId
+# Referenced by NODES via summaryId (s1, s2, s3, etc.)
 
 SUMMARY_CONTENT = {
-    "t1": {
+    "s1": {
         "content": "The forgetting curve, discovered by Hermann Ebbinghaus in 1885, shows how memory retention declines exponentially over time without reinforcement. Within 24 hours, we forget approximately 70% of new information unless we actively review it.\n\nThe key to combating the forgetting curve is spaced repetition — reviewing material at increasing intervals (1 day, 3 days, 7 days, 14 days). Each review strengthens the memory trace, making it more resistant to decay.\n\nActive recall, where you actively retrieve information from memory rather than passively re-reading, is the most effective review method. This effortful retrieval process strengthens neural pathways and creates more durable memories.",
         "keyTakeaways": [
             "Review just before forgetting to maximize retention efficiency",
