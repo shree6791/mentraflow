@@ -1,179 +1,11 @@
 # Dashboard Mock Data
 # Consolidated and optimized data structure
-# Functions at top, data constants at bottom
+# Single source of truth for all knowledge nodes and library items
 
 # ========================================
-# HELPER FUNCTIONS (Derive data dynamically)
-# ========================================
-
-def get_recall_tasks(nodes):
-    """Generate recall tasks from nodes that need review"""
-    tasks = []
-    
-    for node in nodes:
-        # Add to recall if fading or low score
-        if node["state"] == "fading" or node["score"] < 60:
-            # Determine priority
-            if node["state"] == "fading" and node["score"] < 50:
-                priority = "critical"
-            elif node["state"] == "fading":
-                priority = "high"
-            else:
-                priority = "medium"
-            
-            # Calculate due time based on lastReview
-            due_time = "Overdue"
-            if "2 weeks" in node["lastReview"]:
-                due_time = "Overdue (2 weeks)"
-            elif "3 weeks" in node["lastReview"]:
-                due_time = "Overdue (3 weeks)"
-            elif "1 week" in node["lastReview"]:
-                due_time = "2 hours ago"
-            
-            tasks.append({
-                "id": f"recall_{node['id']}",
-                "title": node["title"],
-                "dueTime": due_time,
-                "priority": priority,
-                "nodeId": node["id"]
-            })
-    
-    return tasks
-
-
-def get_stats(nodes):
-    """Calculate statistics from nodes"""
-    # Calculate items due today (from recall tasks)
-    recall_tasks = get_recall_tasks(nodes)
-    items_due_today = len(recall_tasks)
-    
-    # Calculate average retention (average score across all nodes)
-    total_score = sum(n["score"] for n in nodes)
-    avg_retention = total_score // len(nodes) if nodes else 0
-    
-    # Streak days (hardcoded for now, would be user-specific in real app)
-    streak_days = 7
-    
-    # Count nodes by retention state
-    strong_retention = len([n for n in nodes if n["state"] == "high"])
-    needing_review = len([n for n in nodes if n["state"] == "fading"])
-    
-    # Count total connections
-    total_connections = sum(len(n["connections"]) for n in nodes)
-    
-    return {
-        "dashboard": {
-            "itemsDueToday": items_due_today,
-            "avgRetention": avg_retention,
-            "streakDays": streak_days
-        },
-        "insights": {
-            "totalTopics": len(nodes),
-            "strongRetention": strong_retention,
-            "needingReview": needing_review
-        },
-        "knowledge": {
-            "totalNodes": len(nodes),
-            "totalConnections": total_connections
-        }
-    }
-
-
-def get_knowledge_clusters(nodes):
-    """Generate knowledge clusters by analyzing node connections"""
-    clusters = []
-    
-    # Memory Retention cluster (high retention nodes)
-    memory_nodes = [n for n in nodes if n["id"] in ["t1", "t2", "t5"]]
-    if memory_nodes:
-        avg_score = sum(n["score"] for n in memory_nodes) // len(memory_nodes)
-        clusters.append({
-            "id": "cluster1",
-            "name": "Memory Retention",
-            "topics": [n["title"] for n in memory_nodes],
-            "strength": avg_score,
-            "lastReview": min(n["lastReview"] for n in memory_nodes)
-        })
-    
-    # Study Techniques cluster
-    study_nodes = [n for n in nodes if n["id"] in ["t2", "t3", "t5"]]
-    if study_nodes:
-        avg_score = sum(n["score"] for n in study_nodes) // len(study_nodes)
-        clusters.append({
-            "id": "cluster2",
-            "name": "Study Techniques",
-            "topics": [n["title"] for n in study_nodes],
-            "strength": avg_score,
-            "lastReview": min(n["lastReview"] for n in study_nodes)
-        })
-    
-    # Cognitive Science cluster
-    cognitive_nodes = [n for n in nodes if n["id"] in ["t4", "t6", "t7"]]
-    if cognitive_nodes:
-        avg_score = sum(n["score"] for n in cognitive_nodes) // len(cognitive_nodes)
-        clusters.append({
-            "id": "cluster3",
-            "name": "Cognitive Science",
-            "topics": [n["title"] for n in cognitive_nodes],
-            "strength": avg_score,
-            "lastReview": min(n["lastReview"] for n in cognitive_nodes)
-        })
-    
-    return clusters
-
-
-def get_recommendations(nodes):
-    """Generate personalized recommendations based on node states"""
-    recommendations = []
-    
-    # Find fading nodes (need review)
-    fading_nodes = [n for n in nodes if n["state"] == "fading"]
-    for node in fading_nodes:
-        recommendations.append({
-            "id": f"rec_review_{node['id']}",
-            "type": "review",
-            "title": f"Review: {node['title']}",
-            "description": "This topic is fading. Review now to strengthen retention.",
-            "priority": "high",
-            "action": "Review Now",
-            "nodeId": node["id"]
-        })
-    
-    # Find strong nodes (practice to maintain)
-    strong_nodes = [n for n in nodes if n["state"] == "high" and n["score"] > 85]
-    if strong_nodes:
-        node = strong_nodes[0]  # Pick the strongest
-        recommendations.append({
-            "id": f"rec_practice_{node['id']}",
-            "type": "practice",
-            "title": f"Practice: {node['title']} Quiz",
-            "description": f"Your {node['title']} knowledge is strong. Test yourself to maintain it.",
-            "priority": "low",
-            "action": "Take Quiz",
-            "nodeId": node["id"]
-        })
-    
-    # Find connection opportunities (nodes with many connections)
-    connected_nodes = sorted(nodes, key=lambda n: len(n["connections"]), reverse=True)
-    if len(connected_nodes) >= 2:
-        n1, n2 = connected_nodes[0], connected_nodes[1]
-        recommendations.append({
-            "id": "rec_connection_1",
-            "type": "connection",
-            "title": f"Connect: {n1['title']} ↔ {n2['title']}",
-            "description": "These concepts complement each other. Review together for deeper understanding.",
-            "priority": "medium",
-            "action": "Explore Connection"
-        })
-    
-    return recommendations
-
-
-# ========================================
-# DATA CONSTANTS
-# ========================================
-
 # KNOWLEDGE NODES (Single Source of Truth)
+# ========================================
+# Used by: Dashboard, Insights, Knowledge Graph
 # Each node contains: metadata, quiz questions, and summary content
 NODES = [
     {
@@ -499,118 +331,293 @@ NODES = [
     }
 ]
 
+# ========================================
+# RECALL TASKS (Dynamically generated from NODES)
+# ========================================
+def get_recall_tasks():
+    """Generate recall tasks from nodes that need review"""
+    tasks = []
+    
+    for node in NODES:
+        # Add to recall if fading or low score
+        if node["state"] == "fading" or node["score"] < 60:
+            # Determine priority
+            if node["state"] == "fading" and node["score"] < 50:
+                priority = "critical"
+            elif node["state"] == "fading":
+                priority = "high"
+            else:
+                priority = "medium"
+            
+            # Calculate due time based on lastReview
+            due_time = "Overdue"
+            if "2 weeks" in node["lastReview"]:
+                due_time = "Overdue (2 weeks)"
+            elif "3 weeks" in node["lastReview"]:
+                due_time = "Overdue (3 weeks)"
+            elif "1 week" in node["lastReview"]:
+                due_time = "2 hours ago"
+            
+            tasks.append({
+                "id": f"recall_{node['id']}",
+                "title": node["title"],
+                "dueTime": due_time,
+                "priority": priority,
+                "nodeId": node["id"]
+            })
+    
+    return tasks
+
+# ========================================
+# STATISTICS (Dynamically calculated from NODES)
+# ========================================
+def get_stats():
+    """Calculate statistics from nodes and library items"""
+    # Calculate items due today (from recall tasks)
+    recall_tasks = get_recall_tasks()
+    items_due_today = len(recall_tasks)
+    
+    # Calculate average retention (average score across all nodes)
+    total_score = sum(n["score"] for n in NODES)
+    avg_retention = total_score // len(NODES) if NODES else 0
+    
+    # Streak days (hardcoded for now, would be user-specific in real app)
+    streak_days = 7
+    
+    # Count nodes by retention state
+    strong_retention = len([n for n in NODES if n["state"] == "high"])
+    needing_review = len([n for n in NODES if n["state"] == "fading"])
+    
+    # Count total connections
+    total_connections = sum(len(n["connections"]) for n in NODES)
+    
+    return {
+        "dashboard": {
+            "itemsDueToday": items_due_today,
+            "avgRetention": avg_retention,
+            "streakDays": streak_days
+        },
+        "insights": {
+            "totalTopics": len(NODES),
+            "strongRetention": strong_retention,
+            "needingReview": needing_review
+        },
+        "knowledge": {
+            "totalNodes": len(NODES),
+            "totalConnections": total_connections
+        }
+    }
+
+STATS = get_stats()
+RECALL_TASKS = get_recall_tasks()
+
+# ========================================
 # LIBRARY ITEMS (User's uploaded documents)
+# ========================================
 # Each library item links to a node via nodeId
 # Title MUST match the corresponding node's title exactly
 LIBRARY_ITEMS = [
     {
         "id": "lib1",
-        "title": "Forgetting Curve",
+        "title": "Forgetting Curve",  # ✅ Matches NODES[0].title
         "filename": "forgetting-curve.pdf",
         "uploadDate": "2024-10-25",
-        "lastReview": "2 days ago",
+        "lastReview": "2 days ago",  # ✅ Matches NODES[0].lastReview
         "status": "completed",
-        "retention": "high",
+        "retention": "high",  # ✅ Matches NODES[0].state
         "nextReview": "In 5 days",
-        "quizScore": 85,
-        "hasQuiz": True,
+        "quizScore": 85,  # ✅ Matches NODES[0].score
+        "hasQuiz": True,  # ✅ NODES[0].questions is not empty
         "nodeId": "t1"
     },
     {
         "id": "lib2",
-        "title": "Active Recall",
+        "title": "Active Recall",  # ✅ Matches NODES[1].title
         "filename": "active-recall-notes.txt",
         "uploadDate": "2024-10-27",
-        "lastReview": "1 day ago",
+        "lastReview": "1 day ago",  # ✅ Matches NODES[1].lastReview
         "status": "completed",
-        "retention": "high",
+        "retention": "high",  # ✅ Matches NODES[1].state
         "nextReview": "In 6 days",
-        "quizScore": 92,
-        "hasQuiz": True,
+        "quizScore": 92,  # ✅ Matches NODES[1].score
+        "hasQuiz": True,  # ✅ NODES[1].questions is not empty
         "nodeId": "t2"
     },
     {
         "id": "lib3",
-        "title": "Spacing Effect",
+        "title": "Spacing Effect",  # ✅ Matches NODES[2].title
         "filename": "spacing-effect.pdf",
         "uploadDate": "2024-10-20",
-        "lastReview": "1 week ago",
+        "lastReview": "1 week ago",  # ✅ Matches NODES[2].lastReview
         "status": "completed",
-        "retention": "medium",
+        "retention": "medium",  # ✅ Matches NODES[2].state
         "nextReview": "Due today",
-        "quizScore": 68,
-        "hasQuiz": True,
+        "quizScore": 68,  # ✅ Matches NODES[2].score
+        "hasQuiz": True,  # ✅ NODES[2].questions is not empty
         "nodeId": "t3"
     },
     {
         "id": "lib4",
-        "title": "Interleaved Practice",
+        "title": "Interleaved Practice",  # ✅ Matches NODES[4].title
         "filename": "interleaved-practice.pdf",
         "uploadDate": "2024-10-22",
-        "lastReview": "4 days ago",
+        "lastReview": "4 days ago",  # ✅ Matches NODES[4].lastReview
         "status": "completed",
-        "retention": "medium",
+        "retention": "medium",  # ✅ Matches NODES[4].state
         "nextReview": "In 3 days",
-        "quizScore": 75,
-        "hasQuiz": True,
+        "quizScore": 75,  # ✅ Matches NODES[4].score
+        "hasQuiz": True,  # ✅ NODES[4].questions is not empty
         "nodeId": "t5"
     },
     {
         "id": "lib5",
-        "title": "Metacognition",
+        "title": "Metacognition",  # ✅ Matches NODES[5].title
         "filename": "metacognition.pdf",
         "uploadDate": "2024-10-28",
-        "lastReview": "3 days ago",
+        "lastReview": "3 days ago",  # ✅ Matches NODES[5].lastReview
         "status": "completed",
-        "retention": "high",
+        "retention": "high",  # ✅ Matches NODES[5].state
         "nextReview": "In 4 days",
-        "quizScore": 88,
-        "hasQuiz": True,
+        "quizScore": 88,  # ✅ Matches NODES[5].score
+        "hasQuiz": True,  # ✅ NODES[5].questions is not empty
         "nodeId": "t6"
     },
     {
         "id": "lib6",
-        "title": "Working Memory",
+        "title": "Working Memory",  # ✅ Matches NODES[3].title
         "filename": "working-memory.txt",
         "uploadDate": "2024-10-10",
-        "lastReview": "2 weeks ago",
+        "lastReview": "2 weeks ago",  # ✅ Matches NODES[3].lastReview
         "status": "needs-review",
-        "retention": "fading",
+        "retention": "fading",  # ✅ Matches NODES[3].state
         "nextReview": "Overdue",
-        "quizScore": 45,
-        "hasQuiz": True,
+        "quizScore": 45,  # ✅ Matches NODES[3].score
+        "hasQuiz": True,  # ✅ NODES[3].questions is not empty
         "nodeId": "t4"
     },
     {
         "id": "lib7",
-        "title": "Retrieval Practice",
+        "title": "Retrieval Practice",  # ✅ Matches NODES[6].title
         "filename": "retrieval-practice.pdf",
         "uploadDate": "2024-10-23",
-        "lastReview": "5 days ago",
+        "lastReview": "5 days ago",  # ✅ Matches NODES[6].lastReview
         "status": "completed",
-        "retention": "medium",
+        "retention": "medium",  # ✅ Matches NODES[6].state
         "nextReview": "In 2 days",
-        "quizScore": 72,
-        "hasQuiz": True,
+        "quizScore": 72,  # ✅ Matches NODES[6].score
+        "hasQuiz": True,  # ✅ NODES[6].questions is not empty
         "nodeId": "t7"
     },
     {
         "id": "lib8",
-        "title": "Chunking",
+        "title": "Chunking",  # ✅ Matches NODES[7].title
         "filename": "chunking.txt",
         "uploadDate": "2024-10-05",
-        "lastReview": "3 weeks ago",
+        "lastReview": "3 weeks ago",  # ✅ Matches NODES[7].lastReview
         "status": "needs-review",
-        "retention": "fading",
+        "retention": "fading",  # ✅ Matches NODES[7].state
         "nextReview": "Overdue",
-        "quizScore": 52,
-        "hasQuiz": True,
+        "quizScore": 52,  # ✅ Matches NODES[7].score
+        "hasQuiz": True,  # ✅ NODES[7].questions is not empty
         "nodeId": "t8"
     }
 ]
 
-# Generate derived data using helper functions
-STATS = get_stats(NODES)
-RECALL_TASKS = get_recall_tasks(NODES)
-KNOWLEDGE_CLUSTERS = get_knowledge_clusters(NODES)
-RECOMMENDATIONS = get_recommendations(NODES)
+# ========================================
+# KNOWLEDGE CLUSTERS (Dynamically generated from NODES)
+# ========================================
+def get_knowledge_clusters():
+    """Generate knowledge clusters by analyzing node connections"""
+    # Predefined clusters based on topic relationships
+    clusters = []
+    
+    # Memory Retention cluster (high retention nodes)
+    memory_nodes = [n for n in NODES if n["id"] in ["t1", "t2", "t5"]]
+    if memory_nodes:
+        avg_score = sum(n["score"] for n in memory_nodes) // len(memory_nodes)
+        clusters.append({
+            "id": "cluster1",
+            "name": "Memory Retention",
+            "topics": [n["title"] for n in memory_nodes],
+            "strength": avg_score,
+            "lastReview": min(n["lastReview"] for n in memory_nodes)
+        })
+    
+    # Study Techniques cluster
+    study_nodes = [n for n in NODES if n["id"] in ["t2", "t3", "t5"]]
+    if study_nodes:
+        avg_score = sum(n["score"] for n in study_nodes) // len(study_nodes)
+        clusters.append({
+            "id": "cluster2",
+            "name": "Study Techniques",
+            "topics": [n["title"] for n in study_nodes],
+            "strength": avg_score,
+            "lastReview": min(n["lastReview"] for n in study_nodes)
+        })
+    
+    # Cognitive Science cluster
+    cognitive_nodes = [n for n in NODES if n["id"] in ["t4", "t6", "t7"]]
+    if cognitive_nodes:
+        avg_score = sum(n["score"] for n in cognitive_nodes) // len(cognitive_nodes)
+        clusters.append({
+            "id": "cluster3",
+            "name": "Cognitive Science",
+            "topics": [n["title"] for n in cognitive_nodes],
+            "strength": avg_score,
+            "lastReview": min(n["lastReview"] for n in cognitive_nodes)
+        })
+    
+    return clusters
+
+KNOWLEDGE_CLUSTERS = get_knowledge_clusters()
+
+# ========================================
+# RECOMMENDATIONS (Dynamically generated from NODES)
+# ========================================
+def get_recommendations():
+    """Generate personalized recommendations based on node states"""
+    recommendations = []
+    
+    # Find fading nodes (need review)
+    fading_nodes = [n for n in NODES if n["state"] == "fading"]
+    for node in fading_nodes:
+        recommendations.append({
+            "id": f"rec_review_{node['id']}",
+            "type": "review",
+            "title": f"Review: {node['title']}",
+            "description": "This topic is fading. Review now to strengthen retention.",
+            "priority": "high",
+            "action": "Review Now",
+            "nodeId": node["id"]
+        })
+    
+    # Find strong nodes (practice to maintain)
+    strong_nodes = [n for n in NODES if n["state"] == "high" and n["score"] > 85]
+    if strong_nodes:
+        node = strong_nodes[0]  # Pick the strongest
+        recommendations.append({
+            "id": f"rec_practice_{node['id']}",
+            "type": "practice",
+            "title": f"Practice: {node['title']} Quiz",
+            "description": f"Your {node['title']} knowledge is strong. Test yourself to maintain it.",
+            "priority": "low",
+            "action": "Take Quiz",
+            "nodeId": node["id"]
+        })
+    
+    # Find connection opportunities (nodes with many connections)
+    connected_nodes = sorted(NODES, key=lambda n: len(n["connections"]), reverse=True)
+    if len(connected_nodes) >= 2:
+        n1, n2 = connected_nodes[0], connected_nodes[1]
+        recommendations.append({
+            "id": "rec_connection_1",
+            "type": "connection",
+            "title": f"Connect: {n1['title']} ↔ {n2['title']}",
+            "description": "These concepts complement each other. Review together for deeper understanding.",
+            "priority": "medium",
+            "action": "Explore Connection"
+        })
+    
+    return recommendations
+
+RECOMMENDATIONS = get_recommendations()
