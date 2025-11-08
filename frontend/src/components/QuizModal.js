@@ -167,7 +167,7 @@ const QuizModal = ({
                       </div>
                     </div>
 
-                    <div className="quiz-navigation" style={{marginTop: '2rem'}}>
+                    <div className="quiz-navigation" style={{marginTop: '1.5rem'}}>
                       {currentQuestionIndex > 0 ? (
                         <>
                           <button 
