@@ -53,7 +53,7 @@ SUMMARY_CONTENT = {
         ],
         "keywords": ["Interleaved Practice", "Blocked Practice", "Discrimination", "Transfer"]
     },
-    "t6": {
+    "s6": {
         "content": "Metacognition refers to awareness and understanding of one's own thought processes. It involves monitoring what you know, recognizing when you don't understand something, and adjusting learning strategies accordingly.\n\nEffective learners use metacognitive strategies to assess their understanding, identify gaps in knowledge, and select appropriate study methods. This self-regulation is a key predictor of academic success.\n\nCommon metacognitive strategies include self-testing, reflection on learning, and conscious evaluation of comprehension during study.",
         "keyTakeaways": [
             "Awareness of your own thinking and learning processes",
