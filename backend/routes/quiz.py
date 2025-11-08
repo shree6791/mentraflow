@@ -11,7 +11,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import uuid
 import logging
-from dashboard_data import NODES
+from db.repository.dashboard_data import NODES
 
 router = APIRouter()
 
