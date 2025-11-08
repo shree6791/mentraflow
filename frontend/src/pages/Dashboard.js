@@ -450,6 +450,18 @@ const Dashboard = () => {
     }
   };
 
+  const retakeQuiz = () => {
+    setQuizAnswers({});
+    setQuizResults({});
+    setShowQuizResults(false);
+    setCurrentQuestionIndex(0);
+  };
+
+  const calculateScore = (results, totalQuestions) => {
+    const correctAnswers = Object.values(results).filter(Boolean).length;
+    return Math.round((correctAnswers / totalQuestions) * 100);
+  };
+
   const handleProfileSave = () => {
     showToast('Profile updated successfully!');
     setShowProfileModal(false);
