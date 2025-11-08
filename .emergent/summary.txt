@@ -1,90 +1,125 @@
 <analysis>
-The trajectory details the work of an AI engineer on the MentraFlow application, focusing heavily on UI/UX refinements for the Dashboard. Initially, the engineer tackled filter spacing and library card decluttering, successfully making cards more compact and aligning information. Subsequent user feedback led to the consolidation of card metadata (status, filename, links) into single rows, unifying the design between Your Priority Today and My Knowledge Library sections. This evolved into a complete dashboard redesign, replacing the Your Priority Today section with a top-banner Priority Widget that opens a dedicated modal, further enhancing space efficiency.
-
-The engineer then implemented a full payment flow, including pricing adjustments, a dedicated Billing page with carousel support for mobile, a Payment page, and a team member selector for team plans, culminating in the integration of an Apple Pay button. Concurrently, the navigation structure was refined by creating dedicated Insights and Knowledge Graph pages, converting previous modals into full-page experiences. The engineer meticulously addressed responsive design, layout consistency, and user feedback through iterative edits to , , and newly created files for billing, payment, and insights.
+The AI engineer's work on MentraFlow focused extensively on UI/UX enhancements and core feature development, primarily for the frontend. Initial tasks involved button styling, text alignment, and layout consistency across various authenticated pages. A significant portion of the effort was dedicated to improving responsiveness, implementing multi-column layouts for data-heavy sections like the Dashboard, and refining modal presentations on mobile. Legends on graph visualizations were either removed in favor of inline labels or embedded for better integration. The final major initiative was a complete rewrite of the Knowledge Graph using D3.js for interactive, force-directed visualization. Throughout this process, the engineer systematically addressed user feedback, debugging CSS, restructuring JSX, and iterating on visual details to ensure brand consistency and an optimal user experience.
 </analysis>
 
 <product_requirements>
-MentraFlow is an MVP for memory enhancement, featuring conversion-optimized landing pages and a functional dashboard. The application uses a strict brand system with specific colors, Poppins/Inter fonts, glass-morphism, and neural-network animations, demanding responsive design and consistent UI/UX. The core problem is to transform the Dashboard from a passive library into an active learning coach that improves post-learning retention by being the most user-friendly app ever. This involves enhancing visual feedback, decluttering the interface, and improving user guidance.
+MentraFlow is an MVP for memory enhancement, designed as an active learning coach to boost post-learning retention. The application features conversion-optimized landing pages and a functional dashboard, adhering to a strict brand system (colors, fonts, glass-morphism, neural-network animations) while demanding responsive and consistent UI/UX. The primary goal is to enhance visual feedback, declutter the interface, and improve user guidance.
 
-Recent implementations include:
-- A Generated Content Modal for summaries/quizzes.
-- Redesign of the Dashboard from a two-column layout to a Smart Priority Flow single-column.
-- Floating Action Button (FAB) for knowledge capture.
-- Pagination for Knowledge Library and Priority sections.
-- UI polish like retention indicators, progress rings, and tooltips.
-- Visual consolidation of library card metadata (status, filename, links) into compact rows.
-- Introduction of a Priority Widget in the top banner that opens a modal for urgent items, replacing the old Your Priority Today section.
-- Implementation of a full payment flow with a dedicated  page, responsive pricing cards (carousel on mobile), a team member selector, and a  page including an Apple Pay option.
-- Creation of dedicated  and  pages, converting previous modals into full-page experiences for better navigation and detailed analytics.
+Key implementations and enhancements include:
+- A Generated Content Modal and a Floating Action Button (FAB) for knowledge capture.
+- Dashboard redesigned to a Smart Priority Flow layout with pagination and a Priority Widget.
+- Visual consolidation of library card metadata.
+- A full payment flow including  and  pages with Apple Pay.
+- Dedicated  and  pages replacing previous modals.
+- Reusable , , and  components for consistent authenticated page layouts.
+- Dashboard stats cards converted to a mobile carousel.
+- Full-width background sections for Home, Science, and Vision pages.
+- Brand-consistent gradient buttons across the application (yellow-to-orange) and specific teal hover effects.
+- Default center alignment for all button text.
+- Responsive 2-column grid for Dashboard library cards on desktop/tablet, single-column on mobile, with left-aligned and multi-line metadata.
+- Optimized modals for mobile/tablet to ensure headers and content are fully visible and properly spaced.
+- Graph legends on Science and Knowledge Graph pages made responsive, with Science legend replaced by inline labels and Knowledge Graph legend embedded within the visualization.
+- Vision page's Journey of Knowledge section converted to a mobile carousel.
+- Settings page content width aligned with , with centered and reordered action buttons.
+- Standardized font size hierarchy and card consistency across all authenticated pages, including subtle dashboard stat rings.
+- Color-coded Dashboard action buttons and card borders based on retention status (Red for Fading, Yellow for Review Soon, Green for Strong).
+- Interactive D3.js force-directed Knowledge Graph with draggable/bounded nodes, importance-based sizing, link opacity, click interactions, auto-arrange, recenter, and mobile pinch/zoom.
+- Knowledge Graph search/filter layout fixed, and node hover tooltips designed to show details and actions.
 </product_requirements>
 
 <key_technical_concepts>
 - **Full-stack:** React (frontend), FastAPI (backend), MongoDB (database).
-- **Frontend:** React Router DOM, Tailwind CSS, Framer Motion, Axios, CSS Custom Properties, D3.js (Knowledge Graph),  for icons.
-- **Backend:** FastAPI, , .
+- **Frontend:** React Router DOM, Tailwind CSS, CSS Custom Properties, D3.js (Knowledge Graph), .
+- **Backend:** FastAPI.
 - **Authentication:** JWT, .
-- **Design:** Glass-morphism, Responsive Design, UX principles (cognitive load, visual hierarchy, feedback loops).
+- **Design:** Glass-morphism, Responsive Design, UX principles.
 </key_technical_concepts>
 
 <code_architecture>
 
--   ****: Central routing configuration. Modified to add new routes: , ,  (later ), and .
--   ****: Global styles. Used for general pricing card styles, ensuring they are globally available.
--   ****: Heavily modified.
-    -   **Purpose:** The main user interface for knowledge management and review.
-    -   **Changes:** Refactored for Smart Priority Flow, added , , pagination for library/priority. The Your Priority Today section was removed and replaced by a Priority Widget in the stats banner that opens .  was removed, and View Graph now navigates to a dedicated Knowledge Graph page. Avatar dropdown updated to include Manage Plan and Insights options. Filters are now behind a toggle button.
--   ****: Extensive styling for the Dashboard.
-    -   **Purpose:** Controls the layout and appearance of all dashboard elements.
-    -   **Changes:** Styles for flexible layouts, pagination, FAB, modals. Updated for quick filter spacing, library card decluttering (reduced padding, spacing, color intensity), compact , , , . Added styles for unified card structure, priority widget/modal, and responsive adjustments for filters and cards. Also, width alignment fixes for main content sections.
--   ****: Used as a template for card styles.
-    -   **Purpose:** Displays subscription pricing plans.
-    -   **Changes:** Updated prices from 0/5 to .99/4.99.
--   ** (NEW)**:
-    -   **Purpose:** Dedicated page for logged-in users to manage their subscription plan.
-    -   **Changes:** Created to display plan options using pricing card styles from , including a  for mobile views and a team member selector for the Teams Plan.
--   ** (NEW)**: Styles for the new Billing page, including responsive grid/carousel layout and team selector.
--   ** (NEW)**:
-    -   **Purpose:** Handles the final payment process for plan upgrades/subscriptions.
-    -   **Changes:** Created to display order summary, handle dynamic pricing based on team members, and include an Apple Pay option with a Or pay with card divider.
--   ** (NEW)**: Styles for the Payment page elements, including Apple Pay button and divider.
--   ** (NEW, renamed to Insights conceptually)**:
-    -   **Purpose:** Displays learning progress and insights.
-    -   **Changes:** Created as a dedicated page for analytics, performance overview, knowledge clusters, and a link to the Knowledge Graph page.
--   ** (NEW)**: Styles for the Activity/Insights page.
--   ** (NEW)**:
-    -   **Purpose:** Acts as a standalone page wrapper for the existing  component, replacing its previous modal implementation.
-    -   **Changes:** Created to ensure the Knowledge Graph is a dedicated, navigable page.
--   ** (NEW)**: Styles for the Knowledge Graph wrapper page.
--   ****: Styles for the Tooltip component.
-    -   **Changes:**  increased to accommodate wider content.
--   ****: Updated to include  dependency.
+-   ****: Global stylesheet.
+    -   **Importance**: Defines core brand styles, general layout, and global UI component styling.
+    -   **Changes**: Updated  variable for orange-to-yellow gradient. Applied this gradient and  to primary, secondary, and login buttons. Added teal hover effect for . Set  color to . Modified , , and  to stretch full-width for backgrounds. Removed  specific styles after inline legend implementation.
+-   ****: Dashboard content and logic.
+    -   **Importance**: Manages the main user dashboard, including knowledge library display and priority widgets.
+    -   **Changes**: Restructured JSX for library card metadata to display filename on a separate line.  components were resized from 80x80 to 60x60, with corresponding SVG attribute adjustments. Logic for button color based on retention status was updated to use  for high retention.
+-   ****: Dashboard-specific styling.
+    -   **Importance**: Styles the dashboard layout, cards, modals, and other interactive elements.
+    -   **Changes**: Implemented responsive 2-column grid for  on desktop/tablet, while retaining single-column for mobile. Fixed left alignment of  and . Adjusted  for mobile visibility (sticky header,  alignment). Reduced font size of  to . Applied global width constraints to  and  and removed conflicting internal padding. Fixed a CSS syntax error. Updated ,  to brand yellow, and added  (green). Increased  width to  and added background tints for  and .
+-   ****: Home page content.
+    -   **Importance**: Defines the structure and content of the application's landing page.
+    -   **Changes**: Ensured CTA buttons (e.g., Try MentraFlow) correctly utilize  class for gradient application.
+-   ****: Billing page styling.
+    -   **Importance**: Styles the subscription and payment-related UI elements.
+    -   **Changes**: Improved spacing and readability for the  on mobile and tablet views (padding, gap, line-height, margin). Adjusted  font size to .
+-   ****: Insights page styling.
+    -   **Importance**: Styles the analytics and insights cards and layout.
+    -   **Changes**: Reduced  font size to  for visual consistency.
+-   ****: Wrapper for the Knowledge Graph component.
+    -   **Importance**: Integrates the Knowledge Graph into the application's page structure.
+    -   **Changes**: Modified to import and render the new  component, replacing the previous .
+-   ****: Styles for Knowledge Graph components.
+    -   **Importance**: Provides styling for graph elements, legends, and controls.
+    -   **Changes**: Adjusted responsive styles for the Knowledge Graph legend (sizing, readability). Added  to . Added CSS for new inline legend and tooltip.
+-   ** (NEW)**: The new interactive D3.js Knowledge Graph component.
+    -   **Importance**: Implements the core interactive visualization feature, which is a key differentiator.
+    -   **Creation**: A complete rewrite using D3.js force simulation, including force-directed layout, draggable nodes with boundary constraints, node sizing based on importance, color-coding, and connection lines.
+    -   **Changes**: Implemented initial force simulation, node and link rendering. Incorporated logic for restricting node movement within bounds during dragging. Added tooltip functionality with light background, readable text, and action buttons. Fixed search and filter layout within the graph container.
+-   ** (NEW)**: Styles for the D3.js Knowledge Graph.
+    -   **Importance**: Styles the visual presentation of the interactive D3 graph, including nodes, links, legend, and controls.
+    -   **Creation**: Contains styles for the D3 graph, inline legend bar, tooltip, and graph container elements.
+-   ****: Reusable component for page titles.
+    -   **Importance**: Ensures consistent display of page titles and subtitles across authenticated pages.
+    -   **Changes**: Increased  font size to  to establish proper visual hierarchy with page content.
+-   ****: Science page.
+    -   **Importance**: Displays information and visualizations related to learning science.
+    -   **Changes**: Modified the SVG graph to embed labels directly onto the graph lines, eliminating the need for a separate legend component.
+-   ****: User settings page.
+    -   **Importance**: Allows users to manage their personal information and preferences.
+    -   **Changes**: Modified to apply  to the internal form content, allowing the  to control the overall page width. Swapped the order of Save Changes and Cancel buttons.
+-   ****: Settings page styling.
+    -   **Importance**: Styles the layout and components of the settings page.
+    -   **Changes**: Removed  from , applied  to . Added  to the button action container.
+-   ****: Vision page.
+    -   **Importance**: Presents the application's vision and Journey of Knowledge timeline.
+    -   **Changes**: Modified to integrate the  component for the Journey of Knowledge timeline steps on mobile, hiding the desktop version when on smaller screens.
+-   ****: To-do list.
+    -   **Importance**: Tracks pending tasks for future development.
+    -   **Changes**: Added Review Soon cards need yellow border based on user feedback.
+
 </code_architecture>
 
 <pending_tasks>
 - Address the external  to enable actual Google OAuth.
 - Revert the authentication bypass in the Login page and Dashboard.
-- Implement backend integration for the Contact form, early access list, and full dashboard features (e.g., actual data for analytics, payment gateway integration).
-- Revisit Vision page founder section to change from teal gradient to a gray gradient.
-- Fix the quick filters and sort dropdown not appearing on the same line in non-mobile view.
+- Implement backend integration for the Contact form, early access list, and full dashboard features.
+- Legend spacing in Knowledge Graph page (re-added to  as user still reported not seeing the fix).
+- Dashboard spacing alignment for cards (as noted in ).
+- Review Soon cards need yellow border (added to  as user still reported not seeing the fix).
+- Knowledge Graph: The hover tooltip is still not showing visually, despite attempts to fix its appearance and positioning.
 </pending_tasks>
 
 <current_work>
-Immediately before this summary request, the AI engineer was addressing a user request to further optimize space and improve the usability of filter options in the My Knowledge Library section. The explicit request was to place the filter options (All Items⏰ Due Soon🔴 Fading✅ Strong and Sort by: Priority) behind a filter icon, next to the View Graph button, and also to increase the width of info tooltips which were showing data vertically.
+Immediately before this summary request, the AI engineer was actively working on refining the newly implemented D3.js interactive Knowledge Graph on the  page. The user had reported several critical UI/UX issues related to its functionality and visual presentation.
 
-The engineer's last actions involved:
-1.  **Modifying **:
-    *   Added  state to control the visibility of a new filter modal.
-    *   Replaced the inline filter options and sort dropdown with a Filters button (using a  icon) in the library header. This button now toggles the new .
-    *   Added the JSX for the  component to the  file, containing the previous filter and sort options.
-2.  **Modifying **:
-    *   Added specific CSS for , , , , and  to style the new modal.
-3.  **Modifying **:
-    *   Adjusted the  property to increase the width of tooltips, as requested.
+Specifically, the problems identified by the user were:
+1.  **Unrestricted Graph Movement**: Nodes within the D3 graph could be dragged indefinitely off-screen, leading to a poor user experience.
+2.  **Incorrect Hover Tooltip Display**: When hovering over nodes, a black, barely visible box appeared, and it lacked the previously intended options for viewing quiz/summary information.
+3.  **Legend Visibility**: Although a previous attempt was made to embed the legend, it was still not consistently visible.
+4.  **Search Bar and Filter Layout**: The controls for searching and filtering concepts were not spaced properly.
 
-The current state is that the Filters button is visible on the dashboard next to View Graph. The engineer has just finished making these code changes and is about to take a screenshot to verify that clicking the new Filters button opens the filter modal as intended.
+The AI engineer implemented the following sequence of fixes:
+-   **Bounded Movement**: Modifications were made to  to introduce boundary constraints, ensuring that nodes remain within the visible graph viewport even when dragged. This was confirmed to be working.
+-   **Tooltip Refinement**:
+    *   The code in  was updated to make the tooltip light-colored, with readable text, and to include action buttons (e.g., for quiz/summary).
+    *   Corresponding styles in  were adjusted to ensure the tooltip's visual appearance was correct.
+    *   Despite these efforts, the tooltip is still not visually appearing in screenshots, suggesting an ongoing visibility issue.
+-   **Search and Filter Layout**: The layout for the search bar and filter controls within  was adjusted to ensure proper spacing and alignment.
+-   **Legend Embedding**: After an initial attempt, it was found that  in  required  to correctly position the absolutely placed legend within the graph container. This was fixed, and the legend is now visible in the top-right corner.
+
+The current state is that the D3 Knowledge Graph now features bounded node movement, a visible and correctly positioned inline legend, and a well-aligned search/filter interface. However, the hover tooltip, intended to provide node details and actions, remains elusive in visual testing (screenshots). The AI engineer's last action was to attempt to make the tooltip appear *inside* the graph container to ensure its visibility, implying that the issue might be related to its render position or layering.
 </current_work>
 
 <optional_next_step>
-Take a screenshot to verify that clicking the Filters button opens the filter modal correctly.
+Investigate and fix the persistent issue where the hover tooltip is not visually appearing on the D3 Knowledge Graph.
 </optional_next_step>
