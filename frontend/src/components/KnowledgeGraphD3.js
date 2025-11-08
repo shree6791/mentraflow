@@ -112,16 +112,20 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
     const filteredNodes = getFilteredNodes();
     const filteredLinks = getFilteredLinks(filteredNodes);
 
-    // Bounding box function to keep nodes within viewport
-    const boundingBox = (x, y, radius) => {
-      const padding = radius + 20;
-      return {
-        x: Math.max(padding, Math.min(width - padding, x)),
-        y: Math.max(padding, Math.min(height - padding, y))
-      };
+    // Bounding box function to keep nodes FULLY within viewport
+    const boundingBox = (node) => {
+      const radius = getNodeRadius(node.connections);
+      const padding = radius + 30; // Extra padding to ensure full visibility
+      
+      if (node.x !== undefined) {
+        node.x = Math.max(padding, Math.min(width - padding, node.x));
+      }
+      if (node.y !== undefined) {
+        node.y = Math.max(padding, Math.min(height - padding, node.y));
+      }
     };
 
-    // Create force simulation with bounds
+    // Create force simulation with strict bounds
     const simulation = d3.forceSimulation(filteredNodes)
       .force('link', d3.forceLink(filteredLinks)
         .id(d => d.id)
@@ -132,13 +136,9 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       .force('center', d3.forceCenter(width / 2, height / 2))
       .force('collision', d3.forceCollide()
         .radius(d => getNodeRadius(d.connections) + 15))
-      .force('bounds', () => {
-        filteredNodes.forEach(node => {
-          const radius = getNodeRadius(node.connections);
-          const bounded = boundingBox(node.x, node.y, radius);
-          node.x = bounded.x;
-          node.y = bounded.y;
-        });
+      .on('tick', () => {
+        // Apply bounds on every tick
+        filteredNodes.forEach(boundingBox);
       });
 
     simulationRef.current = simulation;
