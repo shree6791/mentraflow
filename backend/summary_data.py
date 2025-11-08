@@ -33,7 +33,7 @@ SUMMARY_CONTENT = {
         ],
         "keywords": ["Spacing Effect", "Distributed Practice", "Memory Consolidation", "Study Schedule"]
     },
-    "t4": {
+    "s4": {
         "content": "Working memory is a cognitive system responsible for temporarily holding and manipulating information needed for complex tasks. Research suggests working memory has a limited capacity of about 7±2 items (Miller's Law).\n\nWorking memory is crucial for learning, reasoning, and comprehension. When overloaded, it becomes a bottleneck that impairs learning and performance.\n\nStrategies to optimize working memory include chunking information, reducing cognitive load, and using external aids like notes or diagrams.",
         "keyTakeaways": [
             "Limited capacity of approximately 7±2 items",
