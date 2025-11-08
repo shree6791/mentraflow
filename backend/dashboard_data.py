@@ -186,9 +186,6 @@ NODES = [
     }
 ]
 
-# Backward compatibility alias (will be removed in future)
-TOPICS = NODES
-
 # ========================================
 # RECALL TASKS (Dynamically generated from NODES)
 # ========================================
