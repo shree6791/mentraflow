@@ -187,21 +187,6 @@ async def get_recall_tasks():
     return {"tasks": RECALL_TASKS}
 
 # --------------------------------------
-# QUIZ
-# --------------------------------------
-
-@api_router.get("/quiz/{title}")
-async def get_quiz(title: str):
-    """Get quiz questions for a specific topic"""
-    import urllib.parse
-    decoded_title = urllib.parse.unquote(title)
-    
-    quiz = QUICK_RECALL_QUIZ.get(decoded_title, [])
-    if not quiz:
-        raise HTTPException(status_code=404, detail="Quiz not found")
-    return {"title": decoded_title, "questions": quiz}
-
-# --------------------------------------
 # INSIGHTS SPECIFIC
 # --------------------------------------
 
