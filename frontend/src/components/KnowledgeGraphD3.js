@@ -16,17 +16,8 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
   const [showQuickReview, setShowQuickReview] = useState(false);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
 
-  // Enhanced graph data with connections
-  const graphData = [
-    { id: 't1', title: 'Forgetting Curve', state: 'high', lastReview: '2 days ago', score: 85, connections: ['t2', 't5', 't7'] },
-    { id: 't2', title: 'Active Recall', state: 'high', lastReview: '1 day ago', score: 92, connections: ['t1', 't3', 't5'] },
-    { id: 't3', title: 'Spacing Effect', state: 'medium', lastReview: '1 week ago', score: 68, connections: ['t2', 't4', 't6'] },
-    { id: 't4', title: 'Working Memory', state: 'fading', lastReview: '2 weeks ago', score: 45, connections: ['t3', 't5'] },
-    { id: 't5', title: 'Cognitive Load', state: 'high', lastReview: '3 days ago', score: 88, connections: ['t1', 't2', 't4', 't6'] },
-    { id: 't6', title: 'Neuroplasticity', state: 'medium', lastReview: '5 days ago', score: 72, connections: ['t3', 't5', 't7'] },
-    { id: 't7', title: 'Memory Consolidation', state: 'fading', lastReview: '3 weeks ago', score: 38, connections: ['t1', 't6'] },
-    { id: 't8', title: 'Metacognition', state: 'high', lastReview: '1 day ago', score: 90, connections: ['t2', 't5'] },
-  ];
+  // Use topics from props (fetched from backend API)
+  const graphData = topics || [];
 
   // Helper functions
   const getNodeColor = (state) => {
