@@ -13,14 +13,13 @@ from auth import auth_router, set_database
 
 # Import dashboard mock data
 from dashboard_data import (
-    TOPICS,
+    NODES,
+    TOPICS,  # Backward compatibility alias
     STATS,
     LIBRARY_ITEMS,
     RECALL_TASKS,
-    QUICK_RECALL_QUIZ,
     KNOWLEDGE_CLUSTERS,
-    RECOMMENDATIONS,
-    TOPIC_SUMMARIES
+    RECOMMENDATIONS
 )
 
 
