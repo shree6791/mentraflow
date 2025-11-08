@@ -270,38 +270,8 @@ NODES = [
         "connections": ["t4"],
         "libraryId": "lib8",
         "quizzesTaken": 1,
-        "questions": [
-            {
-                "q": "What is chunking in cognitive psychology?",
-                "options": [
-                    "Breaking study time into small sessions",
-                    "Grouping individual pieces of information into larger units",
-                    "Memorizing information word-for-word",
-                    "Taking breaks during study sessions"
-                ],
-                "correctIndex": 1
-            },
-            {
-                "q": "How does chunking help working memory?",
-                "options": [
-                    "It increases working memory capacity",
-                    "It reduces the number of items to remember",
-                    "It makes studying more enjoyable",
-                    "It eliminates the need for practice"
-                ],
-                "correctIndex": 1
-            }
-        ],
-        "summary": {
-            "content": "Chunking is a memory strategy that involves grouping individual pieces of information into larger, meaningful units. This technique effectively expands working memory capacity by reducing the number of items to remember.\n\nFor example, the sequence '2-0-2-4-1-2-2-5' is easier to remember as '2024-12-25' (a date). Expert knowledge is often characterized by sophisticated chunking of domain information.\n\nChunking is most effective when the grouped information is meaningful and follows familiar patterns or schemas.",
-            "keyTakeaways": [
-                "Groups individual items into meaningful larger units",
-                "Expands effective working memory capacity",
-                "More effective with meaningful patterns",
-                "Underlies expert performance in many domains"
-            ],
-            "keywords": ["Chunking", "Working Memory", "Information Processing", "Pattern Recognition"]
-        }
+        "quizId": "t8",
+        "summaryId": "t8"
     }
 ]
 
