@@ -275,12 +275,12 @@ NODES = [
     }
 ]
 
-# LIBRARY ITEMS (User's uploaded documents)
-# Each library item links to a node via nodeId
+# DOCUMENTS (User's uploaded documents)
+# Each document links to a node via nodeId
 # Title MUST match the corresponding node's title exactly
-LIBRARY_ITEMS = [
+DOCUMENTS = [
     {
-        "id": "lib1",
+        "id": "doc1",
         "title": "Forgetting Curve",
         "filename": "forgetting-curve.pdf",
         "uploadDate": "2024-10-25",
