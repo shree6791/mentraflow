@@ -291,19 +291,26 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         
         const action = button.getAttribute('data-action');
         console.log('Button clicked:', action, 'for node:', d.title);
+        console.log('Callbacks available - onTakeQuiz:', !!onTakeQuizRef.current, 'onViewSummary:', !!onViewSummaryRef.current);
         
         if (action === 'close') {
           tooltip.transition().duration(200).style('opacity', 0);
         } else if (action === 'quiz') {
+          console.log('Calling onTakeQuiz with node:', d);
           // Use the callback from parent to open quiz modal
-          if (onTakeQuiz) {
-            onTakeQuiz(d);
+          if (onTakeQuizRef.current) {
+            onTakeQuizRef.current(d);
+          } else {
+            console.error('onTakeQuiz callback not available');
           }
           tooltip.transition().duration(200).style('opacity', 0);
         } else if (action === 'summary') {
+          console.log('Calling onViewSummary with node:', d);
           // Use the callback from parent to open summary modal
-          if (onViewSummary) {
-            onViewSummary(d);
+          if (onViewSummaryRef.current) {
+            onViewSummaryRef.current(d);
+          } else {
+            console.error('onViewSummary callback not available');
           }
           tooltip.transition().duration(200).style('opacity', 0);
         }
