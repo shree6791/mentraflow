@@ -279,18 +279,11 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         .style('top', tooltipY + 'px')
         .style('transform', tooltipY < d.y ? 'translate(-50%, -100%)' : 'translate(-50%, 0)');
       
-      // Use event delegation - listen on tooltip container
+      // Use event delegation - add listener directly to tooltip element
       const tooltipElement = tooltip.node();
       
-      // Remove any existing click listener on tooltip
-      const newTooltip = tooltipElement.cloneNode(true);
-      tooltipElement.parentNode.replaceChild(newTooltip, tooltipElement);
-      
-      // Re-reference tooltip after replacement
-      const activeTooltip = d3.select(newTooltip);
-      
-      // Add single click listener using event delegation
-      newTooltip.addEventListener('click', function(e) {
+      // Remove old listener by removing the attribute (if exists)
+      const handleClick = function(e) {
         e.stopPropagation();
         
         // Find which button was clicked
@@ -301,17 +294,26 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         console.log('Button clicked:', action, 'for node:', d.title);
         
         if (action === 'close') {
-          activeTooltip.transition().duration(200).style('opacity', 0);
+          tooltip.transition().duration(200).style('opacity', 0);
         } else if (action === 'quiz') {
           console.log('Opening quiz modal for:', d.title);
           setSelectedNode(d);
           setShowQuickReview(true);
-          activeTooltip.transition().duration(200).style('opacity', 0);
+          tooltip.transition().duration(200).style('opacity', 0);
         } else if (action === 'summary') {
           console.log('Opening summary for:', d.title);
-          activeTooltip.transition().duration(200).style('opacity', 0);
+          tooltip.transition().duration(200).style('opacity', 0);
         }
-      });
+      };
+      
+      // Remove old listener if exists
+      if (tooltipElement._clickHandler) {
+        tooltipElement.removeEventListener('click', tooltipElement._clickHandler);
+      }
+      
+      // Store reference and add new listener
+      tooltipElement._clickHandler = handleClick;
+      tooltipElement.addEventListener('click', handleClick);
       
       // Highlight connected nodes
       const connectedIds = new Set([d.id, ...d.connections]);
