@@ -180,7 +180,7 @@ const Dashboard = () => {
   const [showQuizResults, setShowQuizResults] = useState(false);
   
   // Phase 2: Recall Tasks & Quiz Customization
-  const [recallTasks, setRecallTasks] = useState(RECALL_TASKS);
+  const [recallTasks, setRecallTasks] = useState([]);
   const [showRecallQuiz, setShowRecallQuiz] = useState(false);
   const [currentRecallTask, setCurrentRecallTask] = useState(null);
   const [recallQuizData, setRecallQuizData] = useState(null);
