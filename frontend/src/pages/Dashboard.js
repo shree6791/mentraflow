@@ -460,7 +460,7 @@ const Dashboard = () => {
 
   const calculateScore = () => {
     const correctAnswers = Object.values(quizResults).filter(Boolean).length;
-    const totalQuestions = SAMPLE_QUIZ.length;
+    const totalQuestions = libraryQuizData?.questions?.length || SAMPLE_QUIZ.length;
     return Math.round((correctAnswers / totalQuestions) * 100);
   };
 
