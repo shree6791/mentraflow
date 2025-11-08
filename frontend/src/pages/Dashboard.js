@@ -391,33 +391,32 @@ const Dashboard = () => {
     }, 2000);
   };
 
-  const generateCustomQuiz = () => {
+  const generateCustomQuiz = async () => {
     setShowQuizCustomization(false);
     setGenerating(true);
     
-    // Simulate API call with custom parameters
-    setTimeout(() => {
-      // Generate quiz based on configuration
-      let questions = [...SAMPLE_QUIZ];
+    try {
+      // Call API to generate custom quiz
+      const response = await axios.post(`${API}/generate-custom-quiz`, {
+        content: uploadedContent,
+        config: quizConfig
+      });
       
-      // Adjust number of questions
-      if (quizConfig.questionCount === 10) {
-        questions = [...questions, ...SAMPLE_QUIZ.slice(0, 5)]; // Duplicate some
-      } else if (quizConfig.questionCount === 15) {
-        questions = [...questions, ...SAMPLE_QUIZ, ...SAMPLE_QUIZ.slice(0, 5)];
-      }
+      const { summary, quiz } = response.data;
       
-      questions = questions.slice(0, quizConfig.questionCount);
-      
-      setSummary(SAMPLE_SUMMARY);
-      setQuiz(questions);
+      setSummary(summary);
+      setQuiz(quiz?.questions || []);
       setQuizAnswers({});
       setQuizResults({});
       setCurrentQuestionIndex(0);
       setShowQuizResults(false);
       setGenerating(false);
       showToast(`Custom quiz generated! (${quizConfig.questionCount} questions, ${quizConfig.difficulty})`);
-    }, 2000);
+    } catch (error) {
+      console.error('Error generating custom quiz:', error);
+      setGenerating(false);
+      showToast('Failed to generate custom quiz. Please try again.', 'error');
+    }
   };
 
   // Library Item Detail Modal Handlers
