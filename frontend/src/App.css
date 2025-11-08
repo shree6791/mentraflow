@@ -445,6 +445,18 @@ html {
   opacity: 0.95;
 }
 
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-primary:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
 .btn-secondary {
   background: var(--surface);
   color: #0E7C7B;
