@@ -258,13 +258,13 @@ class BackendTester:
         # Validate cluster structure
         if clusters:
             cluster = clusters[0]
-            required_keys = ["name", "topics", "avgScore"]
+            required_keys = ["id", "name", "topics", "strength"]
             for key in required_keys:
                 if key not in cluster:
                     return f"Cluster missing key: {key}"
             
             print_success(f"  Sample cluster: {cluster['name']}")
-            print_success(f"  Topics: {cluster['topics']}, Avg Score: {cluster['avgScore']}")
+            print_success(f"  Topics: {len(cluster['topics'])}, Strength: {cluster['strength']}")
         
         return True
     
