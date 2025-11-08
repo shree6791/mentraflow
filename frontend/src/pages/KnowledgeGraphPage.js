@@ -39,20 +39,9 @@ const KnowledgeGraphPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showQuizResults, setShowQuizResults] = useState(false);
 
-  // Memoize callbacks to prevent recreating them on every render
-  const handleTakeQuiz = React.useCallback((node) => {
-    console.log('handleTakeQuiz called:', node);
-    openTopicModal(node, 'quiz');
-  }, []);
-
-  const handleViewSummary = React.useCallback((node) => {
-    console.log('handleViewSummary called:', node);
-    openTopicModal(node, 'summary');
-  }, []);
-
   useEffect(() => {
     const fetchTopics = async () => {
-      try {
+      try:
         const response = await axios.get(`${API}/topics`);
         setTopics(response.data?.topics || []);
         setLoading(false);
@@ -66,7 +55,7 @@ const KnowledgeGraphPage = () => {
     fetchTopics();
   }, [API]);
 
-  // Modal Handlers
+  // Modal Handlers  
   const openTopicModal = async (topic, tab = 'summary') => {
     console.log('openTopicModal called with topic:', topic, 'tab:', tab);
     alert(`Opening modal for: ${topic?.title || 'unknown'}`);
@@ -83,6 +72,17 @@ const KnowledgeGraphPage = () => {
         setQuizData(null);
       }
     }
+  };
+  
+  // Callbacks for KnowledgeGraphD3
+  const handleTakeQuiz = (node) => {
+    console.log('handleTakeQuiz called:', node);
+    openTopicModal(node, 'quiz');
+  };
+
+  const handleViewSummary = (node) => {
+    console.log('handleViewSummary called:', node);
+    openTopicModal(node, 'summary');
   };
 
   const closeTopicModal = () => {
