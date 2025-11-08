@@ -446,18 +446,30 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
           </button>
         </div>
 
-        {/* Inline Legend */}
+        {/* Interactive Legend - Click to filter */}
         <div className="graph-legend-inline">
           <div className="legend-inline-items">
-            <div className="legend-inline-item">
+            <div 
+              className={`legend-inline-item ${activeFilters.includes('high') ? 'active' : 'inactive'}`}
+              onClick={() => toggleFilter('high')}
+              title="Click to toggle High retention filter"
+            >
               <div className="legend-inline-dot" style={{background: '#06D6A0'}}></div>
               <span>High</span>
             </div>
-            <div className="legend-inline-item">
+            <div 
+              className={`legend-inline-item ${activeFilters.includes('medium') ? 'active' : 'inactive'}`}
+              onClick={() => toggleFilter('medium')}
+              title="Click to toggle Medium retention filter"
+            >
               <div className="legend-inline-dot" style={{background: '#FFD166'}}></div>
               <span>Medium</span>
             </div>
-            <div className="legend-inline-item">
+            <div 
+              className={`legend-inline-item ${activeFilters.includes('fading') ? 'active' : 'inactive'}`}
+              onClick={() => toggleFilter('fading')}
+              title="Click to toggle Fading retention filter"
+            >
               <div className="legend-inline-dot" style={{background: '#EF476F'}}></div>
               <span>Fading</span>
             </div>
