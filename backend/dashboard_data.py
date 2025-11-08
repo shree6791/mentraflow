@@ -345,7 +345,7 @@ DOCUMENTS = [
         "nodeId": "t6"
     },
     {
-        "id": "lib6",
+        "id": "doc6",
         "title": "Working Memory",
         "filename": "working-memory.txt",
         "uploadDate": "2024-10-10",
