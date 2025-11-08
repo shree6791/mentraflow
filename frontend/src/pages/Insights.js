@@ -7,45 +7,59 @@ import '../styles/Insights.css';
 
 const Insights = () => {
   const navigate = useNavigate();
+  const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
-  // Mock data - Replace with actual API calls
-  const performanceData = {
-    strong: [
-      { topic: 'Spacing Effect', score: 92, quizzesTaken: 5, lastReview: '2 days ago' },
-      { topic: 'Working Memory', score: 88, quizzesTaken: 4, lastReview: '1 day ago' },
-      { topic: 'Cognitive Load', score: 85, quizzesTaken: 6, lastReview: '3 days ago' }
-    ],
-    medium: [
-      { topic: 'Neural Pathways', score: 72, quizzesTaken: 3, lastReview: '5 days ago' },
-      { topic: 'Memory Consolidation', score: 68, quizzesTaken: 2, lastReview: '1 week ago' }
-    ],
-    weak: [
-      { topic: 'Interleaving Practice', score: 45, quizzesTaken: 2, lastReview: '2 weeks ago' },
-      { topic: 'Retrieval Practice', score: 52, quizzesTaken: 1, lastReview: '3 weeks ago' }
-    ]
-  };
+  // State for insights data
+  const [loading, setLoading] = useState(true);
+  const [performanceData, setPerformanceData] = useState({
+    strong: [],
+    medium: [],
+    weak: []
+  });
+  const [knowledgeClusters, setKnowledgeClusters] = useState([]);
+  const [stats, setStats] = useState({
+    totalQuizzes: 0,
+    avgScore: 0,
+    strongTopics: 0,
+    needsReview: 0,
+    streak: 0,
+    totalNotes: 0
+  });
+  const [recommendations, setRecommendations] = useState([]);
 
-  const knowledgeClusters = [
-    { name: 'Memory Techniques', topics: 5, avgScore: 85, color: '#0E7C7B' },
-    { name: 'Learning Science', topics: 4, avgScore: 72, color: '#4E9AF1' },
-    { name: 'Neuroscience', topics: 3, avgScore: 68, color: '#FFD166' },
-    { name: 'Study Methods', topics: 2, avgScore: 58, color: '#EF476F' }
-  ];
+  useEffect(() => {
+    const fetchInsightsData = async () => {
+      try {
+        const [statsResponse, topicsResponse, clustersResponse, recommendationsResponse] = await Promise.all([
+          axios.get(`${API}/stats`, { withCredentials: true }),
+          axios.get(`${API}/topics`, { withCredentials: true }),
+          axios.get(`${API}/clusters`, { withCredentials: true }),
+          axios.get(`${API}/recommendations`, { withCredentials: true })
+        ]);
 
-  const stats = {
-    totalQuizzes: 23,
-    avgScore: 75,
-    strongTopics: 3,
-    needsReview: 2,
-    streak: 4,
-    totalNotes: 12
-  };
+        setStats(statsResponse.data || stats);
+        
+        // Process topics data into performance categories
+        const topics = topicsResponse.data || [];
+        const categorizedTopics = {
+          strong: topics.filter(t => t.avgScore >= 80),
+          medium: topics.filter(t => t.avgScore >= 60 && t.avgScore < 80),
+          weak: topics.filter(t => t.avgScore < 60)
+        };
+        setPerformanceData(categorizedTopics);
+        
+        setKnowledgeClusters(clustersResponse.data || []);
+        setRecommendations(recommendationsResponse.data || []);
+        
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching insights data:', error);
+        setLoading(false);
+      }
+    };
 
-  const recommendations = [
-    { text: 'Review "Interleaving Practice" - Last reviewed 2 weeks ago', priority: 'high' },
-    { text: 'Your Memory Techniques cluster is strong! Keep it up', priority: 'success' },
-    { text: 'Consider reviewing Neural Pathways before it fades', priority: 'medium' }
-  ];
+    fetchInsightsData();
+  }, [API]);
 
   return (
     <AppLayout 
