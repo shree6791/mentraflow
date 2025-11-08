@@ -165,7 +165,7 @@ const Dashboard = () => {
   // Dashboard state
   const [masteryScore, setMasteryScore] = useState(68);
   const [weeklyChange, setWeeklyChange] = useState(6);
-  const [topics, setTopics] = useState(SAMPLE_TOPICS);
+  const [topics, setTopics] = useState([]);
   const [activeTab, setActiveTab] = useState('upload');
   const [uploadedContent, setUploadedContent] = useState('');
   const [summary, setSummary] = useState(null);
