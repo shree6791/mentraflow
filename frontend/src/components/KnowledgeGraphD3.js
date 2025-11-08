@@ -393,7 +393,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
   };
 
   return (
-    <div className="knowledge-graph-page" ref={containerRef}>
+    <div className="knowledge-graph-container" ref={containerRef}>
       {!hideHeader && (
         <div className="graph-header">
           <div className="graph-header-left">
