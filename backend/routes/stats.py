@@ -4,7 +4,7 @@ Endpoints for dashboard and user statistics
 """
 
 from fastapi import APIRouter
-from db.repository.dashboard_data import STATS
+from db.dashboard_data import STATS
 
 router = APIRouter()
 
