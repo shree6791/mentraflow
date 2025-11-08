@@ -43,7 +43,7 @@ SUMMARY_CONTENT = {
         ],
         "keywords": ["Working Memory", "Miller's Law", "Cognitive Load", "Chunking"]
     },
-    "t5": {
+    "s5": {
         "content": "Interleaved practice involves mixing different topics or types of problems during a study session, rather than focusing on one topic at a time (blocked practice).\n\nWhile blocked practice may feel easier and produce faster initial gains, interleaved practice leads to better long-term retention and transfer of knowledge. The difficulty of switching between topics forces deeper processing.\n\nInterleaved practice is particularly effective for subjects that require discrimination between different concepts or problem types.",
         "keyTakeaways": [
             "Mix different topics rather than blocking by topic",
