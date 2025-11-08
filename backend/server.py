@@ -15,7 +15,7 @@ from auth import auth_router, set_database
 from dashboard_data import (
     NODES,
     STATS,
-    LIBRARY_ITEMS,
+    DOCUMENTS,
     RECALL_TASKS,
     KNOWLEDGE_CLUSTERS,
     RECOMMENDATIONS
