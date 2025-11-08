@@ -3,7 +3,7 @@ import { ArrowLeft, Search, Filter, Eye, Brain, ZoomIn, ZoomOut, Loader, X, Rota
 import * as d3 from 'd3';
 import './KnowledgeGraph.css';
 
-const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, hideHeader }) => {
+const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, onTakeQuiz, onViewSummary, hideHeader }) => {
   const svgRef = useRef(null);
   const containerRef = useRef(null);
   const simulationRef = useRef(null);
