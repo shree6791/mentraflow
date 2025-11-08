@@ -1527,200 +1527,32 @@ const Dashboard = () => {
         </div>
       )}
 
-      {/* Library Item Detail Modal */}
+      {/* Library Item Detail Modal - Using Shared Component */}
       {selectedLibraryItem && (
-        <div className="modal-overlay" onClick={closeLibraryItem}>
-          <div className="modal-content library-detail-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <div>
-                <h2>{selectedLibraryItem.title}</h2>
-                <p className="modal-subtitle">{selectedLibraryItem.filename}</p>
-              </div>
-              <button className="modal-close" onClick={closeLibraryItem}>
-                <X size={24} />
-              </button>
-            </div>
-
-            {/* Tabs */}
-            <div className="library-modal-tabs">
-              <button
-                className={`library-tab ${libraryModalTab === 'summary' ? 'active' : ''}`}
-                onClick={() => setLibraryModalTab('summary')}
-              >
-                <Eye size={16} /> Summary
-              </button>
-              <button
-                className={`library-tab ${libraryModalTab === 'quiz' ? 'active' : ''}`}
-                onClick={() => setLibraryModalTab('quiz')}
-                disabled={!selectedLibraryItem.hasQuiz}
-              >
-                <Brain size={16} /> Take Quiz
-              </button>
-              <button
-                className={`library-tab ${libraryModalTab === 'performance' ? 'active' : ''}`}
-                onClick={() => setLibraryModalTab('performance')}
-                disabled={selectedLibraryItem.quizScore === null}
-              >
-                <BarChart3 size={16} /> Performance
-              </button>
-            </div>
-
-            <div className="modal-body library-modal-body">
-              {/* Summary Tab */}
-              {libraryModalTab === 'summary' && (
-                <div className="library-tab-content">
-                  <div className="summary-content">
-                    <h3>{SAMPLE_SUMMARY.title}</h3>
-                    <p className="summary-text">{SAMPLE_SUMMARY.content}</p>
-                    {SAMPLE_SUMMARY.bullets && SAMPLE_SUMMARY.bullets.length > 0 && (
-                      <div className="summary-bullets">
-                        <h4>Key Takeaways:</h4>
-                        <ul>
-                          {SAMPLE_SUMMARY.bullets.map((bullet, idx) => (
-                            <li key={idx}>{bullet}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                    {SAMPLE_SUMMARY.keywords && SAMPLE_SUMMARY.keywords.length > 0 && (
-                      <div className="summary-keywords">
-                        {SAMPLE_SUMMARY.keywords.map((keyword, idx) => (
-                          <span key={idx} className="keyword-tag">{keyword}</span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {/* Quiz Tab */}
-              {libraryModalTab === 'quiz' && selectedLibraryItem.hasQuiz && (
-                <div className="library-tab-content">
-                  {!showQuizResults ? (
-                    <>
-                      <div className="quiz-progress-bar">
-                        <div 
-                          className="quiz-progress-fill"
-                          style={{width: `${((currentQuestionIndex + 1) / SAMPLE_QUIZ.length) * 100}%`}}
-                        ></div>
-                      </div>
-                      
-                      <div className="quiz-question">
-                        <p className="question-number">Question {currentQuestionIndex + 1} of {SAMPLE_QUIZ.length}</p>
-                        <h3>{SAMPLE_QUIZ[currentQuestionIndex].q}</h3>
-                        <div className="quiz-options">
-                          {SAMPLE_QUIZ[currentQuestionIndex].options.map((option, idx) => (
-                            <button
-                              key={idx}
-                              className={`quiz-option ${quizAnswers[currentQuestionIndex] === idx ? 'selected' : ''}`}
-                              onClick={() => handleQuizAnswer(currentQuestionIndex, idx)}
-                            >
-                              <span className="option-letter">{String.fromCharCode(65 + idx)}</span>
-                              <span className="option-text">{option}</span>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                      
-                      <div className="quiz-navigation">
-                        <button 
-                          className="btn-secondary"
-                          onClick={previousQuestion}
-                          disabled={currentQuestionIndex === 0}
-                        >
-                          Previous
-                        </button>
-                        {currentQuestionIndex < SAMPLE_QUIZ.length - 1 ? (
-                          <button 
-                            className="btn-primary"
-                            onClick={nextQuestion}
-                            disabled={quizAnswers[currentQuestionIndex] === undefined}
-                          >
-                            Next
-                          </button>
-                        ) : (
-                          <button 
-                            className="btn-primary"
-                            onClick={submitQuiz}
-                            disabled={Object.keys(quizAnswers).length !== SAMPLE_QUIZ.length}
-                          >
-                            Submit Quiz
-                          </button>
-                        )}
-                      </div>
-                    </>
-                  ) : (
-                    <div className="quiz-results-content">
-                      <div className="results-summary">
-                        <div className="results-score">
-                          <h3>{Math.round((Object.values(quizResults).filter(Boolean).length / SAMPLE_QUIZ.length) * 100)}%</h3>
-                          <p>{Object.values(quizResults).filter(Boolean).length} out of {SAMPLE_QUIZ.length} correct</p>
-                        </div>
-                        <div className="results-message">
-                          {Object.values(quizResults).filter(Boolean).length === SAMPLE_QUIZ.length ? (
-                            <p className="message-success">🎉 Perfect score! You've mastered this topic.</p>
-                          ) : Object.values(quizResults).filter(Boolean).length >= SAMPLE_QUIZ.length * 0.7 ? (
-                            <p className="message-good">✅ Great work! You're building strong retention.</p>
-                          ) : (
-                            <p className="message-review">🧠 Keep practicing — each recall makes your memory stronger.</p>
-                          )}
-                        </div>
-                      </div>
-                      <button 
-                        className="btn-primary"
-                        onClick={() => {
-                          setQuizAnswers({});
-                          setQuizResults({});
-                          setShowQuizResults(false);
-                          setCurrentQuestionIndex(0);
-                        }}
-                      >
-                        Retake Quiz
-                      </button>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Performance Tab */}
-              {libraryModalTab === 'performance' && selectedLibraryItem.quizScore !== null && (
-                <div className="library-tab-content">
-                  <div className="performance-overview">
-                    <div className="perf-stat-card">
-                      <h4>Current Score</h4>
-                      <div className="perf-score">{selectedLibraryItem.quizScore}%</div>
-                      <span className={`retention-badge retention-${selectedLibraryItem.retention}`}>
-                        {selectedLibraryItem.retention === 'high' ? '🟢 High Retention' : 
-                         selectedLibraryItem.retention === 'medium' ? '🟡 Medium Retention' : 
-                         '🔴 Needs Review'}
-                      </span>
-                    </div>
-                    
-                    <div className="perf-info-card">
-                      <h4>Quiz History</h4>
-                      <p>Total attempts: {selectedLibraryItem.hasQuiz ? '3' : '0'}</p>
-                      <p>Last reviewed: {selectedLibraryItem.lastReview}</p>
-                      <p>Uploaded: {new Date(selectedLibraryItem.uploadDate).toLocaleDateString()}</p>
-                    </div>
-
-                    {selectedLibraryItem.retention === 'fading' && (
-                      <div className="perf-warning">
-                        ⚠️ This topic needs reinforcement soon. Review the summary or retake the quiz to strengthen retention.
-                      </div>
-                    )}
-
-                    <button 
-                      className="btn-primary"
-                      onClick={() => setLibraryModalTab('quiz')}
-                    >
-                      <Brain size={18} /> Practice Again
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
+        <QuizModal
+          item={{
+            ...selectedLibraryItem,
+            summary: {
+              content: SAMPLE_SUMMARY.content,
+              keyTakeaways: SAMPLE_SUMMARY.bullets,
+              keywords: SAMPLE_SUMMARY.keywords
+            }
+          }}
+          modalTab={libraryModalTab}
+          onTabChange={setLibraryModalTab}
+          onClose={closeLibraryItem}
+          quizData={selectedLibraryItem.hasQuiz ? { questions: SAMPLE_QUIZ } : null}
+          quizAnswers={quizAnswers}
+          currentQuestionIndex={currentQuestionIndex}
+          showQuizResults={showQuizResults}
+          quizResults={quizResults}
+          onAnswerSelect={handleQuizAnswer}
+          onPreviousQuestion={previousQuestion}
+          onNextQuestion={nextQuestion}
+          onSubmitQuiz={submitQuiz}
+          onRetakeQuiz={retakeQuiz}
+          calculateScore={calculateScore}
+        />
       )}
 
       {/* Floating Action Button (FAB) */}
