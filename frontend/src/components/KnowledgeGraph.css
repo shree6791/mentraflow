@@ -1090,12 +1090,13 @@
 
   .search-container {
     max-width: 100%;
+    flex: 1 1 100%;
     order: 1;
   }
 
   .filter-group {
     flex: 1;
-    min-width: 150px;
+    min-width: 140px;
     order: 2;
   }
 
@@ -1145,22 +1146,22 @@
     top: 0.75rem;
     right: 0.75rem;
     left: 0.75rem;
-    padding: 0.625rem 0.875rem;
+    padding: 0.75rem 1rem;
     max-width: calc(100% - 1.5rem);
   }
 
   .legend-inline-items {
-    gap: 0.75rem;
+    gap: 1rem;
     justify-content: center;
   }
 
   .legend-inline-item span {
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
   }
 
   .legend-inline-dot {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
   }
 
   .graph-zoom-controls {
@@ -1182,6 +1183,15 @@
   .zoom-btn {
     width: 32px;
     height: 32px;
+  }
+
+  .graph-hint {
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    font-size: 0.75rem;
+    padding: 0.625rem 1rem;
+    max-width: calc(100% - 2rem);
   }
 
   /* Larger touch targets on mobile */
