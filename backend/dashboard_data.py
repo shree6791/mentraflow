@@ -293,7 +293,7 @@ DOCUMENTS = [
         "nodeId": "t1"
     },
     {
-        "id": "lib2",
+        "id": "doc2",
         "title": "Active Recall",
         "filename": "active-recall-notes.txt",
         "uploadDate": "2024-10-27",
