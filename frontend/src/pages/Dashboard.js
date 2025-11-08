@@ -1440,10 +1440,10 @@ const Dashboard = () => {
         <QuizModal
           item={{
             ...selectedLibraryItem,
-            summary: {
-              content: SAMPLE_SUMMARY.content,
-              keyTakeaways: SAMPLE_SUMMARY.bullets,
-              keywords: SAMPLE_SUMMARY.keywords
+            summary: selectedLibraryItem.summary || {
+              content: 'Summary not available',
+              keyTakeaways: [],
+              keywords: []
             }
           }}
           modalTab={libraryModalTab}
