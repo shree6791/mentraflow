@@ -153,13 +153,6 @@ async def get_all_stats():
     """
     return STATS
 
-@api_router.get("/stats/{section}")
-async def get_section_stats(section: str):
-    """Get statistics for a specific section (dashboard, insights, knowledge)"""
-    if section not in STATS:
-        raise HTTPException(status_code=404, detail="Section not found")
-    return STATS[section]
-
 # --------------------------------------
 # LIBRARY (Dashboard specific)
 # --------------------------------------
