@@ -11,7 +11,7 @@ import uuid
 from datetime import datetime, timezone
 from auth import auth_router, set_database
 
-# Import dashboard mock data
+# Import dashboard mock data (lean nodes only)
 from dashboard_data import (
     NODES,
     STATS,
@@ -20,6 +20,10 @@ from dashboard_data import (
     KNOWLEDGE_CLUSTERS,
     RECOMMENDATIONS
 )
+
+# Import content data (lazy loaded on-demand)
+from quiz_data import QUIZ_CONTENT
+from summary_data import SUMMARY_CONTENT
 
 
 
