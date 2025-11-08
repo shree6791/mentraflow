@@ -293,7 +293,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       node.attr('transform', d => `translate(${d.x},${d.y})`);
     });
 
-    // Drag functions
+    // Drag functions with bounds checking
     function dragstarted(event, d) {
       if (!event.active) simulation.alphaTarget(0.3).restart();
       d.fx = d.x;
@@ -301,15 +301,22 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
     }
 
     function dragged(event, d) {
-      d.fx = event.x;
-      d.fy = event.y;
+      // Apply bounds during drag
+      const radius = getNodeRadius(d.connections);
+      const padding = radius + 30;
+      
+      d.fx = Math.max(padding, Math.min(width - padding, event.x));
+      d.fy = Math.max(padding, Math.min(height - padding, event.y));
     }
 
     function dragended(event, d) {
       if (!event.active) simulation.alphaTarget(0);
-      // Keep node fixed at dropped position
-      d.fx = event.x;
-      d.fy = event.y;
+      // Keep node fixed at bounded position
+      const radius = getNodeRadius(d.connections);
+      const padding = radius + 30;
+      
+      d.fx = Math.max(padding, Math.min(width - padding, event.x));
+      d.fy = Math.max(padding, Math.min(height - padding, event.y));
     }
 
     // Loading complete
