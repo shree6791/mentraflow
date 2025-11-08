@@ -48,7 +48,7 @@ const KnowledgeGraphPage = () => {
       subtitle="Interactive memory visualization • Click nodes to explore"
       maxWidth="100%"
     >
-      <KnowledgeGraph 
+      <KnowledgeGraphD3 
           topics={topics} 
           userAvatar="/default-avatar.png"
           userName="Demo User"
