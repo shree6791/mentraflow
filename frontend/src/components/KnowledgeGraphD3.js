@@ -343,17 +343,6 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
     };
   }, [filterState, searchQuery, expandedNode]);
 
-  const handleNodeClick = (node) => {
-    if (expandedNode === node.id) {
-      // Second click - open quick review
-      setSelectedNode(node);
-      setShowQuickReview(true);
-    } else {
-      // First click - expand to show connections
-      setExpandedNode(node.id);
-    }
-  };
-
   const handleRecenter = () => {
     const svg = d3.select(svgRef.current);
     svg.transition()
