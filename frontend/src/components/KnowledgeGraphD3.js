@@ -353,6 +353,10 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       tooltipElement._clickHandler = handleClick;
       tooltipElement.addEventListener('click', handleClick);
       
+      console.log('Event listener attached to tooltip for node:', d.title);
+      console.log('Tooltip element:', tooltipElement);
+      console.log('Has _clickHandler:', !!tooltipElement._clickHandler);
+      
       // Highlight connected nodes
       const connectedIds = new Set([d.id, ...d.connections]);
       
