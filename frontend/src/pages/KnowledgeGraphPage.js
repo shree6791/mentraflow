@@ -149,8 +149,8 @@ const KnowledgeGraphPage = () => {
         userAvatar="/default-avatar.png"
         userName="Demo User"
         onClose={() => navigate(-1)}
-        onTakeQuiz={(node) => openTopicModal(node, 'quiz')}
-        onViewSummary={(node) => openTopicModal(node, 'summary')}
+        onTakeQuiz={handleTakeQuiz}
+        onViewSummary={handleViewSummary}
         hideHeader={true}
       />
 
