@@ -218,10 +218,38 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         .duration(200)
         .style('opacity', 1);
       
-      // Account for graph container padding (2rem = 32px)
-      const containerPadding = 32;
-      const tooltipX = d.x + containerPadding;
-      const tooltipY = d.y - getNodeRadius(d.connections) - 20; // Position above node with gap
+      // Get graph container dimensions
+      const containerPadding = 32; // 2rem
+      const containerBounds = containerRef.current.getBoundingClientRect();
+      const tooltipWidth = 240; // Approximate tooltip width
+      const tooltipHeight = 200; // Approximate tooltip height
+      
+      // Calculate initial position
+      let tooltipX = d.x + containerPadding;
+      let tooltipY = d.y - getNodeRadius(d.connections) - 20;
+      
+      // Boundary checks - keep tooltip within graph container
+      const leftBound = containerPadding + tooltipWidth / 2;
+      const rightBound = dimensions.width - containerPadding - tooltipWidth / 2;
+      const topBound = tooltipHeight + 20;
+      const bottomBound = dimensions.height - 20;
+      
+      // Adjust horizontal position
+      if (tooltipX < leftBound) {
+        tooltipX = leftBound;
+      } else if (tooltipX > rightBound) {
+        tooltipX = rightBound;
+      }
+      
+      // Adjust vertical position - if too close to top, show below node
+      if (tooltipY < topBound) {
+        tooltipY = d.y + getNodeRadius(d.connections) + 20; // Show below node
+      }
+      
+      // Prevent going below bottom
+      if (tooltipY > bottomBound) {
+        tooltipY = bottomBound;
+      }
       
       tooltip.html(`
         <div class="tooltip-content" style="background: white; color: #1F2937; position: relative;">
@@ -249,7 +277,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       `)
         .style('left', tooltipX + 'px')
         .style('top', tooltipY + 'px')
-        .style('transform', 'translate(-50%, -100%)');
+        .style('transform', tooltipY < d.y ? 'translate(-50%, -100%)' : 'translate(-50%, 0)');
       
       // Add click handlers to tooltip buttons
       d3.selectAll('.tooltip-btn').on('click', function(e) {
