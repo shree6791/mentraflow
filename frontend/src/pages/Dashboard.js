@@ -330,8 +330,8 @@ const Dashboard = () => {
 
   const calculateScore = () => {
     const correctAnswers = Object.values(quizResults).filter(Boolean).length;
-    const totalQuestions = libraryQuizData?.questions?.length || SAMPLE_QUIZ.length;
-    return Math.round((correctAnswers / totalQuestions) * 100);
+    const totalQuestions = libraryQuizData?.questions?.length || quiz?.length || 0;
+    return totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
   };
 
   const handleProfileSave = () => {
