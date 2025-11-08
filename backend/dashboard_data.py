@@ -237,6 +237,27 @@ RECALL_TASKS = [
     }
 ]
 
+# ========================================
+# INSIGHTS SPECIFIC DATA
+# ========================================
+
+KNOWLEDGE_CLUSTERS = [
+    {"name": "Memory Techniques", "topics": 5, "avgScore": 85, "color": "#0E7C7B"},
+    {"name": "Learning Science", "topics": 4, "avgScore": 72, "color": "#4E9AF1"},
+    {"name": "Neuroscience", "topics": 3, "avgScore": 68, "color": "#FFD166"},
+    {"name": "Study Methods", "topics": 2, "avgScore": 58, "color": "#EF476F"}
+]
+
+RECOMMENDATIONS = [
+    {"text": "Review \"Interleaving Practice\" - Last reviewed 2 weeks ago", "priority": "high"},
+    {"text": "Your Memory Techniques cluster is strong! Keep it up", "priority": "success"},
+    {"text": "Consider reviewing Neural Pathways before it fades", "priority": "medium"}
+]
+
+# ========================================
+# QUIZ DATA
+# ========================================
+
 QUICK_RECALL_QUIZ = {
     "Forgetting Curve": [
         {
