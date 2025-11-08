@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppLayout from '../components/AppLayout';
-import KnowledgeGraph from '../components/KnowledgeGraph';
+import KnowledgeGraphD3 from '../components/KnowledgeGraphD3';
 
 const KnowledgeGraphPage = () => {
   const navigate = useNavigate();
