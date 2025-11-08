@@ -309,7 +309,8 @@ const Dashboard = () => {
   };
 
   const nextQuestion = () => {
-    const activeQuiz = recallQuizData || quiz;
+    // Check all possible quiz data sources
+    const activeQuiz = libraryQuizData?.questions || recallQuizData || quiz;
     if (activeQuiz && currentQuestionIndex < activeQuiz.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
     }
