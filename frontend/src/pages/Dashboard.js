@@ -217,7 +217,7 @@ const Dashboard = () => {
     }
   };
 
-  const generateSummaryAndQuiz = () => {
+  const generateSummaryAndQuiz = async () => {
     if (!uploadedContent) {
       showToast('Please upload or paste content first', 'error');
       return;
@@ -225,10 +225,16 @@ const Dashboard = () => {
     
     setGenerating(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      setSummary(SAMPLE_SUMMARY);
-      setQuiz(SAMPLE_QUIZ);
+    try {
+      // Call API to generate summary and quiz
+      const response = await axios.post(`${API}/generate`, {
+        content: uploadedContent
+      });
+      
+      const { summary, quiz } = response.data;
+      
+      setSummary(summary);
+      setQuiz(quiz?.questions || []);
       setQuizAnswers({});
       setQuizResults({});
       setCurrentQuestionIndex(0);
@@ -252,7 +258,11 @@ const Dashboard = () => {
       setFabAnimatePulse(false);
       
       showToast('Summary and quiz generated!');
-    }, 2000);
+    } catch (error) {
+      console.error('Error generating content:', error);
+      setGenerating(false);
+      showToast('Failed to generate content. Please try again.', 'error');
+    }
   };
 
   const handleQuizAnswer = (questionIndex, optionIndex) => {
