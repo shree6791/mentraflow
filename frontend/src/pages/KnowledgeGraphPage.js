@@ -190,17 +190,7 @@ const KnowledgeGraphPage = () => {
               </button>
               <button
                 className={`library-tab ${modalTab === 'quiz' ? 'active' : ''}`}
-                onClick={async () => {
-                  setModalTab('quiz');
-                  if (!quizData) {
-                    try {
-                      const response = await axios.get(`${API}/quiz/${encodeURIComponent(selectedTopic.title)}`);
-                      setQuizData(response.data);
-                    } catch (error) {
-                      console.error('Error fetching quiz:', error);
-                    }
-                  }
-                }}
+                onClick={() => setModalTab('quiz')}
               >
                 <Brain size={16} /> Take Quiz
               </button>
