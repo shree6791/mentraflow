@@ -273,7 +273,7 @@ const Dashboard = () => {
     });
   };
 
-  const submitQuiz = () => {
+  const submitQuiz = async () => {
     // Check all possible quiz data sources
     const activeQuiz = libraryQuizData?.questions || recallQuizData || quiz;
     
@@ -283,37 +283,69 @@ const Dashboard = () => {
     }
     
     const results = {};
+    const answers = [];
+    
     activeQuiz.forEach((q, idx) => {
-      results[idx] = quizAnswers[idx] === q.correctIndex;
+      const isCorrect = quizAnswers[idx] === q.correctIndex;
+      results[idx] = isCorrect;
+      answers.push({
+        questionIndex: idx,
+        selectedAnswer: quizAnswers[idx],
+        isCorrect: isCorrect
+      });
     });
+    
     setQuizResults(results);
     setShowQuizResults(true);
     
     const score = Object.values(results).filter(Boolean).length;
     const percentage = Math.round((score / activeQuiz.length) * 100);
     
-    // Update mastery score
-    const change = percentage > masteryScore ? 2 : -1;
-    setMasteryScore(prev => Math.min(100, Math.max(0, prev + change)));
-    setWeeklyChange(prev => prev + change);
+    // Determine nodeId and quizId
+    const nodeId = selectedLibraryItem?.nodeId || currentRecallTask?.nodeId || 't1';
+    const quizId = selectedLibraryItem?.quizId || 'q1';
     
-    // Phase 3: Award XP
-    const xpGain = 10;
-    setXp(prev => prev + xpGain);
-    
-    // Motivational message based on performance
-    let message = '';
-    if (percentage === 100) {
-      message = `🎉 Perfect score! +${xpGain} XP. You've mastered this!`;
-    } else if (percentage >= 80) {
-      message = `✅ Great work! ${percentage}% correct. +${xpGain} XP`;
-    } else if (percentage >= 60) {
-      message = `🧠 Good effort! ${percentage}% correct. +${xpGain} XP. Keep practicing!`;
-    } else {
-      message = `💪 ${percentage}% correct. +${xpGain} XP. Each recall strengthens your memory!`;
+    // Submit quiz results to backend
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/quiz-results`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nodeId: nodeId,
+          quizId: quizId,
+          answers: answers,
+          score: score,
+          percentage: percentage,
+          totalQuestions: activeQuiz.length
+        })
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Quiz result submitted:', data);
+        
+        // Update mastery score
+        const change = percentage > masteryScore ? 2 : -1;
+        setMasteryScore(prev => Math.min(100, Math.max(0, prev + change)));
+        setWeeklyChange(prev => prev + change);
+        
+        // Award XP from backend response
+        setXp(prev => prev + data.xpGained);
+        
+        // Show message from backend
+        showToast(data.message);
+      } else {
+        console.error('Failed to submit quiz result');
+        // Still show local message as fallback
+        showToast(`Quiz completed! ${percentage}% correct`);
+      }
+    } catch (error) {
+      console.error('Error submitting quiz:', error);
+      // Show local message as fallback
+      showToast(`Quiz completed! ${percentage}% correct`);
     }
-    
-    showToast(message);
   };
 
   const nextQuestion = () => {
