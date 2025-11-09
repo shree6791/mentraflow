@@ -2232,10 +2232,10 @@ html {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #EF476F, #FFD166);
   padding: 0.75rem 2rem;
   border-radius: 30px;
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 8px 24px rgba(239, 71, 111, 0.4);
   pointer-events: all;
 }
 
