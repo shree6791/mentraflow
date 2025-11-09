@@ -181,6 +181,16 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
 
     // Get filtered data
     const filteredNodes = getFilteredNodes();
+    
+    // Restore saved positions to filtered nodes
+    filteredNodes.forEach(node => {
+      const savedPos = nodePositionsRef.current.get(node.id);
+      if (savedPos) {
+        node.x = savedPos.x;
+        node.y = savedPos.y;
+      }
+    });
+    
     const filteredLinks = getFilteredLinks(filteredNodes);
 
     // Bounding box function
