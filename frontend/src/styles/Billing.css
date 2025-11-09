@@ -570,7 +570,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  margin-top: 12px; /* Reduced from 16px */
+  margin-top: auto;
   background: white;
   border: 2px solid var(--primary-teal);
   color: var(--primary-teal);
