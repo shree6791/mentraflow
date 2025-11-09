@@ -458,18 +458,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         </div>
       )}
 
-      <div className="graph-controls-bar">
-        <div className="search-container">
-          <Search size={18} />
-          <input
-            type="text"
-            placeholder="Search by topics..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input"
-          />
-        </div>
-      </div>
+      {/* Internal search bar removed - using external search from parent */}
 
       <div className="graph-visualization">
         {isLoading && (
