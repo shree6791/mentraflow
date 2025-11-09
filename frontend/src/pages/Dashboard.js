@@ -1634,7 +1634,7 @@ const Dashboard = () => {
                     <label htmlFor="fab-file-upload" className="upload-label">
                       <Upload size={48} className="upload-icon" />
                       <p className="upload-text">Drag & drop or click to upload</p>
-                      <p className="upload-hint">Supports .txt, .pdf, .doc, .docx</p>
+                      <p className="upload-hint">Best with .txt files (PDF/DOC support coming soon)</p>
                     </label>
                   ) : (
                     <div className="uploaded-file-display">
