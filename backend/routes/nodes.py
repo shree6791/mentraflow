@@ -16,6 +16,7 @@ router = APIRouter()
 
 
 @router.get("/nodes")
+@cached(medium_cache, "get_nodes")
 async def get_nodes(
     time_window: int = Query(21, description="Filter nodes by days (21=3 weeks, 35=5 weeks, 49=7 weeks, 0=all time)"),
     limit: int = Query(100, description="Maximum number of nodes to return")
@@ -33,6 +34,8 @@ async def get_nodes(
     1. Fading topics (retention < 60%) - Highest priority
     2. Medium topics (retention 60-80%) - Medium priority
     3. Strong topics (retention > 80%) - Lower priority
+    
+    Cached: 5 minutes (medium_cache)
     """
     filtered_nodes = NODES
     
