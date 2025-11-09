@@ -291,7 +291,14 @@ const Insights = () => {
                     <h4>{cluster.name}</h4>
                     <div className="cluster-topics-list">
                       {cluster.topics.slice(0, 3).map((topic, i) => (
-                        <span key={i} className="cluster-topic-tag">{topic}</span>
+                        <span 
+                          key={i} 
+                          className="cluster-topic-tag clickable"
+                          onClick={() => handleOpenQuiz(topic)}
+                          title={`Click to take ${topic} quiz`}
+                        >
+                          {topic}
+                        </span>
                       ))}
                     </div>
                     <div className="cluster-stats">
