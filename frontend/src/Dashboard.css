@@ -613,6 +613,44 @@
   height: 16px;
 }
 
+/* MVP Demo: Library Card Progress Bar */
+.item-retention-bar {
+  position: relative;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+  margin-top: 0.75rem;
+  overflow: hidden;
+}
+
+.retention-fill {
+  position: absolute;
+  height: 100%;
+  transition: width 0.5s ease;
+  border-radius: 3px;
+}
+
+.retention-fill.retention-high {
+  background: var(--retention-green);
+}
+
+.retention-fill.retention-medium {
+  background: #FFD166;
+}
+
+.retention-fill.retention-fading {
+  background: var(--neural-coral);
+}
+
+.retention-score {
+  position: absolute;
+  right: 0.5rem;
+  top: -1.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-gray);
+}
+
 /* Library Empty State */
 .library-empty-state {
   text-align: center;
