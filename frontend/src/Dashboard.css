@@ -1098,6 +1098,26 @@
   cursor: not-allowed;
 }
 
+.btn-generate-ready {
+  animation: pulse-glow 2s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(14, 124, 123, 0.4);
+}
+
+.btn-generate-ready:hover {
+  animation: none;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(14, 124, 123, 0.3);
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(14, 124, 123, 0.2);
+  }
+  50% {
+    box-shadow: 0 6px 20px rgba(14, 124, 123, 0.4);
+  }
+}
+
 /* ========================================
    SUMMARY DISPLAY
    ======================================== */
