@@ -16,6 +16,9 @@ def get_stats(nodes):
     total_score = sum(n["score"] for n in nodes)
     avg_retention = total_score // len(nodes) if nodes else 0
     
+    # Calculate total quizzes taken
+    total_quizzes = sum(n.get("quizzesTaken", 0) for n in nodes)
+    
     # Streak days (hardcoded for now, would be user-specific in real app)
     streak_days = 7
     
@@ -33,9 +36,12 @@ def get_stats(nodes):
             "streakDays": streak_days
         },
         "insights": {
-            "totalTopics": len(nodes),
-            "strongRetention": strong_retention,
-            "needingReview": needing_review
+            "totalQuizzes": total_quizzes,
+            "avgScore": avg_retention,
+            "strongTopics": strong_retention,
+            "needsReview": needing_review,
+            "streak": streak_days,
+            "totalNotes": len(nodes)
         },
         "knowledge": {
             "totalNodes": len(nodes),
