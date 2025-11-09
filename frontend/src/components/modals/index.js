@@ -5,3 +5,4 @@ export { default as PriorityModal } from './PriorityModal';
 export { default as FilterModal } from './FilterModal';
 export { default as QuizCustomizationModal } from './QuizCustomizationModal';
 export { default as RecallQuizModal } from './RecallQuizModal';
+export { default as QuizModal } from './QuizModal';
