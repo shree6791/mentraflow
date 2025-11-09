@@ -235,7 +235,7 @@ const Insights = () => {
               <Target size={24} color="#06D6A0" />
             </div>
             <div className="stat-content">
-              <h3>{stats.avgScore}%</h3>
+              <h3>{formatPercentage(stats.avgScore)}</h3>
               <p>Average Score</p>
             </div>
           </div>
