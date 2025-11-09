@@ -242,6 +242,19 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
         .attr('stroke-width', linkD =>
           (linkD.source.id === d.id || linkD.target.id === d.id) ? 3 : 2
         );
+    })
+    // MVP Demo: Add hover tooltip for quick info
+    .on('mouseover', function(event, d) {
+      const containerBounds = containerRef.current.getBoundingClientRect();
+      setHoverTooltip({
+        visible: true,
+        x: event.clientX - containerBounds.left + 10,
+        y: event.clientY - containerBounds.top - 10,
+        data: d
+      });
+    })
+    .on('mouseout', function() {
+      setHoverTooltip({ visible: false, x: 0, y: 0, data: null });
     });
 
     // Click outside to close tooltip
