@@ -15,7 +15,9 @@ const GeneratedContentModal = ({
   handleQuizAnswer,
   previousQuestion,
   nextQuestion,
-  submitQuiz
+  submitQuiz,
+  onRetake,
+  onCloseResults
 }) => {
   if (!show || !summary || !quiz) return null;
 
