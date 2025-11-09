@@ -34,6 +34,7 @@ const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('upload');
   const [uploadedContent, setUploadedContent] = useState('');
   const [uploadedFileName, setUploadedFileName] = useState('');
+  const [processingFile, setProcessingFile] = useState(false);
   const [youtubeUrl, setYoutubeUrl] = useState('');
   const [summary, setSummary] = useState(null);
   const [quiz, setQuiz] = useState(null);
