@@ -4,6 +4,7 @@ import Carousel from '../components/Carousel';
 import PricingCard from '../components/PricingCard';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Button from '../components/Button';
 import { getAllPlans } from '../constants/pricingPlans';
 import { useModal } from '../hooks';
 
