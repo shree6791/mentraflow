@@ -333,7 +333,13 @@ const Insights = () => {
                   </div>
                   <button 
                     className={`rec-action-btn ${rec.priority}`}
-                    onClick={() => handleOpenQuiz(rec.nodeId || rec.topic)}
+                    onClick={() => {
+                      if (rec.type === 'connection') {
+                        navigate('/knowledge-graph');
+                      } else {
+                        handleOpenQuiz(rec.nodeId || rec.topic);
+                      }
+                    }}
                   >
                     {rec.action}
                   </button>
