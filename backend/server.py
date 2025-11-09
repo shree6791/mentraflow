@@ -39,12 +39,11 @@ api_router = APIRouter(prefix="/api")
 # Include modular routes
 api_router.include_router(health.router, tags=["Health"])
 api_router.include_router(nodes.router, tags=["Nodes"])
-api_router.include_router(library.router, tags=["Library"])
+api_router.include_router(dashboard.router, tags=["Dashboard"])
 api_router.include_router(stats.router, tags=["Statistics"])
 api_router.include_router(recall.router, tags=["Recall Tasks"])
 api_router.include_router(insights.router, tags=["Insights"])
 api_router.include_router(quiz.router, tags=["Quiz"])
-api_router.include_router(knowledge.router, tags=["Knowledge Capture"])
 
 # Include auth router
 api_router.include_router(auth_router, tags=["Authentication"])
