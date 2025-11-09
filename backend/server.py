@@ -68,12 +68,7 @@ app.add_middleware(CacheMiddleware)           # Cache responses
 app.add_middleware(RateLimitMiddleware)       # Rate limiting
 app.add_middleware(RequestLoggingMiddleware)  # Request logging
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
+# Logging already configured via setup_logging() above
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
