@@ -7,7 +7,7 @@ from auth import auth_router, set_database
 from routes import google_auth
 
 # Import modular routes
-from routes import health, nodes, dashboard, stats, recall, insights, quiz, cache_admin
+from routes import health, nodes, dashboard, stats, recall, insights, quiz, cache_admin, mcp
 
 # Import middleware
 from middleware.logging import RequestLoggingMiddleware
