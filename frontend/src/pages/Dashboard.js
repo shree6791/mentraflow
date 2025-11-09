@@ -937,7 +937,13 @@ const Dashboard = () => {
 
       {/* MVP Demo: Badges Showcase */}
       <div className="badges-showcase">
-        <h3>🏆 Achievements</h3>
+        <div className="section-title-with-tooltip">
+          <h3>🏆 Achievements</h3>
+          <div className="info-tooltip-wrapper">
+            <Info size={16} className="info-icon" />
+            <div className="info-tooltip">Track your learning milestones and unlock rewards</div>
+          </div>
+        </div>
         <div className="badges-grid">
           {badges.map(badge => (
             <div key={badge.id} className={`badge-card ${badge.unlocked ? 'unlocked' : 'locked'}`}>
