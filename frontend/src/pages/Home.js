@@ -56,12 +56,12 @@ const Home = () => {
             But it fades. MentraFlow brings that aha moment back — right when it's about to fade.
           </p>
           <div className="hero-cta">
-            <button className="btn-primary" onClick={scrollToCta}>
+            <Button variant="primary" onClick={scrollToCta}>
               Try MentraFlow
-            </button>
-            <button className="btn-secondary" onClick={scrollToHow}>
+            </Button>
+            <Button variant="secondary" onClick={scrollToHow}>
               How It Works
-            </button>
+            </Button>
           </div>
         </div>
       </section>
