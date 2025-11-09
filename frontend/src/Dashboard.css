@@ -4029,6 +4029,28 @@
     padding: 1rem;
   }
   
+  /* Badges - Horizontal Carousel on Mobile */
+  .badges-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    grid-template-columns: none;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    padding-bottom: 0.5rem;
+  }
+  
+  .badges-grid::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
+  
+  .badge-card {
+    min-width: 160px;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+  
   .priority-section {
     padding: 1.5rem;
   }
