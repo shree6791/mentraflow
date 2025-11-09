@@ -55,7 +55,7 @@ const Home = () => {
           </p>
           <div className="hero-cta">
             <button className="btn-primary" onClick={scrollToCta}>
-              Experience the Demo
+              Try MentraFlow
             </button>
             <button className="btn-secondary" onClick={scrollToHow}>
               How It Works
