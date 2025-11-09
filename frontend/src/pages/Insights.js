@@ -197,7 +197,7 @@ const Insights = () => {
 
   const calculateQuizScore = () => {
     const correctCount = Object.values(quizResults).filter(Boolean).length;
-    return Math.round((correctCount / quizData.quiz.length) * 100);
+    return Math.round((correctCount / quizData.questions.length) * 100);
   };
 
   if (loading) {
