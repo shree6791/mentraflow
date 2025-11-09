@@ -17,6 +17,11 @@ class KnowledgeCaptureRequest(BaseModel):
     content: str
     title: Optional[str] = None
     tags: Optional[List[str]] = []
+    
+    # Quiz customization options
+    questionCount: Optional[int] = 5  # Default: 5 questions
+    difficulty: Optional[str] = "balanced"  # Default: balanced (easy, balanced, advanced)
+    focusArea: Optional[str] = "all"  # Default: all topics
 
 
 class SummaryResponse(BaseModel):
