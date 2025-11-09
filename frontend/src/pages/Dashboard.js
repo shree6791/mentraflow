@@ -1661,7 +1661,13 @@ const Dashboard = () => {
               )}
 
               <button 
-                className="btn-primary btn-generate"
+                className={`btn-primary btn-generate ${
+                  (activeTab === 'youtube' && youtubeUrl) || 
+                  (activeTab === 'upload' && uploadedFileName) || 
+                  (activeTab === 'paste' && uploadedContent) 
+                    ? 'btn-generate-ready' 
+                    : ''
+                }`}
                 onClick={generateSummaryAndQuiz}
                 disabled={generating || (activeTab === 'youtube' ? !youtubeUrl : !uploadedContent)}
                 style={{marginTop: '1rem'}}
