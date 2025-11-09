@@ -127,7 +127,7 @@ async def get_node_detail(title: str):
     summary = SUMMARY_CONTENT.get(summary_id) if summary_id else None
     
     # Build comprehensive response
-    return {
+    result = {
         "node": node,
         "summary": summary,
         "quiz": {
@@ -141,3 +141,8 @@ async def get_node_detail(title: str):
             "lastReview": node.get("lastReview", "Never")
         }
     }
+    
+    # Store in cache
+    medium_cache[cache_key] = result
+    
+    return result
