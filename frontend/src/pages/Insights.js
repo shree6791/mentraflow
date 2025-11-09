@@ -260,16 +260,28 @@ const Insights = () => {
         <div className="activity-section">
           <h2>Recommendations</h2>
           <div className="recommendations-list">
-            {recommendations.map((rec, idx) => (
-              <div key={idx} className={`recommendation-item ${rec.priority}`}>
-                <div className="rec-icon">
-                  {rec.priority === 'high' && '🔴'}
-                  {rec.priority === 'medium' && '🟡'}
-                  {rec.priority === 'success' && '🟢'}
+            {recommendations.length > 0 ? (
+              recommendations.map((rec) => (
+                <div key={rec.id} className={`recommendation-item ${rec.priority}`}>
+                  <div className="rec-icon">
+                    {rec.type === 'review' && '🔴'}
+                    {rec.type === 'practice' && '🟢'}
+                    {rec.type === 'connection' && '🔗'}
+                  </div>
+                  <div className="rec-content">
+                    <h4>{rec.title}</h4>
+                    <p>{rec.description}</p>
+                  </div>
+                  <button className={`rec-action-btn ${rec.priority}`}>
+                    {rec.action}
+                  </button>
                 </div>
-                <p>{rec.text}</p>
+              ))
+            ) : (
+              <div className="empty-state">
+                <p>✨ You're doing great! No urgent recommendations at the moment.</p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </AppLayout>
