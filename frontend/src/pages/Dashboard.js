@@ -702,6 +702,40 @@ const Dashboard = () => {
   const fadingCount = topics.filter(t => t.status === 'fading').length;
   const mediumCount = topics.filter(t => t.status === 'medium').length;
 
+  // MVP Demo: Badge calculations
+  const totalQuizzes = libraryItems.filter(item => item.quizScore !== null).length;
+  const avgScore = libraryItems.reduce((acc, item) => acc + (item.quizScore || 0), 0) / Math.max(libraryItems.length, 1);
+
+  const badges = [
+    {
+      id: 'week-warrior',
+      name: 'Week Warrior',
+      description: '7-day streak',
+      emoji: '🔥',
+      current: streak,
+      target: 7,
+      unlocked: streak >= 7
+    },
+    {
+      id: 'quiz-master',
+      name: 'Quiz Master',
+      description: '20 quizzes',
+      emoji: '🎓',
+      current: totalQuizzes,
+      target: 20,
+      unlocked: totalQuizzes >= 20
+    },
+    {
+      id: 'expert',
+      name: 'Expert',
+      description: '80% average',
+      emoji: '💯',
+      current: Math.round(avgScore),
+      target: 80,
+      unlocked: avgScore >= 80
+    }
+  ];
+
   if (loading) {
     return (
       <div className="dashboard-loading">
