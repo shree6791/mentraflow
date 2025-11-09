@@ -260,13 +260,15 @@ const Insights = () => {
         {/* Knowledge Clusters - Moved up for better hierarchy */}
         <div className="activity-section">
           <div className="section-header">
-            <h2>Knowledge Clusters</h2>
+            <div className="section-title-group">
+              <h2>Knowledge Clusters</h2>
+              <p className="section-description">Related topics you've mastered together</p>
+            </div>
             <button className="view-graph-btn" onClick={() => navigate('/knowledge-graph')}>
               <BookOpen size={16} />
               View Knowledge Graph
             </button>
           </div>
-          <p className="section-description">Related topics you've mastered together</p>
           
           <div className="clusters-grid">
             {knowledgeClusters.map((cluster, idx) => {
