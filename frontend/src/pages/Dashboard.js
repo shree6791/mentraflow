@@ -1579,6 +1579,12 @@ const Dashboard = () => {
                 >
                   <PenTool size={18} /> Paste Text
                 </button>
+                <button 
+                  className={`tab ${activeTab === 'youtube' ? 'active' : ''}`}
+                  onClick={() => setActiveTab('youtube')}
+                >
+                  <Video size={18} /> YouTube
+                </button>
               </div>
 
               {activeTab === 'upload' ? (
@@ -1596,7 +1602,7 @@ const Dashboard = () => {
                     <p className="upload-hint">Supports .txt, .pdf, .doc, .docx</p>
                   </label>
                 </div>
-              ) : (
+              ) : activeTab === 'paste' ? (
                 <div className="paste-zone">
                   <textarea
                     placeholder="Paste your notes, articles, or any text you want to remember..."
@@ -1604,6 +1610,22 @@ const Dashboard = () => {
                     onChange={(e) => setUploadedContent(e.target.value)}
                     rows={10}
                   />
+                </div>
+              ) : (
+                <div className="youtube-zone">
+                  <div className="youtube-input-container">
+                    <Video size={24} className="youtube-icon" />
+                    <input
+                      type="url"
+                      placeholder="Enter YouTube URL (e.g., https://www.youtube.com/watch?v=...)"
+                      value={youtubeUrl}
+                      onChange={(e) => setYoutubeUrl(e.target.value)}
+                      className="youtube-input"
+                    />
+                  </div>
+                  <p className="youtube-hint">
+                    Paste a YouTube video link to generate a summary and quiz from the video content
+                  </p>
                 </div>
               )}
 
