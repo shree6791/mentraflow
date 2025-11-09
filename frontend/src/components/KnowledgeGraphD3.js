@@ -338,7 +338,24 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
     return () => {
       simulation.stop();
     };
-  }, [activeFilters, searchQuery, expandedNode, onTakeQuizRef, onViewSummaryRef, dimensions]);
+  }, [activeFilters, searchQuery, expandedNode, onTakeQuizRef, onViewSummaryRef]);
+
+  // Handle dimension changes separately without full redraw
+  useEffect(() => {
+    if (!svgRef.current || !simulationRef.current) return;
+    
+    const svg = d3.select(svgRef.current);
+    svg.attr('width', dimensions.width)
+       .attr('height', dimensions.height);
+    
+    // Restart simulation with new dimensions
+    if (simulationRef.current) {
+      simulationRef.current
+        .force('center', d3.forceCenter(dimensions.width / 2, dimensions.height / 2))
+        .alpha(0.3)
+        .restart();
+    }
+  }, [dimensions]);
 
   const handleRecenter = () => {
     const svg = d3.select(svgRef.current);
