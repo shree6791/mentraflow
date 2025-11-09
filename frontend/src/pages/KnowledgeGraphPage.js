@@ -12,6 +12,8 @@ const KnowledgeGraphPage = () => {
   
   const [topics, setTopics] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [timeWindow, setTimeWindow] = useState(21); // Default: 3 weeks
+  const [nodeStats, setNodeStats] = useState({ total: 0, showing: 0 });
   
   // Topic Detail Modal State
   const [selectedTopic, setSelectedTopic] = useState(null);
@@ -25,8 +27,17 @@ const KnowledgeGraphPage = () => {
   useEffect(() => {
     const fetchTopics = async () => {
       try {
-        const response = await axios.get(`${API}/nodes`);
+        const response = await axios.get(`${API}/nodes`, {
+          params: {
+            time_window: timeWindow,
+            limit: 100
+          }
+        });
         setTopics(response.data?.nodes || []);
+        setNodeStats({
+          total: response.data?.total || 0,
+          showing: response.data?.showing || 0
+        });
         setLoading(false);
       } catch (error) {
         console.error('Error fetching nodes:', error);
@@ -36,7 +47,7 @@ const KnowledgeGraphPage = () => {
     };
 
     fetchTopics();
-  }, [API]);
+  }, [API, timeWindow]);
 
   // Modal Handlers  
   const openTopicModal = async (topic, tab = 'summary') => {
