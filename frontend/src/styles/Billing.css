@@ -339,17 +339,16 @@
 }
 
 .team-selector label {
-  display: block;
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--text-dark);
-  margin-bottom: 0.75rem;
+  margin-right: 1rem;
+  white-space: nowrap;
 }
 
 .quantity-selector {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0.5rem;
 }
 
