@@ -433,7 +433,8 @@
   }
 
   .topics-grid,
-  .clusters-grid {
+  .clusters-grid,
+  .recommendations-grid {
     grid-template-columns: 1fr;
   }
 
