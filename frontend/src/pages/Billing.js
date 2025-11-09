@@ -40,7 +40,7 @@ const Billing = () => {
     } else {
       navigate(`/payment?plan=${planId}`);
     }
-    setShowUpgradeModal(false);
+    upgradeModal.close();
   };
 
   return (
