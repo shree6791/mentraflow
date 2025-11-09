@@ -180,9 +180,9 @@ const Home = () => {
               We're putting the finishing touches on MentraFlow's demo experience.
               Join our early access list and be the first to experience memory infrastructure that actually works.
             </p>
-            <button className="btn-primary" onClick={modal.close}>
+            <Button variant="primary" onClick={modal.close}>
               Got it!
-            </button>
+            </Button>
           </div>
         </div>
       )}
