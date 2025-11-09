@@ -217,15 +217,14 @@ const LoginContent = () => {
               <span className="badge-text">Coming Soon</span>
             </div>
             <form className="auth-form disabled-form" onSubmit={(e) => e.preventDefault()}>
-              <div className="form-field">
-                <input
-                  type="email"
-                  id="email"
-                  placeholder=" "
-                  disabled
-                />
-                <label htmlFor="email">Email</label>
-              </div>
+              <FormInput
+                type="email"
+                name="email"
+                label="Email"
+                value=""
+                onChange={() => {}}
+                disabled
+              />
 
               <div className="form-field">
                 <input
