@@ -311,7 +311,10 @@ const Dashboard = () => {
     } catch (error) {
       console.error('Error generating content:', error);
       setGenerating(false);
-      showToast('Failed to generate content. Please try again.', 'error');
+      
+      // Show specific error message from backend if available
+      const errorMessage = error.response?.data?.detail || 'Failed to generate content. Please try again.';
+      showToast(errorMessage, 'error');
     }
   };
 
