@@ -154,7 +154,7 @@ const Pricing = () => {
               </li>
             </ul>
             <button className="plan-cta" onClick={() => setShowModal(true)}>
-              Request Demo
+              Schedule Consultation
             </button>
           </div>
         </Carousel>
