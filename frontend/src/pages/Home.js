@@ -21,11 +21,11 @@ const Home = () => {
   // ESC key to close modal
   useEffect(() => {
     const handleEsc = (e) => {
-      if (e.key === 'Escape' && showModal) setShowModal(false);
+      if (e.key === 'Escape' && modal.isOpen) modal.close();
     };
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
-  }, [showModal]);
+  }, [modal]);
 
   const scrollToCta = () => {
     document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' });
