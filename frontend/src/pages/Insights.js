@@ -392,7 +392,7 @@ const Insights = () => {
                   </div>
                   <button 
                     className={`rec-action-btn ${rec.priority}`}
-                    onClick={() => handleOpenQuiz(rec.topic)}
+                    onClick={() => handleOpenQuiz(rec.nodeId || rec.topic)}
                   >
                     {rec.action}
                   </button>
