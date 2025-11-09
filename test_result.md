@@ -162,15 +162,18 @@ frontend:
 
   - task: "Prominent Yellow Borders for Review Soon Cards"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/Dashboard.css"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: "NA"
         - agent: "main"
         - comment: "IMPLEMENTED: Enhanced retention status borders for library cards. Changed border width from 3px to 4px for all retention states. Added subtle box shadows for better prominence: Fading cards (red #FF6B6B with rgba shadow), Review Soon/Medium cards (yellow #FFD166 with stronger rgba(255, 209, 102, 0.15) shadow), Strong cards (green #06D6A0 with light shadow). Yellow border now highly visible and matches app color palette (#FFD166). Background tints slightly increased for medium cards."
+        - working: true
+        - agent: "testing"
+        - comment: "✅ VERIFIED WORKING: Prominent yellow borders for review soon cards are displaying correctly. During quiz flow testing, observed library cards with proper color-coded retention borders - red for fading, yellow for review soon/medium, and green for strong retention. The 4px border width and enhanced box shadows provide excellent visual prominence. Yellow borders are highly visible and match the app's color palette perfectly."
   
   - task: "Dashboard Card Spacing Alignment"
     implemented: true
