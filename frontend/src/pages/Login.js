@@ -226,22 +226,23 @@ const LoginContent = () => {
                 disabled
               />
 
-              <div className="form-field">
-                <input
-                  type="password"
-                  id="password"
-                  placeholder=" "
-                  disabled
-                />
-                <label htmlFor="password">Password</label>
-                <button
-                  type="button"
-                  className="password-toggle"
-                  disabled
-                >
-                  <Eye size={20} />
-                </button>
-              </div>
+              <FormInput
+                type="password"
+                name="password"
+                label="Password"
+                value=""
+                onChange={() => {}}
+                disabled
+                rightElement={
+                  <button
+                    type="button"
+                    className="password-toggle"
+                    disabled
+                  >
+                    <Eye size={20} />
+                  </button>
+                }
+              />
 
               <div className="form-options">
                 <label className="remember-me">
