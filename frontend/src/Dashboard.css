@@ -331,22 +331,16 @@
   }
 }
 
+/* Desktop - 3 Columns */
 .library-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   margin-bottom: 1rem;
 }
 
-/* Tablet Portrait & Mobile - Single Column */
-@media (max-width: 1024px) {
-  .library-list {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Tablet Landscape - 2 Columns */
-@media (min-width: 1025px) and (max-width: 1366px) {
+/* iPad/Tablet - 2 Columns */
+@media (max-width: 1200px) {
   .library-list {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.875rem;
