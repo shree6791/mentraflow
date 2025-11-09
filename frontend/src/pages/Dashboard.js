@@ -210,13 +210,25 @@ const Dashboard = () => {
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setUploadedContent(event.target.result);
+      // Check file type
+      const fileExtension = file.name.split('.').pop().toLowerCase();
+      
+      // Only .txt files can be read as text directly
+      if (fileExtension === 'txt') {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          setUploadedContent(event.target.result);
+          setUploadedFileName(file.name);
+          showToast('File uploaded successfully!');
+        };
+        reader.readAsText(file);
+      } else {
+        // For PDF, DOC, DOCX - show a message
+        // In production, these would be processed server-side
         setUploadedFileName(file.name);
-        showToast('File uploaded successfully!');
-      };
-      reader.readAsText(file);
+        setUploadedContent(`[File uploaded: ${file.name}]\n\nNote: PDF, DOC, and DOCX files require server-side processing. In this demo, please use .txt files or paste text directly for full functionality.`);
+        showToast(`${file.name} uploaded. Note: Only .txt files are fully supported in demo mode.`, 'info');
+      }
     }
   };
 
