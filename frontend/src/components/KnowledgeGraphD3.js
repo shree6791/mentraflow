@@ -152,6 +152,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       });
 
     svg.call(zoomBehavior);
+    zoomBehaviorRef.current = zoomBehavior;
 
     // Create main group for zooming/panning
     const g = svg.append('g').attr('class', 'graph-container');
