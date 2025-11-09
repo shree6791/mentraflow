@@ -4,15 +4,14 @@ Endpoints for quiz submission and results tracking
 """
 
 from fastapi import APIRouter
-from pydantic import BaseModel, Field
-from typing import List
-from datetime import datetime, timezone
 from motor.motor_asyncio import AsyncIOMotorClient
+from datetime import datetime, timezone
 import os
 import uuid
 import logging
 from db.dashboard_data import NODES
 from validation.validators import QuizValidator
+from models.quiz import QuizAnswer, QuizResultSubmit, QuizResultResponse
 
 router = APIRouter()
 
@@ -20,28 +19,6 @@ router = APIRouter()
 MONGO_URL = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
 client = AsyncIOMotorClient(MONGO_URL)
 db = client.knowledge_app
-
-# Models
-class QuizAnswer(BaseModel):
-    questionIndex: int
-    selectedAnswer: int
-    isCorrect: bool
-
-class QuizResultSubmit(BaseModel):
-    nodeId: str
-    quizId: str
-    answers: List[QuizAnswer]
-    score: int
-    percentage: int
-    totalQuestions: int
-
-class QuizResultResponse(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    success: bool
-    message: str
-    xpGained: int
-    updatedScore: int
-    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 @router.post("/quiz-results", response_model=QuizResultResponse)
