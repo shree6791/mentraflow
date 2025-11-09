@@ -163,6 +163,9 @@ const Dashboard = () => {
           dashboardService.getStats()
         ]);
 
+        // Add a small delay to ensure smooth transition
+        await new Promise(resolve => setTimeout(resolve, 300));
+
         // Set data from API responses
         setLibraryItems(libraryData?.items || []);
         setTopics(nodesData?.nodes || []);
@@ -179,6 +182,7 @@ const Dashboard = () => {
         setLoading(false);
       } catch (error) {
         console.error('Error fetching dashboard data:', error);
+        showToast('Failed to load dashboard data. Please refresh.', 'error');
         setLoading(false);
       }
     };
