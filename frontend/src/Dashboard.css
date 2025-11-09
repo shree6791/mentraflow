@@ -2556,19 +2556,12 @@
    LIBRARY ITEM DETAIL MODAL
    ======================================== */
 
+/* Library Detail Modal - Uses base, no overrides needed */
 .library-detail-modal {
-  max-width: 800px;
-  width: 90%;
-  max-height: 85vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-subtitle {
-  font-size: 0.875rem;
-  color: var(--text-gray);
-  margin: 0.25rem 0 0 0;
+  /* Inherits all base modal properties */
+  /* max-width: 800px - from base */
+  /* width: 90% - from base */
+  /* max-height: 85vh - from base */
 }
 
 /* Tabs */
