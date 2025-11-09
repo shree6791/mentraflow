@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CreditCard, Calendar, TrendingUp, X, Check, ArrowLeft } from 'lucide-react';
+import { CreditCard, Calendar, TrendingUp, Check } from 'lucide-react';
 import AppLayout from '../components/AppLayout';
-import Carousel from '../components/Carousel';
+import { UpgradeModal } from '../components/modals';
 import '../styles/Billing.css';
 
 const Billing = () => {
