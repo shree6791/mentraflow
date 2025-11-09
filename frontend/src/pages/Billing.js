@@ -148,8 +148,8 @@ const Billing = () => {
 
       {/* Upgrade Modal */}
       <UpgradeModal
-        isOpen={showUpgradeModal}
-        onClose={() => setShowUpgradeModal(false)}
+        isOpen={upgradeModal.isOpen}
+        onClose={upgradeModal.close}
         plans={plans}
         teamMemberCount={teamMemberCount}
         setTeamMemberCount={setTeamMemberCount}
