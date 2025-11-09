@@ -1051,33 +1051,27 @@ const Dashboard = () => {
                       <h3>{item.title}</h3>
                     </div>
                     
-                    {/* Status Chips Row */}
-                    <div className="library-item-meta-row">
-                      {item.retention && (
-                        <span className={`retention-chip retention-chip-${item.retention}`}>
-                          {item.retention === 'high' && '🟢 Strong'}
-                          {item.retention === 'medium' && '🟡 Review Soon'}
-                          {item.retention === 'fading' && '🔴 Fading'}
-                        </span>
-                      )}
+                    {/* Unified Meta Row: Chips (left) + Links (right) */}
+                    <div className="library-item-unified-row">
+                      {/* Left side: Status chips */}
+                      <div className="chips-container">
+                        {item.retention && (
+                          <span className={`retention-chip retention-chip-${item.retention}`}>
+                            {item.retention === 'high' && '🟢 Strong'}
+                            {item.retention === 'medium' && '🟡 Review Soon'}
+                            {item.retention === 'fading' && '🔴 Fading'}
+                          </span>
+                        )}
+                        
+                        {item.nextReview && (
+                          <span className={`countdown-chip ${item.nextReviewDays < 0 ? 'overdue' : item.nextReviewDays <= 1 ? 'urgent' : 'normal'}`}>
+                            <Clock size={12} />
+                            {item.nextReview}
+                          </span>
+                        )}
+                      </div>
                       
-                      {item.nextReview && (
-                        <span className={`countdown-chip ${item.nextReviewDays < 0 ? 'overdue' : item.nextReviewDays <= 1 ? 'urgent' : 'normal'}`}>
-                          <Clock size={12} />
-                          {item.nextReview}
-                        </span>
-                      )}
-                    </div>
-                    
-                    {/* Filename Row */}
-                    <div className="library-item-filename-row">
-                      <span className="filename-text">
-                        {item.filename}
-                      </span>
-                    </div>
-                    
-                    {/* Quick Action Links Row */}
-                    <div className="library-item-actions-row">
+                      {/* Right side: Quick action links */}
                       <div className="quick-action-links">
                         <button className="link-btn-compact" onClick={() => openLibraryItem(item, 'summary')}>
                           <Eye size={12} /> Summary
