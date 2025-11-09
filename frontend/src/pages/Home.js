@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import Carousel from '../components/Carousel';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useModal } from '../hooks';
 
 const Home = () => {
-  const [showModal, setShowModal] = useState(false);
+  const modal = useModal(false);
 
   // Fade-in on view
   useEffect(() => {
