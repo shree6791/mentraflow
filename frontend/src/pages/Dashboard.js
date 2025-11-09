@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { LogOut, User, Upload, FileText, BarChart3, Brain, CheckCircle, XCircle, ChevronDown, ChevronUp, Menu, X, Search, Filter, Eye, PenTool, TrendingUp, TrendingDown, Clock, Settings, CreditCard, Video, Loader, Target } from 'lucide-react';
+import { LogOut, User, Upload, FileText, BarChart3, Brain, CheckCircle, XCircle, ChevronDown, ChevronUp, Menu, X, Search, Filter, Eye, PenTool, TrendingUp, TrendingDown, Clock, Settings, CreditCard, Video, Loader, Target, Info } from 'lucide-react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import AppLayout from '../components/AppLayout';
