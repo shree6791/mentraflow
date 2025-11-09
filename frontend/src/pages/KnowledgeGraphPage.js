@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Filter, Search } from 'lucide-react';
-import axios from 'axios';
+import { graphService } from '../services/api';
 import AppLayout from '../components/AppLayout';
 import KnowledgeGraphD3 from '../components/KnowledgeGraphD3';
 import { QuizModal } from '../components/modals';
