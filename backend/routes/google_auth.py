@@ -90,14 +90,15 @@ async def google_auth_callback(request: Request, response: Response):
             import uuid
             user_id = str(uuid.uuid4())
             
+            now = datetime.now(timezone.utc).isoformat()
             user_doc = {
                 "_id": user_id,
                 "google_id": google_id,
                 "email": email,
                 "name": name,
                 "picture": picture,
-                "created_at": datetime.now(timezone.utc),
-                "last_login": datetime.now(timezone.utc)
+                "created_at": now,
+                "last_login": now
             }
             
             await db.users.insert_one(user_doc)
