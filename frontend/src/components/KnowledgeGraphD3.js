@@ -331,8 +331,31 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       d.fy = Math.max(padding, Math.min(height - padding, event.y));
     }
 
-    // Loading complete
-    setTimeout(() => setIsLoading(false), 500);
+    // Center the graph on initial load
+    setTimeout(() => {
+      const bounds = g.node().getBBox();
+      const fullWidth = bounds.width;
+      const fullHeight = bounds.height;
+      const midX = bounds.x + fullWidth / 2;
+      const midY = bounds.y + fullHeight / 2;
+      
+      if (fullWidth && fullHeight) {
+        const scale = 0.9 / Math.max(fullWidth / width, fullHeight / height);
+        const translate = [
+          width / 2 - scale * midX,
+          height / 2 - scale * midY
+        ];
+        
+        svg.transition()
+          .duration(750)
+          .call(
+            zoomBehavior.transform,
+            d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
+          );
+      }
+      
+      setIsLoading(false);
+    }, 1000);
 
     // Cleanup
     return () => {
