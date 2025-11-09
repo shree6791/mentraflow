@@ -383,11 +383,13 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
   }, [dimensions]);
 
   const handleRecenter = () => {
+    if (!svgRef.current || !zoomBehaviorRef.current) return;
+    
     const svg = d3.select(svgRef.current);
     svg.transition()
       .duration(750)
       .call(
-        d3.zoom().transform,
+        zoomBehaviorRef.current.transform,
         d3.zoomIdentity
       );
     
@@ -403,17 +405,21 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
   };
 
   const handleZoomIn = () => {
+    if (!svgRef.current || !zoomBehaviorRef.current) return;
+    
     const svg = d3.select(svgRef.current);
     svg.transition().duration(300).call(
-      d3.zoom().scaleBy,
+      zoomBehaviorRef.current.scaleBy,
       1.3
     );
   };
 
   const handleZoomOut = () => {
+    if (!svgRef.current || !zoomBehaviorRef.current) return;
+    
     const svg = d3.select(svgRef.current);
     svg.transition().duration(300).call(
-      d3.zoom().scaleBy,
+      zoomBehaviorRef.current.scaleBy,
       0.7
     );
   };
