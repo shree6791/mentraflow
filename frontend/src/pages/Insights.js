@@ -178,7 +178,12 @@ const Insights = () => {
             </div>
             <div className="topics-grid">
               {performanceData.strong.map((topic, idx) => (
-                <div key={idx} className="topic-card strong">
+                <div 
+                  key={idx} 
+                  className="topic-card strong clickable" 
+                  onClick={() => handleOpenQuiz(topic.topic)}
+                  title="Click to take quiz"
+                >
                   <div className="topic-header">
                     <h4>{topic.topic}</h4>
                     <span className="score-badge strong">{topic.score}%</span>
