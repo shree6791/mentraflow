@@ -142,10 +142,10 @@ const Pricing = () => {
       <Footer />
 
       {/* Request Demo Modal */}
-      {showModal && (
-        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+      {modal.isOpen && (
+        <div className="modal-overlay" onClick={modal.close}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setShowModal(false)}>
+            <button className="modal-close" onClick={modal.close}>
               ×
             </button>
             <h2>Request Teams Demo</h2>
@@ -153,7 +153,7 @@ const Pricing = () => {
               Let's explore how MentraFlow can scale your team's learning infrastructure.
               We'll reach out within 24 hours.
             </p>
-            <button className="btn-primary" onClick={() => setShowModal(false)}>
+            <button className="btn-primary" onClick={modal.close}>
               Got it!
             </button>
           </div>
