@@ -116,13 +116,14 @@ async def google_auth_callback(request: Request, response: Response):
         
         # Create JWT token
         jwt_token = create_jwt_token(user_id, email)
+        jwt_config = get_jwt_config()
         
         # Store session in database for tracking (optional but useful)
         now = datetime.now(timezone.utc)
         session_doc = {
             "user_id": user_id,
             "session_token": jwt_token,
-            "expires_at": (now + timedelta(days=JWT_EXPIRATION_DAYS)).isoformat(),
+            "expires_at": (now + timedelta(days=jwt_config["expiration_days"])).isoformat(),
             "created_at": now.isoformat()
         }
         await db.user_sessions.insert_one(session_doc)
@@ -134,7 +135,7 @@ async def google_auth_callback(request: Request, response: Response):
             httponly=True,
             secure=True,  # Always use HTTPS
             samesite="none",  # Allow cross-site cookies
-            max_age=JWT_EXPIRATION_DAYS * 24 * 60 * 60,
+            max_age=jwt_config["expiration_days"] * 24 * 60 * 60,
             path="/"
         )
         
