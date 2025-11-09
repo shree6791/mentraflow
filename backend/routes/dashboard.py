@@ -30,6 +30,10 @@ async def get_library_items():
     return {"items": DOCUMENTS}
 
 
+# ========================================
+# KNOWLEDGE CAPTURE & GENERATION
+# ========================================
+
 @router.post("/generate", response_model=GenerateResponse)
 async def generate_summary_and_quiz(request: KnowledgeCaptureRequest):
     """
