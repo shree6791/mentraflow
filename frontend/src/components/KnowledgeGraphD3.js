@@ -70,10 +70,10 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
   // Helper functions
   const getNodeColor = (state) => {
     switch(state) {
-      case 'high': return '#06D6A0'; // Green
-      case 'medium': return '#FFD166'; // Yellow
-      case 'fading': return '#EF476F'; // Red
-      default: return '#0E7C7B';
+      case 'high': return COLORS.retention.green; // Green
+      case 'medium': return COLORS.retention.yellow; // Yellow
+      case 'fading': return COLORS.retention.red; // Red
+      default: return COLORS.primary.teal;
     }
   };
 
