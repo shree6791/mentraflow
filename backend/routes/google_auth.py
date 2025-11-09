@@ -28,13 +28,14 @@ JWT_EXPIRATION_DAYS = int(os.getenv("JWT_EXPIRATION_DAYS", 7))
 
 def create_jwt_token(user_id: str, email: str) -> str:
     """Create JWT token for user"""
-    expiration = datetime.now(timezone.utc) + timedelta(days=JWT_EXPIRATION_DAYS)
+    now = datetime.now(timezone.utc)
+    expiration = now + timedelta(days=JWT_EXPIRATION_DAYS)
     
     payload = {
         "user_id": user_id,
         "email": email,
-        "exp": expiration,
-        "iat": datetime.now(timezone.utc)
+        "exp": int(expiration.timestamp()),  # Convert to Unix timestamp
+        "iat": int(now.timestamp())  # Convert to Unix timestamp
     }
     
     token = jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
