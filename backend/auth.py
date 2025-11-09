@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, Response, Request, Cookie
 from typing import Optional
 import httpx
 from datetime import datetime, timezone, timedelta
-from models import User, UserSession, SessionData, UserResponse
+from models.user import User, UserSession, SessionData, UserResponse
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
