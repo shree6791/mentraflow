@@ -6,16 +6,10 @@ Endpoints for application health and status monitoring
 from fastapi import APIRouter
 from typing import List
 from datetime import datetime
-from motor.motor_asyncio import AsyncIOMotorClient
-import os
 from models.health import StatusCheck, StatusCheckCreate
+from db.connection import db
 
 router = APIRouter()
-
-# MongoDB connection
-MONGO_URL = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
-client = AsyncIOMotorClient(MONGO_URL)
-db = client.knowledge_app
 
 
 @router.get("/")
