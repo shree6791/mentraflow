@@ -300,7 +300,7 @@ const LoginContent = () => {
                     />
                     <label>Email</label>
                   </div>
-                  <button type="submit" className="submit-btn">Join Waitlist</button>
+                  <Button type="submit" className="submit-btn" fullWidth>Join Waitlist</Button>
                 </form>
               </>
             ) : (
