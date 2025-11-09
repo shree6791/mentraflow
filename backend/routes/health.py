@@ -4,12 +4,11 @@ Endpoints for application health and status monitoring
 """
 
 from fastapi import APIRouter
-from pydantic import BaseModel, Field, ConfigDict
 from typing import List
-from datetime import datetime, timezone
+from datetime import datetime
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
-import uuid
+from models.health import StatusCheck, StatusCheckCreate
 
 router = APIRouter()
 
@@ -17,16 +16,6 @@ router = APIRouter()
 MONGO_URL = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
 client = AsyncIOMotorClient(MONGO_URL)
 db = client.knowledge_app
-
-# Models
-class StatusCheck(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    client_name: str
-    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    model_config = ConfigDict(extra="ignore")
-
-class StatusCheckCreate(BaseModel):
-    client_name: str
 
 
 @router.get("/")
