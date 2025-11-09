@@ -3986,9 +3986,10 @@
 }
 
 /* FAB Capture Modal */
+/* FAB Capture Modal - Slightly narrower than base */
 .fab-capture-modal {
-  max-width: 600px;
-  width: 90%;
+  max-width: 650px;
+  /* Inherits: width: 90%, max-height: 85vh, display: flex, etc. */
 }
 
 .fab-capture-header {
