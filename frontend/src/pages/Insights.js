@@ -274,10 +274,14 @@ const Insights = () => {
               const color = colors[idx % colors.length];
               
               return (
-                <div key={cluster.id} className="cluster-card">
-                  <div className="cluster-icon" style={{background: `${color}20`}}>
-                    <div className="cluster-dot" style={{background: color}}></div>
-                  </div>
+                <div 
+                  key={cluster.id} 
+                  className="cluster-card"
+                  style={{
+                    background: `linear-gradient(135deg, ${color}08 0%, ${color}15 100%)`,
+                    borderLeft: `4px solid ${color}`
+                  }}
+                >
                   <div className="cluster-content">
                     <h4>{cluster.name}</h4>
                     <div className="cluster-topics-list">
