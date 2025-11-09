@@ -2874,10 +2874,11 @@
 }
 
 /* Priority Modal */
+/* Priority Tasks Modal - Medium size with custom height */
 .priority-modal {
   max-width: 700px;
-  max-height: 80vh;
-  overflow-y: auto;
+  max-height: 80vh; /* Slightly shorter than base */
+  /* Inherits other base modal properties */
 }
 
 .priority-modal-body {
