@@ -10,6 +10,7 @@ from db.dashboard_data import NODES
 from db.quiz_data import QUIZ_CONTENT
 from db.summary_data import SUMMARY_CONTENT
 from validation.validators import NodeValidator
+from utils.cache import cached, medium_cache, long_cache
 
 router = APIRouter()
 
