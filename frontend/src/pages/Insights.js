@@ -403,11 +403,6 @@ const Insights = () => {
             {recommendations.length > 0 ? (
               recommendations.map((rec) => (
                 <div key={rec.id} className={`recommendation-item ${rec.priority}`}>
-                  <div className="rec-icon">
-                    {rec.type === 'review' && '🔴'}
-                    {rec.type === 'practice' && '🟢'}
-                    {rec.type === 'connection' && '🔗'}
-                  </div>
                   <div className="rec-content">
                     <h4>{rec.title}</h4>
                     <p>{rec.description}</p>
