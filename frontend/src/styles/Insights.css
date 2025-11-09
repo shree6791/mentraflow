@@ -417,6 +417,13 @@
   margin-top: 0.5rem;
 }
 
+/* Tablet - 2 cards per row */
+@media (max-width: 1200px) and (min-width: 769px) {
+  .recommendations-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .activity-page {
