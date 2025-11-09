@@ -6,13 +6,14 @@ Endpoints for quiz submission and results tracking
 from fastapi import APIRouter
 from datetime import datetime, timezone
 import uuid
-import logging
 from db.dashboard_data import NODES
 from db.connection import db
 from validation.validators import QuizValidator
 from models.quiz import QuizAnswer, QuizResultSubmit, QuizResultResponse
+from utils.logger import get_logger
 
 router = APIRouter()
+logger = get_logger(__name__)
 
 
 @router.post("/quiz-results", response_model=QuizResultResponse)
