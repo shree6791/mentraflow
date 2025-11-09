@@ -77,3 +77,68 @@ export const BORDER_RADIUS = {
   lg: '16px',
   full: '9999px',
 };
+
+// Helper function to convert theme to CSS custom properties
+export const getCSSVariables = () => {
+  return {
+    // Primary Colors
+    '--color-primary-teal': COLORS.primary.teal,
+    '--color-primary-ocean': COLORS.primary.ocean,
+    
+    // Secondary Colors
+    '--color-secondary-yellow': COLORS.secondary.yellow,
+    '--color-secondary-coral': COLORS.secondary.coral,
+    
+    // Contrast Colors
+    '--color-contrast-indigo': COLORS.contrast.indigo,
+    '--color-contrast-purple': COLORS.contrast.purple,
+    
+    // Retention Colors
+    '--color-retention-green': COLORS.retention.green,
+    '--color-retention-yellow': COLORS.retention.yellow,
+    '--color-retention-red': COLORS.retention.red,
+    
+    // Text Colors
+    '--color-text-dark': COLORS.text.dark,
+    '--color-text-gray': COLORS.text.gray,
+    '--color-text-light': COLORS.text.light,
+    '--color-text-primary': COLORS.text.primary || COLORS.text.dark,
+    '--color-text-secondary': COLORS.text.secondary || COLORS.text.gray,
+    '--color-text-muted': COLORS.text.muted || COLORS.text.light,
+    
+    // Background Colors
+    '--color-bg-light': COLORS.background.light,
+    '--color-bg-surface': COLORS.background.surface,
+    '--color-bg-divider': COLORS.background.divider,
+    
+    // Spacing
+    '--spacing-xs': SPACING.xs,
+    '--spacing-sm': SPACING.sm,
+    '--spacing-md': SPACING.md,
+    '--spacing-lg': SPACING.lg,
+    '--spacing-xl': SPACING.xl,
+    '--spacing-xxl': SPACING.xxl,
+    
+    // Border Radius
+    '--radius-sm': BORDER_RADIUS.sm,
+    '--radius-md': BORDER_RADIUS.md,
+    '--radius-lg': BORDER_RADIUS.lg,
+    '--radius-full': BORDER_RADIUS.full,
+    
+    // Shadows
+    '--shadow-sm': SHADOWS.sm,
+    '--shadow-md': SHADOWS.md,
+    '--shadow-lg': SHADOWS.lg,
+    '--shadow-xl': SHADOWS.xl,
+  };
+};
+
+// Function to inject CSS variables into document
+export const injectThemeVariables = () => {
+  const variables = getCSSVariables();
+  const root = document.documentElement;
+  
+  Object.entries(variables).forEach(([key, value]) => {
+    root.style.setProperty(key, value);
+  });
+};
