@@ -4020,8 +4020,10 @@
 }
 
 /* Filter Modal */
+/* Filter Modal - Compact size */
 .filter-modal {
   max-width: 500px;
+  /* Inherits base modal properties */
 }
 
 .filter-section {
