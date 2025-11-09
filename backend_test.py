@@ -965,6 +965,312 @@ class BackendTester:
         # Print summary
         self.print_summary()
     
+    def test_post_endpoint(self, name: str, url: str, payload: dict, 
+                          expected_status: int = 200, expected_keys: list = None,
+                          validate_func = None) -> bool:
+        """Generic POST endpoint testing function"""
+        print(f"\n{Colors.BOLD}Testing: {name}{Colors.RESET}")
+        print(f"URL: {url}")
+        print(f"Payload: {json.dumps(payload, indent=2)}")
+        
+        try:
+            response = requests.post(url, json=payload, timeout=10)
+            
+            # Check status code
+            if response.status_code != expected_status:
+                print_error(f"Expected status {expected_status}, got: {response.status_code}")
+                print_error(f"Response: {response.text}")
+                self.failed += 1
+                self.errors.append(f"{name}: HTTP {response.status_code}")
+                return False
+            
+            print_success(f"Status code: {response.status_code}")
+            
+            # Parse JSON if expecting 200
+            if expected_status == 200:
+                try:
+                    data = response.json()
+                except json.JSONDecodeError as e:
+                    print_error(f"Invalid JSON response: {e}")
+                    self.failed += 1
+                    self.errors.append(f"{name}: Invalid JSON")
+                    return False
+                
+                # Check expected keys
+                if expected_keys:
+                    missing_keys = [key for key in expected_keys if key not in data]
+                    if missing_keys:
+                        print_error(f"Missing keys: {missing_keys}")
+                        self.failed += 1
+                        self.errors.append(f"{name}: Missing keys {missing_keys}")
+                        return False
+                    print_success(f"All expected keys present: {expected_keys}")
+                
+                # Custom validation
+                if validate_func:
+                    validation_result = validate_func(data)
+                    if validation_result is not True:
+                        print_error(f"Validation failed: {validation_result}")
+                        self.failed += 1
+                        self.errors.append(f"{name}: {validation_result}")
+                        return False
+                
+                # Print sample data
+                print_info(f"Sample response: {json.dumps(data, indent=2)[:500]}...")
+            else:
+                # For error responses, try to parse error message
+                try:
+                    data = response.json()
+                    if "detail" in data:
+                        print_success(f"Error message: {data['detail']}")
+                    else:
+                        print_warning("No error detail in response")
+                except json.JSONDecodeError:
+                    print_warning("Response is not JSON")
+            
+            print_success(f"{name} - PASSED")
+            self.passed += 1
+            return True
+            
+        except requests.exceptions.RequestException as e:
+            print_error(f"Request failed: {e}")
+            self.failed += 1
+            self.errors.append(f"{name}: Request error - {str(e)}")
+            return False
+
+    def validate_generate_response(self, data: dict) -> bool:
+        """Validate /api/generate response structure"""
+        # Check top-level keys
+        required_keys = ["summary", "quiz"]
+        for key in required_keys:
+            if key not in data:
+                return f"Missing key: {key}"
+        
+        # Validate summary structure
+        summary = data["summary"]
+        if not isinstance(summary, dict):
+            return f"summary should be a dict, got {type(summary)}"
+        
+        summary_keys = ["content", "keyTakeaways", "keywords"]
+        for key in summary_keys:
+            if key not in summary:
+                return f"Summary missing key: {key}"
+        
+        if not isinstance(summary["keyTakeaways"], list):
+            return f"keyTakeaways should be a list, got {type(summary['keyTakeaways'])}"
+        
+        if not isinstance(summary["keywords"], list):
+            return f"keywords should be a list, got {type(summary['keywords'])}"
+        
+        print_success(f"  Summary content length: {len(summary['content'])} chars")
+        print_success(f"  Key takeaways: {len(summary['keyTakeaways'])} items")
+        print_success(f"  Keywords: {len(summary['keywords'])} items")
+        
+        # Validate quiz structure
+        quiz = data["quiz"]
+        if not isinstance(quiz, dict):
+            return f"quiz should be a dict, got {type(quiz)}"
+        
+        if "questions" not in quiz:
+            return "Quiz missing 'questions' key"
+        
+        questions = quiz["questions"]
+        if not isinstance(questions, list):
+            return f"questions should be a list, got {type(questions)}"
+        
+        if len(questions) == 0:
+            return "Quiz has no questions"
+        
+        # Validate question structure
+        question = questions[0]
+        question_keys = ["q", "options", "correctIndex"]
+        for key in question_keys:
+            if key not in question:
+                return f"Question missing key: {key}"
+        
+        if not isinstance(question["options"], list):
+            return f"Question options should be a list, got {type(question['options'])}"
+        
+        if not isinstance(question["correctIndex"], int):
+            return f"correctIndex should be an int, got {type(question['correctIndex'])}"
+        
+        print_success(f"  Quiz questions: {len(questions)}")
+        print_success(f"  Sample question: {question['q'][:50]}...")
+        print_success(f"  Options per question: {len(question['options'])}")
+        
+        return True
+
+    def run_youtube_integration_tests(self):
+        """Run comprehensive YouTube integration tests"""
+        print_header("YOUTUBE INTEGRATION TESTING")
+        print_info("Testing YouTube integration for 'Capture New Knowledge' feature")
+        print_info("Backend URL: https://archi-refactor.preview.emergentagent.com/api")
+        print_info("")
+        print_info("TESTING SCOPE:")
+        print_info("1. Valid YouTube URL Processing (youtube.com format)")
+        print_info("2. Valid YouTube URL Processing (youtu.be format)")
+        print_info("3. YouTube URL Validation (invalid URLs)")
+        print_info("4. Quiz Customization Options with YouTube URLs")
+        print_info("5. Input Validation (empty, both content+youtubeUrl, neither)")
+        
+        # Test 1: Valid YouTube URL Processing (youtube.com format)
+        print_header("Test 1: Valid YouTube URL Processing (youtube.com format)")
+        print_info("Testing with: https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+        print_info("Should return summary and quiz with mock data")
+        
+        payload_1 = {
+            "youtubeUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        }
+        
+        self.test_post_endpoint(
+            "YouTube URL Processing - youtube.com format",
+            f"{BACKEND_URL}/generate",
+            payload_1,
+            expected_status=200,
+            expected_keys=["summary", "quiz"],
+            validate_func=self.validate_generate_response
+        )
+        
+        # Test 2: Valid YouTube URL Processing (youtu.be format)
+        print_header("Test 2: Valid YouTube URL Processing (youtu.be format)")
+        print_info("Testing with: https://youtu.be/dQw4w9WgXcQ")
+        print_info("Should be accepted and processed successfully")
+        
+        payload_2 = {
+            "youtubeUrl": "https://youtu.be/dQw4w9WgXcQ"
+        }
+        
+        self.test_post_endpoint(
+            "YouTube URL Processing - youtu.be format",
+            f"{BACKEND_URL}/generate",
+            payload_2,
+            expected_status=200,
+            expected_keys=["summary", "quiz"],
+            validate_func=self.validate_generate_response
+        )
+        
+        # Test 3: YouTube URL Validation - Invalid URL
+        print_header("Test 3: YouTube URL Validation - Invalid URL")
+        print_info("Testing with: https://example.com/video")
+        print_info("Should return 400 error with message about invalid YouTube URL")
+        
+        payload_3 = {
+            "youtubeUrl": "https://example.com/video"
+        }
+        
+        self.test_post_endpoint(
+            "YouTube URL Validation - Invalid URL",
+            f"{BACKEND_URL}/generate",
+            payload_3,
+            expected_status=400
+        )
+        
+        # Test 4: Quiz Customization Options with YouTube URL
+        print_header("Test 4: Quiz Customization Options with YouTube URL")
+        print_info("Testing with customization: questionCount=7, difficulty=advanced, focusArea=key_concepts")
+        print_info("Should accept and process these options")
+        
+        payload_4 = {
+            "youtubeUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "questionCount": 7,
+            "difficulty": "advanced",
+            "focusArea": "key_concepts"
+        }
+        
+        def validate_customized_quiz(data):
+            result = self.validate_generate_response(data)
+            if result is not True:
+                return result
+            
+            # Check if customization was applied
+            questions = data["quiz"]["questions"]
+            if len(questions) != 7:
+                return f"Expected 7 questions, got {len(questions)}"
+            
+            # Check if difficulty is reflected in questions
+            sample_question = questions[0]["q"]
+            if "(Advanced)" not in sample_question:
+                return f"Advanced difficulty not reflected in question: {sample_question}"
+            
+            print_success(f"  ✅ Customization applied: {len(questions)} questions, Advanced difficulty")
+            return True
+        
+        self.test_post_endpoint(
+            "YouTube URL with Quiz Customization",
+            f"{BACKEND_URL}/generate",
+            payload_4,
+            expected_status=200,
+            expected_keys=["summary", "quiz"],
+            validate_func=validate_customized_quiz
+        )
+        
+        # Test 5: Input Validation - Empty youtubeUrl
+        print_header("Test 5: Input Validation - Empty youtubeUrl")
+        print_info("Testing with empty youtubeUrl field")
+        print_info("Should return 400 error")
+        
+        payload_5 = {
+            "youtubeUrl": ""
+        }
+        
+        self.test_post_endpoint(
+            "Input Validation - Empty youtubeUrl",
+            f"{BACKEND_URL}/generate",
+            payload_5,
+            expected_status=400
+        )
+        
+        # Test 6: Input Validation - Both content and youtubeUrl provided
+        print_header("Test 6: Input Validation - Both content and youtubeUrl provided")
+        print_info("Testing with both content and youtubeUrl fields")
+        print_info("Should return 400 error with message about providing only one input method")
+        
+        payload_6 = {
+            "content": "This is some text content for testing",
+            "youtubeUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        }
+        
+        self.test_post_endpoint(
+            "Input Validation - Both content and youtubeUrl",
+            f"{BACKEND_URL}/generate",
+            payload_6,
+            expected_status=400
+        )
+        
+        # Test 7: Input Validation - Neither content nor youtubeUrl
+        print_header("Test 7: Input Validation - Neither content nor youtubeUrl")
+        print_info("Testing with neither content nor youtubeUrl fields")
+        print_info("Should return 400 error with message about providing either text or YouTube URL")
+        
+        payload_7 = {
+            "title": "Test Title"
+        }
+        
+        self.test_post_endpoint(
+            "Input Validation - Neither content nor youtubeUrl",
+            f"{BACKEND_URL}/generate",
+            payload_7,
+            expected_status=400
+        )
+        
+        # Test 8: YouTube URL with additional parameters
+        print_header("Test 8: YouTube URL with Additional Parameters")
+        print_info("Testing with YouTube URL containing additional parameters")
+        print_info("Should extract video ID correctly and process successfully")
+        
+        payload_8 = {
+            "youtubeUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=30s&list=PLrAXtmRdnEQy6nuLMHjMZOz59Oq8HmPME"
+        }
+        
+        self.test_post_endpoint(
+            "YouTube URL with Additional Parameters",
+            f"{BACKEND_URL}/generate",
+            payload_8,
+            expected_status=200,
+            expected_keys=["summary", "quiz"],
+            validate_func=self.validate_generate_response
+        )
+
     def print_summary(self):
         """Print test summary"""
         print_header("TEST SUMMARY")
