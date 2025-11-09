@@ -72,7 +72,7 @@ async def submit_quiz_result(quiz_result: QuizResultSubmit):
     if node:
         # In a real implementation, update the node score in database
         updated_score = node.get("score", 0)
-        logging.info(f"Quiz submitted for node {quiz_result.nodeId}: {quiz_result.percentage}%")
+        logger.info(f"Quiz submitted for node {quiz_result.nodeId}: {quiz_result.percentage}%")
     
     # Generate motivational message
     if quiz_result.percentage == 100:
