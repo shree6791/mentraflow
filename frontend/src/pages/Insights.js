@@ -43,17 +43,18 @@ const Insights = () => {
   useEffect(() => {
     const fetchInsightsData = async () => {
       try {
-        const [statsResponse, nodesResponse, clustersResponse, recommendationsResponse] = await Promise.all([
-          axios.get(`${API}/stats`),
-          axios.get(`${API}/nodes`),
-          axios.get(`${API}/clusters`),
-          axios.get(`${API}/recommendations`)
+        // Use centralized API service layer
+        const [statsData, nodesData, clustersData, recommendationsData] = await Promise.all([
+          statsService.getStats(),
+          graphService.getNodes(),
+          axios.get(`${API}/clusters`).then(res => res.data), // Keep axios for endpoints not yet in service
+          axios.get(`${API}/recommendations`).then(res => res.data)
         ]);
 
-        setStats(statsResponse.data?.insights || stats);
+        setStats(statsData?.insights || stats);
         
         // Process topics data into performance categories
-        const topics = nodesResponse.data?.nodes || [];
+        const topics = nodesData?.nodes || [];
         const categorizedTopics = {
           strong: topics.filter(t => t.score >= 80).map(t => ({
             topic: t.title,
@@ -76,8 +77,8 @@ const Insights = () => {
         };
         setPerformanceData(categorizedTopics);
         
-        setKnowledgeClusters(clustersResponse.data?.clusters || []);
-        setRecommendations(recommendationsResponse.data?.recommendations || []);
+        setKnowledgeClusters(clustersData?.clusters || []);
+        setRecommendations(recommendationsData?.recommendations || []);
         
         setLoading(false);
       } catch (error) {
