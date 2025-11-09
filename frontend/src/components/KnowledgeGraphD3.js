@@ -228,7 +228,8 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       .attr('fill', d => getNodeColor(d.state))
       .attr('stroke', '#fff')
       .attr('stroke-width', 3)
-      .attr('class', 'node-circle');
+      .attr('class', 'node-circle')
+      .attr('opacity', d => nodeMatchesSearch(d) ? 1 : 0.2); // Dim non-matching nodes
 
     // Node labels
     node.append('text')
