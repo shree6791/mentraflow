@@ -57,7 +57,7 @@ const Billing = () => {
               <h3>{currentPlan.name}</h3>
               <div className="plan-price-display">
                 {currentPlan.price === 0 ? (
-                  <span className="price-free">$0</span>
+                  <span className="price-free">Free ($0)</span>
                 ) : (
                   <>
                     <span className="price-amount">${currentPlan.price}</span>
