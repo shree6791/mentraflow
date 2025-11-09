@@ -535,7 +535,7 @@
 }
 
 .plan-header {
-  margin-bottom: 6px; /* Reduced from 8px */
+  margin-bottom: 1rem; /* More space below subtitle */
   text-align: center; /* Center the plan name and subtitle */
 }
 
