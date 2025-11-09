@@ -5,14 +5,14 @@ import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import AppLayout from '../components/AppLayout';
 import Tooltip from '../components/Tooltip';
-import QuizModal from '../components/QuizModal';
 import { 
   CaptureModal, 
   GeneratedContentModal, 
   PriorityModal,
   FilterModal,
   QuizCustomizationModal,
-  RecallQuizModal
+  RecallQuizModal,
+  QuizModal
 } from '../components/modals';
 import * as pdfjsLib from 'pdfjs-dist';
 import mammoth from 'mammoth';
