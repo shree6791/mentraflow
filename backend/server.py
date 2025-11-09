@@ -27,8 +27,9 @@ load_dotenv(ROOT_DIR / '.env')
 setup_logging()
 logger = get_logger(__name__)
 
-# Set database for auth module
+# Set database for auth modules
 set_database(db)
+google_auth.set_database(db)
 
 # Create the main app without a prefix
 app = FastAPI(
