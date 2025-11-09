@@ -54,6 +54,28 @@
   font-weight: 500;
 }
 
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .graph-controls-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .time-filter-container {
+    width: 100%;
+  }
+  
+  .time-window-select {
+    flex: 1;
+  }
+  
+  .node-stats {
+    width: 100%;
+    text-align: center;
+  }
+}
+
 /* Knowledge Graph Container - Simple wrapper, no special styling needed */
 .knowledge-graph-container {
   display: flex;
