@@ -2,7 +2,6 @@ from fastapi import FastAPI, APIRouter
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 import os
-import logging
 from pathlib import Path
 from auth import auth_router, set_database
 
@@ -17,8 +16,15 @@ from middleware.cache import CacheMiddleware
 # Import centralized database connection
 from db.connection import db
 
+# Import and setup centralized logging
+from utils.logger import setup_logging, get_logger
+
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
+
+# Setup logging (must be done before any logger usage)
+setup_logging()
+logger = get_logger(__name__)
 
 # Set database for auth module
 set_database(db)
