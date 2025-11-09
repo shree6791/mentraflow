@@ -115,11 +115,33 @@ const Insights = () => {
       
       // Fetch the full node data including quiz
       const response = await axios.get(`${API}/node/${encodeURIComponent(topicName)}`);
-      const nodeData = response.data;
+      const responseData = response.data;
       
-      if (nodeData && nodeData.quiz) {
-        // Set the full node data as quiz data for the modal
-        setQuizData(nodeData);
+      // Backend returns nested structure: {node, summary, quiz, performance}
+      // We need to flatten it for QuizModal
+      if (responseData) {
+        const flattenedData = {
+          // From node object
+          id: responseData.node?.id,
+          title: responseData.node?.title || topicName,
+          lastReview: responseData.node?.lastReview || 'Never',
+          score: responseData.node?.score,
+          state: responseData.node?.state,
+          
+          // Quiz data - map correctIndex to correct for compatibility
+          questions: responseData.quiz?.questions?.map(q => ({
+            ...q,
+            correct: q.correctIndex // Map correctIndex to correct
+          })) || [],
+          
+          // Summary data
+          summary: responseData.summary,
+          
+          // Performance data
+          performance: responseData.performance
+        };
+        
+        setQuizData(flattenedData);
         setModalTab('quiz');
         setQuizAnswers({});
         setCurrentQuestionIndex(0);
