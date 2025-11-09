@@ -190,24 +190,37 @@ const KnowledgeGraphPage = () => {
       subtitle="Interactive memory visualization • Click nodes to explore"
       maxWidth="100%"
     >
-      {/* Time Window Filter */}
+      {/* Unified Controls Header - Filter & Search */}
       <div className="graph-controls-header">
-        <div className="time-filter-container">
-          <label htmlFor="time-window">Time Window:</label>
-          <select 
-            id="time-window"
-            value={timeWindow} 
-            onChange={(e) => setTimeWindow(Number(e.target.value))}
-            className="time-window-select"
-          >
-            <option value={21}>Last 3 weeks (21 days)</option>
-            <option value={35}>Last 5 weeks (35 days)</option>
-            <option value={49}>Last 7 weeks (49 days)</option>
-            <option value={0}>All Time</option>
-          </select>
+        <div className="controls-left">
+          <div className="time-filter-compact">
+            <Filter size={16} className="filter-icon" />
+            <select 
+              value={timeWindow} 
+              onChange={(e) => setTimeWindow(Number(e.target.value))}
+              className="time-window-select-compact"
+            >
+              <option value={21}>Last 3 weeks</option>
+              <option value={35}>Last 5 weeks</option>
+              <option value={49}>Last 7 weeks</option>
+              <option value={0}>All Time</option>
+            </select>
+          </div>
+          <div className="node-stats-compact">
+            {nodeStats.showing} of {nodeStats.total} topics
+          </div>
         </div>
-        <div className="node-stats">
-          Showing {nodeStats.showing} of {nodeStats.total} topics
+        <div className="controls-right">
+          <div className="search-container-header">
+            <Search size={16} className="search-icon" />
+            <input
+              type="text"
+              placeholder="Search topics..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="search-input-header"
+            />
+          </div>
         </div>
       </div>
 
