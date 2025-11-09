@@ -4,21 +4,15 @@ Endpoints for quiz submission and results tracking
 """
 
 from fastapi import APIRouter
-from motor.motor_asyncio import AsyncIOMotorClient
 from datetime import datetime, timezone
-import os
 import uuid
 import logging
 from db.dashboard_data import NODES
+from db.connection import db
 from validation.validators import QuizValidator
 from models.quiz import QuizAnswer, QuizResultSubmit, QuizResultResponse
 
 router = APIRouter()
-
-# MongoDB connection
-MONGO_URL = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
-client = AsyncIOMotorClient(MONGO_URL)
-db = client.knowledge_app
 
 
 @router.post("/quiz-results", response_model=QuizResultResponse)
