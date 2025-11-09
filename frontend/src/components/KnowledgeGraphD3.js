@@ -8,6 +8,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
   const svgRef = useRef(null);
   const containerRef = useRef(null);
   const simulationRef = useRef(null);
+  const zoomBehaviorRef = useRef(null);
   const onTakeQuizRef = useRef(onTakeQuiz);
   const onViewSummaryRef = useRef(onViewSummary);
   
