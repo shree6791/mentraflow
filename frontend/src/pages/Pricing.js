@@ -38,6 +38,14 @@ const Pricing = () => {
     navigate('/login');
   };
 
+  const handlePlanCTA = (planId) => {
+    if (planId === 'teams') {
+      setShowModal(true);
+    } else {
+      navigate('/login');
+    }
+  };
+
   return (
     <div className="pricing-page">
       <Header />
