@@ -6,6 +6,7 @@ import { statsService, graphService, insightsService } from '../services/api';
 import { formatPercentage } from '../utils/formatters';
 import { COLORS } from '../constants/theme';
 import AppLayout from '../components/AppLayout';
+import LoadingBanner from '../components/LoadingBanner';
 import QuizModal from '../components/modals/QuizModal';
 import '../styles/Insights.css';
 
