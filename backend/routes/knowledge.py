@@ -139,7 +139,10 @@ async def generate_summary_and_quiz(request: KnowledgeCaptureRequest):
     
     mock_quiz = QuizResponse(questions=mock_questions)
     
-    logger.info(f"Generated content for: {topic[:30]}...")
+    logger.info(
+        f"Generated content for: {topic[:30]}... "
+        f"(Questions: {question_count}, Difficulty: {difficulty}, Focus: {focus_area})"
+    )
     
     return GenerateResponse(
         summary=mock_summary,
