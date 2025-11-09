@@ -1,3 +1,5 @@
+/* Optimized Billing.css - Replace the entire file with this */
+
 /* Billing Page */
 .billing-page {
   min-height: 100vh;
@@ -296,44 +298,40 @@
 
 /* Upgrade Modal */
 .upgrade-modal {
-  max-width: 900px;
+  max-width: 950px; /* Increased slightly for better card fit */
   max-height: 90vh;
   overflow-y: auto;
   padding: 2rem;
+  width: 95%;
 }
 
+/* OPTIMIZED: Reduced spacing in plan price section */
 .upgrade-modal .plan-price {
-  margin-bottom: 2rem;
-  padding-bottom: 2rem;
+  margin: 8px 0 12px 0; /* Reduced from 2rem bottom */
+  padding-bottom: 0; /* Removed padding */
+  display: flex;
+  align-items: baseline;
+  justify-content: center; /* Center the price */
+  gap: 6px;
 }
 
 .upgrade-modal .plan-price .price {
-  font-size: 3rem;
-  line-height: 1.2;
+  font-size: 2.5rem; /* Reduced from 3rem */
+  font-weight: 700;
+  line-height: 1;
 }
 
 .upgrade-modal .plan-price .period {
-  font-size: 1.125rem;
-  margin-left: 0.75rem;
+  font-size: 1rem;
+  color: var(--text-gray);
+  line-height: 1;
+  margin-left: 0; /* Removed extra margin */
 }
 
-.upgrade-modal .plan-features {
-  margin: 0 0 2.5rem 0;
-}
-
-.upgrade-modal .plan-features li {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
-  line-height: 1.6;
-  padding-left: 0;
-}
-
-/* Team Member Selector */
+/* OPTIMIZED: Team Member Selector - Ultra compact */
 .team-selector {
-  margin: 1.25rem 0 1.25rem 0;
-  padding: 0.75rem 1rem;
+  margin: 12px 0;
+  padding: 8px 12px 6px 12px; /* Even tighter: 8px top, 6px bottom */
   background: var(--bg-light);
   border-radius: 8px;
 }
@@ -343,7 +341,8 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem;
+  margin-bottom: 4px; /* Reduced from 6px to 4px */
 }
 
 .team-selector label {
@@ -351,6 +350,8 @@
   font-weight: 600;
   color: var(--text-dark);
   white-space: nowrap;
+  margin: 0;
+  line-height: 1; /* Tighter line height */
 }
 
 .quantity-selector {
@@ -360,15 +361,15 @@
 }
 
 .qty-btn {
-  width: 36px;
-  height: 36px;
+  width: 32px; /* Reduced from 36px */
+  height: 32px; /* Reduced from 36px */
   display: flex;
   align-items: center;
   justify-content: center;
   background: white;
   border: 1px solid var(--divider);
   border-radius: 6px;
-  font-size: 1.25rem;
+  font-size: 1.1rem; /* Reduced from 1.25rem */
   font-weight: 600;
   color: var(--primary-teal);
   cursor: pointer;
@@ -382,12 +383,12 @@
 }
 
 .qty-input {
-  width: 60px;
-  height: 36px;
+  width: 55px; /* Reduced from 60px */
+  height: 32px; /* Reduced from 36px */
   text-align: center;
   border: 1px solid var(--divider);
   border-radius: 6px;
-  font-size: 1rem;
+  font-size: 0.95rem; /* Reduced from 1rem */
   font-weight: 600;
   color: var(--text-dark);
 }
@@ -397,83 +398,183 @@
   border-color: var(--primary-teal);
 }
 
+/* OPTIMIZED: Total price - completely flat */
 .total-price {
   text-align: center;
-  margin: 0.75rem 0 0 0;
-  font-size: 0.9375rem;
+  margin: 0 !important; /* Force remove ALL margins */
+  padding: 0 !important; /* Force remove ALL padding */
+  font-size: 0.9rem;
   color: var(--text-gray);
+  line-height: 1.2; /* Very tight line height */
 }
 
 .total-price strong {
   color: var(--primary-teal);
-  font-size: 1.125rem;
+  font-size: 1.05rem;
+  line-height: 1.2;
 }
 
-/* Desktop: Grid layout */
+/* OPTIMIZED: Reduced spacing in plan features */
+.upgrade-modal .plan-features {
+  margin: 12px 0 16px 0; /* Reduced from 2.5rem bottom */
+  list-style: none;
+  padding: 0;
+}
+
+.upgrade-modal .plan-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 8px; /* Reduced from 1.25rem */
+  line-height: 1.5;
+  padding-left: 0;
+  font-size: 0.95rem;
+}
+
+.upgrade-modal .plan-features li:last-child {
+  margin-bottom: 0;
+}
+
+.check-icon {
+  color: #059669;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Desktop: Grid layout - Force side-by-side */
 .upgrade-plans-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 1.5rem;
   margin-top: 1.5rem;
+  width: 100%;
+}
+
+@media (min-width: 769px) {
+  .upgrade-plans-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+  }
+  
+  /* CRITICAL: Hide carousel on desktop */
+  .upgrade-plans-carousel {
+    display: none !important;
+  }
 }
 
 /* Mobile: Carousel (hidden on desktop) */
 .upgrade-plans-carousel {
   display: none;
   margin-top: 1.5rem;
+  width: 100%;
+  overflow-x: visible;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .billing-page {
-    padding: 1rem;
-  }
+/* Billing carousel specific overrides */
+.upgrade-plans-carousel .carousel-container {
+  width: 100%;
+  padding: 2rem 0 3rem 0;
+}
 
-  .current-plan-card {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5rem;
-  }
+.upgrade-plans-carousel .carousel-wrapper {
+  padding: 0 0.25rem !important;
+  gap: 0.75rem !important;
+}
 
-  .plan-actions {
-    width: 100%;
-  }
+/* Force wider carousel items for billing */
+.upgrade-plans-carousel .carousel-wrapper > .pricing-card,
+.upgrade-plans-carousel .carousel-wrapper > div {
+  flex: 0 0 94% !important;
+  max-width: 94% !important;
+  min-width: 94% !important;
+  width: 94% !important;
+}
 
-  .btn-upgrade {
-    width: 100%;
-    justify-content: center;
-  }
+.upgrade-plans-carousel .pricing-card {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+.pricing-card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px; /* Reduced from 24px */
+  border-radius: 12px;
+  border: 2px solid #e5e7eb;
+  background: white;
+  position: relative;
+}
 
-  /* Show carousel, hide grid on mobile */
-  .upgrade-plans-grid {
-    display: none;
-  }
+.pricing-card-popular {
+  border-color: var(--primary-teal);
+  box-shadow: 0 4px 12px rgba(14, 124, 123, 0.1);
+}
 
-  .upgrade-plans-carousel {
-    display: block;
-  }
+.popular-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary-teal);
+  color: white;
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
 
-  /* Improve modal spacing on mobile */
-  .upgrade-modal {
-    padding: 1.5rem;
-    max-height: 100vh;
-    width: 100%;
-  }
+.plan-header {
+  margin-bottom: 6px; /* Reduced from 8px */
+  text-align: center; /* Center the plan name and subtitle */
+}
 
-  .upgrade-modal .plan-price .price {
-    font-size: 2.5rem;
-  }
+.plan-name {
+  font-size: 1.4rem; /* Slightly reduced */
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  color: var(--contrast-indigo);
+  line-height: 1.2;
+  text-align: center; /* Center plan name */
+}
 
-  .upgrade-modal .plan-price .period {
-    font-size: 1rem;
-    margin-left: 0.5rem;
-    display: block;
-    margin-top: 0.5rem;
-  }
+.plan-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-gray);
+  margin: 0;
+  text-align: center; /* Center subtitle */
+}
 
-  .upgrade-modal .plan-features li {
-    gap: 0.875rem;
-    margin-bottom: 1.5rem;
-    font-size: 0.9375rem;
-  }
+.check-icon {
+  color: var(--retention-green);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.plan-cta {
+  width: 100%;
+  padding: 11px 20px; /* Slightly reduced */
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 12px; /* Reduced from 16px */
+  background: white;
+  border: 2px solid var(--primary-teal);
+  color: var(--primary-teal);
+}
+
+.plan-cta:hover {
+  background: var(--bg-light);
+}
+
+.plan-cta-primary {
+  background: var(--primary-teal);
+  color: white;
+  border-color: var(--primary-teal);
+}
+
+.plan-cta-primary:hover {
+  background: var(--mind-blue);
+  transform: translateY(-1px);
 }
