@@ -1081,6 +1081,45 @@
   background: rgba(14, 124, 123, 0.05);
 }
 
+/* Processing File Display */
+.processing-file-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  border: 2px dashed var(--primary-teal);
+  border-radius: 12px;
+  background: rgba(14, 124, 123, 0.05);
+}
+
+.processing-icon {
+  color: var(--primary-teal);
+  margin-bottom: 1rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.processing-text {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.processing-hint {
+  font-size: 0.875rem;
+  color: var(--primary-teal);
+}
+
 /* Generate Button */
 .btn-generate {
   width: 100%;
