@@ -7,9 +7,9 @@ from fastapi import Request
 from starlette.middleware.base import BaseHTTPMiddleware
 from datetime import datetime, timedelta
 import json
-import logging
+from utils.logger import get_logger
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class CacheMiddleware(BaseHTTPMiddleware):
