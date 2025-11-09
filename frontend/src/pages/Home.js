@@ -158,10 +158,10 @@ const Home = () => {
       <Footer />
 
       {/* Demo Modal */}
-      {showModal && (
+      {modal.isOpen && (
         <div 
           className="modal-overlay" 
-          onClick={() => setShowModal(false)} 
+          onClick={modal.close} 
           role="dialog" 
           aria-modal="true"
           aria-labelledby="modal-title"
@@ -169,7 +169,7 @@ const Home = () => {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button 
               className="modal-close" 
-              onClick={() => setShowModal(false)} 
+              onClick={modal.close} 
               aria-label="Close modal"
             >
               ×
@@ -179,7 +179,7 @@ const Home = () => {
               We're putting the finishing touches on MentraFlow's demo experience.
               Join our early access list and be the first to experience memory infrastructure that actually works.
             </p>
-            <button className="btn-primary" onClick={() => setShowModal(false)}>
+            <button className="btn-primary" onClick={modal.close}>
               Got it!
             </button>
           </div>
