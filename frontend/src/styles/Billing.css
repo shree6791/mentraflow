@@ -93,7 +93,7 @@
 .plan-info h3 {
   font-size: 1.5rem;
   color: var(--contrast-indigo);
-  margin: 0 0 0.5rem 0;
+  margin: 0;
   line-height: 1.2;
 }
 
