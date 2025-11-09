@@ -239,6 +239,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       .attr('fill', '#333')
       .attr('font-size', '12px')
       .attr('font-weight', '600')
+      .attr('opacity', d => nodeMatchesSearch(d) ? 1 : 0.3) // Dim non-matching labels
       .text(d => d.title);
 
     // Node interactions - Show tooltip on CLICK
