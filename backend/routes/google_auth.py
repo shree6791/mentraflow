@@ -82,7 +82,7 @@ async def google_auth_callback(request: Request, response: Response):
             # Update last login
             await db.users.update_one(
                 {"_id": user_id},
-                {"$set": {"last_login": datetime.now(timezone.utc)}}
+                {"$set": {"last_login": datetime.now(timezone.utc).isoformat()}}
             )
             logger.info(f"User logged in: {email}")
         else:
