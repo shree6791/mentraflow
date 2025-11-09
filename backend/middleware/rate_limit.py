@@ -18,17 +18,19 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
     Different limits for different route groups
     """
     
-    def __init__(self, app, requests_per_minute: int = 60):
+    def __init__(self, app, requests_per_minute: int = 300):
         super().__init__(app)
         self.requests_per_minute = requests_per_minute
         self.requests = defaultdict(list)
         
-        # Route-specific limits
+        # Route-specific limits (increased for better UX)
         self.route_limits = {
-            "/api/quiz-results": 10,  # Quiz submission: 10/min
-            "/api/nodes": 30,          # Nodes: 30/min
-            "/api/node/": 30,          # Node details: 30/min
-            "/api/library": 20,        # Library: 20/min
+            "/api/quiz-results": 30,   # Quiz submission: 30/min
+            "/api/nodes": 120,          # Nodes: 120/min
+            "/api/node/": 120,          # Node details: 120/min
+            "/api/library": 120,        # Library: 120/min
+            "/api/stats": 120,          # Stats: 120/min
+            "/api/cache": 300,          # Cache admin: 300/min
         }
     
     async def dispatch(self, request: Request, call_next):
