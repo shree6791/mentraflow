@@ -11,8 +11,10 @@
   padding: 1rem 2rem;
   background: white;
   border-radius: 12px;
-  margin-bottom: 1rem;
+  margin: 0 auto 1rem auto;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  max-width: 1400px;
+  width: 100%;
 }
 
 /* Search Container - Left Side (More Space) */
