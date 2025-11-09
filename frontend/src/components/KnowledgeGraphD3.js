@@ -338,7 +338,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
     return () => {
       simulation.stop();
     };
-  }, [activeFilters, searchQuery, expandedNode, onTakeQuizRef, onViewSummaryRef]);
+  }, [activeFilters, searchQuery, expandedNode, onTakeQuizRef, onViewSummaryRef, dimensions]);
 
   const handleRecenter = () => {
     const svg = d3.select(svgRef.current);
