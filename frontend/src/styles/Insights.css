@@ -182,9 +182,21 @@
   transition: all 0.3s ease;
 }
 
+.topic-card.clickable {
+  cursor: pointer;
+}
+
 .topic-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.topic-card.clickable:hover {
+  box-shadow: 0 6px 20px rgba(14, 124, 123, 0.15);
+}
+
+.topic-card.clickable:active {
+  transform: translateY(0px);
 }
 
 .topic-card.strong {
