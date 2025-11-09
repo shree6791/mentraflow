@@ -10,6 +10,11 @@ from auth import auth_router, set_database
 # Import modular routes
 from routes import health, nodes, library, stats, recall, insights, quiz
 
+# Import middleware
+from middleware.logging import RequestLoggingMiddleware
+from middleware.rate_limit import RateLimitMiddleware
+from middleware.cache import CacheMiddleware
+
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
