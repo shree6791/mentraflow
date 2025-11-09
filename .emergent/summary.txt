@@ -1,62 +1,85 @@
 <analysis>
-The AI engineer's work primarily focused on enhancing the MentraFlow application's frontend UI/UX, particularly around the D3.js Knowledge Graph and general page layouts. A critical initial task involved resolving persistent visibility and interaction issues with the Knowledge Graph's hover tooltip, which required extensive debugging of DOM attachment, positioning, and event handling. This led to a user-driven shift from hover to click activation for the tooltip. Subsequent iterations tackled layout inconsistencies, embedding zoom controls, implementing interactive legend-based filtering, and refining responsive design for the graph and overall page. The latter part of the trajectory initiated a significant architectural shift: migrating frontend mock data to a consolidated FastAPI backend, which involved creating new API endpoints and refactoring existing data structures. The trajectory concluded midway through connecting these new backend APIs to the frontend, starting with the Dashboard page. The development process was highly iterative, driven by direct user feedback and visual inspection via screenshots.
+The AI engineer effectively managed an evolving MVP application, demonstrating strong adaptability to user-driven architectural refactoring. Initially, the focus was on backend data cleanup and synchronizing frontend UI components, primarily consolidating modal logic. The trajectory then pivoted towards significant backend modularization, including the introduction of dedicated routes, services, and models layers, along with centralized logging and database connection management. Frontend UX issues within the quiz modal were systematically addressed, including navigation logic, button states, and spacing. The engineer also implemented an end-to-end flow for knowledge capture, supporting text and file uploads, and integrating customization options, all while maintaining a strong dialogue with the user to validate design choices and next steps.
 </analysis>
 
 <product_requirements>
-MentraFlow is an MVP designed as an active learning coach to boost post-learning retention. It features conversion-optimized landing pages and a functional dashboard, adhering to a strict brand system (colors, fonts, glass-morphism, neural-network animations) with strong emphasis on responsive and consistent UI/UX. The primary goal is to enhance visual feedback, declutter the interface, and improve user guidance. Key features include a Generated Content Modal, a Smart Priority Flow dashboard, a full payment flow, dedicated  and  pages, reusable UI components, mobile carousels, brand-consistent gradient buttons, and responsive multi-column layouts. The most recent development focused on an interactive D3.js force-directed Knowledge Graph with bounded, draggable nodes, importance-based sizing, and user-friendly filtering/interactions, alongside the migration of frontend mock data to a new backend API.
+The core problem was to enhance a knowledge retention app's Knowledge Graph page to match the interactive quiz/summary modal experience of the Dashboard. This evolved into a comprehensive architectural overhaul.
+Explicit requests included:
+1.  **UI/UX Consistency**: Unify quiz/summary modal design and functionality across Dashboard and Knowledge Graph pages, fixing navigation, button states (disabled when no option selected, previous button on Q1 disabled but visible), and spacing.
+2.  **API Optimization**: Implement a two-tier API ( for list,  for detail) to reduce load.
+3.  **Backend Data Refactoring**: Rename  to , make all derived data dynamic, and reorganize .
+4.  **Frontend Data Flow**: Make Dashboard 100% API-driven.
+5.  **Data Consistency**: Synchronize  and , ensure logical performance stats. Rename  to  and update IDs (e.g., ).
+6.  **Backend Modularity**: Implement modular routing, separate  for business logic, centralize , consolidate  and  routes into , and centralize database connection and logging.
+7.  **Knowledge Capture E2E**: Implement Capture New Knowledge flow with backend mock APIs for generating summaries/quizzes, supporting text, file upload, YouTube links, and input limits. Allow customization options (questions, difficulty, focus).
 </product_requirements>
 
 <key_technical_concepts>
--   **Full-stack:** React (frontend), FastAPI (backend), MongoDB (database).
--   **Frontend:** React Router DOM, Tailwind CSS, CSS Custom Properties, D3.js (Knowledge Graph), .
--   **Backend:** FastAPI, Pydantic (for data modeling).
--   **Authentication:** JWT, .
--   **Design:** Glass-morphism, Responsive Design, UX principles.
+-   **Full-stack Architecture**: React.js (Frontend), FastAPI (Backend), MongoDB (Database).
+-   **State Management**: React , , , .
+-   **API Design**: RESTful, lazy loading, modular endpoints.
+-   **Backend Modularity**: Service Layer, Routers (FastAPI ), Centralized Models, Centralized Logging, Centralized DB Connection.
+-   **Middleware**: FastAPI middleware for logging, caching, rate limiting.
+-   **Data Validation**: Pydantic models for request/response validation.
 </key_technical_concepts>
 
 <code_architecture>
+The application uses React for the frontend, FastAPI for the backend, and MongoDB as the database.
+
+
 
 -   ****:
-    -   **Importance**: Implements the interactive D3.js force-directed graph visualization, a core feature.
-    -   **Changes**: Refactored to display tooltips on click (from hover) with accurate D3-based positioning and boundary constraints. Implemented interactive legend filtering, embedded Google Maps-style zoom controls, and updated instruction hints. Fixed an unnecessary wrapper div causing layout issues. Event handling for tooltip action buttons was a recurring fix.
+    -   **Importance**: The FastAPI application entry point, now primarily responsible for setting up the application, registering modular  instances from , applying middleware, and managing application lifecycle events (startup/shutdown for DB connection).
+    -   **Changes**: Extensive refactoring to remove direct route definitions and model declarations, instead importing and including routers from . Integrated middleware and centralized logging. Centralized database connection via .
+
 -   ****:
-    -   **Importance**: Styles the Knowledge Graph, its controls, legend, and tooltips, ensuring visual consistency and responsiveness.
-    -   **Changes**: Extensive updates to tooltip styling (background, contrast, close button hover), standardized corner rounding for controls, improved spacing and alignment for search/controls, and added styles for embedded zoom controls and interactive legend. Responsive height adjustments for the graph container were also implemented.
+    -   **Importance**: Pure data layer for core application entities.
+    -   **Changes**: Renamed  to .  and  now contain semantic IDs (, , ) and references (, , ). All dynamic data generation functions have been moved to .
+
 -   ****:
-    -   **Importance**: Serves as the page wrapper for the  component, integrating it into the .
-    -   **Changes**: Minor adjustments to ensure it properly contains and passes props to the  component, especially regarding layout and width constraints.
+    -   **Importance**: Renders the main user dashboard and handles interactions.
+    -   **Changes**: Updated  and  logic to correctly handle . Initial UI elements for Capture New Knowledge (Upload File, Paste Text) are present, calling the  endpoint.
+
 -   ****:
-    -   **Importance**: Displays the main user dashboard with library items, stats, and quick actions.
-    -   **Changes**: Verified mock data usage and retention class assignment. Currently being modified to fetch data from the backend APIs instead of local mock data.
--   ** (NEW)**:
-    -   **Importance**: Centralizes all mock data previously distributed across frontend components (Dashboard, Insights, Knowledge Graph) for use by backend API endpoints.
-    -   **Creation**: Initially created to hold Dashboard mock data, then extended to include Insights and Knowledge Graph data. Refactored to consolidate redundant data structures.
+    -   **Importance**: Reusable modal for quiz, summary, and performance display.
+    -   **Changes**: Implemented Next button disabled logic until an option is selected. Previous button is now always visible but disabled on the first question. Corrected UX spacing issues and button width (removed  from submit button).
+
 -   ****:
-    -   **Importance**: The main FastAPI application that defines and serves all backend API endpoints.
-    -   **Changes**: Added new API endpoints to serve consolidated mock data for Dashboard, Insights, and Knowledge Graph. These endpoints were then refactored from an initial 13 to a more consolidated set of 7 (e.g., , ) to avoid redundancy.
--   ** (NEW)**:
-    -   **Importance**: Provides clear, up-to-date documentation for the backend API structure and endpoints.
-    -   **Creation**: Documented the newly created and consolidated API endpoints.
+    -   **Importance**: New route file, consolidates API endpoints related to dashboard functionality, including fetching documents and generating content.
+    -   **Changes**: Created by combining logic from  (fetching ) and  (generating summary/quiz). Now accepts customization options for generation (question count, difficulty, focus area) and validates input limits for text, file, and YouTube URLs.
+
+-   ****:
+    -   **Importance**: Centralizes MongoDB client and database instance creation.
+    -   **Changes**: Newly created to ensure a single, consistent database connection is used across all backend components, preventing duplication and improving manageability.
+
+-   ****:
+    -   **Importance**: New files for abstracting business logic.
+    -   **Changes**: , ,  created. Functions like , , ,  moved here from  and are now directly called by the respective route files.
+
+-   ****:
+    -   **Importance**: Centralized Pydantic models for request and response validation.
+    -   **Changes**: New folder created. , ,  contain models specific to their domains.  was moved from a root . Routes now import models from this centralized location.
+
+-   ****:
+    -   **Importance**: Centralizes the logging configuration for the entire backend.
+    -   **Changes**: Newly created to provide a consistent logging setup with file rotation, used by  and imported by other modules.
 </code_architecture>
 
 <pending_tasks>
--   Address external  for Google OAuth.
--   Revert authentication bypass in Login page and Dashboard.
--   Implement backend integration for the Contact form, early access list, and *remaining* Dashboard features.
--   Dashboard spacing alignment for cards.
--   Review Soon cards still need a prominent yellow border.
--   Complete frontend integration for , , and  to fetch data from backend APIs.
+-   Add the YouTube tab to the frontend's Capture New Knowledge modal, implementing the UI to accept YouTube links.
 </pending_tasks>
 
 <current_work>
-Immediately before this summary request, the AI engineer was in the process of migrating MentraFlow's frontend from local mock data to consolidated backend FastAPI APIs. This involved:
-1.  **Backend Mock Data Consolidation**: Extracted mock data from , , and  into a new backend file .
-2.  **API Endpoint Definition**: Created initial API endpoints in  to expose this data.
-3.  **API Consolidation**: Refactored the initial 13 granular endpoints into 7 unified endpoints (e.g., , , ) to reduce data redundancy and simplify access.
-4.  **Backend Verification**: Successfully tested these consolidated backend endpoints (e.g., , ) to confirm they return the expected mock data.
-5.  **Frontend Integration Initiation**: The AI engineer had just confirmed that the frontend components (, , ) were *still* using their local mock data. Following the user's explicit request to connect the frontend to these new APIs immediately and remove local mock data, the engineer began this integration, starting with . The last action was to prepare to add data fetching logic within 's  hook.
+Immediately before this summary request, the AI engineer was tasked by the user to add the YouTube tab to the frontend for the Capture New Knowledge modal.
+
+The backend has already been updated to support YouTube link processing with validation, including:
+-   A new  model in  that accepts a  field.
+-   The  endpoint in  now validates the provided  and incorporates mock logic for processing.
+-   A new utility file  was created as a placeholder for future YouTube transcript extraction logic.
+
+The current focus is on the frontend implementation to provide the UI for users to input YouTube links within the Capture New Knowledge modal, making this feature end-to-end accessible. The AI engineer's last action was to acknowledge this and begin inspecting the frontend modal structure.
 </current_work>
 
 <optional_next_step>
-Integrate the  endpoint into  to replace local mock data with fetched backend data.
+Add the YouTube tab to the frontend's Capture New Knowledge modal.
 </optional_next_step>
