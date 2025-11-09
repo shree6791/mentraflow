@@ -30,11 +30,16 @@ const KnowledgeGraphPage = () => {
   useEffect(() => {
     const fetchTopics = async () => {
       try {
+        setLoading(true);
         // Use centralized API service layer
         const data = await graphService.getNodes({
           time_window: timeWindow,
           limit: 100
         });
+        
+        // Add a small delay to ensure smooth transition
+        await new Promise(resolve => setTimeout(resolve, 300));
+        
         setTopics(data?.nodes || []);
         setNodeStats({
           total: data?.total || 0,
