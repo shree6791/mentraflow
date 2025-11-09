@@ -16,6 +16,7 @@ import Payment from './pages/Payment';
 import Insights from './pages/Insights';
 import Settings from './pages/Settings';
 import KnowledgeGraphPage from './pages/KnowledgeGraphPage';
+import MCPConnect from './pages/MCPConnect';
 
 function App() {
   // Inject theme CSS variables on mount
