@@ -56,31 +56,20 @@ def verify_jwt_token(token: str) -> Optional[dict]:
 async def google_auth_callback(request: Request, response: Response):
     """
     Handle Google OAuth callback
-    Receives the credential token from Google Sign-In
+    Receives the access token and user info from Google
     """
     try:
         data = await request.json()
-        credential = data.get("credential")
+        user_info = data.get("userInfo")
         
-        if not credential:
-            raise HTTPException(status_code=400, detail="Credential token is required")
+        if not user_info:
+            raise HTTPException(status_code=400, detail="User info is required")
         
-        # Verify the Google token
-        try:
-            idinfo = id_token.verify_oauth2_token(
-                credential, 
-                requests.Request(), 
-                GOOGLE_CLIENT_ID
-            )
-        except ValueError as e:
-            logger.error(f"Token verification failed: {str(e)}")
-            raise HTTPException(status_code=401, detail="Invalid Google token")
-        
-        # Extract user information from the token
-        google_id = idinfo.get("sub")
-        email = idinfo.get("email")
-        name = idinfo.get("name")
-        picture = idinfo.get("picture")
+        # Extract user information
+        google_id = user_info.get("sub")
+        email = user_info.get("email")
+        name = user_info.get("name")
+        picture = user_info.get("picture")
         
         if not google_id or not email:
             raise HTTPException(status_code=400, detail="Missing required user information")
