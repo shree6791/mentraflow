@@ -27,7 +27,8 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
     const handleResize = () => {
       if (containerRef.current) {
         const width = containerRef.current.clientWidth;
-        const height = containerRef.current.clientHeight;
+        // Use viewport height calculation instead of container height to prevent growth
+        const height = Math.max(600, window.innerHeight - 200);
         setDimensions({ width, height });
       }
     };
