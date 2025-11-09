@@ -54,6 +54,9 @@ const Insights = () => {
           insightsService.getRecommendations()
         ]);
 
+        // Add a small delay to ensure smooth transition
+        await new Promise(resolve => setTimeout(resolve, 300));
+
         setStats(statsData?.insights || stats);
         
         // Process topics data into performance categories
@@ -86,6 +89,7 @@ const Insights = () => {
         setLoading(false);
       } catch (error) {
         console.error('Error fetching insights data:', error);
+        // Show error but still set loading to false to prevent infinite loading
         setLoading(false);
       }
     };
