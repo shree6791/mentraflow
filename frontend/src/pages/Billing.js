@@ -4,6 +4,8 @@ import { CreditCard, Calendar, TrendingUp, Check } from 'lucide-react';
 import AppLayout from '../components/AppLayout';
 import { UpgradeModal } from '../components/modals';
 import { getUpgradePlans } from '../constants/pricingPlans';
+import { useModal } from '../hooks';
+import { formatDate } from '../utils/formatters';
 import '../styles/Billing.css';
 
 const Billing = () => {
