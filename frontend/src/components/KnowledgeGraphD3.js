@@ -351,7 +351,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       d.fy = Math.max(padding, Math.min(height - padding, event.y));
     }
 
-    // Center the graph on initial load
+    // Center the graph on initial load (reduced by 25% for better view)
     setTimeout(() => {
       const bounds = g.node().getBBox();
       const fullWidth = bounds.width;
@@ -360,7 +360,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       const midY = bounds.y + fullHeight / 2;
       
       if (fullWidth && fullHeight) {
-        const scale = 0.9 / Math.max(fullWidth / width, fullHeight / height);
+        const scale = 0.675 / Math.max(fullWidth / width, fullHeight / height); // Reduced from 0.9 to 0.675 (25% smaller)
         const translate = [
           width / 2 - scale * midX,
           height / 2 - scale * midY
