@@ -450,39 +450,6 @@ const Insights = () => {
             </div>
           </div>
         </div>
-
-        {/* Recommendations */}
-        <div className="activity-section">
-          <div className="section-title-with-tooltip">
-            <h2>Recommendations</h2>
-            <div className="info-tooltip-wrapper">
-              <Info size={16} className="info-icon" />
-              <div className="info-tooltip">AI-powered suggestions to optimize your learning</div>
-            </div>
-          </div>
-          <div className="recommendations-grid">
-            {recommendations.length > 0 ? (
-              recommendations.map((rec) => (
-                <div key={rec.id} className={`recommendation-item ${rec.priority}`}>
-                  <div className="rec-content">
-                    <h4>{rec.title}</h4>
-                    <p>{rec.description}</p>
-                  </div>
-                  <button 
-                    className={`rec-action-btn ${rec.priority}`}
-                    onClick={() => handleOpenQuiz(rec.nodeId || rec.topic)}
-                  >
-                    {rec.action}
-                  </button>
-                </div>
-              ))
-            ) : (
-              <div className="empty-state">
-                <p>✨ You're doing great! No urgent recommendations at the moment.</p>
-              </div>
-            )}
-          </div>
-        </div>
       </AppLayout>
 
       {/* Quiz Modal */}
