@@ -12,6 +12,7 @@ import os
 import uuid
 import logging
 from db.dashboard_data import NODES
+from validation.validators import QuizValidator
 
 router = APIRouter()
 
