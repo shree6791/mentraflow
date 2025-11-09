@@ -437,6 +437,7 @@ html {
   font-family: var(--font-body);
   box-shadow: var(--shadow);
   text-align: center;
+  min-width: 200px;
 }
 
 .btn-primary:hover {
