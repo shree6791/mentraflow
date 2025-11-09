@@ -200,6 +200,11 @@ export const graphService = {
     return response.data;
   },
 
+  getNodeByTitle: async (title) => {
+    const response = await apiClient.get(`/node/${encodeURIComponent(title)}`);
+    return response.data;
+  },
+
   getConnections: async (nodeId) => {
     const response = await apiClient.get(`/nodes/${nodeId}/connections`);
     return response.data;
