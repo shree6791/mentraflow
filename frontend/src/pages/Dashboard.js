@@ -214,9 +214,8 @@ const Dashboard = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post(`${API}/auth/logout`, {}, {
-        withCredentials: true
-      });
+      // Use centralized auth service
+      await authService.logout();
       authLogout(); // Clear auth context
       navigate('/');
     } catch (err) {
