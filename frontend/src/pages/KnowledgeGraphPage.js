@@ -14,6 +14,7 @@ const KnowledgeGraphPage = () => {
   const [loading, setLoading] = useState(true);
   const [timeWindow, setTimeWindow] = useState(21); // Default: 3 weeks
   const [nodeStats, setNodeStats] = useState({ total: 0, showing: 0 });
+  const [searchQuery, setSearchQuery] = useState('');
   
   // Topic Detail Modal State
   const [selectedTopic, setSelectedTopic] = useState(null);
