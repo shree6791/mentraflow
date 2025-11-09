@@ -268,29 +268,31 @@ const Billing = () => {
                       {/* Team Member Selector for Teams Plan */}
                       {plan.id === 'teams' && (
                         <div className="team-selector">
-                          <label>Number of team members:</label>
-                          <div className="quantity-selector">
-                            <button 
-                              type="button"
-                              onClick={() => setTeamMemberCount(Math.max(2, teamMemberCount - 1))}
-                              className="qty-btn"
-                            >
-                              −
-                            </button>
-                            <input 
-                              type="number" 
-                              value={teamMemberCount}
-                              onChange={(e) => setTeamMemberCount(Math.max(2, parseInt(e.target.value) || 2))}
-                              min="2"
-                              className="qty-input"
-                            />
-                            <button 
-                              type="button"
-                              onClick={() => setTeamMemberCount(teamMemberCount + 1)}
-                              className="qty-btn"
-                            >
-                              +
-                            </button>
+                          <div className="team-selector-row">
+                            <label>Number of team members:</label>
+                            <div className="quantity-selector">
+                              <button 
+                                type="button"
+                                onClick={() => setTeamMemberCount(Math.max(2, teamMemberCount - 1))}
+                                className="qty-btn"
+                              >
+                                −
+                              </button>
+                              <input 
+                                type="number" 
+                                value={teamMemberCount}
+                                onChange={(e) => setTeamMemberCount(Math.max(2, parseInt(e.target.value) || 2))}
+                                min="2"
+                                className="qty-input"
+                              />
+                              <button 
+                                type="button"
+                                onClick={() => setTeamMemberCount(teamMemberCount + 1)}
+                                className="qty-btn"
+                              >
+                                +
+                              </button>
+                            </div>
                           </div>
                           <p className="total-price">
                             Total: <strong>${(plan.price * teamMemberCount).toFixed(2)}/month</strong>
