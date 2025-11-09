@@ -301,42 +301,36 @@
 }
 
 /* Knowledge Clusters */
+/* Knowledge Clusters Carousel */
 .clusters-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
   gap: 1rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  padding-bottom: 0.5rem;
+}
+
+.clusters-grid::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
 }
 
 .cluster-card {
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.25rem;
+  flex-direction: column;
+  padding: 1rem 1.25rem;
   border-radius: 12px;
-  border: 1px solid var(--divider);
-  background: white;
   transition: all 0.3s ease;
+  min-width: 260px;
+  max-width: 300px;
+  scroll-snap-align: start;
+  flex-shrink: 0;
 }
 
 .cluster-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.cluster-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.cluster-dot {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
 }
 
 .cluster-content {
