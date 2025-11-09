@@ -39,8 +39,18 @@ async def generate_summary_and_quiz(request: KnowledgeCaptureRequest):
     """
     Generate summary and quiz from captured knowledge
     
-    Mock implementation that returns customized dummy content based on user preferences.
-    In production, this would call AI services (GPT-5, Claude, etc.)
+    Supports 3 input methods:
+    1. Paste Text (content field)
+    2. Upload File (content field with file content)
+    3. YouTube Link (youtubeUrl field)
+    
+    Limits:
+    - Text/File: 20-10,000 characters
+    - YouTube: Max 60 minutes video duration
+    
+    Mock implementation that returns customized dummy content.
+    In production, this would call AI services (GPT-5, Claude, etc.) and
+    YouTube Transcript API for video transcripts.
     
     Customization Options:
     - questionCount: Number of quiz questions (3-10, default 5)
@@ -48,11 +58,75 @@ async def generate_summary_and_quiz(request: KnowledgeCaptureRequest):
     - focusArea: Topic focus area (default all)
     """
     
-    if not request.content or len(request.content.strip()) < 20:
+    # Upper limits for different input methods
+    MAX_TEXT_LENGTH = 10000  # 10,000 characters
+    MIN_TEXT_LENGTH = 20     # 20 characters minimum
+    MAX_YOUTUBE_DURATION = 60  # 60 minutes
+    
+    # Validate input: must provide either content or YouTube URL
+    if not request.content and not request.youtubeUrl:
         raise HTTPException(
             status_code=400,
-            detail="Content too short. Please provide at least 20 characters."
+            detail="Please provide either text content or a YouTube URL."
         )
+    
+    if request.content and request.youtubeUrl:
+        raise HTTPException(
+            status_code=400,
+            detail="Please provide only one input method: either text or YouTube URL, not both."
+        )
+    
+    # Handle different input methods
+    content_text = ""
+    content_source = ""
+    
+    if request.youtubeUrl:
+        # YouTube URL provided
+        logger.info(f"Processing YouTube URL: {request.youtubeUrl}")
+        
+        # Validate YouTube URL format
+        if not ("youtube.com" in request.youtubeUrl or "youtu.be" in request.youtubeUrl):
+            raise HTTPException(
+                status_code=400,
+                detail="Invalid YouTube URL. Please provide a valid youtube.com or youtu.be link."
+            )
+        
+        # Mock: Extract video ID and simulate transcript extraction
+        # In production, use youtube-transcript-api
+        video_id = request.youtubeUrl.split("v=")[-1].split("&")[0] if "v=" in request.youtubeUrl else request.youtubeUrl.split("/")[-1]
+        
+        # Mock transcript (in production, fetch actual transcript)
+        content_text = (
+            f"[YouTube Video Transcript - Mock]\n\n"
+            f"This is a simulated transcript from the YouTube video (ID: {video_id}). "
+            f"In production, this would contain the actual video transcript extracted using "
+            f"the YouTube Transcript API. The transcript would include all spoken content from "
+            f"the video, properly formatted and timed. This allows users to generate study "
+            f"materials from educational videos without manual transcription."
+        )
+        content_source = f"YouTube Video: {video_id}"
+        
+        # Mock: Check video duration (in production, use YouTube Data API)
+        # For now, assume all videos are under limit
+        logger.info(f"Video duration check passed (mock)")
+        
+    else:
+        # Text content provided (paste or file upload)
+        content_text = request.content.strip()
+        content_source = "Text/File Upload"
+        
+        # Validate text length
+        if len(content_text) < MIN_TEXT_LENGTH:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Content too short. Please provide at least {MIN_TEXT_LENGTH} characters. Current: {len(content_text)}"
+            )
+        
+        if len(content_text) > MAX_TEXT_LENGTH:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Content too long. Maximum {MAX_TEXT_LENGTH} characters allowed. Current: {len(content_text)}"
+            )
     
     # Mock: Extract topic from content (first few words) or use title
     topic = request.title if request.title else request.content[:50].strip()
