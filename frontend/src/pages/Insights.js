@@ -396,51 +396,10 @@ const Insights = () => {
           </div>
         </div>
 
-        {/* Knowledge Clusters */}
-        <div className="activity-section">
-          <div className="section-header">
-            <h2>Knowledge Clusters</h2>
-            <button className="view-graph-btn" onClick={() => navigate('/knowledge-graph')}>
-              <BookOpen size={16} />
-              View Knowledge Graph
-            </button>
-          </div>
-          <p className="section-description">Related topics you've mastered together</p>
-          
-          <div className="clusters-grid">
-            {knowledgeClusters.map((cluster, idx) => {
-              const colors = ['#0E7C7B', '#118AB2', '#EF476F', '#FFD166'];
-              const color = colors[idx % colors.length];
-              
-              return (
-                <div key={cluster.id} className="cluster-card">
-                  <div className="cluster-icon" style={{background: `${color}20`}}>
-                    <div className="cluster-dot" style={{background: color}}></div>
-                  </div>
-                  <div className="cluster-content">
-                    <h4>{cluster.name}</h4>
-                    <div className="cluster-topics-list">
-                      {cluster.topics.slice(0, 3).map((topic, i) => (
-                        <span key={i} className="cluster-topic-tag">{topic}</span>
-                      ))}
-                    </div>
-                    <div className="cluster-stats">
-                      <span>{cluster.topics.length} topics</span>
-                      <span className="cluster-score" style={{color: color}}>
-                        {cluster.strength}% avg
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
         {/* Recommendations */}
         <div className="activity-section">
           <h2>Recommendations</h2>
-          <div className="recommendations-list">
+          <div className="recommendations-grid">
             {recommendations.length > 0 ? (
               recommendations.map((rec) => (
                 <div key={rec.id} className={`recommendation-item ${rec.priority}`}>
