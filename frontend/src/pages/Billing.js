@@ -76,7 +76,7 @@ const Billing = () => {
             <div className="plan-actions">
               <button 
                 className="btn-upgrade"
-                onClick={() => setShowUpgradeModal(true)}
+                onClick={upgradeModal.open}
               >
                 <TrendingUp size={18} />
                 Upgrade Plan
