@@ -5,10 +5,11 @@ import PricingCard from '../components/PricingCard';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { getAllPlans } from '../constants/pricingPlans';
+import { useModal } from '../hooks';
 
 const Pricing = () => {
   const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(false);
+  const modal = useModal(false);
   const plans = getAllPlans();
 
   // Intersection Observer for fade-in animations
