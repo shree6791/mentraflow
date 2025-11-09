@@ -464,10 +464,21 @@
 
 /* Mobile: Carousel (hidden on desktop) */
 .upgrade-plans-carousel {
-  display: none;
+  display: block;
   margin-top: 1.5rem;
   width: 100%;
   overflow-x: visible;
+}
+
+/* Hide grid on mobile */
+@media (max-width: 768px) {
+  .upgrade-plans-grid {
+    display: none !important;
+  }
+  
+  .upgrade-plans-carousel {
+    display: block !important;
+  }
 }
 
 /* Billing carousel specific overrides */
