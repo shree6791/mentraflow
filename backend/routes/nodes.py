@@ -70,6 +70,7 @@ async def get_nodes(
 
 
 @router.get("/node/{title}")
+@cached(medium_cache, "get_node_detail")
 async def get_node_detail(title: str):
     """
     DETAIL API - Get comprehensive node data (with lazy loading)
@@ -77,6 +78,7 @@ async def get_node_detail(title: str):
     Used by: Modal when user clicks on a node
     
     LAZY LOADING: Quiz and summary content loaded on-demand from separate files
+    Cached: 5 minutes (medium_cache)
     """
     decoded_title = urllib.parse.unquote(title)
     
