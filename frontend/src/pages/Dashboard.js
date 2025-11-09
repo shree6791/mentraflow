@@ -519,9 +519,9 @@ const Dashboard = () => {
     setCurrentQuestionIndex(0);
     
     try {
-      // Fetch recall quiz data from API
-      const response = await axios.get(`${API}/recall-quiz/${encodeURIComponent(task.title)}`);
-      setRecallQuizData(response.data?.questions || []);
+      // Fetch recall quiz data from API - using service layer
+      const data = await quizService.getRecallQuiz(task.title);
+      setRecallQuizData(data?.questions || []);
     } catch (error) {
       console.error('Error fetching recall quiz data:', error);
       // Fallback to empty array if API fails
