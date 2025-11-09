@@ -103,20 +103,61 @@
   margin-bottom: 1.5rem;
 }
 
-.section-title-group {
+.section-title-with-tooltip {
   display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.section-title-group h2 {
+.section-title-with-tooltip h2 {
   margin: 0;
 }
 
-.section-title-group .section-description {
-  font-size: 0.875rem;
+.info-tooltip-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.info-icon {
   color: var(--text-gray);
-  margin: 0;
+  cursor: help;
+  transition: color 0.2s ease;
+}
+
+.info-icon:hover {
+  color: var(--primary-teal);
+}
+
+.info-tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+  background: var(--contrast-indigo);
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 1000;
+}
+
+.info-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--contrast-indigo);
+}
+
+.info-tooltip-wrapper:hover .info-tooltip {
+  opacity: 1;
 }
 
 .view-graph-btn {
