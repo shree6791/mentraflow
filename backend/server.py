@@ -8,7 +8,7 @@ from pathlib import Path
 from auth import auth_router, set_database
 
 # Import modular routes
-from routes import health, nodes, library, stats, recall, insights, quiz, knowledge
+from routes import health, nodes, dashboard, stats, recall, insights, quiz
 
 # Import middleware
 from middleware.logging import RequestLoggingMiddleware
