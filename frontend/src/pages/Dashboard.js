@@ -787,18 +787,14 @@ const Dashboard = () => {
             </svg>
           </div>
           <div className="stat-banner-content">
-            <div className="stat-value-row">
-              <h3>Overall Mastery</h3>
-              <span className={`trend-badge ${weeklyChange >= 0 ? 'positive' : 'negative'}`}>
-                {weeklyChange >= 0 ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
+            <h3>Overall Mastery</h3>
+            <div className="stat-compact-row">
+              <span className={`trend-badge-inline ${weeklyChange >= 0 ? 'positive' : 'negative'}`}>
+                {weeklyChange >= 0 ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
                 {weeklyChange >= 0 ? '+' : ''}{weeklyChange}%
               </span>
-            </div>
-            <div className="stat-progress-info">
-              <span className="progress-label">{80 - masteryScore}% to Expert (80%)</span>
-              <div className="mini-progress-bar">
-                <div className="progress-fill" style={{width: `${(masteryScore / 80) * 100}%`}}></div>
-              </div>
+              <span className="separator">•</span>
+              <span className="target-label">{80 - masteryScore}% to Expert</span>
             </div>
           </div>
         </div>
