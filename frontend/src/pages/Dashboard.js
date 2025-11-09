@@ -6,7 +6,14 @@ import { useAuth } from '../context/AuthContext';
 import AppLayout from '../components/AppLayout';
 import Tooltip from '../components/Tooltip';
 import QuizModal from '../components/QuizModal';
-import { CaptureModal, GeneratedContentModal } from '../components/modals';
+import { 
+  CaptureModal, 
+  GeneratedContentModal, 
+  PriorityModal,
+  FilterModal,
+  QuizCustomizationModal,
+  RecallQuizModal
+} from '../components/modals';
 import * as pdfjsLib from 'pdfjs-dist';
 import mammoth from 'mammoth';
 import '../Dashboard.css';
