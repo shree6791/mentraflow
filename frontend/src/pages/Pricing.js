@@ -60,12 +60,12 @@ const Pricing = () => {
             Whether you're mastering your own mind or scaling learning across teams — we adapt to your pace.
           </p>
           <div className="pricing-hero-cta">
-            <button className="btn-primary" onClick={scrollToPlans}>
+            <Button variant="primary" onClick={scrollToPlans}>
               Explore Plans
-            </button>
-            <button className="btn-secondary" onClick={handleTryMentraFlow}>
+            </Button>
+            <Button variant="secondary" onClick={handleTryMentraFlow}>
               Try MentraFlow
-            </button>
+            </Button>
           </div>
         </div>
       </section>
