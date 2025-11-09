@@ -209,7 +209,7 @@ async def generate_summary_and_quiz(request: KnowledgeCaptureRequest):
     
     logger.info(
         f"Generated content for: {topic[:30]}... "
-        f"(Questions: {question_count}, Difficulty: {difficulty}, Focus: {focus_area})"
+        f"(Source: {content_source}, Questions: {question_count}, Difficulty: {difficulty}, Focus: {focus_area})"
     )
     
     return GenerateResponse(
