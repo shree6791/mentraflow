@@ -321,7 +321,10 @@ const Insights = () => {
                     <h4>{rec.title}</h4>
                     <p>{rec.description}</p>
                   </div>
-                  <button className={`rec-action-btn ${rec.priority}`}>
+                  <button 
+                    className={`rec-action-btn ${rec.priority}`}
+                    onClick={() => handleOpenQuiz(rec.topic)}
+                  >
                     {rec.action}
                   </button>
                 </div>
