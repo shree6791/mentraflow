@@ -783,7 +783,7 @@ const Dashboard = () => {
                 </linearGradient>
               </defs>
               <text x="30" y="34" textAnchor="middle" className="progress-ring-text">
-                {masteryScore}%
+                {formatPercentage(masteryScore)}
               </text>
             </svg>
           </div>
@@ -792,10 +792,10 @@ const Dashboard = () => {
             <div className="stat-compact-row">
               <span className={`trend-badge-inline ${weeklyChange >= 0 ? 'positive' : 'negative'}`}>
                 {weeklyChange >= 0 ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
-                {weeklyChange >= 0 ? '+' : ''}{weeklyChange}%
+                {weeklyChange >= 0 ? '+' : ''}{formatPercentage(weeklyChange)}
               </span>
               <span className="separator">•</span>
-              <span className="target-label">{80 - masteryScore}% to Expert</span>
+              <span className="target-label">{formatPercentage(80 - masteryScore)} to Expert</span>
             </div>
           </div>
         </div>
