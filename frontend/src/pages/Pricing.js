@@ -71,102 +71,13 @@ const Pricing = () => {
       {/* Pricing Plans */}
       <section id="plans" className="pricing-plans-section">
         <Carousel className="pricing-cards-container">
-          {/* Free Plan */}
-          <div className="pricing-card">
-            <div className="plan-header">
-              <h3 className="plan-name">Free Plan</h3>
-              <p className="plan-subtitle">Best for Students</p>
-            </div>
-            <div className="plan-price">
-              <span className="price">$0</span>
-              <span className="period">/ month</span>
-            </div>
-            <ul className="plan-features">
-              <li>
-                <Check size={20} className="check-icon" />
-                Up to 50 notes
-              </li>
-              <li>
-                <Check size={20} className="check-icon" />
-                Adaptive recall
-              </li>
-              <li>
-                <Check size={20} className="check-icon" />
-                Weekly progress tracking
-              </li>
-            </ul>
-            <button className="plan-cta" onClick={handleTryMentraFlow}>
-              Start Free
-            </button>
-          </div>
-
-          {/* Pro Plan - Most Popular */}
-          <div className="pricing-card pricing-card-popular">
-            <div className="popular-badge">⭐ Most Popular</div>
-            <div className="plan-header">
-              <h3 className="plan-name">Pro Plan</h3>
-              <p className="plan-subtitle">Best for Consultants</p>
-            </div>
-            <div className="plan-price">
-              <span className="price">$9.99</span>
-              <span className="period">/ month</span>
-            </div>
-            <ul className="plan-features">
-              <li>
-                <Check size={20} className="check-icon" />
-                Unlimited notes
-              </li>
-              <li>
-                <Check size={20} className="check-icon" />
-                Integrations (Notion, Slack, ChatGPT)
-              </li>
-              <li>
-                <Check size={20} className="check-icon" />
-                Retention analytics
-              </li>
-              <li>
-                <Check size={20} className="check-icon" />
-                Recall reminders
-              </li>
-            </ul>
-            <button className="plan-cta plan-cta-primary" onClick={handleTryMentraFlow}>
-              Try Pro
-            </button>
-          </div>
-
-          {/* Teams Plan */}
-          <div className="pricing-card">
-            <div className="plan-header">
-              <h3 className="plan-name">Teams Plan</h3>
-              <p className="plan-subtitle">Best for Organizations</p>
-            </div>
-            <div className="plan-price">
-              <span className="price">$14.99</span>
-              <span className="period">/ user / month</span>
-              <span className="custom-note">(Custom)</span>
-            </div>
-            <ul className="plan-features">
-              <li>
-                <Check size={20} className="check-icon" />
-                Multi-seat dashboards
-              </li>
-              <li>
-                <Check size={20} className="check-icon" />
-                Team analytics
-              </li>
-              <li>
-                <Check size={20} className="check-icon" />
-                API access
-              </li>
-              <li>
-                <Check size={20} className="check-icon" />
-                Priority support
-              </li>
-            </ul>
-            <button className="plan-cta" onClick={() => setShowModal(true)}>
-              Schedule Consultation
-            </button>
-          </div>
+          {plans.map(plan => (
+            <PricingCard 
+              key={plan.id}
+              plan={plan}
+              onCTAClick={handlePlanCTA}
+            />
+          ))}
         </Carousel>
 
         <p className="pricing-footer-note fade-in">
