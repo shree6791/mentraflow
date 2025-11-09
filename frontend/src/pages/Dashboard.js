@@ -596,11 +596,10 @@ const Dashboard = () => {
     setSelectedLibraryItem(item);
     setLibraryModalTab(tab);
     
-    // Fetch complete data from API (quiz + summary + all node fields)
+    // Fetch complete data from API (quiz + summary + all node fields) - using service layer
     try {
       // Title now matches exactly - no mapping needed!
-      const response = await axios.get(`${API}/node/${encodeURIComponent(item.title)}`);
-      const data = response.data;
+      const data = await graphService.getNodeByTitle(item.title);
       
       // Set quiz data
       if (data.quiz && data.quiz.questions) {
