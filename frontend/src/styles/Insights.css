@@ -71,18 +71,25 @@
   height: 20px;
 }
 
+.stat-content {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
 .stat-content h3 {
-  font-size: 1.375rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--contrast-indigo);
   margin: 0;
-  line-height: 1.2;
+  line-height: 1;
 }
 
 .stat-content p {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: var(--text-gray);
-  margin: 0.125rem 0 0 0;
+  margin: 0;
+  font-weight: 500;
 }
 
 /* Activity Sections */
