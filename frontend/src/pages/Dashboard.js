@@ -213,28 +213,76 @@ const Dashboard = () => {
     }
   };
 
-  const handleFileUpload = (e) => {
+  const handleFileUpload = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      // Check file type
-      const fileExtension = file.name.split('.').pop().toLowerCase();
+    if (!file) return;
+    
+    const fileExtension = file.name.split('.').pop().toLowerCase();
+    setProcessingFile(true);
+    setUploadedFileName(file.name);
+    
+    try {
+      let extractedText = '';
       
-      // Only .txt files can be read as text directly
       if (fileExtension === 'txt') {
+        // Read TXT files directly
         const reader = new FileReader();
-        reader.onload = (event) => {
-          setUploadedContent(event.target.result);
-          setUploadedFileName(file.name);
-          showToast('File uploaded successfully!');
-        };
-        reader.readAsText(file);
-      } else {
-        // For PDF, DOC, DOCX - show a message
-        // In production, these would be processed server-side
-        setUploadedFileName(file.name);
-        setUploadedContent(`[File uploaded: ${file.name}]\n\nNote: PDF, DOC, and DOCX files require server-side processing. In this demo, please use .txt files or paste text directly for full functionality.`);
-        showToast(`${file.name} uploaded. Note: Only .txt files are fully supported in demo mode.`, 'info');
+        extractedText = await new Promise((resolve, reject) => {
+          reader.onload = (event) => resolve(event.target.result);
+          reader.onerror = (error) => reject(error);
+          reader.readAsText(file);
+        });
+      } 
+      else if (fileExtension === 'pdf') {
+        // Extract text from PDF
+        const arrayBuffer = await file.arrayBuffer();
+        const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        const numPages = pdf.numPages;
+        let fullText = '';
+        
+        for (let i = 1; i <= numPages; i++) {
+          const page = await pdf.getPage(i);
+          const textContent = await page.getTextContent();
+          const pageText = textContent.items.map(item => item.str).join(' ');
+          fullText += pageText + '\n\n';
+        }
+        
+        extractedText = fullText.trim();
       }
+      else if (fileExtension === 'docx') {
+        // Extract text from DOCX
+        const arrayBuffer = await file.arrayBuffer();
+        const result = await mammoth.extractRawText({ arrayBuffer });
+        extractedText = result.value;
+      }
+      else if (fileExtension === 'doc') {
+        // DOC files are more complex, need server-side processing
+        showToast('Old .doc format not supported. Please use .docx, .pdf, or .txt', 'error');
+        setProcessingFile(false);
+        setUploadedFileName('');
+        return;
+      }
+      else {
+        showToast('Unsupported file type. Please use .txt, .pdf, or .docx', 'error');
+        setProcessingFile(false);
+        setUploadedFileName('');
+        return;
+      }
+      
+      if (extractedText && extractedText.trim().length > 0) {
+        setUploadedContent(extractedText);
+        showToast(`✓ ${file.name} processed successfully!`);
+      } else {
+        showToast('No text content found in file', 'error');
+        setUploadedFileName('');
+      }
+      
+    } catch (error) {
+      console.error('Error processing file:', error);
+      showToast(`Failed to process ${file.name}. Please try again.`, 'error');
+      setUploadedFileName('');
+    } finally {
+      setProcessingFile(false);
     }
   };
 
