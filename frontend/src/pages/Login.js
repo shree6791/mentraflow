@@ -171,9 +171,8 @@ const LoginContent = () => {
   }
 
   return (
-    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-      <div className="login-page-integrated">
-        <Header />
+    <div className="login-page-integrated">
+      <Header />
 
       {/* Login Content */}
       <div className="login-content-wrapper">
