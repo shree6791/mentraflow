@@ -63,7 +63,7 @@ async def submit_quiz_result(quiz_result: QuizResultSubmit):
     try:
         await db.quiz_results.insert_one(result_doc)
     except Exception as e:
-        logging.error(f"Error storing quiz result: {e}")
+        logger.error(f"Error storing quiz result: {e}")
     
     # Find the node and update its score (in real app, this would update NODES in DB)
     node = next((n for n in NODES if n["id"] == quiz_result.nodeId), None)
