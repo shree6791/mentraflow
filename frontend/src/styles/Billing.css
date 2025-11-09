@@ -338,6 +338,14 @@
   border-radius: 8px;
 }
 
+.team-selector > div:first-of-type {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
 .team-selector label {
   font-size: 0.875rem;
   font-weight: 600;
