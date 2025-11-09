@@ -213,9 +213,20 @@ const Dashboard = () => {
       const reader = new FileReader();
       reader.onload = (event) => {
         setUploadedContent(event.target.result);
+        setUploadedFileName(file.name);
         showToast('File uploaded successfully!');
       };
       reader.readAsText(file);
+    }
+  };
+
+  const removeUploadedFile = () => {
+    setUploadedContent('');
+    setUploadedFileName('');
+    // Reset the file input
+    const fileInput = document.getElementById('fab-file-upload');
+    if (fileInput) {
+      fileInput.value = '';
     }
   };
 
