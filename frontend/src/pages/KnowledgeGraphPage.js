@@ -182,6 +182,7 @@ const KnowledgeGraphPage = () => {
   if (loading) {
     return (
       <AppLayout title="Your Knowledge Network">
+        <LoadingBanner message="Loading your knowledge network..." type="info" />
         <div className="knowledge-graph-loading">
           <div className="loading-spinner"></div>
           <p>Loading your knowledge network...</p>
