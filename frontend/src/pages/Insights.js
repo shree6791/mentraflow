@@ -122,6 +122,7 @@ const Insights = () => {
   }
 
   return (
+    <>
     <AppLayout 
       title="Your Learning Insights"
       subtitle="Track progress, identify patterns, and optimize retention"
