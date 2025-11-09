@@ -1632,7 +1632,7 @@ const Dashboard = () => {
               <button 
                 className="btn-primary btn-generate"
                 onClick={generateSummaryAndQuiz}
-                disabled={generating || !uploadedContent}
+                disabled={generating || (activeTab === 'youtube' ? !youtubeUrl : !uploadedContent)}
                 style={{marginTop: '1rem'}}
               >
                 {generating ? (
