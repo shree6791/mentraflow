@@ -89,34 +89,44 @@ const Login = () => {
     */
   }, [navigate, processingSession]);
 
-  const handleGoogleLoginSuccess = async (credentialResponse) => {
-    setLoading(true);
-    setError('');
-    
-    try {
-      const response = await axios.post(`${API}/auth/google/callback`, {
-        credential: credentialResponse.credential
-      }, {
-        withCredentials: true  // Important for cookies
-      });
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      setLoading(true);
+      setError('');
       
-      if (response.data.success) {
-        // Store user data
-        login(response.data.user);
+      try {
+        // Get user info from Google
+        const userInfoResponse = await axios.get(
+          'https://www.googleapis.com/oauth2/v3/userinfo',
+          {
+            headers: { Authorization: `Bearer ${tokenResponse.access_token}` }
+          }
+        );
         
-        // Navigate to dashboard
-        navigate('/dashboard');
+        const userInfo = userInfoResponse.data;
+        
+        // Send to our backend
+        const response = await axios.post(`${API}/auth/google/callback`, {
+          credential: tokenResponse.access_token,
+          userInfo: userInfo
+        }, {
+          withCredentials: true
+        });
+        
+        if (response.data.success) {
+          login(response.data.user);
+          navigate('/dashboard');
+        }
+      } catch (err) {
+        console.error('Google login error:', err);
+        setError(err.response?.data?.detail || 'Google login failed. Please try again.');
+        setLoading(false);
       }
-    } catch (err) {
-      console.error('Google login error:', err);
-      setError(err.response?.data?.detail || 'Google login failed. Please try again.');
-      setLoading(false);
+    },
+    onError: () => {
+      setError('Google login failed. Please try again.');
     }
-  };
-
-  const handleGoogleLoginError = () => {
-    setError('Google login failed. Please try again.');
-  };
+  });
 
   const handleEmailLogin = async (e) => {
     e.preventDefault();
