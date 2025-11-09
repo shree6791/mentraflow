@@ -190,6 +190,27 @@ const KnowledgeGraphPage = () => {
       subtitle="Interactive memory visualization • Click nodes to explore"
       maxWidth="100%"
     >
+      {/* Time Window Filter */}
+      <div className="graph-controls-header">
+        <div className="time-filter-container">
+          <label htmlFor="time-window">Time Window:</label>
+          <select 
+            id="time-window"
+            value={timeWindow} 
+            onChange={(e) => setTimeWindow(Number(e.target.value))}
+            className="time-window-select"
+          >
+            <option value={21}>Last 3 weeks (21 days)</option>
+            <option value={35}>Last 5 weeks (35 days)</option>
+            <option value={49}>Last 7 weeks (49 days)</option>
+            <option value={0}>All Time</option>
+          </select>
+        </div>
+        <div className="node-stats">
+          Showing {nodeStats.showing} of {nodeStats.total} topics
+        </div>
+      </div>
+
       <KnowledgeGraphD3 
         topics={topics} 
         userAvatar="/default-avatar.png"
