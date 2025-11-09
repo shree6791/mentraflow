@@ -44,7 +44,6 @@ const Header = () => {
       </button>
       
       <nav className={`nav ${mobileMenuOpen ? 'nav-open' : ''}`}>
-        <Link to="/" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Home</Link>
         <Link to="/science" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Science</Link>
         <Link to="/vision" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Vision</Link>
         <Link to="/pricing" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Pricing</Link>
