@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import AppLayout from '../components/AppLayout';
 import Tooltip from '../components/Tooltip';
 import QuizModal from '../components/QuizModal';
+import CaptureModal from '../components/modals/CaptureModal';
 import * as pdfjsLib from 'pdfjs-dist';
 import mammoth from 'mammoth';
 import '../Dashboard.css';
