@@ -89,11 +89,30 @@ const Insights = () => {
   }, [API]);
 
   // Handler to open quiz for a specific topic
-  const handleOpenQuiz = async (topicName) => {
+  const handleOpenQuiz = async (topicNameOrNodeId) => {
+    if (!topicNameOrNodeId) {
+      console.error('No topic name provided');
+      return;
+    }
+    
     setLoadingQuiz(true);
-    setSelectedTopicForQuiz(topicName);
+    setSelectedTopicForQuiz(topicNameOrNodeId);
     
     try {
+      // If it's a nodeId (like 't2'), convert it to topic name by looking it up
+      let topicName = topicNameOrNodeId;
+      
+      // Check if it's a nodeId format (starts with 't' followed by number)
+      if (/^t\d+$/.test(topicNameOrNodeId)) {
+        // Fetch all nodes to find the matching topic
+        const nodesResponse = await axios.get(`${API}/nodes`);
+        const allNodes = nodesResponse.data?.nodes || [];
+        const matchingNode = allNodes.find(n => n.id === topicNameOrNodeId);
+        if (matchingNode) {
+          topicName = matchingNode.title;
+        }
+      }
+      
       // Fetch the full node data including quiz
       const response = await axios.get(`${API}/node/${encodeURIComponent(topicName)}`);
       const nodeData = response.data;
