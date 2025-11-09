@@ -51,6 +51,7 @@ api_router.include_router(auth_router, tags=["Authentication"])
 # Include the router in the main app
 app.include_router(api_router)
 
+# Add middleware (order matters - last added runs first)
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
@@ -58,6 +59,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Add custom middleware
+app.add_middleware(CacheMiddleware)           # Cache responses
+app.add_middleware(RateLimitMiddleware)       # Rate limiting
+app.add_middleware(RequestLoggingMiddleware)  # Request logging
 
 # Configure logging
 logging.basicConfig(
