@@ -36,6 +36,18 @@ async def get_nodes(
     
     Cached: 5 minutes (medium_cache)
     """
+    # Manual cache implementation for FastAPI compatibility
+    from utils.cache import medium_cache, generate_cache_key, cache_stats
+    
+    cache_key = generate_cache_key("get_nodes", time_window=time_window, limit=limit)
+    cache_stats['total_requests'] += 1
+    
+    if cache_key in medium_cache:
+        cache_stats['hits'] += 1
+        return medium_cache[cache_key]
+    
+    cache_stats['misses'] += 1
+    
     filtered_nodes = NODES
     
     # Apply time window filter if not "all time"
