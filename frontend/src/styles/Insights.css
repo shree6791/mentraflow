@@ -389,15 +389,32 @@
 }
 
 .rec-icon {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   flex-shrink: 0;
+  margin-bottom: 0.5rem;
 }
 
-.recommendation-item p {
-  font-size: 0.9375rem;
-  color: var(--text-dark);
+.rec-content {
+  flex: 1;
+}
+
+.rec-content h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--contrast-indigo);
+}
+
+.rec-content p {
+  font-size: 0.875rem;
+  color: var(--text-gray);
   margin: 0;
-  line-height: 1.6;
+  line-height: 1.5;
+}
+
+.rec-action-btn {
+  width: 100%;
+  margin-top: 0.5rem;
 }
 
 /* Responsive */
