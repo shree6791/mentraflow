@@ -6,7 +6,6 @@ All endpoints used on the Dashboard page:
 """
 
 from fastapi import APIRouter, HTTPException
-import logging
 from db.dashboard_data import DOCUMENTS
 from models.knowledge import (
     KnowledgeCaptureRequest,
@@ -15,9 +14,10 @@ from models.knowledge import (
     QuizResponse,
     GenerateResponse
 )
+from utils.logger import get_logger
 
 router = APIRouter()
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 # ========================================
