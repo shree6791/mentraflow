@@ -568,13 +568,13 @@ const Dashboard = () => {
     setGenerating(true);
     
     try {
-      // Call API to generate custom quiz
-      const response = await axios.post(`${API}/generate-custom-quiz`, {
+      // Call API to generate custom quiz - using service layer
+      const data = await dashboardService.generateCustomQuiz({
         content: uploadedContent,
         config: quizConfig
       });
       
-      const { summary, quiz } = response.data;
+      const { summary, quiz } = data;
       
       setSummary(summary);
       setQuiz(quiz?.questions || []);
