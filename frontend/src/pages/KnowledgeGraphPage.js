@@ -192,9 +192,22 @@ const KnowledgeGraphPage = () => {
       subtitle="Interactive memory visualization • Click nodes to explore"
       maxWidth="100%"
     >
-      {/* Unified Controls Header - Filter & Search */}
+      {/* Unified Controls Header - Search Left, Filter Right */}
       <div className="graph-controls-header">
-        <div className="controls-left">
+        {/* Left: Search Bar (occupies more space) */}
+        <div className="search-container-header">
+          <Search size={18} className="search-icon" />
+          <input
+            type="text"
+            placeholder="Search topics in your knowledge graph..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input-header"
+          />
+        </div>
+
+        {/* Right: Time Filter & Stats (compact) */}
+        <div className="controls-right">
           <div className="time-filter-compact">
             <Filter size={16} className="filter-icon" />
             <select 
@@ -202,26 +215,14 @@ const KnowledgeGraphPage = () => {
               onChange={(e) => setTimeWindow(Number(e.target.value))}
               className="time-window-select-compact"
             >
-              <option value={21}>Last 3 weeks</option>
-              <option value={35}>Last 5 weeks</option>
-              <option value={49}>Last 7 weeks</option>
+              <option value={21}>3 weeks</option>
+              <option value={35}>5 weeks</option>
+              <option value={49}>7 weeks</option>
               <option value={0}>All Time</option>
             </select>
           </div>
           <div className="node-stats-compact">
-            {nodeStats.showing} of {nodeStats.total} topics
-          </div>
-        </div>
-        <div className="controls-right">
-          <div className="search-container-header">
-            <Search size={16} className="search-icon" />
-            <input
-              type="text"
-              placeholder="Search topics..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="search-input-header"
-            />
+            {nodeStats.showing} of {nodeStats.total}
           </div>
         </div>
       </div>
