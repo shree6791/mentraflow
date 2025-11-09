@@ -413,7 +413,13 @@ const Insights = () => {
 
         {/* Recommendations */}
         <div className="activity-section">
-          <h2>Recommendations</h2>
+          <div className="section-title-with-tooltip">
+            <h2>Recommendations</h2>
+            <div className="info-tooltip-wrapper">
+              <Info size={16} className="info-icon" />
+              <div className="info-tooltip">AI-powered suggestions to optimize your learning</div>
+            </div>
+          </div>
           <div className="recommendations-grid">
             {recommendations.length > 0 ? (
               recommendations.map((rec) => (
