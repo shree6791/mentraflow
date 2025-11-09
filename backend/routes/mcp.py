@@ -130,13 +130,25 @@ async def get_import_status(import_id: str):
     - concepts_extracted: number
     - quizzes_generated: number
     """
-    # TODO: Implement status tracking
+    from db.mcp_data import get_mcp_import
+    
+    import_record = get_mcp_import(import_id)
+    
+    if not import_record:
+        raise HTTPException(status_code=404, detail="Import not found")
+    
+    # Calculate progress based on status
+    progress = 100 if import_record["status"] == "completed" else 50 if import_record["status"] == "processing" else 0
+    
     return {
         "import_id": import_id,
-        "status": "processing",
-        "progress": 50,
-        "concepts_extracted": 0,
-        "quizzes_generated": 0
+        "status": import_record["status"],
+        "progress": progress,
+        "concepts_extracted": import_record["concepts_extracted"],
+        "quizzes_generated": import_record["quizzes_generated"],
+        "nodes_created": import_record["nodes_created"],
+        "created_at": import_record["created_at"],
+        "error": import_record.get("error")
     }
 
 
