@@ -223,8 +223,8 @@ const Insights = () => {
       {/* Quick Stats */}
       <div className="quick-stats-grid">
           <div className="stat-card">
-            <div className="stat-icon" style={{background: 'rgba(14, 124, 123, 0.1)'}}>
-              <Brain size={24} color="#0E7C7B" />
+            <div className="stat-icon" style={{background: `${COLORS.primary.teal}1A`}}>
+              <Brain size={24} color={COLORS.primary.teal} />
             </div>
             <div className="stat-content">
               <h3>{stats.totalQuizzes}</h3>
@@ -232,8 +232,8 @@ const Insights = () => {
             </div>
           </div>
           <div className="stat-card">
-            <div className="stat-icon" style={{background: 'rgba(6, 214, 160, 0.1)'}}>
-              <Target size={24} color="#06D6A0" />
+            <div className="stat-icon" style={{background: `${COLORS.retention.green}1A`}}>
+              <Target size={24} color={COLORS.retention.green} />
             </div>
             <div className="stat-content">
               <h3>{formatPercentage(stats.avgScore)}</h3>
@@ -241,8 +241,8 @@ const Insights = () => {
             </div>
           </div>
           <div className="stat-card">
-            <div className="stat-icon" style={{background: 'rgba(78, 154, 241, 0.1)'}}>
-              <TrendingUp size={24} color="#4E9AF1" />
+            <div className="stat-icon" style={{background: `${COLORS.primary.ocean}1A`}}>
+              <TrendingUp size={24} color={COLORS.primary.ocean} />
             </div>
             <div className="stat-content">
               <h3>{stats.strongTopics}</h3>
@@ -250,8 +250,8 @@ const Insights = () => {
             </div>
           </div>
           <div className="stat-card">
-            <div className="stat-icon" style={{background: 'rgba(255, 209, 102, 0.1)'}}>
-              <Zap size={24} color="#FFD166" />
+            <div className="stat-icon" style={{background: `${COLORS.secondary.yellow}1A`}}>
+              <Zap size={24} color={COLORS.secondary.yellow} />
             </div>
             <div className="stat-content">
               <h3>{stats.streak} days</h3>
