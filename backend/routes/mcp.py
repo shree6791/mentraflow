@@ -151,11 +151,14 @@ async def get_mcp_import_history(user_id: str, limit: int = 10):
     - concepts extracted
     - quizzes generated
     """
-    # TODO: Implement history retrieval
+    from db.mcp_data import get_user_mcp_history
+    
+    imports = get_user_mcp_history(user_id, limit)
+    
     return {
         "user_id": user_id,
-        "imports": [],
-        "total": 0
+        "imports": imports,
+        "total": len(imports)
     }
 
 
