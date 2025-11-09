@@ -257,6 +257,47 @@ const Insights = () => {
           </div>
         </div>
 
+        {/* Knowledge Clusters - Moved up for better hierarchy */}
+        <div className="activity-section">
+          <div className="section-header">
+            <h2>Knowledge Clusters</h2>
+            <button className="view-graph-btn" onClick={() => navigate('/knowledge-graph')}>
+              <BookOpen size={16} />
+              View Knowledge Graph
+            </button>
+          </div>
+          <p className="section-description">Related topics you've mastered together</p>
+          
+          <div className="clusters-grid">
+            {knowledgeClusters.map((cluster, idx) => {
+              const colors = ['#0E7C7B', '#118AB2', '#EF476F', '#FFD166'];
+              const color = colors[idx % colors.length];
+              
+              return (
+                <div key={cluster.id} className="cluster-card">
+                  <div className="cluster-icon" style={{background: `${color}20`}}>
+                    <div className="cluster-dot" style={{background: color}}></div>
+                  </div>
+                  <div className="cluster-content">
+                    <h4>{cluster.name}</h4>
+                    <div className="cluster-topics-list">
+                      {cluster.topics.slice(0, 3).map((topic, i) => (
+                        <span key={i} className="cluster-topic-tag">{topic}</span>
+                      ))}
+                    </div>
+                    <div className="cluster-stats">
+                      <span>{cluster.topics.length} topics</span>
+                      <span className="cluster-score" style={{color: color}}>
+                        {cluster.strength}% avg
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
         {/* Performance Overview */}
         <div className="activity-section">
           <h2>Performance Overview</h2>
