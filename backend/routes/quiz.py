@@ -50,11 +50,23 @@ async def submit_quiz_result(quiz_result: QuizResultSubmit):
     Submit quiz results and update user progress
     
     Mock implementation that:
+    - Validates quiz submission
     - Stores quiz result in database
     - Calculates XP gain
     - Updates node score
     - Returns success response
     """
+    # Validate quiz submission
+    QuizValidator.validate_answers(
+        quiz_result.answers,
+        quiz_result.totalQuestions
+    )
+    QuizValidator.validate_score(
+        quiz_result.score,
+        quiz_result.percentage,
+        quiz_result.totalQuestions
+    )
+    
     # Calculate XP based on performance
     xp_gain = 10  # Base XP
     if quiz_result.percentage == 100:
