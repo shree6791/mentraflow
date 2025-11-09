@@ -9,7 +9,8 @@ from typing import List, Optional
 
 class KnowledgeCaptureRequest(BaseModel):
     """Request model for capturing and generating content from knowledge"""
-    content: str
+    content: Optional[str] = None  # For paste text / file upload
+    youtubeUrl: Optional[str] = None  # For YouTube link
     title: Optional[str] = None
     tags: Optional[List[str]] = []
     
