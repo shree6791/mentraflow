@@ -448,15 +448,8 @@
     gap: 1rem;
   }
 
-  .clusters-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .topic-card {
-    min-width: 260px;
-    max-width: 300px;
-  }
-  
+  .topic-card,
+  .cluster-card,
   .recommendation-item {
     min-width: 260px;
     max-width: 300px;
