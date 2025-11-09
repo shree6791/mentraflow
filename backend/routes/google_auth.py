@@ -32,9 +32,9 @@ def get_jwt_config():
 
 def create_jwt_token(user_id: str, email: str) -> str:
     """Create JWT token for user"""
-    logger.info(f"JWT_SECRET type: {type(JWT_SECRET)}, value: {JWT_SECRET}")
+    jwt_config = get_jwt_config()
     now = datetime.now(timezone.utc)
-    expiration = now + timedelta(days=JWT_EXPIRATION_DAYS)
+    expiration = now + timedelta(days=jwt_config["expiration_days"])
     
     payload = {
         "user_id": user_id,
@@ -43,7 +43,7 @@ def create_jwt_token(user_id: str, email: str) -> str:
         "iat": int(now.timestamp())  # Convert to Unix timestamp
     }
     
-    token = jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
+    token = jwt.encode(payload, jwt_config["secret"], algorithm=jwt_config["algorithm"])
     return token
 
 def verify_jwt_token(token: str) -> Optional[dict]:
