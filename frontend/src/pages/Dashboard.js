@@ -219,18 +219,44 @@ const Dashboard = () => {
   };
 
   const generateSummaryAndQuiz = async () => {
-    if (!uploadedContent) {
-      showToast('Please upload or paste content first', 'error');
-      return;
+    // Validate input based on active tab
+    if (activeTab === 'youtube') {
+      if (!youtubeUrl) {
+        showToast('Please enter a YouTube URL', 'error');
+        return;
+      }
+      // Validate YouTube URL format
+      if (!youtubeUrl.includes('youtube.com') && !youtubeUrl.includes('youtu.be')) {
+        showToast('Please enter a valid YouTube URL', 'error');
+        return;
+      }
+    } else {
+      if (!uploadedContent) {
+        showToast('Please upload or paste content first', 'error');
+        return;
+      }
     }
     
     setGenerating(true);
     
     try {
+      // Prepare request payload based on active tab
+      const requestData = activeTab === 'youtube' 
+        ? { 
+            youtubeUrl,
+            questionCount: quizConfig.questionCount,
+            difficulty: quizConfig.difficulty,
+            focusArea: quizConfig.focusArea
+          }
+        : { 
+            content: uploadedContent,
+            questionCount: quizConfig.questionCount,
+            difficulty: quizConfig.difficulty,
+            focusArea: quizConfig.focusArea
+          };
+      
       // Call API to generate summary and quiz
-      const response = await axios.post(`${API}/generate`, {
-        content: uploadedContent
-      });
+      const response = await axios.post(`${API}/generate`, requestData);
       
       const { summary, quiz } = response.data;
       
@@ -254,6 +280,10 @@ const Dashboard = () => {
       
       // Close the FAB capture modal after generation
       setShowFABCapture(false);
+      
+      // Reset input fields
+      setUploadedContent('');
+      setYoutubeUrl('');
       
       // Stop pulse animation after first use
       setFabAnimatePulse(false);
