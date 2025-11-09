@@ -1,0 +1,108 @@
+/* Reusable Form Input Component Styles */
+
+.form-field {
+  width: 100%;
+  margin-bottom: 1.25rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-dark, #1F2937);
+  margin-bottom: 0.5rem;
+}
+
+.form-required {
+  color: #EF476F;
+  margin-left: 0.25rem;
+}
+
+.form-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  color: var(--text-dark, #1F2937);
+  background: white;
+  border: 2px solid var(--divider, #E5E7EB);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: var(--primary-teal, #0E7C7B);
+  box-shadow: 0 0 0 3px rgba(14, 124, 123, 0.1);
+}
+
+.form-input:disabled {
+  background: var(--bg-light, #F9FAFB);
+  color: var(--text-gray, #6B7280);
+  cursor: not-allowed;
+}
+
+.form-input::placeholder {
+  color: var(--text-gray, #6B7280);
+}
+
+/* Input with icon */
+.form-input-with-icon {
+  padding-left: 2.75rem;
+}
+
+.form-input-icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--text-gray, #6B7280);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+/* Input with right element */
+.form-input-with-right {
+  padding-right: 2.75rem;
+}
+
+.form-input-right {
+  position: absolute;
+  right: 1rem;
+  color: var(--text-gray, #6B7280);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Error state */
+.form-input-error {
+  border-color: #EF476F;
+}
+
+.form-input-error:focus {
+  box-shadow: 0 0 0 3px rgba(239, 71, 111, 0.1);
+}
+
+.form-error {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #EF476F;
+}
+
+.form-helper {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-gray, #6B7280);
+}
+
+/* Textarea specific */
+textarea.form-input {
+  resize: vertical;
+  min-height: 100px;
+}
