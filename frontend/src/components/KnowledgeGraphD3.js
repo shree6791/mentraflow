@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, Search, Filter, Eye, Brain, ZoomIn, ZoomOut, Loader, X, RotateCcw } from 'lucide-react';
 import * as d3 from 'd3';
+import { COLORS } from '../constants/theme';
 import './KnowledgeGraph.css';
 
 const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, onTakeQuiz, onViewSummary, hideHeader, externalSearchQuery = '' }) => {
