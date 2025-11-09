@@ -101,6 +101,11 @@ const Insights = () => {
       if (nodeData && nodeData.quiz) {
         // Set the full node data as quiz data for the modal
         setQuizData(nodeData);
+        setModalTab('quiz');
+        setQuizAnswers({});
+        setCurrentQuestionIndex(0);
+        setShowQuizResults(false);
+        setQuizResults({});
         setShowQuizModal(true);
       } else {
         console.error('No quiz data available for this topic');
@@ -110,6 +115,48 @@ const Insights = () => {
     } finally {
       setLoadingQuiz(false);
     }
+  };
+
+  // Quiz navigation handlers
+  const handleAnswerSelect = (questionIndex, answerIndex) => {
+    setQuizAnswers(prev => ({
+      ...prev,
+      [questionIndex]: answerIndex
+    }));
+  };
+
+  const handlePreviousQuestion = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
+    }
+  };
+
+  const handleNextQuestion = () => {
+    if (currentQuestionIndex < quizData.quiz.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    }
+  };
+
+  const handleSubmitQuiz = () => {
+    // Calculate results
+    const results = {};
+    quizData.quiz.forEach((question, idx) => {
+      results[idx] = quizAnswers[idx] === question.correct;
+    });
+    setQuizResults(results);
+    setShowQuizResults(true);
+  };
+
+  const handleRetakeQuiz = () => {
+    setQuizAnswers({});
+    setCurrentQuestionIndex(0);
+    setShowQuizResults(false);
+    setQuizResults({});
+  };
+
+  const calculateQuizScore = () => {
+    const correctCount = Object.values(quizResults).filter(Boolean).length;
+    return Math.round((correctCount / quizData.quiz.length) * 100);
   };
 
   if (loading) {
