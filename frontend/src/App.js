@@ -41,6 +41,7 @@ function App() {
             <Route path="/insights" element={<Insights />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/knowledge-graph" element={<KnowledgeGraphPage />} />
+            <Route path="/mcp-connect" element={<MCPConnect />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
