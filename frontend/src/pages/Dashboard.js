@@ -1053,6 +1053,17 @@ const Dashboard = () => {
                         </button>
                       )}
                     </div>
+                    
+                    {/* MVP Demo: Visual Progress Bar */}
+                    {item.quizScore !== null && (
+                      <div className="item-retention-bar">
+                        <div 
+                          className={`retention-fill retention-${item.retention}`}
+                          style={{width: `${item.quizScore}%`}}
+                        />
+                        <span className="retention-score">{item.quizScore}% mastered</span>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
