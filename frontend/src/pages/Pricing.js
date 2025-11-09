@@ -41,7 +41,7 @@ const Pricing = () => {
 
   const handlePlanCTA = (planId) => {
     if (planId === 'teams') {
-      setShowModal(true);
+      modal.open();
     } else {
       navigate('/login');
     }
