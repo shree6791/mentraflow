@@ -9,6 +9,7 @@ import { getAllPlans } from '../constants/pricingPlans';
 const Pricing = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+  const plans = getAllPlans();
 
   // Intersection Observer for fade-in animations
   useEffect(() => {
