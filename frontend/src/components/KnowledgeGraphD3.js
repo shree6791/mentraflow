@@ -578,7 +578,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
               onClick={() => toggleFilter('high')}
               title="Click to toggle High retention filter"
             >
-              <div className="legend-inline-dot" style={{background: '#06D6A0'}}></div>
+              <div className="legend-inline-dot" style={{background: COLORS.retention.green}}></div>
               <span>High</span>
             </div>
             <div 
@@ -586,7 +586,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
               onClick={() => toggleFilter('medium')}
               title="Click to toggle Medium retention filter"
             >
-              <div className="legend-inline-dot" style={{background: '#FFD166'}}></div>
+              <div className="legend-inline-dot" style={{background: COLORS.retention.yellow}}></div>
               <span>Medium</span>
             </div>
             <div 
@@ -594,7 +594,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
               onClick={() => toggleFilter('fading')}
               title="Click to toggle Fading retention filter"
             >
-              <div className="legend-inline-dot" style={{background: '#EF476F'}}></div>
+              <div className="legend-inline-dot" style={{background: COLORS.retention.red}}></div>
               <span>Fading</span>
             </div>
           </div>
