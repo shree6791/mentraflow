@@ -48,8 +48,9 @@ def create_jwt_token(user_id: str, email: str) -> str:
 
 def verify_jwt_token(token: str) -> Optional[dict]:
     """Verify and decode JWT token"""
+    jwt_config = get_jwt_config()
     try:
-        payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+        payload = jwt.decode(token, jwt_config["secret"], algorithms=[jwt_config["algorithm"]])
         return payload
     except jwt.ExpiredSignatureError:
         logger.warning("Token expired")
