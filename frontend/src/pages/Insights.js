@@ -173,7 +173,7 @@ const Insights = () => {
   };
 
   const handleNextQuestion = () => {
-    if (currentQuestionIndex < quizData.quiz.length - 1) {
+    if (currentQuestionIndex < quizData.questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
   };
