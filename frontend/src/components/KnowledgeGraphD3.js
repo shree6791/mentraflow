@@ -90,11 +90,17 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
 
   // Filter and search logic
   const getFilteredNodes = () => {
+    // Only filter by legend state, NOT by search (we'll dim nodes instead)
     return graphData.filter(node => {
       const matchesFilter = activeFilters.includes(node.state);
-      const matchesSearch = !searchQuery || node.title.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchesFilter && matchesSearch;
+      return matchesFilter;
     });
+  };
+
+  // Check if a node matches the search query
+  const nodeMatchesSearch = (node) => {
+    if (!effectiveSearchQuery || effectiveSearchQuery.trim() === '') return true;
+    return node.title.toLowerCase().includes(effectiveSearchQuery.toLowerCase());
   };
 
   // Toggle filter for legend items
