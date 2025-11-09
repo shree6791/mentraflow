@@ -270,7 +270,7 @@ const Insights = () => {
           
           <div className="clusters-grid">
             {knowledgeClusters.map((cluster, idx) => {
-              const colors = ['#0E7C7B', '#118AB2', '#EF476F', '#FFD166'];
+              const colors = ['#06D6A0', '#FFD166', '#EF476F']; // Green, Yellow, Red
               const color = colors[idx % colors.length];
               
               return (
