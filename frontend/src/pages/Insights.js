@@ -43,12 +43,12 @@ const Insights = () => {
   useEffect(() => {
     const fetchInsightsData = async () => {
       try {
-        // Use centralized API service layer
+        // Use centralized API service layer - fully migrated
         const [statsData, nodesData, clustersData, recommendationsData] = await Promise.all([
           statsService.getStats(),
           graphService.getNodes(),
-          axios.get(`${API}/clusters`).then(res => res.data), // Keep axios for endpoints not yet in service
-          axios.get(`${API}/recommendations`).then(res => res.data)
+          insightsService.getClusters(),
+          insightsService.getRecommendations()
         ]);
 
         setStats(statsData?.insights || stats);
