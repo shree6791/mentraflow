@@ -59,7 +59,7 @@ async def generate_summary_and_quiz(request: KnowledgeCaptureRequest):
     """
     
     # Upper limits for different input methods
-    MAX_TEXT_LENGTH = 10000  # 10,000 characters
+    MAX_TEXT_LENGTH = 100000  # 100,000 characters
     MIN_TEXT_LENGTH = 20     # 20 characters minimum
     MAX_YOUTUBE_DURATION = 60  # 60 minutes
     
