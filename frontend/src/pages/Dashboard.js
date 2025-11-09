@@ -17,6 +17,7 @@ import {
 import * as pdfjsLib from 'pdfjs-dist';
 import mammoth from 'mammoth';
 import { formatPercentage, formatRelativeTime } from '../utils/formatters';
+import { dashboardService, authService, graphService, quizService } from '../services/api';
 import '../Dashboard.css';
 
 // Set up PDF.js worker from npm package
