@@ -2,16 +2,108 @@
    KNOWLEDGE GRAPH - INTERACTIVE VISUALIZATION
    ======================================== */
 
-/* Graph Controls Header */
+/* Graph Controls Header - Search Left, Filter Right */
 .graph-controls-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
   padding: 1rem 2rem;
   background: white;
   border-radius: 12px;
   margin-bottom: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Search Container - Left Side (More Space) */
+.search-container-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--bg-light);
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  border: 2px solid var(--divider);
+  flex: 1;
+  max-width: 600px;
+  transition: all 0.2s ease;
+}
+
+.search-container-header:focus-within {
+  border-color: var(--primary-teal);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(14, 124, 123, 0.1);
+}
+
+.search-container-header .search-icon {
+  color: var(--text-gray);
+  flex-shrink: 0;
+}
+
+.search-input-header {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.9375rem;
+  color: var(--text-dark);
+  flex: 1;
+  min-width: 0;
+  font-weight: 500;
+}
+
+.search-input-header::placeholder {
+  color: var(--text-gray);
+  font-weight: 400;
+}
+
+/* Right Controls - Compact */
+.controls-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.time-filter-compact {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  background: var(--bg-light);
+  border: 2px solid var(--divider);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.time-filter-compact:hover {
+  border-color: var(--primary-teal);
+}
+
+.time-filter-compact .filter-icon {
+  color: var(--text-gray);
+  flex-shrink: 0;
+}
+
+.time-window-select-compact {
+  border: none;
+  background: transparent;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--contrast-indigo);
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  min-width: auto;
+}
+
+.node-stats-compact {
+  font-size: 0.875rem;
+  color: var(--text-gray);
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 0.625rem 1rem;
+  background: var(--bg-light);
+  border-radius: 10px;
 }
 
 .time-filter-container {
