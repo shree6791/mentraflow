@@ -101,14 +101,20 @@ This document tracks the refactoring work done to improve code organization, red
 - ✅ Applied to weekly change badge
 - ✅ Applied to library card progress bars
 
-### Phase 2A: API Service Layer - PARTIALLY COMPLETED
-- ✅ Created comprehensive api.js service layer
-- ✅ Integrated into Insights.js for stats and nodes API calls
-- ✅ Kept axios as fallback for endpoints not yet migrated
+### Phase 2A: API Service Layer - ✅ COMPLETED (Phase 2B Done!)
+- ✅ Created comprehensive api.js service layer with all endpoints
+- ✅ Added missing endpoints: getLibrary, getRecallTasks, getClusters, getRecommendations, generateContent, generateCustomQuiz, getRecallQuiz, getNodeByTitle
+- ✅ **Insights.js - FULLY MIGRATED** - All axios calls replaced with service layer (statsService, graphService, insightsService)
+- ✅ **KnowledgeGraphPage.js - FULLY MIGRATED** - Using graphService for all API calls
+- ✅ **Dashboard.js - FULLY MIGRATED** - 7 axios calls replaced with dashboardService, authService, graphService, quizService
+- ✅ Removed direct axios imports where fully migrated
 
-### Phase 3A: Custom Hooks - PARTIALLY COMPLETED
-- ✅ Integrated useModal hook into Pricing.js
-- ✅ Replaced useState pattern with modal.isOpen, modal.open(), modal.close()
+### Phase 3A: Custom Hooks - ✅ SIGNIFICANTLY EXPANDED
+- ✅ Integrated useModal hook into **Pricing.js** for Teams demo modal
+- ✅ Integrated useModal hook into **Home.js** for demo access modal
+- ✅ Integrated useModal hook into **Billing.js** for upgrade modal
+- ✅ Replaced all useState modal patterns with modal.isOpen, modal.open(), modal.close()
+- ✅ Consistent modal management across 3 pages
 
 ## Next Steps
 
