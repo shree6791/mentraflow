@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { LogOut, User, Upload, FileText, BarChart3, Brain, CheckCircle, XCircle, ChevronDown, ChevronUp, Menu, X, Search, Filter, Eye, PenTool, TrendingUp, Clock, Settings, CreditCard, Video } from 'lucide-react';
+import { LogOut, User, Upload, FileText, BarChart3, Brain, CheckCircle, XCircle, ChevronDown, ChevronUp, Menu, X, Search, Filter, Eye, PenTool, TrendingUp, Clock, Settings, CreditCard, Video, Loader } from 'lucide-react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import AppLayout from '../components/AppLayout';
 import Tooltip from '../components/Tooltip';
 import QuizModal from '../components/QuizModal';
+import * as pdfjsLib from 'pdfjs-dist';
+import mammoth from 'mammoth';
 import '../Dashboard.css';
+
+// Set up PDF.js worker
+pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
