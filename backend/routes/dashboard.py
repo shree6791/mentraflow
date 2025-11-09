@@ -129,7 +129,7 @@ async def generate_summary_and_quiz(request: KnowledgeCaptureRequest):
             )
     
     # Mock: Extract topic from content (first few words) or use title
-    topic = request.title if request.title else request.content[:50].strip()
+    topic = request.title if request.title else content_text[:50].strip()
     
     # Get customization parameters with defaults
     question_count = min(request.questionCount or 5, 10)  # Max 10 questions
