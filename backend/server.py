@@ -49,6 +49,7 @@ api_router.include_router(stats.router, tags=["Statistics"])
 api_router.include_router(recall.router, tags=["Recall Tasks"])
 api_router.include_router(insights.router, tags=["Insights"])
 api_router.include_router(quiz.router, tags=["Quiz"])
+api_router.include_router(cache_admin.router, tags=["Cache Admin"])
 
 # Include auth routers
 api_router.include_router(auth_router, tags=["Authentication"])
