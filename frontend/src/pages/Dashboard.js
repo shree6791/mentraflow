@@ -1680,15 +1680,22 @@ const Dashboard = () => {
                   <input
                     type="file"
                     id="fab-file-upload"
-                    accept=".txt,.pdf,.doc,.docx"
+                    accept=".txt,.pdf,.docx"
                     onChange={handleFileUpload}
                     style={{ display: 'none' }}
+                    disabled={processingFile}
                   />
-                  {!uploadedFileName ? (
+                  {processingFile ? (
+                    <div className="processing-file-display">
+                      <Loader size={48} className="processing-icon" />
+                      <p className="processing-text">Processing {uploadedFileName}...</p>
+                      <p className="processing-hint">Extracting text content</p>
+                    </div>
+                  ) : !uploadedFileName ? (
                     <label htmlFor="fab-file-upload" className="upload-label">
                       <Upload size={48} className="upload-icon" />
                       <p className="upload-text">Drag & drop or click to upload</p>
-                      <p className="upload-hint">Best with .txt files (PDF/DOC support coming soon)</p>
+                      <p className="upload-hint">Supports .txt, .pdf, and .docx files</p>
                     </label>
                   ) : (
                     <div className="uploaded-file-display">
