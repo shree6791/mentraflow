@@ -2,6 +2,58 @@
    KNOWLEDGE GRAPH - INTERACTIVE VISUALIZATION
    ======================================== */
 
+/* Graph Controls Header */
+.graph-controls-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: white;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.time-filter-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.time-filter-container label {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--contrast-indigo);
+}
+
+.time-window-select {
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--divider);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--contrast-indigo);
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.time-window-select:hover {
+  border-color: var(--primary-teal);
+}
+
+.time-window-select:focus {
+  outline: none;
+  border-color: var(--primary-teal);
+  box-shadow: 0 0 0 3px rgba(14, 124, 123, 0.1);
+}
+
+.node-stats {
+  font-size: 0.875rem;
+  color: var(--text-gray);
+  font-weight: 500;
+}
+
 /* Knowledge Graph Container - Simple wrapper, no special styling needed */
 .knowledge-graph-container {
   display: flex;
