@@ -257,9 +257,9 @@ const LoginContent = () => {
                 </button>
               </div>
 
-              <button type="submit" className="submit-btn" disabled>
+              <Button type="submit" className="submit-btn" disabled fullWidth>
                 Login
-              </button>
+              </Button>
             </form>
           </div>
         </div>
