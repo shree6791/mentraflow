@@ -207,6 +207,9 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
     };
 
     // Create force simulation
+    // Check if we have saved positions - if yes, use lower alpha for smoother transitions
+    const hasPositions = filteredNodes.some(node => nodePositionsRef.current.has(node.id));
+    
     const simulation = d3.forceSimulation(filteredNodes)
       .force('link', d3.forceLink(filteredLinks)
         .id(d => d.id)
@@ -217,6 +220,8 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       .force('center', d3.forceCenter(width / 2, height / 2))
       .force('collision', d3.forceCollide()
         .radius(d => getNodeRadius(d.connections) + 15))
+      .alpha(hasPositions ? 0.3 : 1) // Lower alpha if positions are known
+      .alphaDecay(hasPositions ? 0.05 : 0.0228) // Faster settling if positions are known
       .on('tick', () => {
         filteredNodes.forEach(boundingBox);
       });
