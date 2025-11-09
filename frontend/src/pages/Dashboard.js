@@ -295,7 +295,14 @@ const Dashboard = () => {
       
       // Reset input fields
       setUploadedContent('');
+      setUploadedFileName('');
       setYoutubeUrl('');
+      
+      // Reset file input
+      const fileInput = document.getElementById('fab-file-upload');
+      if (fileInput) {
+        fileInput.value = '';
+      }
       
       // Stop pulse animation after first use
       setFabAnimatePulse(false);
