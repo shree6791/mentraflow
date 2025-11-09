@@ -1732,6 +1732,7 @@
   }
 }
 
+/* Base Modal Header - Shared structure */
 .modal-header {
   display: flex;
   justify-content: space-between;
@@ -1742,6 +1743,7 @@
   top: 0;
   z-index: 10;
   background: white;
+  flex-shrink: 0; /* Don't compress header */
 }
 
 .modal-header h2 {
@@ -1749,6 +1751,12 @@
   font-weight: 600;
   color: var(--contrast-indigo);
   margin: 0;
+}
+
+.modal-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-gray);
+  margin: 0.25rem 0 0 0;
 }
 
 .modal-close {
@@ -1759,6 +1767,7 @@
   padding: 0.5rem;
   border-radius: 8px;
   transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
 .modal-close:hover {
@@ -1766,8 +1775,11 @@
   color: var(--primary-teal);
 }
 
+/* Base Modal Body - Scrollable content area */
 .modal-body {
   padding: 2rem;
+  overflow-y: auto;
+  flex: 1; /* Take remaining space */
 }
 
 .graph-description {
