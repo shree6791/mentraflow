@@ -309,7 +309,13 @@ const Insights = () => {
 
         {/* Performance Overview */}
         <div className="activity-section">
-          <h2>Performance Overview</h2>
+          <div className="section-title-with-tooltip">
+            <h2>Performance Overview</h2>
+            <div className="info-tooltip-wrapper">
+              <Info size={16} className="info-icon" />
+              <div className="info-tooltip">Your topics grouped by retention strength</div>
+            </div>
+          </div>
           
           {/* Strong Topics */}
           <div className="performance-category">
