@@ -1540,56 +1540,97 @@ const Dashboard = () => {
                     </>
                   ) : (
                     <div className="quiz-results">
-                      <div className="results-summary">
-                        <h3>Quiz Complete!</h3>
-                        <div className="score-display">
-                          {Object.values(quizResults).filter(Boolean).length} / {quiz.length}
+                      {/* Score Header */}
+                      <div className="results-header">
+                        <div className="score-circle">
+                          <div className="score-number">
+                            {Object.values(quizResults).filter(Boolean).length}/{quiz.length}
+                          </div>
+                          <div className="score-label">Correct</div>
                         </div>
-                        <p className="score-percentage">
-                          {Math.round((Object.values(quizResults).filter(Boolean).length / quiz.length) * 100)}%
-                        </p>
+                        <div className="score-info">
+                          <h3 className="results-title">
+                            {Math.round((Object.values(quizResults).filter(Boolean).length / quiz.length) * 100) >= 80 
+                              ? "🎉 Excellent Work!" 
+                              : Math.round((Object.values(quizResults).filter(Boolean).length / quiz.length) * 100) >= 60
+                              ? "👍 Good Job!"
+                              : "💪 Keep Practicing!"}
+                          </h3>
+                          <p className="results-subtitle">
+                            You scored {Math.round((Object.values(quizResults).filter(Boolean).length / quiz.length) * 100)}%
+                            {Math.round((Object.values(quizResults).filter(Boolean).length / quiz.length) * 100) >= 80 
+                              ? " — You're building strong retention!" 
+                              : " — Each recall strengthens your memory."}
+                          </p>
+                        </div>
                       </div>
-                      <div className="results-detail">
+
+                      {/* Question Results */}
+                      <div className="results-questions">
                         {quiz.map((q, idx) => (
-                          <div key={idx} className="result-item">
-                            <div className="result-header">
-                              {quizResults[idx] ? (
-                                <CheckCircle size={20} className="icon-success" />
-                              ) : (
-                                <XCircle size={20} className="icon-error" />
-                              )}
-                              <span className="result-question">Question {idx + 1}</span>
+                          <div key={idx} className={`result-card ${quizResults[idx] ? 'correct' : 'incorrect'}`}>
+                            <div className="result-card-header">
+                              <div className="question-badge">
+                                {quizResults[idx] ? (
+                                  <CheckCircle size={18} className="badge-icon" />
+                                ) : (
+                                  <XCircle size={18} className="badge-icon" />
+                                )}
+                                <span className="badge-text">Question {idx + 1}</span>
+                              </div>
                             </div>
-                            <p className="question-text">{q.q}</p>
-                            <p className="correct-answer">
-                              ✓ Correct: {q.options[q.correctIndex]}
-                            </p>
-                            {!quizResults[idx] && (
-                              <p className="your-answer">
-                                ✗ Your answer: {q.options[quizAnswers[idx]]}
-                              </p>
-                            )}
+                            
+                            <p className="result-question-text">{q.q}</p>
+                            
+                            <div className="result-answers">
+                              <div className="answer-box answer-correct">
+                                <div className="answer-label">
+                                  <CheckCircle size={16} />
+                                  <span>Correct Answer</span>
+                                </div>
+                                <p className="answer-text">{q.options[q.correctIndex]}</p>
+                              </div>
+                              
+                              {!quizResults[idx] && (
+                                <div className="answer-box answer-wrong">
+                                  <div className="answer-label">
+                                    <XCircle size={16} />
+                                    <span>Your Answer</span>
+                                  </div>
+                                  <p className="answer-text">{q.options[quizAnswers[idx]]}</p>
+                                </div>
+                              )}
+                            </div>
                           </div>
                         ))}
                       </div>
-                      <div className="motivation-message">
-                        {Math.round((Object.values(quizResults).filter(Boolean).length / quiz.length) * 100) >= 80 ? (
-                          <p className="message-good">✅ Great work! You're building strong retention.</p>
-                        ) : (
-                          <p className="message-review">🧠 Keep practicing — each recall makes your memory stronger.</p>
-                        )}
+
+                      {/* Action Buttons */}
+                      <div className="results-actions">
+                        <button 
+                          className="btn-secondary btn-retake"
+                          onClick={() => {
+                            setQuizAnswers({});
+                            setQuizResults({});
+                            setShowQuizResults(false);
+                            setCurrentQuestionIndex(0);
+                          }}
+                        >
+                          <Brain size={18} /> Retake Quiz
+                        </button>
+                        <button 
+                          className="btn-primary btn-close-results"
+                          onClick={() => {
+                            setShowGeneratedModal(false);
+                            setQuizAnswers({});
+                            setQuizResults({});
+                            setShowQuizResults(false);
+                            setCurrentQuestionIndex(0);
+                          }}
+                        >
+                          Done
+                        </button>
                       </div>
-                      <button 
-                        className="btn-primary"
-                        onClick={() => {
-                          setQuizAnswers({});
-                          setQuizResults({});
-                          setShowQuizResults(false);
-                          setCurrentQuestionIndex(0);
-                        }}
-                      >
-                        Retake Quiz
-                      </button>
                     </div>
                   )}
                 </div>
