@@ -69,3 +69,7 @@ tzdata==2025.2
 urllib3==2.5.0
 uvicorn==0.25.0
 watchfiles==1.1.1
+cachetools==6.2.1
+google-auth==2.41.1
+google-auth-httplib2==0.2.1
+google-auth-oauthlib==1.2.3
