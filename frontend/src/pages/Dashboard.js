@@ -345,10 +345,10 @@ const Dashboard = () => {
             focusArea: quizConfig.focusArea
           };
       
-      // Call API to generate summary and quiz
-      const response = await axios.post(`${API}/generate`, requestData);
+      // Call API to generate summary and quiz - using service layer
+      const data = await dashboardService.generateContent(requestData);
       
-      const { summary, quiz } = response.data;
+      const { summary, quiz } = data;
       
       setSummary(summary);
       setQuiz(quiz?.questions || []);
