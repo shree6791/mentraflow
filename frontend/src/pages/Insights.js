@@ -94,11 +94,8 @@ const Insights = () => {
       const nodeData = response.data;
       
       if (nodeData && nodeData.quiz) {
-        setQuizData({
-          type: 'quiz',
-          title: nodeData.title,
-          questions: nodeData.quiz
-        });
+        // Set the full node data as quiz data for the modal
+        setQuizData(nodeData);
         setShowQuizModal(true);
       } else {
         console.error('No quiz data available for this topic');
