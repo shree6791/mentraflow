@@ -412,7 +412,7 @@ const Insights = () => {
                 >
                   <div className="topic-header">
                     <h4>{topic.topic}</h4>
-                    <span className="score-badge medium">{topic.score}%</span>
+                    <span className="score-badge medium">{formatPercentage(topic.score)}</span>
                   </div>
                   <div className="topic-meta">
                     <span>{topic.quizzesTaken} quizzes</span>
