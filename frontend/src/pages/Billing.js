@@ -51,20 +51,19 @@ const Billing = () => {
           <h2>Current Plan</h2>
           <div className="current-plan-card">
             <div className="plan-info">
-              <div className="plan-badge">
-                {currentPlan.name === 'Free Plan' ? '🆓 Free' : '⭐ Pro'}
-              </div>
-              <h3>{currentPlan.name}</h3>
-              <div className="plan-price-display">
+              <h3>
                 {currentPlan.price === 0 ? (
-                  <span className="price-amount">$0</span>
+                  <>Free Plan ($0)</>
                 ) : (
-                  <>
-                    <span className="price-amount">${currentPlan.price}</span>
-                    <span className="price-period">/ {currentPlan.billingCycle}</span>
-                  </>
+                  <>{currentPlan.name}</>
                 )}
-              </div>
+              </h3>
+              {currentPlan.price > 0 && (
+                <div className="plan-price-display">
+                  <span className="price-amount">${currentPlan.price}</span>
+                  <span className="price-period">/ {currentPlan.billingCycle}</span>
+                </div>
+              )}
               {currentPlan.nextBillingDate && (
                 <p className="next-billing">
                   <Calendar size={16} />
