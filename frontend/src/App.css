@@ -2203,6 +2203,21 @@ html {
   flex-shrink: 0;
 }
 
+/* Google Login Wrapper - for @react-oauth/google component */
+.google-login-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.google-login-wrapper > div {
+  width: 100% !important;
+}
+
+.google-login-wrapper iframe {
+  width: 100% !important;
+}
+
 /* Divider */
 .auth-divider {
   display: flex;
