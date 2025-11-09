@@ -350,11 +350,19 @@
 }
 
 /* Recommendations */
-/* Recommendations Grid - Desktop: 3 per row, Tablet: 2 per row */
+/* Recommendations Carousel - Horizontal scrolling on all screens */
 .recommendations-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
   gap: 1rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  padding-bottom: 0.5rem;
+}
+
+.recommendations-grid::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
 }
 
 .recommendation-item {
@@ -366,6 +374,10 @@
   border-left: 4px solid;
   background: white;
   transition: all 0.3s ease;
+  min-width: 320px;
+  max-width: 350px;
+  scroll-snap-align: start;
+  flex-shrink: 0;
 }
 
 .recommendation-item:hover {
