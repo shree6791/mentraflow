@@ -260,9 +260,12 @@ const Insights = () => {
         {/* Knowledge Clusters - Moved up for better hierarchy */}
         <div className="activity-section">
           <div className="section-header">
-            <div className="section-title-group">
+            <div className="section-title-with-tooltip">
               <h2>Knowledge Clusters</h2>
-              <p className="section-description">Related topics you've mastered together</p>
+              <div className="info-tooltip-wrapper">
+                <Info size={16} className="info-icon" />
+                <div className="info-tooltip">Related topics you've mastered together</div>
+              </div>
             </div>
             <button className="view-graph-btn" onClick={() => navigate('/knowledge-graph')}>
               <BookOpen size={16} />
