@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, TrendingUp, TrendingDown, Target, BookOpen, Zap, Brain, ExternalLink, Info } from 'lucide-react';
 import axios from 'axios';
 import { statsService, graphService, insightsService } from '../services/api';
+import { formatPercentage } from '../utils/formatters';
 import AppLayout from '../components/AppLayout';
 import QuizModal from '../components/modals/QuizModal';
 import '../styles/Insights.css';
