@@ -185,9 +185,14 @@ async def get_mcp_settings(user_id: str):
     - auto_quiz_generation: boolean
     - summarization_model: which LLM to use
     """
+    from db.mcp_data import get_mcp_stats
+    
     # Get the MCP endpoint URL
     # In production, this would be from environment variable
     mcp_endpoint = "https://brain-vault-3.preview.emergentagent.com/api/mcp/receive-export"
+    
+    # Get user stats
+    stats = get_mcp_stats(user_id)
     
     return {
         "user_id": user_id,
@@ -195,7 +200,44 @@ async def get_mcp_settings(user_id: str):
         "enabled_platforms": ["claude", "perplexity"],
         "auto_quiz_generation": True,
         "summarization_model": "gpt-5",
-        "max_conversations_per_export": 10
+        "max_conversations_per_export": 10,
+        "stats": stats
+    }
+
+
+@router.get("/concepts")
+async def get_mcp_concepts(user_id: str, limit: int = 50):
+    """
+    Get concepts extracted from MCP imports
+    
+    Returns list of concepts with their metadata
+    """
+    from db.mcp_data import get_user_mcp_concepts
+    
+    concepts = get_user_mcp_concepts(user_id, limit)
+    
+    return {
+        "user_id": user_id,
+        "concepts": concepts,
+        "total": len(concepts)
+    }
+
+
+@router.get("/quizzes")
+async def get_mcp_quizzes(user_id: str):
+    """
+    Get quizzes generated from MCP concepts
+    
+    Returns list of quizzes available
+    """
+    from db.mcp_data import get_user_mcp_quizzes
+    
+    quizzes = get_user_mcp_quizzes(user_id)
+    
+    return {
+        "user_id": user_id,
+        "quizzes": quizzes,
+        "total": len(quizzes)
     }
 
 
