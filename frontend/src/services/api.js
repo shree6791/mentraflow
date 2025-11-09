@@ -76,17 +76,32 @@ export const authService = {
 // ============================================
 export const dashboardService = {
   getStats: async () => {
-    const response = await apiClient.get('/dashboard/stats');
+    const response = await apiClient.get('/stats');
     return response.data;
   },
 
   getLibrary: async () => {
-    const response = await apiClient.get('/dashboard/library');
+    const response = await apiClient.get('/library');
+    return response.data;
+  },
+
+  getRecallTasks: async () => {
+    const response = await apiClient.get('/recall-tasks');
     return response.data;
   },
 
   getAchievements: async () => {
     const response = await apiClient.get('/dashboard/achievements');
+    return response.data;
+  },
+
+  generateContent: async (data) => {
+    const response = await apiClient.post('/generate', data);
+    return response.data;
+  },
+
+  generateCustomQuiz: async (data) => {
+    const response = await apiClient.post('/generate-custom-quiz', data);
     return response.data;
   },
 };
