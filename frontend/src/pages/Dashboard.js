@@ -939,6 +939,25 @@ const Dashboard = () => {
         </div>
       </div>
 
+      {/* MVP Demo: Badges Showcase */}
+      <div className="badges-showcase">
+        <h3>🏆 Achievements</h3>
+        <div className="badges-grid">
+          {badges.map(badge => (
+            <div key={badge.id} className={`badge-card ${badge.unlocked ? 'unlocked' : 'locked'}`}>
+              <div className="badge-icon">{badge.emoji}</div>
+              <span className="badge-name">{badge.name}</span>
+              <span className="badge-desc">{badge.description}</span>
+              {badge.unlocked ? (
+                <span className="badge-status unlocked">✓ Unlocked</span>
+              ) : (
+                <span className="badge-progress">{badge.current}/{badge.target}</span>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Main Focus Area - Smart Priority Flow */}
       <div className="dashboard-main-focus">
         
