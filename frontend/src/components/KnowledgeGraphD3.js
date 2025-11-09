@@ -135,6 +135,9 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
     return links;
   };
 
+  // Store node positions to preserve them across filter changes
+  const nodePositionsRef = useRef(new Map());
+
   // Initialize D3 force simulation
   useEffect(() => {
     if (!svgRef.current || !containerRef.current) return;
@@ -144,6 +147,15 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
     const width = container.clientWidth;
     const height = container.clientHeight;
     setDimensions({ width, height });
+
+    // Save current node positions before clearing
+    if (simulationRef.current) {
+      simulationRef.current.nodes().forEach(node => {
+        if (node.x !== undefined && node.y !== undefined) {
+          nodePositionsRef.current.set(node.id, { x: node.x, y: node.y });
+        }
+      });
+    }
 
     // Clear previous content
     d3.select(svgRef.current).selectAll('*').remove();
