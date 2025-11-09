@@ -50,8 +50,9 @@ api_router.include_router(recall.router, tags=["Recall Tasks"])
 api_router.include_router(insights.router, tags=["Insights"])
 api_router.include_router(quiz.router, tags=["Quiz"])
 
-# Include auth router
+# Include auth routers
 api_router.include_router(auth_router, tags=["Authentication"])
+api_router.include_router(google_auth.router, tags=["Google Authentication"])
 
 # Include the router in the main app
 app.include_router(api_router)
