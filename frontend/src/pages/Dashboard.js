@@ -1215,97 +1215,15 @@ const Dashboard = () => {
         submitRecallQuiz={submitRecallQuiz}
       />
 
-      {/* Quiz Customization Modal - Phase 2 */}
-      {showQuizCustomization && (
-        <div className="modal-overlay" onClick={() => setShowQuizCustomization(false)}>
-          <div className="modal-content quiz-custom-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h2>Customize Your Quiz</h2>
-              <button className="modal-close" onClick={() => setShowQuizCustomization(false)}>
-                <X size={24} />
-              </button>
-            </div>
-            <div className="modal-body">
-              <form className="quiz-custom-form">
-                <div className="form-group">
-                  <label>Number of Questions</label>
-                  <select
-                    value={quizConfig.questionCount}
-                    onChange={(e) => setQuizConfig({...quizConfig, questionCount: parseInt(e.target.value)})}
-                  >
-                    <option value={5}>5 Questions</option>
-                    <option value={10}>10 Questions</option>
-                    <option value={15}>15 Questions</option>
-                  </select>
-                </div>
-                
-                <div className="form-group">
-                  <label>Difficulty Level</label>
-                  <div className="difficulty-options">
-                    <button
-                      type="button"
-                      className={`difficulty-btn ${quizConfig.difficulty === 'easy' ? 'active' : ''}`}
-                      onClick={() => setQuizConfig({...quizConfig, difficulty: 'easy'})}
-                    >
-                      🟢 Easy
-                      <span className="difficulty-desc">60% recall, 30% conceptual, 10% applied</span>
-                    </button>
-                    <button
-                      type="button"
-                      className={`difficulty-btn ${quizConfig.difficulty === 'balanced' ? 'active' : ''}`}
-                      onClick={() => setQuizConfig({...quizConfig, difficulty: 'balanced'})}
-                    >
-                      🟡 Balanced
-                      <span className="difficulty-desc">Mixed difficulty across all types</span>
-                    </button>
-                    <button
-                      type="button"
-                      className={`difficulty-btn ${quizConfig.difficulty === 'advanced' ? 'active' : ''}`}
-                      onClick={() => setQuizConfig({...quizConfig, difficulty: 'advanced'})}
-                    >
-                      🔴 Advanced
-                      <span className="difficulty-desc">30% recall, 40% conceptual, 30% applied</span>
-                    </button>
-                  </div>
-                </div>
-                
-                <div className="form-group">
-                  <label>Focus Area</label>
-                  <select
-                    value={quizConfig.focusArea}
-                    onChange={(e) => setQuizConfig({...quizConfig, focusArea: e.target.value})}
-                  >
-                    <option value="all">All Topics</option>
-                    {topics.map(topic => (
-                      <option key={topic.id} value={topic.id}>{topic.title}</option>
-                    ))}
-                  </select>
-                </div>
-                
-                <div className="form-actions">
-                  <button 
-                    type="button" 
-                    className="btn-secondary" 
-                    onClick={() => setShowQuizCustomization(false)}
-                  >
-                    Cancel
-                  </button>
-                  <button 
-                    type="button" 
-                    className="btn-primary" 
-                    onClick={() => {
-                      setShowQuizCustomization(false);
-                      showToast('Quiz settings saved! Use "Generate Summary & Quiz" to create content.');
-                    }}
-                  >
-                    <Filter size={18} /> Save Settings
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Quiz Customization Modal */}
+      <QuizCustomizationModal
+        show={showQuizCustomization}
+        onClose={() => setShowQuizCustomization(false)}
+        quizConfig={quizConfig}
+        setQuizConfig={setQuizConfig}
+        topics={topics}
+        showToast={showToast}
+      />
 
       {/* Onboarding Tooltip - Phase 3 */}
       {showOnboarding && (
