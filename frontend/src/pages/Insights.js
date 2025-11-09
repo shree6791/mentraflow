@@ -27,6 +27,12 @@ const Insights = () => {
     totalNotes: 0
   });
   const [recommendations, setRecommendations] = useState([]);
+  
+  // Quiz modal state
+  const [showQuizModal, setShowQuizModal] = useState(false);
+  const [selectedTopicForQuiz, setSelectedTopicForQuiz] = useState(null);
+  const [quizData, setQuizData] = useState(null);
+  const [loadingQuiz, setLoadingQuiz] = useState(false);
 
   useEffect(() => {
     const fetchInsightsData = async () => {
