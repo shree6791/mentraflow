@@ -217,16 +217,13 @@ const GeneratedContentModal = ({
                   <div className="results-actions">
                     <button 
                       className="btn-secondary btn-retake"
-                      onClick={() => {
-                        // Reset quiz state - parent will handle
-                        window.location.reload(); // Temporary - ideally pass callbacks
-                      }}
+                      onClick={onRetake}
                     >
                       <Brain size={18} /> Retake Quiz
                     </button>
                     <button 
                       className="btn-primary btn-close-results"
-                      onClick={onClose}
+                      onClick={onCloseResults}
                     >
                       Done
                     </button>
