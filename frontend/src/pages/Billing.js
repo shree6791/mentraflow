@@ -173,31 +173,14 @@ const Billing = () => {
         )}
 
       {/* Upgrade Modal */}
-      {showUpgradeModal && (
-        <div className="modal-overlay" onClick={() => setShowUpgradeModal(false)}>
-          <div className="modal-content upgrade-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <h2>Upgrade Your Plan</h2>
-              <button className="modal-close" onClick={() => setShowUpgradeModal(false)}>
-                <X size={24} />
-              </button>
-            </div>
-            <div className="modal-body" style={{width: '100%', padding: 0}}>
-              {/* Desktop: Grid layout */}
-              <div className="upgrade-plans-grid">
-                {plans.map(plan => renderPlanCard(plan))}
-              </div>
-
-              {/* Mobile: Carousel */}
-              <div className="upgrade-plans-carousel" style={{width: '100%', maxWidth: '100%', margin: '0 -0.5rem'}}>
-                <Carousel className="billing-carousel">
-                  {plans.map(plan => renderPlanCard(plan))}
-                </Carousel>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <UpgradeModal
+        isOpen={showUpgradeModal}
+        onClose={() => setShowUpgradeModal(false)}
+        plans={plans}
+        teamMemberCount={teamMemberCount}
+        setTeamMemberCount={setTeamMemberCount}
+        onUpgrade={handleUpgrade}
+      />
     </AppLayout>
   );
 };
