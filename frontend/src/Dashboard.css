@@ -970,6 +970,53 @@
   color: var(--text-gray);
 }
 
+/* YouTube Zone */
+.youtube-zone {
+  margin-bottom: 1.5rem;
+}
+
+.youtube-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.youtube-icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--primary-teal);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.youtube-input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3.5rem;
+  border: 1px solid var(--divider);
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  outline: none;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.youtube-input:focus {
+  border-color: var(--primary-teal);
+  box-shadow: 0 0 0 3px rgba(17, 138, 178, 0.1);
+}
+
+.youtube-input::placeholder {
+  color: var(--text-gray);
+}
+
+.youtube-hint {
+  font-size: 0.875rem;
+  color: var(--text-gray);
+  padding-left: 0.25rem;
+}
+
 /* Generate Button */
 .btn-generate {
   width: 100%;
