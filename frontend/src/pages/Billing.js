@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { CreditCard, Calendar, TrendingUp, Check } from 'lucide-react';
 import AppLayout from '../components/AppLayout';
 import { UpgradeModal } from '../components/modals';
+import { getUpgradePlans } from '../constants/pricingPlans';
 import '../styles/Billing.css';
 
 const Billing = () => {
