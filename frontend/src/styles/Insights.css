@@ -100,13 +100,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.section-description {
-  font-size: 0.9375rem;
+.section-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.section-title-group h2 {
+  margin: 0;
+}
+
+.section-title-group .section-description {
+  font-size: 0.875rem;
   color: var(--text-gray);
-  margin: 0 0 1.5rem 0;
+  margin: 0;
 }
 
 .view-graph-btn {
