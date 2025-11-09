@@ -181,7 +181,7 @@ const Insights = () => {
   const handleSubmitQuiz = () => {
     // Calculate results
     const results = {};
-    quizData.quiz.forEach((question, idx) => {
+    quizData.questions.forEach((question, idx) => {
       results[idx] = quizAnswers[idx] === question.correct;
     });
     setQuizResults(results);
