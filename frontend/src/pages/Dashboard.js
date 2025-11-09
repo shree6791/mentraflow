@@ -1608,11 +1608,30 @@ const Dashboard = () => {
                     onChange={handleFileUpload}
                     style={{ display: 'none' }}
                   />
-                  <label htmlFor="fab-file-upload" className="upload-label">
-                    <Upload size={48} className="upload-icon" />
-                    <p className="upload-text">Drag & drop or click to upload</p>
-                    <p className="upload-hint">Supports .txt, .pdf, .doc, .docx</p>
-                  </label>
+                  {!uploadedFileName ? (
+                    <label htmlFor="fab-file-upload" className="upload-label">
+                      <Upload size={48} className="upload-icon" />
+                      <p className="upload-text">Drag & drop or click to upload</p>
+                      <p className="upload-hint">Supports .txt, .pdf, .doc, .docx</p>
+                    </label>
+                  ) : (
+                    <div className="uploaded-file-display">
+                      <div className="uploaded-file-info">
+                        <CheckCircle size={24} className="file-success-icon" />
+                        <div className="file-details">
+                          <p className="file-name">{uploadedFileName}</p>
+                          <p className="file-status">Ready to generate</p>
+                        </div>
+                      </div>
+                      <button 
+                        className="btn-remove-file"
+                        onClick={removeUploadedFile}
+                        type="button"
+                      >
+                        <X size={18} /> Change File
+                      </button>
+                    </div>
+                  )}
                 </div>
               ) : activeTab === 'paste' ? (
                 <div className="paste-zone">
