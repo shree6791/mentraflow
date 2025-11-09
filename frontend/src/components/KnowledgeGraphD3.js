@@ -208,7 +208,13 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       .join('line')
       .attr('class', 'graph-link')
       .attr('stroke', '#999')
-      .attr('stroke-opacity', d => getLinkOpacity(d.source, d.target))
+      .attr('stroke-opacity', d => {
+        const sourceMatches = nodeMatchesSearch(d.source);
+        const targetMatches = nodeMatchesSearch(d.target);
+        // Dim link if either end doesn't match search
+        const baseOpacity = getLinkOpacity(d.source, d.target);
+        return (sourceMatches && targetMatches) ? baseOpacity : baseOpacity * 0.2;
+      })
       .attr('stroke-width', 2);
 
     // Create nodes
