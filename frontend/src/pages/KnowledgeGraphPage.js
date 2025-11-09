@@ -233,6 +233,7 @@ const KnowledgeGraphPage = () => {
         onTakeQuiz={handleTakeQuiz}
         onViewSummary={handleViewSummary}
         hideHeader={true}
+        externalSearchQuery={searchQuery}
       />
 
       {/* Topic Detail Modal - Using Shared Component */}
