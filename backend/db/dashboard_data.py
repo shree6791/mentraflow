@@ -5,11 +5,8 @@
 # - services/recall_service.py
 # - services/stats_service.py
 # - services/insights_service.py
-
-# Import services for derived data generation
-from services.recall_service import get_recall_tasks
-from services.stats_service import get_stats
-from services.insights_service import get_knowledge_clusters, get_recommendations
+#
+# Routes call services directly with NODES as input
 
 
 # ========================================
