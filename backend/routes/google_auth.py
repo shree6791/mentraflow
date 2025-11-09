@@ -60,7 +60,9 @@ async def google_auth_callback(request: Request, response: Response):
     Receives the access token and user info from Google
     """
     try:
+        logger.info("Received Google auth callback")
         data = await request.json()
+        logger.info(f"Request data: {data}")
         user_info = data.get("userInfo")
         
         if not user_info:
@@ -71,6 +73,7 @@ async def google_auth_callback(request: Request, response: Response):
         email = user_info.get("email")
         name = user_info.get("name")
         picture = user_info.get("picture")
+        logger.info(f"Processing login for: {email}")
         
         if not google_id or not email:
             raise HTTPException(status_code=400, detail="Missing required user information")
