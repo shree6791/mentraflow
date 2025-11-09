@@ -33,6 +33,11 @@ const Insights = () => {
   const [selectedTopicForQuiz, setSelectedTopicForQuiz] = useState(null);
   const [quizData, setQuizData] = useState(null);
   const [loadingQuiz, setLoadingQuiz] = useState(false);
+  const [modalTab, setModalTab] = useState('quiz');
+  const [quizAnswers, setQuizAnswers] = useState({});
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [showQuizResults, setShowQuizResults] = useState(false);
+  const [quizResults, setQuizResults] = useState({});
 
   useEffect(() => {
     const fetchInsightsData = async () => {
