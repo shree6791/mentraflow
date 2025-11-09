@@ -1,14 +1,14 @@
 """
-Logging Middleware
+Request Logging Middleware
 Logs request and response details for monitoring
 """
 
 from fastapi import Request
 from starlette.middleware.base import BaseHTTPMiddleware
 import time
-import logging
+from utils.logger import get_logger
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class RequestLoggingMiddleware(BaseHTTPMiddleware):
