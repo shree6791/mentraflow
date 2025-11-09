@@ -19,6 +19,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
   const [showQuickReview, setShowQuickReview] = useState(false);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
   const [tooltipData, setTooltipData] = useState(null);
+  const [hoverTooltip, setHoverTooltip] = useState({ visible: false, x: 0, y: 0, data: null });
   
   // Keep refs up to date
   useEffect(() => {
