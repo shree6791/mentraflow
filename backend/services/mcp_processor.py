@@ -273,18 +273,34 @@ JSON array:"""
         
         Returns node_id
         """
-        # TODO: Integrate with actual MongoDB database
-        # For now, we'll use mock data structure
+        from db.mcp_data import create_mcp_concept, create_mcp_quiz
         
-        node_id = f"mcp_{platform}_{conversation_id}"
+        node_id = f"mcp_{platform}_{conversation_id[:8]}"
         
-        # Mock node creation
+        # Store each concept
+        concept_ids = []
+        for i, concept_text in enumerate(concepts):
+            concept = create_mcp_concept(
+                import_id=f"import_{user_id}_{conversation_id[:8]}",
+                user_id=user_id,
+                conversation_id=conversation_id,
+                concept_text=concept_text,
+                platform=platform,
+                summary=summary
+            )
+            concept_ids.append(concept["concept_id"])
+            
+            logger.info(f"Created concept: {concept['concept_id']} - {concept_text[:50]}...")
+        
+        # Store quiz if questions were generated
+        if quiz_questions:
+            quiz = create_mcp_quiz(
+                concept_id=concept_ids[0] if concept_ids else "unknown",
+                user_id=user_id,
+                questions=quiz_questions
+            )
+            logger.info(f"Created quiz: {quiz['quiz_id']} with {len(quiz_questions)} questions")
+        
         logger.info(f"Created knowledge node: {node_id} with {len(concepts)} concepts and {len(quiz_questions)} quiz questions")
-        
-        # In real implementation:
-        # - Store in MongoDB nodes collection
-        # - Link to user's knowledge graph
-        # - Schedule recall sessions
-        # - Create quiz entries
         
         return node_id
