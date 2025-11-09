@@ -307,7 +307,15 @@ const LoginContent = () => {
           </div>
         </div>
       )}
-      </div>
+    </div>
+  );
+};
+
+// Wrap with GoogleOAuthProvider
+const Login = () => {
+  return (
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+      <LoginContent />
     </GoogleOAuthProvider>
   );
 };
