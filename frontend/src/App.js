@@ -20,6 +20,7 @@ function App() {
     <div className="App">
       <AuthProvider>
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/science" element={<Science />} />
