@@ -683,22 +683,22 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
             <X size={16} />
           </button>
           
-          <strong style={{paddingRight: '1.5rem', display: 'block', marginBottom: '0.75rem', color: '#1a1a1a', fontSize: '1.1rem'}}>
+          <strong style={{paddingRight: '1.5rem', display: 'block', marginBottom: '0.75rem', color: COLORS.text.primary, fontSize: '1.1rem'}}>
             {tooltipData.node.title}
           </strong>
           
-          <div className="tooltip-stats" style={{marginBottom: '1rem', fontSize: '0.9rem', color: '#666'}}>
+          <div className="tooltip-stats" style={{marginBottom: '1rem', fontSize: '0.9rem', color: COLORS.text.secondary}}>
             <div style={{marginBottom: '0.25rem'}}>
-              <span style={{color: '#888'}}>Last Review:</span>{' '}
-              <span style={{color: '#1a1a1a', fontWeight: 500}}>{tooltipData.node.lastReview}</span>
+              <span style={{color: COLORS.text.muted}}>Last Review:</span>{' '}
+              <span style={{color: COLORS.text.primary, fontWeight: 500}}>{tooltipData.node.lastReview}</span>
             </div>
             <div style={{marginBottom: '0.25rem'}}>
-              <span style={{color: '#888'}}>Score:</span>{' '}
-              <span style={{color: '#1a1a1a', fontWeight: 500}}>{tooltipData.node.score}%</span>
+              <span style={{color: COLORS.text.muted}}>Score:</span>{' '}
+              <span style={{color: COLORS.text.primary, fontWeight: 500}}>{tooltipData.node.score}%</span>
             </div>
             <div>
-              <span style={{color: '#888'}}>Connections:</span>{' '}
-              <span style={{color: '#1a1a1a', fontWeight: 500}}>{tooltipData.node.connections.length}</span>
+              <span style={{color: COLORS.text.muted}}>Connections:</span>{' '}
+              <span style={{color: COLORS.text.primary, fontWeight: 500}}>{tooltipData.node.connections.length}</span>
             </div>
           </div>
           
