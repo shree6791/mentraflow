@@ -113,6 +113,11 @@
   margin: 0;
 }
 
+/* Add spacing below section titles (when not in section-header) */
+.activity-section > .section-title-with-tooltip {
+  margin-bottom: 1.5rem;
+}
+
 .info-tooltip-wrapper {
   position: relative;
   display: inline-flex;
