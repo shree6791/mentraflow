@@ -28,6 +28,7 @@ const Dashboard = () => {
   const [topics, setTopics] = useState([]);
   const [activeTab, setActiveTab] = useState('upload');
   const [uploadedContent, setUploadedContent] = useState('');
+  const [uploadedFileName, setUploadedFileName] = useState('');
   const [youtubeUrl, setYoutubeUrl] = useState('');
   const [summary, setSummary] = useState(null);
   const [quiz, setQuiz] = useState(null);
