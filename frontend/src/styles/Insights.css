@@ -445,9 +445,12 @@
   }
 
   .topics-grid,
-  .clusters-grid,
-  .recommendations-grid {
+  .clusters-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .recommendation-item {
+    min-width: 280px;
   }
 
   .section-header {
