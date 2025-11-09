@@ -447,7 +447,8 @@
   }
   
   .recommendation-item {
-    min-width: 280px;
+    min-width: 260px;
+    max-width: 300px;
   }
 
   .section-header {
