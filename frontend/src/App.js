@@ -1,7 +1,9 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
 import { AuthProvider } from './context/AuthContext';
 import ScrollToTop from './components/ScrollToTop';
+import { injectThemeVariables } from './constants/theme';
 import Home from './pages/Home';
 import Science from './pages/Science';
 import Vision from './pages/Vision';
@@ -16,6 +18,10 @@ import Settings from './pages/Settings';
 import KnowledgeGraphPage from './pages/KnowledgeGraphPage';
 
 function App() {
+  // Inject theme CSS variables on mount
+  useEffect(() => {
+    injectThemeVariables();
+  }, []);
   return (
     <div className="App">
       <AuthProvider>
