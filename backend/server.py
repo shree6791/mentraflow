@@ -4,6 +4,7 @@ from starlette.middleware.cors import CORSMiddleware
 import os
 from pathlib import Path
 from auth import auth_router, set_database
+from routes import google_auth
 
 # Import modular routes
 from routes import health, nodes, dashboard, stats, recall, insights, quiz
