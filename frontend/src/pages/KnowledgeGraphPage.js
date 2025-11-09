@@ -56,10 +56,9 @@ const KnowledgeGraphPage = () => {
     setSelectedTopic(topic);
     setModalTab(tab);
     
-    // Fetch complete node details (summary + quiz + performance)
+    // Fetch complete node details (summary + quiz + performance) - using service layer
     try {
-      const response = await axios.get(`${API}/node/${encodeURIComponent(topic.title)}`);
-      const data = response.data;
+      const data = await graphService.getNodeByTitle(topic.title);
       
       // Set quiz data if available
       if (data.quiz && data.quiz.questions) {
