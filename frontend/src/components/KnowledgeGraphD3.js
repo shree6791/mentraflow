@@ -16,7 +16,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   
-  // Use external search query if provided
+  // Use external search query if provided (prioritize external)
   const effectiveSearchQuery = externalSearchQuery || searchQuery;
   const [selectedNode, setSelectedNode] = useState(null);
   const [expandedNode, setExpandedNode] = useState(null);
