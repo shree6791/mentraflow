@@ -206,56 +206,57 @@ const LoginContent = () => {
             <span>or</span>
           </div>
 
-          <form className="auth-form" onSubmit={handleEmailLogin}>
-            <div className="form-field">
-              <input
-                type="email"
-                id="email"
-                value={formData.email}
-                onChange={(e) => setFormData({...formData, email: e.target.value})}
-                placeholder=" "
-                required
-              />
-              <label htmlFor="email">Email</label>
+          {/* Email/Password Login - Coming Soon */}
+          <div className="email-login-coming-soon">
+            <div className="coming-soon-badge">
+              <span className="badge-text">Coming Soon</span>
             </div>
-
-            <div className="form-field">
-              <input
-                type={showPassword ? 'text' : 'password'}
-                id="password"
-                value={formData.password}
-                onChange={(e) => setFormData({...formData, password: e.target.value})}
-                placeholder=" "
-                required
-              />
-              <label htmlFor="password">Password</label>
-              <button
-                type="button"
-                className="password-toggle"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-              </button>
-            </div>
-
-            <div className="form-options">
-              <label className="remember-me">
+            <form className="auth-form disabled-form" onSubmit={(e) => e.preventDefault()}>
+              <div className="form-field">
                 <input
-                  type="checkbox"
-                  checked={formData.remember}
-                  onChange={(e) => setFormData({...formData, remember: e.target.checked})}
+                  type="email"
+                  id="email"
+                  placeholder=" "
+                  disabled
                 />
-                <span>Remember me</span>
-              </label>
-              <button type="button" className="forgot-password" onClick={() => setShowEarlyAccessModal(true)}>
-                Forgot password?
-              </button>
-            </div>
+                <label htmlFor="email">Email</label>
+              </div>
 
-            <button type="submit" className="submit-btn" disabled={loading}>
-              {loading ? 'Processing...' : 'Login'}
-            </button>
-          </form>
+              <div className="form-field">
+                <input
+                  type="password"
+                  id="password"
+                  placeholder=" "
+                  disabled
+                />
+                <label htmlFor="password">Password</label>
+                <button
+                  type="button"
+                  className="password-toggle"
+                  disabled
+                >
+                  <Eye size={20} />
+                </button>
+              </div>
+
+              <div className="form-options">
+                <label className="remember-me">
+                  <input
+                    type="checkbox"
+                    disabled
+                  />
+                  <span>Remember me</span>
+                </label>
+                <button type="button" className="forgot-password" disabled>
+                  Forgot password?
+                </button>
+              </div>
+
+              <button type="submit" className="submit-btn" disabled>
+                Login
+              </button>
+            </form>
+          </div>
         </div>
       </div>
 
