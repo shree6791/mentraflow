@@ -307,8 +307,9 @@
 
 /* OPTIMIZED: Reduced spacing in plan price section */
 .upgrade-modal .plan-price {
-  margin: 8px 0 12px 0; /* Reduced from 2rem bottom */
-  padding-bottom: 0; /* Removed padding */
+  margin: 0 0 1rem 0; /* No top margin, 1rem bottom for space before border/features */
+  padding-bottom: 1rem; /* Add padding for visual separation */
+  border-bottom: 1px solid var(--divider); /* Add border below price */
   display: flex;
   align-items: baseline;
   justify-content: center; /* Center the price */
