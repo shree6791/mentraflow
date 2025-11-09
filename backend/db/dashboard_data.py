@@ -225,8 +225,6 @@ DOCUMENTS = [
     }
 ]
 
-# Generate derived data using helper functions
-STATS = get_stats(NODES)
-RECALL_TASKS = get_recall_tasks(NODES)
-KNOWLEDGE_CLUSTERS = get_knowledge_clusters(NODES)
-RECOMMENDATIONS = get_recommendations(NODES)
+# Note: Derived data (STATS, RECALL_TASKS, KNOWLEDGE_CLUSTERS, RECOMMENDATIONS)
+# is now computed on-demand by routes calling service functions directly.
+# This provides fresher data and better follows service layer pattern.
