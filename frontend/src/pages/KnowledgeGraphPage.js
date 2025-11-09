@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Filter, Search } from 'lucide-react';
 import { graphService } from '../services/api';
 import AppLayout from '../components/AppLayout';
+import LoadingBanner from '../components/LoadingBanner';
 import KnowledgeGraphD3 from '../components/KnowledgeGraphD3';
 import { QuizModal } from '../components/modals';
 import '../Dashboard.css';
