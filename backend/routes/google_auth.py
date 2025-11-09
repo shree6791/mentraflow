@@ -108,11 +108,12 @@ async def google_auth_callback(request: Request, response: Response):
         jwt_token = create_jwt_token(user_id, email)
         
         # Store session in database for tracking (optional but useful)
+        now = datetime.now(timezone.utc)
         session_doc = {
             "user_id": user_id,
             "session_token": jwt_token,
-            "expires_at": datetime.now(timezone.utc) + timedelta(days=JWT_EXPIRATION_DAYS),
-            "created_at": datetime.now(timezone.utc)
+            "expires_at": (now + timedelta(days=JWT_EXPIRATION_DAYS)).isoformat(),
+            "created_at": now.isoformat()
         }
         await db.user_sessions.insert_one(session_doc)
         
