@@ -72,12 +72,17 @@ async def get_nodes(
     # Apply limit
     limited_nodes = sorted_nodes[:limit]
     
-    return {
+    result = {
         "nodes": limited_nodes,
         "total": len(NODES),
         "showing": len(limited_nodes),
         "time_window_days": time_window
     }
+    
+    # Store in cache
+    medium_cache[cache_key] = result
+    
+    return result
 
 
 @router.get("/node/{title}")
