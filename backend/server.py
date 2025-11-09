@@ -14,7 +14,7 @@ from middleware.rate_limit import RateLimitMiddleware
 from middleware.cache import CacheMiddleware
 
 # Import centralized database connection
-from db.connection import db
+from db.connection import db, client
 
 # Import and setup centralized logging
 from utils.logger import setup_logging, get_logger
