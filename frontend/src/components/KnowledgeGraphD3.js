@@ -410,6 +410,67 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
     };
   }, [expandedNode, onTakeQuizRef, onViewSummaryRef]); // Removed activeFilters and searchQuery to prevent recreation
 
+  // Update node/link visibility when filters or search change (without recreating simulation)
+  useEffect(() => {
+    if (!svgRef.current || !simulationRef.current) return;
+
+    const svg = d3.select(svgRef.current);
+    const filteredNodes = getFilteredNodes();
+    const filteredNodeIds = new Set(filteredNodes.map(n => n.id));
+
+    // Update node visibility based on filters
+    svg.selectAll('.graph-node')
+      .transition()
+      .duration(300)
+      .style('opacity', d => filteredNodeIds.has(d.id) ? 1 : 0)
+      .style('pointer-events', d => filteredNodeIds.has(d.id) ? 'all' : 'none');
+
+    // Update node circle opacity based on search
+    svg.selectAll('.node-circle')
+      .transition()
+      .duration(300)
+      .attr('opacity', d => {
+        if (!filteredNodeIds.has(d.id)) return 0;
+        return nodeMatchesSearch(d) ? 1 : 0.2;
+      });
+
+    // Update node labels opacity based on search
+    svg.selectAll('.node-label')
+      .transition()
+      .duration(300)
+      .attr('opacity', d => {
+        if (!filteredNodeIds.has(d.id)) return 0;
+        return nodeMatchesSearch(d) ? 1 : 0.3;
+      });
+
+    // Update link visibility
+    svg.selectAll('.graph-link')
+      .transition()
+      .duration(300)
+      .attr('stroke-opacity', d => {
+        const sourceVisible = filteredNodeIds.has(d.source.id);
+        const targetVisible = filteredNodeIds.has(d.target.id);
+        if (!sourceVisible || !targetVisible) return 0;
+        
+        const sourceMatches = nodeMatchesSearch(d.source);
+        const targetMatches = nodeMatchesSearch(d.target);
+        const baseOpacity = getLinkOpacity(d.source, d.target);
+        return (sourceMatches && targetMatches) ? baseOpacity : baseOpacity * 0.2;
+      });
+
+    // Update simulation nodes (but don't restart heavily)
+    if (simulationRef.current) {
+      const allNodes = simulationRef.current.nodes();
+      allNodes.forEach(node => {
+        // Keep filtered-out nodes in place but mark them
+        node._filtered = !filteredNodeIds.has(node.id);
+      });
+      
+      // Very gentle restart to adjust positions slightly
+      simulationRef.current.alpha(0.05).restart();
+    }
+  }, [activeFilters, effectiveSearchQuery]);
+
   // Handle dimension changes separately without full redraw
   useEffect(() => {
     if (!svgRef.current || !simulationRef.current) return;
