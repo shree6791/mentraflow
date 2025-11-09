@@ -419,12 +419,14 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Naming convention refactor validation completed"
+    - "YouTube Tab for Capture New Knowledge Modal"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
 
 agent_communication:
+    - agent: "main"
+    - message: "✅ YOUTUBE TAB IMPLEMENTATION COMPLETE\n\n**Implementation Summary:**\n\n**Frontend Changes:**\n1. ✅ Added Video icon to lucide-react imports\n2. ✅ Added youtubeUrl state variable\n3. ✅ Created YouTube tab (third tab alongside Upload File and Paste Text)\n4. ✅ Implemented YouTube input zone with:\n   - Video icon positioned at left\n   - URL input field with proper placeholder\n   - Hint text explaining functionality\n5. ✅ Updated generateSummaryAndQuiz function:\n   - Frontend validation for YouTube URLs (supports youtube.com and youtu.be)\n   - Conditional request payload based on active tab\n   - Includes quiz customization options for all tabs\n   - Resets both uploadedContent and youtubeUrl after generation\n6. ✅ Updated button disable logic to handle all three tabs\n7. ✅ Added comprehensive CSS styles matching existing design patterns\n\n**Backend Integration:**\n✅ Backend already supports YouTube URL via /api/generate endpoint\n✅ KnowledgeCaptureRequest model accepts youtubeUrl field\n✅ Backend validates YouTube URLs and has mock processing logic\n\n**Status:** Frontend implementation complete. Ready for backend and UI testing."
     - agent: "main"
     - message: "✅ OPTION 2 IMPLEMENTATION - LAZY LOADING WITH SEPARATE CONTENT FILES\n\n**Implementation Completed:**\n\n**1. Created Separate Content Files:**\n- ✅ `/app/backend/quiz_data.py` - All quiz questions (8 topics, QUIZ_CONTENT dictionary)\n- ✅ `/app/backend/summary_data.py` - All summaries (8 topics, SUMMARY_CONTENT dictionary)\n\n**2. Refactored dashboard_data.py:**\n- ✅ Removed embedded `questions` and `summary` from all 8 NODES\n- ✅ Added `quizId` and `summaryId` references to each node\n- ✅ NODES now ~70% smaller (lean metadata only)\n- ✅ Structure: id, title, state, score, connections, quizId, summaryId\n\n**3. Updated server.py for Lazy Loading:**\n- ✅ Imported QUIZ_CONTENT from quiz_data.py\n- ✅ Imported SUMMARY_CONTENT from summary_data.py\n- ✅ GET /api/nodes - Returns lean nodes (no quiz/summary content loaded)\n- ✅ GET /api/node/{title} - Lazy loads quiz/summary on-demand using IDs\n- ✅ Quiz loaded only when modal opens: `QUIZ_CONTENT.get(node['quizId'])`\n- ✅ Summary loaded only when modal opens: `SUMMARY_CONTENT.get(node['summaryId'])`\n\n**4. Backend Restarted:**\n- ✅ No errors in logs\n- ✅ Application startup complete\n- ✅ Ready for testing\n\n**Benefits Achieved:**\n✅ Lean NODES structure (easier to scan and manage)\n✅ Content separated by type (quiz vs summary)\n✅ Lazy loading (content fetched only when needed)\n✅ Future-friendly (can add quiz versions, translations, etc.)\n✅ Better maintainability (update content without touching metadata)\n\n**Status:** Ready for comprehensive backend API testing with lazy loading"
     - agent: "testing"
