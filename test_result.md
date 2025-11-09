@@ -443,6 +443,7 @@ test_plan:
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
+  last_test_completed: "Complete Quiz Flow Testing with New Redesigned Results Screen"
 
 agent_communication:
     - agent: "main"
