@@ -1681,12 +1681,9 @@ html {
 
 .future-goal h4 {
   font-size: 1.5rem;
-  background: linear-gradient(135deg, #EF476F, #FFD166);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: white;
   margin-bottom: 1rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .future-goal p {
