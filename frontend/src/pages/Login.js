@@ -288,16 +288,14 @@ const LoginContent = () => {
                     onChange={(e) => setEarlyAccessData({...earlyAccessData, name: e.target.value})}
                     required
                   />
-                  <div className="form-field">
-                    <input
-                      type="email"
-                      value={earlyAccessData.email}
-                      onChange={(e) => setEarlyAccessData({...earlyAccessData, email: e.target.value})}
-                      placeholder=" "
-                      required
-                    />
-                    <label>Email</label>
-                  </div>
+                  <FormInput
+                    type="email"
+                    name="email"
+                    label="Email"
+                    value={earlyAccessData.email}
+                    onChange={(e) => setEarlyAccessData({...earlyAccessData, email: e.target.value})}
+                    required
+                  />
                   <Button type="submit" className="submit-btn" fullWidth>Join Waitlist</Button>
                 </form>
               </>
