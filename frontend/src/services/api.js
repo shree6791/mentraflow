@@ -180,8 +180,8 @@ export const quizService = {
     return response.data;
   },
 
-  getRecallQuiz: async () => {
-    const response = await apiClient.get('/recall/quiz');
+  getRecallQuiz: async (title) => {
+    const response = await apiClient.get(`/recall-quiz/${encodeURIComponent(title)}`);
     return response.data;
   },
 
