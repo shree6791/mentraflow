@@ -2266,8 +2266,10 @@
   line-height: 1.4;
 }
 
+/* Recall Quiz Modal - Medium size */
 .recall-quiz-modal {
   max-width: 700px;
+  /* Inherits base modal properties */
 }
 
 .question-number {
