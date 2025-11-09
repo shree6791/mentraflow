@@ -550,6 +550,17 @@
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--primary-teal);
+  transition: all 0.2s ease;
+}
+
+.cluster-topic-tag.clickable {
+  cursor: pointer;
+}
+
+.cluster-topic-tag.clickable:hover {
+  background: rgba(14, 124, 123, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Recommendations Enhanced */
