@@ -4,6 +4,7 @@ import { ArrowLeft, TrendingUp, TrendingDown, Target, BookOpen, Zap, Brain, Exte
 import axios from 'axios';
 import { statsService, graphService, insightsService } from '../services/api';
 import { formatPercentage } from '../utils/formatters';
+import { COLORS } from '../constants/theme';
 import AppLayout from '../components/AppLayout';
 import QuizModal from '../components/modals/QuizModal';
 import '../styles/Insights.css';
