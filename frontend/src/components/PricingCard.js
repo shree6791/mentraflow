@@ -12,7 +12,7 @@ const PricingCard = ({ plan, onCTAClick, isPopular }) => {
       <div className="plan-price">
         <span className="price">${plan.price}</span>
         <span className="period">{plan.period}</span>
-        {plan.id === 'teams' && <span className="custom-note">(Custom)</span>}
+        {/* {plan.id === 'teams' && <span className="custom-note">(Custom)</span>} */}
       </div>
       <ul className="plan-features">
         {plan.features.map((feature, idx) => (
