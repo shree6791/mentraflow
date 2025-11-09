@@ -209,7 +209,12 @@ const Insights = () => {
             </div>
             <div className="topics-grid">
               {performanceData.medium.map((topic, idx) => (
-                <div key={idx} className="topic-card medium">
+                <div 
+                  key={idx} 
+                  className="topic-card medium clickable"
+                  onClick={() => handleOpenQuiz(topic.topic)}
+                  title="Click to take quiz"
+                >
                   <div className="topic-header">
                     <h4>{topic.topic}</h4>
                     <span className="score-badge medium">{topic.score}%</span>
