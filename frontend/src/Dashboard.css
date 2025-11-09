@@ -413,32 +413,28 @@
   margin: 0;
 }
 
-/* Compact Meta Row - All info in one horizontal line */
-.library-item-meta-row {
+/* Unified Row: Chips (left) + Links (right) */
+.library-item-unified-row {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  font-size: 0.75rem;
-  margin: 0.25rem 0;
-}
-
-.library-item-filename-row {
-  display: flex;
-  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   margin: 0.5rem 0;
+  font-size: 0.75rem;
 }
 
-.library-item-actions-row {
+.chips-container {
   display: flex;
   align-items: center;
-  margin: 0.25rem 0;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .quick-action-links {
   display: flex;
   align-items: center;
   gap: 0.625rem;
+  flex-shrink: 0;
 }
 
 .link-btn-compact {
