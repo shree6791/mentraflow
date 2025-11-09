@@ -2214,8 +2214,10 @@
   color: white;
 }
 
+/* Quiz Customization Modal - Compact size */
 .quiz-custom-modal {
   max-width: 600px;
+  /* Inherits base modal properties */
 }
 
 .quiz-custom-form {
