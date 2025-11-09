@@ -474,6 +474,7 @@ html {
   justify-content: center;
   font-family: var(--font-body);
   text-align: center;
+  min-width: 200px;
 }
 
 .btn-secondary:hover {
