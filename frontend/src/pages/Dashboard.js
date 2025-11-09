@@ -1114,7 +1114,7 @@ const Dashboard = () => {
                           className={`retention-fill retention-${item.retention}`}
                           style={{width: `${item.quizScore}%`}}
                         />
-                        <span className="retention-score">{item.quizScore}% mastered</span>
+                        <span className="retention-score">{formatPercentage(item.quizScore)} mastered</span>
                       </div>
                     )}
                   </div>
