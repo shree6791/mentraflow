@@ -399,6 +399,18 @@ frontend:
         - agent: "main"
         - comment: "TODO: Filter buttons and Sort dropdown should be on same horizontal line in desktop view (left and right corners). Currently appearing as plain text on separate lines. CSS has flex-wrap: nowrap and margin-left: auto configured, but styled container not rendering properly. May need cache clear or container structure verification."
 
+  - task: "YouTube Tab for Capture New Knowledge Modal"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/Dashboard.js, /app/frontend/src/Dashboard.css"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+        - agent: "main"
+        - comment: "IMPLEMENTED: Added YouTube tab to the Capture New Knowledge modal. Changes: (1) Added Video icon import from lucide-react, (2) Added youtubeUrl state variable, (3) Created third tab 'YouTube' alongside Upload File and Paste Text, (4) Implemented YouTube input UI with icon, URL input field, and hint text, (5) Updated generateSummaryAndQuiz function to handle YouTube URLs with frontend validation (supports both youtube.com and youtu.be), (6) Added proper request payload formatting based on active tab, (7) Integrated quiz customization options (questionCount, difficulty, focusArea) for all tabs, (8) Added CSS styles for youtube-zone, youtube-input-container, youtube-icon, and youtube-input with matching design patterns, (9) Reset youtubeUrl after successful generation. Frontend validation ensures proper YouTube URL format before API call. Backend already supports YouTube URL processing via /api/generate endpoint."
+
 metadata:
   created_by: "main_agent"
   version: "7.0"
