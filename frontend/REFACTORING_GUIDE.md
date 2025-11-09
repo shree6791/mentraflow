@@ -137,6 +137,26 @@ This document tracks the refactoring work done to improve code organization, red
 - ✅ Total: Dashboard.js (3 locations) + Insights.js (7 locations) = 10 locations
 - ✅ Consistent percentage formatting across entire app
 
+### Phase 1C: Expand Theme Usage - ✅ COMPLETED
+- ✅ **Insights.js** - Converted 4 stat card icon backgrounds to use COLORS constants
+  - Brain icon: `COLORS.primary.teal`
+  - Target icon: `COLORS.retention.green`
+  - TrendingUp icon: `COLORS.primary.ocean`
+  - Zap icon: `COLORS.secondary.yellow`
+- ✅ **KnowledgeGraphD3.js** - Converted 10 inline styles
+  - Legend dots: 3 retention colors (green, yellow, red)
+  - Tooltip title: `COLORS.text.primary`
+  - Tooltip stats: `COLORS.text.secondary`
+  - Tooltip labels: `COLORS.text.muted` (3 instances)
+  - Tooltip values: `COLORS.text.primary` (3 instances)
+- ✅ **CSS Custom Properties System**
+  - Created `getCSSVariables()` function in theme.js
+  - Exports 40+ CSS variables (colors, spacing, shadows, radius)
+  - Created `injectThemeVariables()` function
+  - Integrated into App.js on mount
+  - All theme values now accessible as CSS variables
+  - Enables dynamic theming support for future
+
 ## Remaining Work - NONE! ✅
 
 ### Phase 1C: Expand Theme Usage - ✅ COMPLETED
