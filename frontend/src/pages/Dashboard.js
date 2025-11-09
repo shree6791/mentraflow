@@ -966,9 +966,12 @@ const Dashboard = () => {
         {/* My Knowledge Library - Main Content */}
         <section className="dashboard-section library-section-main">
           <div className="section-header">
-            <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+            <div className="section-title-with-tooltip">
               <h2>My Knowledge Library</h2>
-              <Tooltip content="All your captured knowledge organized by retention strength. Use filters to focus on specific topics or sort by priority." position="right" />
+              <div className="info-tooltip-wrapper">
+                <Info size={16} className="info-icon" />
+                <div className="info-tooltip">All your captured knowledge organized by retention strength</div>
+              </div>
             </div>
             <div style={{display: 'flex', alignItems: 'center', gap: '0.75rem'}}>
               <button className="btn-icon-text" onClick={() => setShowFilterModal(true)}>
