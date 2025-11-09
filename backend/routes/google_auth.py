@@ -28,6 +28,7 @@ JWT_EXPIRATION_DAYS = int(os.getenv("JWT_EXPIRATION_DAYS", 7))
 
 def create_jwt_token(user_id: str, email: str) -> str:
     """Create JWT token for user"""
+    logger.info(f"JWT_SECRET type: {type(JWT_SECRET)}, value: {JWT_SECRET}")
     now = datetime.now(timezone.utc)
     expiration = now + timedelta(days=JWT_EXPIRATION_DAYS)
     
