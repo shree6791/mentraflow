@@ -6,10 +6,15 @@ All endpoints used on the Dashboard page:
 """
 
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
-from typing import List, Optional
 import logging
 from db.dashboard_data import DOCUMENTS
+from models.knowledge import (
+    KnowledgeCaptureRequest,
+    SummaryResponse,
+    QuizQuestion,
+    QuizResponse,
+    GenerateResponse
+)
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -23,43 +28,6 @@ logger = logging.getLogger(__name__)
 async def get_library_items():
     """Get all documents (user's uploaded study materials)"""
     return {"items": DOCUMENTS}
-
-
-# ========================================
-# KNOWLEDGE CAPTURE & GENERATION
-# ========================================
-
-# Models
-class KnowledgeCaptureRequest(BaseModel):
-    content: str
-    title: Optional[str] = None
-    tags: Optional[List[str]] = []
-    
-    # Quiz customization options
-    questionCount: Optional[int] = 5  # Default: 5 questions
-    difficulty: Optional[str] = "balanced"  # Default: balanced (easy, balanced, advanced)
-    focusArea: Optional[str] = "all"  # Default: all topics
-
-
-class SummaryResponse(BaseModel):
-    content: str
-    keyTakeaways: List[str]
-    keywords: List[str]
-
-
-class QuizQuestion(BaseModel):
-    q: str
-    options: List[str]
-    correctIndex: int
-
-
-class QuizResponse(BaseModel):
-    questions: List[QuizQuestion]
-
-
-class GenerateResponse(BaseModel):
-    summary: SummaryResponse
-    quiz: QuizResponse
 
 
 @router.post("/generate", response_model=GenerateResponse)
