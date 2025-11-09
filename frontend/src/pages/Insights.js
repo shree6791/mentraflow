@@ -391,19 +391,30 @@ const Insights = () => {
       {/* Quiz Modal */}
       {showQuizModal && quizData && (
         <QuizModal
-          isOpen={showQuizModal}
+          item={quizData}
+          modalTab={modalTab}
+          onTabChange={setModalTab}
           onClose={() => {
             setShowQuizModal(false);
             setQuizData(null);
             setSelectedTopicForQuiz(null);
+            setModalTab('quiz');
+            setQuizAnswers({});
+            setCurrentQuestionIndex(0);
+            setShowQuizResults(false);
+            setQuizResults({});
           }}
-          content={quizData}
-          onComplete={() => {
-            setShowQuizModal(false);
-            setQuizData(null);
-            setSelectedTopicForQuiz(null);
-            // Optionally refresh insights data here
-          }}
+          quizData={quizData}
+          quizAnswers={quizAnswers}
+          currentQuestionIndex={currentQuestionIndex}
+          showQuizResults={showQuizResults}
+          quizResults={quizResults}
+          onAnswerSelect={handleAnswerSelect}
+          onPreviousQuestion={handlePreviousQuestion}
+          onNextQuestion={handleNextQuestion}
+          onSubmitQuiz={handleSubmitQuiz}
+          onRetakeQuiz={handleRetakeQuiz}
+          calculateScore={calculateQuizScore}
         />
       )}
     </>
