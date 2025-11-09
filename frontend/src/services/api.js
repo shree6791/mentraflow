@@ -116,7 +116,12 @@ export const insightsService = {
   },
 
   getRecommendations: async () => {
-    const response = await apiClient.get('/insights/recommendations');
+    const response = await apiClient.get('/recommendations');
+    return response.data;
+  },
+
+  getClusters: async () => {
+    const response = await apiClient.get('/clusters');
     return response.data;
   },
 
