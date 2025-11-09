@@ -52,7 +52,7 @@ const Pricing = () => {
               Explore Plans
             </button>
             <button className="btn-secondary" onClick={handleTryMentraFlow}>
-              Access Demo
+              Try MentraFlow
             </button>
           </div>
         </div>
