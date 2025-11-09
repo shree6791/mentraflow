@@ -408,7 +408,7 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
     return () => {
       simulation.stop();
     };
-  }, [activeFilters, searchQuery, effectiveSearchQuery, expandedNode, onTakeQuizRef, onViewSummaryRef]);
+  }, [expandedNode, onTakeQuizRef, onViewSummaryRef]); // Removed activeFilters and searchQuery to prevent recreation
 
   // Handle dimension changes separately without full redraw
   useEffect(() => {
