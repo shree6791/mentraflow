@@ -15,6 +15,9 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
   const [activeFilters, setActiveFilters] = useState(['high', 'medium', 'fading']);
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  
+  // Use external search query if provided
+  const effectiveSearchQuery = externalSearchQuery || searchQuery;
   const [selectedNode, setSelectedNode] = useState(null);
   const [expandedNode, setExpandedNode] = useState(null);
   const [showQuickReview, setShowQuickReview] = useState(false);
