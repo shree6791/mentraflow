@@ -106,18 +106,17 @@ const Insights = () => {
       
       // Check if it's a nodeId format (starts with 't' followed by number)
       if (/^t\d+$/.test(topicNameOrNodeId)) {
-        // Fetch all nodes to find the matching topic
-        const nodesResponse = await axios.get(`${API}/nodes`);
-        const allNodes = nodesResponse.data?.nodes || [];
+        // Fetch all nodes to find the matching topic - using service layer
+        const nodesData = await graphService.getNodes();
+        const allNodes = nodesData?.nodes || [];
         const matchingNode = allNodes.find(n => n.id === topicNameOrNodeId);
         if (matchingNode) {
           topicName = matchingNode.title;
         }
       }
       
-      // Fetch the full node data including quiz
-      const response = await axios.get(`${API}/node/${encodeURIComponent(topicName)}`);
-      const responseData = response.data;
+      // Fetch the full node data including quiz - using service layer
+      const responseData = await graphService.getNodeByTitle(topicName);
       
       // Backend returns nested structure: {node, summary, quiz, performance}
       // We need to flatten it for QuizModal
