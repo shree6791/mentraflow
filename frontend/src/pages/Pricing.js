@@ -154,9 +154,9 @@ const Pricing = () => {
               Let's explore how MentraFlow can scale your team's learning infrastructure.
               We'll reach out within 24 hours.
             </p>
-            <button className="btn-primary" onClick={modal.close}>
+            <Button variant="primary" onClick={modal.close}>
               Got it!
-            </button>
+            </Button>
           </div>
         </div>
       )}
