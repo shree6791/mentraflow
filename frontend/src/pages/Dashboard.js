@@ -154,21 +154,21 @@ const Dashboard = () => {
       try {
         setLoading(true);
         
-        // Fetch all dashboard data including stats
-        const [libraryResponse, nodesResponse, recallResponse, statsResponse] = await Promise.all([
-          axios.get(`${API}/library`),
-          axios.get(`${API}/nodes`),
-          axios.get(`${API}/recall-tasks`),
-          axios.get(`${API}/stats`)
+        // Fetch all dashboard data using centralized service layer
+        const [libraryData, nodesData, recallData, statsData] = await Promise.all([
+          dashboardService.getLibrary(),
+          graphService.getNodes(),
+          dashboardService.getRecallTasks(),
+          dashboardService.getStats()
         ]);
 
         // Set data from API responses
-        setLibraryItems(libraryResponse.data?.items || []);
-        setTopics(nodesResponse.data?.nodes || []);
-        setRecallTasks(recallResponse.data?.tasks || []);
+        setLibraryItems(libraryData?.items || []);
+        setTopics(nodesData?.nodes || []);
+        setRecallTasks(recallData?.tasks || []);
         
         // Set dashboard statistics
-        const dashboardStats = statsResponse.data?.dashboard || {};
+        const dashboardStats = statsData?.dashboard || {};
         setMasteryScore(dashboardStats.avgRetention || 68);
         setStreak(dashboardStats.streakDays || 4);
         
