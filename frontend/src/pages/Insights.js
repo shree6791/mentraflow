@@ -240,7 +240,12 @@ const Insights = () => {
             </div>
             <div className="topics-grid">
               {performanceData.weak.map((topic, idx) => (
-                <div key={idx} className="topic-card weak">
+                <div 
+                  key={idx} 
+                  className="topic-card weak clickable"
+                  onClick={() => handleOpenQuiz(topic.topic)}
+                  title="Click to take quiz"
+                >
                   <div className="topic-header">
                     <h4>{topic.topic}</h4>
                     <span className="score-badge weak">{topic.score}%</span>
