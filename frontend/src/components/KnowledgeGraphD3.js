@@ -586,6 +586,46 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
           </div>
         </div>
       )}
+
+      {/* MVP Demo: Hover Tooltip for Quick Info */}
+      {hoverTooltip.visible && hoverTooltip.data && (
+        <div 
+          className="graph-hover-tooltip"
+          style={{
+            position: 'absolute',
+            left: `${hoverTooltip.x}px`,
+            top: `${hoverTooltip.y}px`,
+            pointerEvents: 'none',
+            zIndex: 9999
+          }}
+        >
+          <div style={{
+            background: 'white',
+            border: '1px solid #E0E0E0',
+            borderRadius: '8px',
+            padding: '0.75rem 1rem',
+            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.15)',
+            minWidth: '200px'
+          }}>
+            <h4 style={{margin: '0 0 0.5rem 0', fontSize: '0.95rem', fontWeight: 600, color: '#0E7C7B'}}>
+              {hoverTooltip.data.title}
+            </h4>
+            <div style={{display: 'flex', flexDirection: 'column', gap: '0.25rem', marginBottom: '0.5rem'}}>
+              <span style={{fontSize: '0.8125rem', color: '#333'}}>
+                📊 {hoverTooltip.data.score}% retention
+              </span>
+              <span style={{fontSize: '0.8125rem', color: '#333'}}>
+                🔗 {hoverTooltip.data.connections?.length || 0} connections
+              </span>
+            </div>
+            <div style={{paddingTop: '0.5rem', borderTop: '1px solid #E0E0E0'}}>
+              <span style={{fontSize: '0.75rem', color: '#888'}}>
+                Last: {hoverTooltip.data.lastReview}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
