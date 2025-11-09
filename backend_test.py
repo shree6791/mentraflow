@@ -1312,10 +1312,13 @@ if __name__ == "__main__":
         elif sys.argv[1] == "naming":
             tester.run_naming_convention_tests()
             tester.print_summary()
+        elif sys.argv[1] == "youtube":
+            tester.run_youtube_integration_tests()
+            tester.print_summary()
         else:
-            print("Usage: python backend_test.py [all|refactored|lazy|naming]")
-            print("Default: naming convention tests")
+            print("Usage: python backend_test.py [all|refactored|lazy|naming|youtube]")
+            print("Default: YouTube integration tests")
     else:
-        # Run naming convention tests by default for this review request
-        tester.run_naming_convention_tests()
+        # Run YouTube integration tests by default for this review request
+        tester.run_youtube_integration_tests()
         tester.print_summary()
