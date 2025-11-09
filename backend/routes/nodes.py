@@ -35,6 +35,9 @@ async def get_node_detail(title: str):
     """
     decoded_title = urllib.parse.unquote(title)
     
+    # Validate title
+    NodeValidator.validate_title(decoded_title)
+    
     # Find the node
     node = next((n for n in NODES if n["title"] == decoded_title), None)
     if not node:
