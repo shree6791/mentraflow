@@ -83,6 +83,33 @@ const Insights = () => {
     fetchInsightsData();
   }, [API]);
 
+  // Handler to open quiz for a specific topic
+  const handleOpenQuiz = async (topicName) => {
+    setLoadingQuiz(true);
+    setSelectedTopicForQuiz(topicName);
+    
+    try {
+      // Fetch the full node data including quiz
+      const response = await axios.get(`${API}/node/${encodeURIComponent(topicName)}`);
+      const nodeData = response.data;
+      
+      if (nodeData && nodeData.quiz) {
+        setQuizData({
+          type: 'quiz',
+          title: nodeData.title,
+          questions: nodeData.quiz
+        });
+        setShowQuizModal(true);
+      } else {
+        console.error('No quiz data available for this topic');
+      }
+    } catch (error) {
+      console.error('Error fetching quiz data:', error);
+    } finally {
+      setLoadingQuiz(false);
+    }
+  };
+
   if (loading) {
     return (
       <AppLayout title="Your Learning Insights">
