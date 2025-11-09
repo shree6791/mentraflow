@@ -134,9 +134,9 @@ const Pricing = () => {
           <p className="fade-in">
             Start free, stay consistent, and watch your learning evolve.
           </p>
-          <button className="btn-cta-banner fade-in" onClick={handleTryMentraFlow}>
+          <Button variant="primary" size="lg" className="btn-cta-banner fade-in" onClick={handleTryMentraFlow}>
             Try MentraFlow
-          </button>
+          </Button>
         </div>
       </section>
 
