@@ -280,16 +280,14 @@ const LoginContent = () => {
                 <h3>Join Early Access</h3>
                 <p>Be among the first to experience MentraFlow's memory infrastructure.</p>
                 <form onSubmit={handleEarlyAccessSubmit}>
-                  <div className="form-field">
-                    <input
-                      type="text"
-                      value={earlyAccessData.name}
-                      onChange={(e) => setEarlyAccessData({...earlyAccessData, name: e.target.value})}
-                      placeholder=" "
-                      required
-                    />
-                    <label>Name</label>
-                  </div>
+                  <FormInput
+                    type="text"
+                    name="name"
+                    label="Name"
+                    value={earlyAccessData.name}
+                    onChange={(e) => setEarlyAccessData({...earlyAccessData, name: e.target.value})}
+                    required
+                  />
                   <div className="form-field">
                     <input
                       type="email"
