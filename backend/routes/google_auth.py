@@ -140,8 +140,10 @@ async def google_auth_callback(request: Request, response: Response):
     except HTTPException:
         raise
     except Exception as e:
+        import traceback
         logger.error(f"Error in Google auth callback: {str(e)}")
-        raise HTTPException(status_code=500, detail="Authentication failed")
+        logger.error(f"Traceback: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=f"Authentication failed: {str(e)}")
 
 @router.get("/verify")
 async def verify_token(request: Request):
