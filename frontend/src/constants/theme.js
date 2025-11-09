@@ -31,6 +31,9 @@ export const COLORS = {
     dark: '#1F2937',
     gray: '#6B7280',
     light: '#9CA3AF',
+    primary: '#1a1a1a',
+    secondary: '#666',
+    muted: '#888',
   },
   
   // Background Colors
