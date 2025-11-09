@@ -89,14 +89,33 @@ const Login = () => {
     */
   }, [navigate, processingSession]);
 
-  const handleGoogleLogin = () => {
-    // TEMPORARY BYPASS: Go directly to dashboard and set auth
-    login({ email: 'demo@mentraflow.com', name: 'Demo User' });
-    navigate('/dashboard');
+  const handleGoogleLoginSuccess = async (credentialResponse) => {
+    setLoading(true);
+    setError('');
     
-    /* COMMENTED OUT - Re-enable for production
-    window.location.href = EMERGENT_AUTH_URL;
-    */
+    try {
+      const response = await axios.post(`${API}/auth/google/callback`, {
+        credential: credentialResponse.credential
+      }, {
+        withCredentials: true  // Important for cookies
+      });
+      
+      if (response.data.success) {
+        // Store user data
+        login(response.data.user);
+        
+        // Navigate to dashboard
+        navigate('/dashboard');
+      }
+    } catch (err) {
+      console.error('Google login error:', err);
+      setError(err.response?.data?.detail || 'Google login failed. Please try again.');
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleLoginError = () => {
+    setError('Google login failed. Please try again.');
   };
 
   const handleEmailLogin = async (e) => {
