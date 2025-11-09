@@ -211,6 +211,7 @@ const Insights = () => {
   if (loading) {
     return (
       <AppLayout title="Your Learning Insights">
+        <LoadingBanner message="Loading your insights..." type="info" />
         <div className="insights-loading">
           <div className="loading-spinner"></div>
           <p>Loading your insights...</p>
