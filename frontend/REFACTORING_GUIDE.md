@@ -137,35 +137,14 @@ This document tracks the refactoring work done to improve code organization, red
 - ✅ Total: Dashboard.js (3 locations) + Insights.js (7 locations) = 10 locations
 - ✅ Consistent percentage formatting across entire app
 
-## Next Steps
+## Remaining Work (4% - 1 Task)
 
-### Phase 2B: Complete API Service Migration (High Priority)
-- [ ] Update Dashboard.js to use API services (20+ axios calls)
-- [ ] Update KnowledgeGraphPage.js to use graphService
-- [ ] Update Login.js to use authService
-- [ ] Add missing endpoints to api.js (clusters, recommendations, recall-tasks, library)
-- [ ] Remove direct axios imports after full migration
+### Phase 1C: Expand Theme Usage (Optional Enhancement)
+- [ ] Use theme constants in additional inline styles across components
+- [ ] Apply to more D3.js visualizations beyond KnowledgeGraphD3
+- [ ] Consider exporting theme as CSS custom properties for dynamic runtime theming
 
-### Phase 1C: Expand Theme Usage (Medium Priority)
-- [ ] Use theme constants in more D3.js visualizations
-- [ ] Apply to inline styles in other components
-- [ ] Consider exporting as CSS custom properties for dynamic theming
-
-### Phase 1D: Expand Formatter Usage (Medium Priority)
-- [ ] Replace all percentage displays across app
-- [ ] Add formatRelativeTime() for "last reviewed" dates
-- [ ] Use formatDate() for formatted date displays
-- [ ] Apply formatNumber() to large stat numbers
-
-### Phase 3B: Component Integration (Medium Priority)
-- [ ] Replace 5-10 buttons with Button component (start with Pricing, Home pages)
-- [ ] Replace login form inputs with FormInput component
-- [ ] Create documentation for component usage
-
-### Phase 3C: Hook Integration (Low Priority)
-- [ ] Integrate useModal into Home.js modal
-- [ ] Find form validation candidates for useForm
-- [ ] Identify data fetching patterns for useAPI hook
+**Note**: This is an optional enhancement. The core refactoring is complete and production-ready.
 
 ## Integration Examples
 
