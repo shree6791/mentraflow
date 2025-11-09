@@ -86,7 +86,6 @@ async def get_nodes(
 
 
 @router.get("/node/{title}")
-@cached(medium_cache, "get_node_detail")
 async def get_node_detail(title: str):
     """
     DETAIL API - Get comprehensive node data (with lazy loading)
@@ -96,6 +95,18 @@ async def get_node_detail(title: str):
     LAZY LOADING: Quiz and summary content loaded on-demand from separate files
     Cached: 5 minutes (medium_cache)
     """
+    # Manual cache implementation
+    from utils.cache import medium_cache, generate_cache_key, cache_stats
+    
+    cache_key = generate_cache_key("get_node_detail", title=title)
+    cache_stats['total_requests'] += 1
+    
+    if cache_key in medium_cache:
+        cache_stats['hits'] += 1
+        return medium_cache[cache_key]
+    
+    cache_stats['misses'] += 1
+    
     decoded_title = urllib.parse.unquote(title)
     
     # Validate title
