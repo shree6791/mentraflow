@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AppLayout from '../components/AppLayout';
 import KnowledgeGraphD3 from '../components/KnowledgeGraphD3';
-import QuizModal from '../components/QuizModal';
+import { QuizModal } from '../components/modals';
 import '../Dashboard.css';
 
 const KnowledgeGraphPage = () => {
