@@ -337,6 +337,25 @@ const Insights = () => {
           </div>
         </div>
       </AppLayout>
+
+      {/* Quiz Modal */}
+      {showQuizModal && quizData && (
+        <QuizModal
+          isOpen={showQuizModal}
+          onClose={() => {
+            setShowQuizModal(false);
+            setQuizData(null);
+            setSelectedTopicForQuiz(null);
+          }}
+          content={quizData}
+          onComplete={() => {
+            setShowQuizModal(false);
+            setQuizData(null);
+            setSelectedTopicForQuiz(null);
+            // Optionally refresh insights data here
+          }}
+        />
+      )}
   );
 };
 
