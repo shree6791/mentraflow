@@ -27,36 +27,8 @@ const Billing = () => {
     storageLimit: '50 MB'
   };
 
-  const plans = [
-    {
-      id: 'pro',
-      name: 'Pro Plan',
-      price: 9.99,
-      period: '/ month',
-      subtitle: 'Best for Consultants',
-      features: [
-        'Unlimited notes',
-        'Integrations (Notion, Slack, ChatGPT)',
-        'Retention analytics',
-        'Recall reminders'
-      ],
-      popular: true
-    },
-    {
-      id: 'teams',
-      name: 'Teams Plan',
-      price: 14.99,
-      period: '/ user / month',
-      subtitle: 'Best for Organizations',
-      features: [
-        'Multi-seat dashboards',
-        'Team analytics',
-        'Priority support',
-        'Custom integrations'
-      ],
-      popular: false
-    }
-  ];
+  // Get upgrade plans from shared constants
+  const plans = getUpgradePlans();
 
   const handleUpgrade = (planId) => {
     console.log('Upgrading to:', planId);
