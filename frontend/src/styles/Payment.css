@@ -212,7 +212,9 @@
 .order-summary-section {
   position: sticky;
   top: 2rem;
-  height: fit-content;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .order-summary {
