@@ -21,6 +21,26 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
   const [tooltipData, setTooltipData] = useState(null);
   const [hoverTooltip, setHoverTooltip] = useState({ visible: false, x: 0, y: 0, data: null });
   
+  // Handle window resize for responsive graph
+  useEffect(() => {
+    const handleResize = () => {
+      if (containerRef.current) {
+        const width = containerRef.current.clientWidth;
+        const height = containerRef.current.clientHeight;
+        setDimensions({ width, height });
+      }
+    };
+
+    // Add resize listener
+    window.addEventListener('resize', handleResize);
+    
+    // Initial size check
+    handleResize();
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
   // Keep refs up to date
   useEffect(() => {
     onTakeQuizRef.current = onTakeQuiz;
