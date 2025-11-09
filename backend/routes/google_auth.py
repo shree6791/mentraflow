@@ -19,12 +19,16 @@ def set_database(database):
     global db
     db = database
 
-# Get credentials from environment
-GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
-GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
-JWT_SECRET = os.getenv("JWT_SECRET")
-JWT_ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
-JWT_EXPIRATION_DAYS = int(os.getenv("JWT_EXPIRATION_DAYS", 7))
+# Get credentials from environment (lazily loaded via functions)
+def get_google_client_id():
+    return os.getenv("GOOGLE_CLIENT_ID")
+
+def get_jwt_config():
+    return {
+        "secret": os.getenv("JWT_SECRET"),
+        "algorithm": os.getenv("JWT_ALGORITHM", "HS256"),
+        "expiration_days": int(os.getenv("JWT_EXPIRATION_DAYS", 7))
+    }
 
 def create_jwt_token(user_id: str, email: str) -> str:
     """Create JWT token for user"""
