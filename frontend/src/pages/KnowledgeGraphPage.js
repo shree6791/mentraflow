@@ -29,16 +29,15 @@ const KnowledgeGraphPage = () => {
   useEffect(() => {
     const fetchTopics = async () => {
       try {
-        const response = await axios.get(`${API}/nodes`, {
-          params: {
-            time_window: timeWindow,
-            limit: 100
-          }
+        // Use centralized API service layer
+        const data = await graphService.getNodes({
+          time_window: timeWindow,
+          limit: 100
         });
-        setTopics(response.data?.nodes || []);
+        setTopics(data?.nodes || []);
         setNodeStats({
-          total: response.data?.total || 0,
-          showing: response.data?.showing || 0
+          total: data?.total || 0,
+          showing: data?.showing || 0
         });
         setLoading(false);
       } catch (error) {
@@ -49,7 +48,7 @@ const KnowledgeGraphPage = () => {
     };
 
     fetchTopics();
-  }, [API, timeWindow]);
+  }, [timeWindow]);
 
   // Modal Handlers  
   const openTopicModal = async (topic, tab = 'summary') => {
