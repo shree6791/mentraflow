@@ -4045,6 +4045,29 @@
     flex-shrink: 0;
   }
   
+  /* Library Cards - Horizontal Carousel on Mobile */
+  .library-list {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    grid-template-columns: none;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    padding-bottom: 0.5rem;
+  }
+  
+  .library-list::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
+  
+  .library-item {
+    min-width: 280px;
+    max-width: 320px;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+  
   .priority-section {
     padding: 1.5rem;
   }
