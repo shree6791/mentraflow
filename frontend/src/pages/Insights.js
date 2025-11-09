@@ -42,9 +42,24 @@ const Insights = () => {
         // Process topics data into performance categories
         const topics = nodesResponse.data?.nodes || [];
         const categorizedTopics = {
-          strong: topics.filter(t => t.score >= 80),
-          medium: topics.filter(t => t.score >= 60 && t.score < 80),
-          weak: topics.filter(t => t.score < 60)
+          strong: topics.filter(t => t.score >= 80).map(t => ({
+            topic: t.title,
+            score: t.score,
+            quizzesTaken: t.quizzesTaken || 0,
+            lastReview: t.lastReview
+          })),
+          medium: topics.filter(t => t.score >= 60 && t.score < 80).map(t => ({
+            topic: t.title,
+            score: t.score,
+            quizzesTaken: t.quizzesTaken || 0,
+            lastReview: t.lastReview
+          })),
+          weak: topics.filter(t => t.score < 60).map(t => ({
+            topic: t.title,
+            score: t.score,
+            quizzesTaken: t.quizzesTaken || 0,
+            lastReview: t.lastReview
+          }))
         };
         setPerformanceData(categorizedTopics);
         
