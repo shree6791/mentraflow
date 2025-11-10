@@ -253,15 +253,17 @@ async def process_mcp_export(user_id: str, conversations: List[ChatConversation]
     1. Summarize conversations with LLM
     2. Extract key concepts
     3. Generate quiz questions
-    4. Create knowledge graph nodes
-    5. Store results
-    6. Notify user
+    4. Create knowledge graph nodes (Phase 3)
+    5. Link to existing graph (Phase 3)
+    6. Schedule recall sessions (Phase 3)
+    7. Store results
+    8. Notify user
     """
     from db.mcp_data import create_mcp_import, update_mcp_import
     
     # Create import record
     platform = conversations[0].platform if conversations else "unknown"
-    import_record = create_mcp_import(user_id, platform, len(conversations))
+    import_record = await create_mcp_import(user_id, platform, len(conversations))
     import_id = import_record["import_id"]
     
     try:
@@ -274,6 +276,7 @@ async def process_mcp_export(user_id: str, conversations: List[ChatConversation]
         
         total_concepts = 0
         total_quizzes = 0
+        total_nodes = 0
         
         # Process each conversation
         for conv in conversations:
@@ -281,24 +284,27 @@ async def process_mcp_export(user_id: str, conversations: List[ChatConversation]
             if result["success"]:
                 total_concepts += result.get("concepts_count", 0)
                 total_quizzes += result.get("quiz_questions_count", 0)
+                total_nodes += result.get("concepts_count", 0)  # One node per concept
         
         # Update import record with results
-        update_mcp_import(
+        await update_mcp_import(
             import_id,
             status="completed",
             concepts_extracted=total_concepts,
             quizzes_generated=total_quizzes,
-            nodes_created=len(conversations),
+            nodes_created=total_nodes,
             completed_at=datetime.utcnow().isoformat()
         )
         
-        logger.info(f"Completed processing {len(conversations)} conversations for user {user_id}")
-        logger.info(f"Extracted {total_concepts} concepts, generated {total_quizzes} quiz questions")
+        logger.info(f"✅ Completed processing {len(conversations)} conversations for user {user_id}")
+        logger.info(f"Extracted {total_concepts} concepts, generated {total_quizzes} quiz questions, created {total_nodes} nodes")
         
     except Exception as e:
         logger.error(f"Error in background processing: {str(e)}")
+        import traceback
+        traceback.print_exc()
         # Store error
-        update_mcp_import(
+        await update_mcp_import(
             import_id,
             status="failed",
             error=str(e),
