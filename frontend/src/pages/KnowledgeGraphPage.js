@@ -34,7 +34,8 @@ const KnowledgeGraphPage = () => {
         // Use centralized API service layer
         const data = await graphService.getNodes({
           time_window: timeWindow,
-          limit: 100
+          limit: 100,
+          user_id: 'demo_user'  // Pass user_id to fetch MCP nodes
         });
         
         // Add a small delay to ensure smooth transition
