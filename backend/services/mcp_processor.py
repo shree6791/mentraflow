@@ -315,18 +315,29 @@ Example format:
         quiz_questions: List[Dict[str, Any]]
     ) -> str:
         """
-        Create knowledge graph node from processed conversation
+        Create knowledge graph nodes from processed conversation
         
-        Returns node_id
+        Phase 3: Full integration with knowledge graph
+        - Creates concepts in MCP collections
+        - Creates knowledge nodes
+        - Links to existing graph
+        - Schedules recall sessions
+        
+        Returns summary node_id
         """
-        from db.mcp_data import create_mcp_concept, create_mcp_quiz
+        from db.mcp_data import create_mcp_concept, create_mcp_quiz, link_concept_to_node
+        from db.connection import get_database
+        from services.knowledge_integration import KnowledgeIntegrationService
         
-        node_id = f"mcp_{platform}_{conversation_id[:8]}"
+        db = get_database()
+        integration_service = KnowledgeIntegrationService(db)
         
-        # Store each concept
-        concept_ids = []
+        node_ids = []
+        
+        # Store each concept and integrate with knowledge graph
         for i, concept_text in enumerate(concepts):
-            concept = create_mcp_concept(
+            # Create MCP concept record
+            concept = await create_mcp_concept(
                 import_id=f"import_{user_id}_{conversation_id[:8]}",
                 user_id=user_id,
                 conversation_id=conversation_id,
@@ -334,19 +345,52 @@ Example format:
                 platform=platform,
                 summary=summary
             )
-            concept_ids.append(concept["concept_id"])
             
             logger.info(f"Created concept: {concept['concept_id']} - {concept_text[:50]}...")
-        
-        # Store quiz if questions were generated
-        if quiz_questions:
-            quiz = create_mcp_quiz(
-                concept_id=concept_ids[0] if concept_ids else "unknown",
+            
+            # Create corresponding quiz for this concept (if available)
+            quiz_id = None
+            summary_id = None
+            
+            if i < len(quiz_questions):
+                # Create quiz with just this concept's questions (1 question per concept)
+                concept_quiz = await create_mcp_quiz(
+                    concept_id=concept["concept_id"],
+                    user_id=user_id,
+                    questions=[quiz_questions[i]] if i < len(quiz_questions) else []
+                )
+                quiz_id = concept_quiz["quiz_id"]
+                logger.info(f"Created quiz: {quiz_id} for concept")
+            
+            # Create a summary ID for this concept (using concept_id as summary_id)
+            summary_id = f"summary_{concept['concept_id']}"
+            
+            # ✅ PHASE 3: Full Knowledge Integration
+            integration_result = await integration_service.integrate_concept(
                 user_id=user_id,
-                questions=quiz_questions
+                concept_id=concept["concept_id"],
+                concept_text=concept_text,
+                quiz_id=quiz_id or f"quiz_{concept['concept_id']}",
+                summary_id=summary_id,
+                source_platform=platform,
+                conversation_id=conversation_id
             )
-            logger.info(f"Created quiz: {quiz['quiz_id']} with {len(quiz_questions)} questions")
+            
+            if integration_result["success"]:
+                node = integration_result["node"]
+                connections = integration_result["connections"]
+                recall_session = integration_result["recall_session"]
+                
+                node_ids.append(node["id"])
+                
+                # Link concept to node in MCP database
+                await link_concept_to_node(concept["concept_id"], node["id"])
+                
+                logger.info(f"✅ Integrated: node={node['id']}, connections={len(connections)}, recall={recall_session['id']}")
+            else:
+                logger.error(f"❌ Integration failed: {integration_result.get('error')}")
         
-        logger.info(f"Created knowledge node: {node_id} with {len(concepts)} concepts and {len(quiz_questions)} quiz questions")
+        summary_node_id = f"mcp_{platform}_{conversation_id[:8]}"
+        logger.info(f"Created {len(node_ids)} knowledge nodes with full integration")
         
-        return node_id
+        return summary_node_id
