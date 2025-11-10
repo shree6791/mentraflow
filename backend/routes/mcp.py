@@ -132,7 +132,7 @@ async def get_import_status(import_id: str):
     """
     from db.mcp_data import get_mcp_import
     
-    import_record = get_mcp_import(import_id)
+    import_record = await get_mcp_import(import_id)
     
     if not import_record:
         raise HTTPException(status_code=404, detail="Import not found")
@@ -165,7 +165,7 @@ async def get_mcp_import_history(user_id: str, limit: int = 10):
     """
     from db.mcp_data import get_user_mcp_history
     
-    imports = get_user_mcp_history(user_id, limit)
+    imports = await get_user_mcp_history(user_id, limit)
     
     return {
         "user_id": user_id,
@@ -192,14 +192,14 @@ async def get_mcp_settings(user_id: str):
     mcp_endpoint = "https://resume-session-13.preview.emergentagent.com/api/mcp/receive-export"
     
     # Get user stats
-    stats = get_mcp_stats(user_id)
+    stats = await get_mcp_stats(user_id)
     
     return {
         "user_id": user_id,
         "mcp_endpoint_url": mcp_endpoint,
         "enabled_platforms": ["claude", "perplexity"],
         "auto_quiz_generation": True,
-        "summarization_model": "gpt-5",
+        "summarization_model": "gpt-4o",
         "max_conversations_per_export": 10,
         "stats": stats
     }
@@ -214,7 +214,7 @@ async def get_mcp_concepts(user_id: str, limit: int = 50):
     """
     from db.mcp_data import get_user_mcp_concepts
     
-    concepts = get_user_mcp_concepts(user_id, limit)
+    concepts = await get_user_mcp_concepts(user_id, limit)
     
     return {
         "user_id": user_id,
@@ -232,7 +232,7 @@ async def get_mcp_quizzes(user_id: str):
     """
     from db.mcp_data import get_user_mcp_quizzes
     
-    quizzes = get_user_mcp_quizzes(user_id)
+    quizzes = await get_user_mcp_quizzes(user_id)
     
     return {
         "user_id": user_id,
