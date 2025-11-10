@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { LogOut, User, BarChart3, Brain, CreditCard, Settings, Menu, X } from 'lucide-react';
+import { LogOut, User, BarChart3, Brain, CreditCard, Settings, Menu, X, Zap } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import './AppHeader.css';
 
