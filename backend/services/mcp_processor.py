@@ -172,36 +172,46 @@ Each should be an array of strings (2-5 items each)."""
         Returns list of concept strings
         """
         try:
-            from emergentintegrations import EmergentLLM
+            logger.info("Extracting concepts from conversation...")
             
-            llm = EmergentLLM()
-            
-            prompt = f"""Extract 3-5 key concepts or learnings from this conversation.
+            response = await self.client.chat.completions.create(
+                model=self.llm_model,
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "You are an expert at extracting key concepts from conversations. Always respond with valid JSON only."
+                    },
+                    {
+                        "role": "user",
+                        "content": f"""Extract 3-5 key concepts or learnings from this conversation summary.
 
 Summary:
 {summary}
 
-Return ONLY a JSON array of concept strings. Each concept should be:
+Requirements for each concept:
 - A single, clear idea or learning
 - Suitable for creating a quiz question
 - 5-15 words long
+- Specific and actionable
 
-Example: ["Python decorators modify function behavior", "REST APIs use HTTP methods", "Database indexing improves query performance"]
+Example format: {{"concepts": ["Python decorators modify function behavior", "REST APIs use HTTP methods", "Database indexing improves query performance"]}}
 
-JSON array:"""
-            
-            response = await llm.generate(
-                prompt=prompt,
-                model="gpt-5",
+Return as JSON with a 'concepts' array."""
+                    }
+                ],
+                temperature=0.5,
                 max_tokens=300,
-                temperature=0.5
+                response_format={"type": "json_object"}
             )
             
             # Parse JSON response
-            concepts_text = response.get('text', '[]')
-            concepts = json.loads(concepts_text)
+            concepts_json = response.choices[0].message.content
+            concepts_data = json.loads(concepts_json)
+            concepts = concepts_data.get("concepts", [])
             
-            return concepts if isinstance(concepts, list) else []
+            logger.info(f"Extracted {len(concepts)} concepts")
+            
+            return concepts if isinstance(concepts, list) and len(concepts) > 0 else ["General conversation insights"]
             
         except Exception as e:
             logger.error(f"Error extracting concepts: {str(e)}")
