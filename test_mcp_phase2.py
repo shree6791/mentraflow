@@ -5,8 +5,11 @@ Tests the OpenAI-powered summarization, concept extraction, and quiz generation
 
 import asyncio
 import json
-from backend.services.mcp_processor import MCPProcessor
-from backend.routes.mcp import ChatMessage, ChatConversation
+import sys
+sys.path.insert(0, '/app/backend')
+
+from services.mcp_processor import MCPProcessor
+from routes.mcp import ChatMessage, ChatConversation
 
 
 async def test_mcp_processor():
