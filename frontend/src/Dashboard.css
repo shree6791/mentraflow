@@ -4602,6 +4602,279 @@
   }
   
   .mcp-concepts-grid {
+
+
+/* ========================================
+   Recall Sessions Widget
+   ======================================== */
+
+.recall-widget {
+  background: white;
+  border: 2px solid #E5E7EB;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.recall-widget.empty {
+  text-align: center;
+}
+
+.widget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.widget-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.widget-icon {
+  color: #8B5CF6;
+}
+
+.widget-header h3 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.due-badge {
+  background: #FEE2E2;
+  color: #DC2626;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.recall-stats-mini {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.recall-stat-mini {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background: #F9FAFB;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.recall-stat-mini.due {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+}
+
+.recall-stat-mini.upcoming {
+  background: #FEF3C7;
+  border: 1px solid #FDE68A;
+}
+
+.recall-stat-mini.completed {
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+}
+
+.recall-stat-mini .stat-value {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin-bottom: 0.25rem;
+}
+
+.recall-stat-mini.due .stat-value {
+  color: #DC2626;
+}
+
+.recall-stat-mini.upcoming .stat-value {
+  color: #D97706;
+}
+
+.recall-stat-mini.completed .stat-value {
+  color: #059669;
+}
+
+.recall-stat-mini .stat-label {
+  font-size: 0.75rem;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.recall-sessions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.recall-session-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #F9FAFB;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+
+.recall-session-item.due {
+  background: #FEF2F2;
+  border-color: #FCA5A5;
+}
+
+.recall-session-item:hover {
+  border-color: #8B5CF6;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.1);
+}
+
+.session-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.session-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.session-concept {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  line-height: 1.4;
+  max-width: 80%;
+}
+
+.status-icon {
+  flex-shrink: 0;
+}
+
+.status-icon.due {
+  color: #DC2626;
+}
+
+.status-icon.upcoming {
+  color: #D97706;
+}
+
+.session-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #6B7280;
+}
+
+.session-due-date.overdue {
+  color: #DC2626;
+  font-weight: 600;
+}
+
+.session-interval {
+  color: #9CA3AF;
+}
+
+.session-start-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.625rem 1.25rem;
+  background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.session-start-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.session-start-btn.due {
+  background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 3rem 1rem;
+}
+
+.empty-state p {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0;
+}
+
+.empty-subtitle {
+  font-size: 0.875rem;
+  color: #9CA3AF;
+}
+
+.recall-view-all {
+  text-align: center;
+  padding-top: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid #E5E7EB;
+}
+
+.view-all-btn {
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  border: 2px solid #8B5CF6;
+  border-radius: 8px;
+  color: #8B5CF6;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.view-all-btn:hover {
+  background: #8B5CF6;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .recall-stats-mini {
+    grid-template-columns: 1fr;
+  }
+  
+  .recall-session-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  .session-start-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
     grid-template-columns: 1fr;
   }
   
