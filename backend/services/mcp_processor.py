@@ -97,7 +97,7 @@ class MCPProcessor:
     
     async def _summarize_conversation(self, conversation_text: str) -> str:
         """
-        Summarize conversation using LLM
+        Summarize conversation using OpenAI API
         
         Prompt engineering to extract:
         - Main topics discussed
@@ -106,32 +106,41 @@ class MCPProcessor:
         - Actionable takeaways
         """
         try:
-            # Use Emergent LLM Key integration
-            from emergentintegrations import EmergentLLM
+            logger.info("Starting conversation summarization...")
             
-            llm = EmergentLLM()
-            
-            prompt = f"""Analyze this AI conversation and provide a comprehensive summary.
+            response = await self.client.chat.completions.create(
+                model=self.llm_model,
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "You are an expert at analyzing conversations and extracting key information. Always respond with valid JSON only."
+                    },
+                    {
+                        "role": "user",
+                        "content": f"""Analyze this AI conversation and provide a comprehensive summary.
 
 Conversation:
 {conversation_text}
 
 Please provide:
-1. Main Topics: What was discussed?
-2. Key Insights: What did the user learn?
-3. Important Questions: What questions were explored?
-4. Actionable Takeaways: What can the user apply?
+1. Main Topics: What was discussed? (array of strings)
+2. Key Insights: What did the user learn? (array of strings)
+3. Important Questions: What questions were explored? (array of strings)
+4. Actionable Takeaways: What can the user apply? (array of strings)
 
-Format your response as structured JSON with these keys: main_topics, key_insights, questions, takeaways"""
-            
-            response = await llm.generate(
-                prompt=prompt,
-                model="gpt-5",
+Format your response as valid JSON with these keys: main_topics, key_insights, questions, takeaways
+Each should be an array of strings (2-5 items each)."""
+                    }
+                ],
+                temperature=0.3,
                 max_tokens=1000,
-                temperature=0.3
+                response_format={"type": "json_object"}
             )
             
-            return response.get('text', '')
+            summary_json = response.choices[0].message.content
+            logger.info(f"Summary generated successfully: {len(summary_json)} chars")
+            
+            return summary_json
             
         except Exception as e:
             logger.error(f"Error summarizing conversation: {str(e)}")
