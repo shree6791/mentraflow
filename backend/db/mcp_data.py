@@ -91,7 +91,7 @@ async def get_user_mcp_history(user_id: str, limit: int = 10) -> List[Dict[str, 
     return user_imports
 
 
-def create_mcp_concept(
+async def create_mcp_concept(
     import_id: str,
     user_id: str,
     conversation_id: str,
@@ -100,7 +100,7 @@ def create_mcp_concept(
     summary: str
 ) -> Dict[str, Any]:
     """
-    Create a concept extracted from MCP conversation
+    Create a concept extracted from MCP conversation in MongoDB
     
     Returns concept object
     """
@@ -118,17 +118,17 @@ def create_mcp_concept(
         "node_id": None
     }
     
-    MCP_CONCEPTS.append(concept)
+    await mcp_concepts_collection.insert_one(concept)
     return concept
 
 
-def create_mcp_quiz(
+async def create_mcp_quiz(
     concept_id: str,
     user_id: str,
     questions: List[Dict[str, Any]]
 ) -> Dict[str, Any]:
     """
-    Create quiz from MCP concept
+    Create quiz from MCP concept in MongoDB
     
     Returns quiz object
     """
@@ -143,7 +143,7 @@ def create_mcp_quiz(
         "last_taken": None
     }
     
-    MCP_QUIZZES.append(quiz)
+    await mcp_quizzes_collection.insert_one(quiz)
     return quiz
 
 
