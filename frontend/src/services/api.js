@@ -200,8 +200,10 @@ export const graphService = {
     return response.data;
   },
 
-  getNodeByTitle: async (title) => {
-    const response = await apiClient.get(`/node/${encodeURIComponent(title)}`);
+  getNodeByTitle: async (title, userId = 'demo_user') => {
+    const response = await apiClient.get(`/node/${encodeURIComponent(title)}`, {
+      params: { user_id: userId }
+    });
     return response.data;
   },
 
