@@ -972,6 +972,12 @@ const Dashboard = () => {
       {/* MCP Imports Section */}
       <MCPImportsSection />
 
+      {/* Recall Sessions Widget */}
+      <RecallSessionsWidget onStartQuiz={(session) => {
+        // TODO: Show quiz modal for this session
+        console.log('Start quiz for session:', session);
+      }} />
+
       {/* Main Focus Area - Smart Priority Flow */}
       <div className="dashboard-main-focus">
         
