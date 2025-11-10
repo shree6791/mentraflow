@@ -968,6 +968,9 @@ const Dashboard = () => {
         </div>
       </div>
 
+      {/* MCP Imports Section */}
+      <MCPImportsSection />
+
       {/* Main Focus Area - Smart Priority Flow */}
       <div className="dashboard-main-focus">
         
