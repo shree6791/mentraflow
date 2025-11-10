@@ -134,7 +134,21 @@ function handleMessage(message) {
 
       case 'tools/call':
         if (request.params.name === 'export_to_mentraflow') {
-          const { user_id, conversations } = request.params.arguments;
+          // Get user_id from arguments or environment variable
+          const args = request.params.arguments || {};
+          const user_id = args.user_id || DEFAULT_USER_ID;
+          const conversations = args.conversations || [];
+          
+          // Validate required parameters
+          if (!user_id) {
+            sendError(request.id, -32602, 'Missing required parameter: user_id. Please provide user_id or set MENTRAFLOW_USER_ID environment variable.');
+            break;
+          }
+          
+          if (!conversations || conversations.length === 0) {
+            sendError(request.id, -32602, 'Missing required parameter: conversations array cannot be empty.');
+            break;
+          }
           
           exportToMentraFlow(user_id, conversations)
             .then((result) => {
