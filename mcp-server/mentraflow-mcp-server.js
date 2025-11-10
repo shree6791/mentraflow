@@ -100,7 +100,9 @@ function handleMessage(message) {
                 properties: {
                   user_id: {
                     type: 'string',
-                    description: 'MentraFlow user ID'
+                    description: DEFAULT_USER_ID 
+                      ? `MentraFlow user ID (optional, defaults to: ${DEFAULT_USER_ID})`
+                      : 'MentraFlow user ID (required)'
                   },
                   conversations: {
                     type: 'array',
@@ -118,14 +120,16 @@ function handleMessage(message) {
                             properties: {
                               role: { type: 'string' },
                               content: { type: 'string' }
-                            }
+                            },
+                            required: ['role', 'content']
                           }
                         }
-                      }
+                      },
+                      required: ['conversation_id', 'platform', 'messages']
                     }
                   }
                 },
-                required: ['user_id', 'conversations']
+                required: DEFAULT_USER_ID ? ['conversations'] : ['user_id', 'conversations']
               }
             }
           ]
