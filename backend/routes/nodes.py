@@ -1,6 +1,7 @@
 """
 Node/Topic Routes
 Endpoints for knowledge graph nodes and topic details
+Updated: Now includes MCP-imported nodes from MongoDB
 """
 
 from fastapi import APIRouter, HTTPException, Query
@@ -9,10 +10,14 @@ from datetime import datetime, timedelta
 from db.dashboard_data import NODES
 from db.quiz_data import QUIZ_CONTENT
 from db.summary_data import SUMMARY_CONTENT
+from db.connection import get_database
 from validation.validators import NodeValidator
 from utils.cache import cached, medium_cache, long_cache
 
 router = APIRouter()
+
+# Get MongoDB connection
+db = get_database()
 
 
 @router.get("/nodes")
