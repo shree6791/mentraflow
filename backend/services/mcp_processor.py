@@ -139,6 +139,10 @@ class MCPProcessor:
         
         return formatted
     
+    def _estimate_tokens(self, text: str) -> int:
+        """Rough token estimation (1 token ≈ 4 characters)"""
+        return len(text) // 4
+    
     async def _summarize_conversation(self, conversation_text: str) -> str:
         """
         Summarize conversation using OpenAI API
@@ -148,9 +152,18 @@ class MCPProcessor:
         - Key insights gained
         - Important questions asked
         - Actionable takeaways
+        
+        Handles token limits gracefully
         """
         try:
-            logger.info("Starting conversation summarization...")
+            estimated_tokens = self._estimate_tokens(conversation_text)
+            logger.info(f"Starting conversation summarization... (estimated tokens: {estimated_tokens})")
+            
+            # If estimated tokens exceed safe limit, truncate further
+            if estimated_tokens > 6000:
+                logger.warning(f"Conversation very long ({estimated_tokens} tokens). Truncating to last 5000 characters.")
+                conversation_text = conversation_text[-5000:]
+                estimated_tokens = self._estimate_tokens(conversation_text)
             
             response = await self.client.chat.completions.create(
                 model=self.llm_model,
