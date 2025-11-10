@@ -85,6 +85,14 @@ async def receive_export(
         if not export_data.conversations:
             raise HTTPException(status_code=400, detail="No conversations provided")
         
+        # Log conversation sizes
+        for i, conv in enumerate(export_data.conversations):
+            msg_count = len(conv.messages)
+            if msg_count > 100:
+                logger.warning(f"Conversation {i+1} has {msg_count} messages (will be truncated for processing)")
+            else:
+                logger.info(f"Conversation {i+1} has {msg_count} messages")
+        
         # Limit to latest 10 conversations
         conversations_to_process = export_data.conversations[:10]
         
