@@ -83,15 +83,59 @@ class MCPProcessor:
             }
     
     def _format_conversation(self, conversation: Any) -> str:
-        """Format conversation messages for LLM processing"""
+        """
+        Format conversation messages for LLM processing with intelligent truncation
+        
+        Handles long conversations by:
+        - Keeping first 20 messages (context)
+        - Keeping last 30 messages (recent content)
+        - Summarizing middle if conversation is too long
+        """
+        messages = conversation.messages
+        total_messages = len(messages)
+        
         formatted = f"Conversation from {conversation.platform}\n\n"
         
         if conversation.title:
             formatted += f"Title: {conversation.title}\n\n"
         
         formatted += "Messages:\n"
-        for msg in conversation.messages:
-            formatted += f"{msg.role.upper()}: {msg.content}\n\n"
+        
+        # Small conversations: use all messages
+        if total_messages <= 50:
+            for msg in messages:
+                formatted += f"{msg.role.upper()}: {msg.content}\n\n"
+            logger.info(f"Formatted {total_messages} messages (all included)")
+        
+        # Medium conversations: keep first 20 + last 30
+        elif total_messages <= 100:
+            # First 20 messages
+            for msg in messages[:20]:
+                formatted += f"{msg.role.upper()}: {msg.content}\n\n"
+            
+            # Note about truncation
+            skipped = total_messages - 50
+            formatted += f"\n[... {skipped} messages in the middle were summarized for processing ...]\n\n"
+            
+            # Last 30 messages
+            for msg in messages[-30:]:
+                formatted += f"{msg.role.upper()}: {msg.content}\n\n"
+            
+            logger.info(f"Formatted {total_messages} messages (kept first 20 + last 30, skipped {skipped})")
+        
+        # Very long conversations: aggressive truncation
+        else:
+            # First 15 messages
+            for msg in messages[:15]:
+                formatted += f"{msg.role.upper()}: {msg.content}\n\n"
+            
+            formatted += f"\n[... This conversation has {total_messages} messages total. For processing efficiency, showing first 15 and last 25 messages ...]\n\n"
+            
+            # Last 25 messages
+            for msg in messages[-25:]:
+                formatted += f"{msg.role.upper()}: {msg.content}\n\n"
+            
+            logger.warning(f"Very long conversation: {total_messages} messages. Truncated to 40 messages for processing.")
         
         return formatted
     
