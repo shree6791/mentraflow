@@ -43,6 +43,7 @@ function App() {
             <Route path="/settings" element={<Settings />} />
             <Route path="/knowledge-graph" element={<KnowledgeGraphPage />} />
             <Route path="/mcp-connect" element={<MCPConnect />} />
+            <Route path="/ai-learning" element={<AILearningHub />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
