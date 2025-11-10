@@ -143,19 +143,24 @@ async def get_nodes(
 
 
 @router.get("/node/{title}")
-async def get_node_detail(title: str):
+async def get_node_detail(
+    title: str,
+    user_id: str = Query("demo_user", description="User ID for MCP nodes")
+):
     """
     DETAIL API - Get comprehensive node data (with lazy loading)
     Returns: All node data + summary + quiz + performance
     Used by: Modal when user clicks on a node
     
-    LAZY LOADING: Quiz and summary content loaded on-demand from separate files
+    **Updated:** Now handles both mock nodes + MCP nodes from MongoDB
+    
+    LAZY LOADING: Quiz and summary content loaded on-demand from separate files or MongoDB
     Cached: 5 minutes (medium_cache)
     """
     # Manual cache implementation
     from utils.cache import medium_cache, generate_cache_key, cache_stats
     
-    cache_key = generate_cache_key("get_node_detail", title=title)
+    cache_key = generate_cache_key("get_node_detail", title=title, user_id=user_id)
     cache_stats['total_requests'] += 1
     
     if cache_key in medium_cache:
@@ -169,19 +174,68 @@ async def get_node_detail(title: str):
     # Validate title
     NodeValidator.validate_title(decoded_title)
     
-    # Find the node
+    # Try to find in mock nodes first
     node = next((n for n in NODES if n["title"] == decoded_title), None)
+    is_mcp_node = False
+    
+    # If not found in mock nodes, try MongoDB
+    if not node:
+        try:
+            node = await db.knowledge_nodes.find_one({
+                "title": decoded_title,
+                "user_id": user_id
+            })
+            if node:
+                node.pop('_id', None)
+                node.pop('user_id', None)
+                is_mcp_node = True
+                node['isMCP'] = True
+                node['mcpPlatform'] = node.get('source_platform', 'mcp')
+        except Exception as e:
+            import logging
+            logging.error(f"Error fetching MCP node: {str(e)}")
+    
     if not node:
         raise HTTPException(status_code=404, detail="Node not found")
     
-    # LAZY LOAD: Get quiz questions from QUIZ_CONTENT using quizId
-    quiz_id = node.get("quizId")
-    quiz_data = QUIZ_CONTENT.get(quiz_id) if quiz_id else None
-    questions = quiz_data.get("questions", []) if quiz_data else []
-    
-    # LAZY LOAD: Get summary from SUMMARY_CONTENT using summaryId
-    summary_id = node.get("summaryId")
-    summary = SUMMARY_CONTENT.get(summary_id) if summary_id else None
+    # LAZY LOAD: Get quiz and summary
+    if is_mcp_node:
+        # For MCP nodes, get quiz from MCP collections
+        quiz_id = node.get("quizId")
+        questions = []
+        summary = None
+        
+        if quiz_id:
+            try:
+                from db.mcp_data import mcp_quizzes_collection
+                quiz_doc = await mcp_quizzes_collection.find_one({"quiz_id": quiz_id})
+                if quiz_doc:
+                    questions = quiz_doc.get("questions", [])
+            except Exception as e:
+                import logging
+                logging.error(f"Error fetching MCP quiz: {str(e)}")
+        
+        # For MCP nodes, get summary from concept
+        try:
+            from db.mcp_data import mcp_concepts_collection
+            concept = await mcp_concepts_collection.find_one({"node_id": node.get("id")})
+            if concept:
+                summary = {
+                    "content": concept.get("summary", ""),
+                    "keyTakeaways": [node.get("title", "")],
+                    "keywords": []
+                }
+        except Exception as e:
+            import logging
+            logging.error(f"Error fetching MCP summary: {str(e)}")
+    else:
+        # For mock nodes, use existing logic
+        quiz_id = node.get("quizId")
+        quiz_data = QUIZ_CONTENT.get(quiz_id) if quiz_id else None
+        questions = quiz_data.get("questions", []) if quiz_data else []
+        
+        summary_id = node.get("summaryId")
+        summary = SUMMARY_CONTENT.get(summary_id) if summary_id else None
     
     # Build comprehensive response
     result = {
