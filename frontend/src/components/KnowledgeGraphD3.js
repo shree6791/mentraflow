@@ -265,6 +265,27 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
       .attr('class', 'node-circle')
       .attr('opacity', d => nodeMatchesSearch(d) ? 1 : 0.2); // Dim non-matching nodes
 
+    // MCP Badge (small circle with "M" for MCP nodes)
+    node.filter(d => d.isMCP)
+      .append('circle')
+      .attr('r', 8)
+      .attr('cx', d => getNodeRadius(d.connections) * 0.7)
+      .attr('cy', d => -getNodeRadius(d.connections) * 0.7)
+      .attr('fill', '#14B8A6') // Teal color for MCP
+      .attr('stroke', '#fff')
+      .attr('stroke-width', 1.5);
+
+    node.filter(d => d.isMCP)
+      .append('text')
+      .attr('x', d => getNodeRadius(d.connections) * 0.7)
+      .attr('y', d => -getNodeRadius(d.connections) * 0.7)
+      .attr('text-anchor', 'middle')
+      .attr('dominant-baseline', 'middle')
+      .attr('fill', '#fff')
+      .attr('font-size', '10px')
+      .attr('font-weight', 'bold')
+      .text('M');
+
     // Node labels
     node.append('text')
       .attr('dy', d => getNodeRadius(d.connections) + 15)
