@@ -708,6 +708,23 @@ const KnowledgeGraphD3 = ({ topics, userAvatar, userName, onClose, onReinforce, 
             {tooltipData.node.title}
           </strong>
           
+          {tooltipData.node.isMCP && (
+            <div style={{
+              display: 'inline-block',
+              padding: '0.25rem 0.75rem',
+              background: 'linear-gradient(135deg, #14B8A6 0%, #0D9488 100%)',
+              borderRadius: '12px',
+              fontSize: '0.75rem',
+              fontWeight: 600,
+              color: 'white',
+              marginBottom: '0.75rem',
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px'
+            }}>
+              🤖 From {tooltipData.node.mcpPlatform || 'MCP'}
+            </div>
+          )}
+          
           <div className="tooltip-stats" style={{marginBottom: '1rem', fontSize: '0.9rem', color: COLORS.text.secondary}}>
             <div style={{marginBottom: '0.25rem'}}>
               <span style={{color: COLORS.text.muted}}>Last Review:</span>{' '}
