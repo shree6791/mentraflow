@@ -23,16 +23,20 @@ db = get_database()
 @router.get("/nodes")
 async def get_nodes(
     time_window: int = Query(21, description="Filter nodes by days (21=3 weeks, 35=5 weeks, 49=7 weeks, 0=all time)"),
-    limit: int = Query(100, description="Maximum number of nodes to return")
+    limit: int = Query(100, description="Maximum number of nodes to return"),
+    user_id: str = Query("demo_user", description="User ID to fetch nodes for")
 ):
     """
     LIGHTWEIGHT API - Get nodes for graph display with time-based filtering
     Returns: Minimal node data (no quiz/summary content)
     Used by: Knowledge Graph visualization
     
+    **Updated:** Now includes both mock nodes + MCP-imported nodes from MongoDB
+    
     Filters:
     - time_window: Number of days to look back (21, 35, 49, or 0 for all)
     - limit: Max nodes to return (default 100)
+    - user_id: User to fetch MCP nodes for
     
     Sorting Priority:
     1. Fading topics (retention < 60%) - Highest priority
@@ -44,7 +48,7 @@ async def get_nodes(
     # Manual cache implementation for FastAPI compatibility
     from utils.cache import medium_cache, generate_cache_key, cache_stats
     
-    cache_key = generate_cache_key("get_nodes", time_window=time_window, limit=limit)
+    cache_key = generate_cache_key("get_nodes", time_window=time_window, limit=limit, user_id=user_id)
     cache_stats['total_requests'] += 1
     
     if cache_key in medium_cache:
@@ -53,14 +57,60 @@ async def get_nodes(
     
     cache_stats['misses'] += 1
     
-    filtered_nodes = NODES
+    # Start with mock nodes
+    all_nodes = list(NODES)
+    
+    # Fetch MCP nodes from MongoDB
+    try:
+        mcp_nodes_cursor = db.knowledge_nodes.find({"user_id": user_id})
+        mcp_nodes = await mcp_nodes_cursor.to_list(length=200)
+        
+        # Convert MCP nodes to match frontend format
+        for mcp_node in mcp_nodes:
+            mcp_node.pop('_id', None)  # Remove MongoDB _id
+            mcp_node.pop('user_id', None)  # Remove user_id (not needed in frontend)
+            
+            # Calculate state from score if not set
+            if mcp_node.get('state') == 'new' or not mcp_node.get('state'):
+                score = mcp_node.get('score', 0)
+                if score < 60:
+                    mcp_node['state'] = 'fading'
+                elif score < 80:
+                    mcp_node['state'] = 'medium'
+                else:
+                    mcp_node['state'] = 'high'
+            
+            # Ensure lastReview field
+            if not mcp_node.get('lastReview'):
+                mcp_node['lastReview'] = 'Never'
+            
+            # Add MCP badge flag for frontend
+            mcp_node['isMCP'] = True
+            mcp_node['mcpPlatform'] = mcp_node.get('source_platform', 'mcp')
+            
+        all_nodes.extend(mcp_nodes)
+        
+    except Exception as e:
+        import logging
+        logging.error(f"Error fetching MCP nodes: {str(e)}")
+        # Continue with just mock nodes if MongoDB fails
     
     # Apply time window filter if not "all time"
+    filtered_nodes = all_nodes
     if time_window > 0:
         cutoff_date = datetime.now() - timedelta(days=time_window)
-        # For mock data, we'll include all nodes but in production would filter by lastReview date
-        # filtered_nodes = [n for n in NODES if parse_date(n['lastReview']) > cutoff_date]
-        pass  # Mock data doesn't have proper dates, so skip for now
+        # For mock data, include all; for MCP nodes, filter by created_at
+        filtered_nodes = []
+        for node in all_nodes:
+            if node.get('isMCP'):
+                try:
+                    created_at = datetime.fromisoformat(node.get('created_at', ''))
+                    if created_at > cutoff_date:
+                        filtered_nodes.append(node)
+                except:
+                    filtered_nodes.append(node)  # Include if date parsing fails
+            else:
+                filtered_nodes.append(node)  # Include all mock nodes
     
     # Sort by priority: fading > medium > strong
     def get_priority(node):
@@ -79,8 +129,10 @@ async def get_nodes(
     
     result = {
         "nodes": limited_nodes,
-        "total": len(NODES),
+        "total": len(all_nodes),
         "showing": len(limited_nodes),
+        "mcp_nodes": len([n for n in limited_nodes if n.get('isMCP')]),
+        "mock_nodes": len([n for n in limited_nodes if not n.get('isMCP')]),
         "time_window_days": time_window
     }
     
