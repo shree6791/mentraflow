@@ -147,48 +147,77 @@ async def create_mcp_quiz(
     return quiz
 
 
-def get_user_mcp_concepts(user_id: str, limit: int = 50) -> List[Dict[str, Any]]:
-    """Get all concepts for a user"""
-    user_concepts = [c for c in MCP_CONCEPTS if c["user_id"] == user_id]
-    user_concepts.sort(key=lambda x: x["created_at"], reverse=True)
-    return user_concepts[:limit]
+async def get_user_mcp_concepts(user_id: str, limit: int = 50) -> List[Dict[str, Any]]:
+    """Get all concepts for a user from MongoDB"""
+    cursor = mcp_concepts_collection.find(
+        {"user_id": user_id}
+    ).sort("created_at", -1).limit(limit)
+    
+    user_concepts = await cursor.to_list(length=limit)
+    
+    # Remove MongoDB _id field
+    for concept in user_concepts:
+        concept.pop('_id', None)
+    
+    return user_concepts
 
 
-def get_concept_quiz(concept_id: str) -> Optional[Dict[str, Any]]:
-    """Get quiz for a concept"""
-    for quiz in MCP_QUIZZES:
-        if quiz["concept_id"] == concept_id:
-            return quiz
-    return None
+async def get_concept_quiz(concept_id: str) -> Optional[Dict[str, Any]]:
+    """Get quiz for a concept from MongoDB"""
+    quiz = await mcp_quizzes_collection.find_one({"concept_id": concept_id})
+    if quiz:
+        quiz.pop('_id', None)
+    return quiz
 
 
-def get_user_mcp_quizzes(user_id: str) -> List[Dict[str, Any]]:
-    """Get all MCP quizzes for a user"""
-    return [q for q in MCP_QUIZZES if q["user_id"] == user_id]
+async def get_user_mcp_quizzes(user_id: str) -> List[Dict[str, Any]]:
+    """Get all MCP quizzes for a user from MongoDB"""
+    cursor = mcp_quizzes_collection.find({"user_id": user_id})
+    quizzes = await cursor.to_list(length=100)
+    
+    # Remove MongoDB _id field
+    for quiz in quizzes:
+        quiz.pop('_id', None)
+    
+    return quizzes
 
 
-def link_concept_to_node(concept_id: str, node_id: str) -> bool:
-    """Link MCP concept to knowledge graph node"""
-    for concept in MCP_CONCEPTS:
-        if concept["concept_id"] == concept_id:
-            concept["node_created"] = True
-            concept["node_id"] = node_id
-            return True
-    return False
+async def link_concept_to_node(concept_id: str, node_id: str) -> bool:
+    """Link MCP concept to knowledge graph node in MongoDB"""
+    result = await mcp_concepts_collection.update_one(
+        {"concept_id": concept_id},
+        {"$set": {"node_created": True, "node_id": node_id}}
+    )
+    return result.modified_count > 0
 
 
 # Statistics functions
-def get_mcp_stats(user_id: str) -> Dict[str, Any]:
-    """Get MCP statistics for user"""
-    user_imports = [imp for imp in MCP_IMPORTS if imp["user_id"] == user_id]
-    user_concepts = [c for c in MCP_CONCEPTS if c["user_id"] == user_id]
-    user_quizzes = [q for q in MCP_QUIZZES if q["user_id"] == user_id]
+async def get_mcp_stats(user_id: str) -> Dict[str, Any]:
+    """Get MCP statistics for user from MongoDB"""
+    total_imports = await mcp_imports_collection.count_documents({"user_id": user_id})
+    total_concepts = await mcp_concepts_collection.count_documents({"user_id": user_id})
+    total_quizzes = await mcp_quizzes_collection.count_documents({"user_id": user_id})
+    
+    concepts_from_claude = await mcp_concepts_collection.count_documents({
+        "user_id": user_id,
+        "platform": "claude"
+    })
+    
+    concepts_from_perplexity = await mcp_concepts_collection.count_documents({
+        "user_id": user_id,
+        "platform": "perplexity"
+    })
+    
+    latest_import = await mcp_imports_collection.find_one(
+        {"user_id": user_id},
+        sort=[("created_at", -1)]
+    )
     
     return {
-        "total_imports": len(user_imports),
-        "total_concepts": len(user_concepts),
-        "total_quizzes": len(user_quizzes),
-        "concepts_from_claude": len([c for c in user_concepts if c["platform"] == "claude"]),
-        "concepts_from_perplexity": len([c for c in user_concepts if c["platform"] == "perplexity"]),
-        "latest_import": user_imports[0]["created_at"] if user_imports else None
+        "total_imports": total_imports,
+        "total_concepts": total_concepts,
+        "total_quizzes": total_quizzes,
+        "concepts_from_claude": concepts_from_claude,
+        "concepts_from_perplexity": concepts_from_perplexity,
+        "latest_import": latest_import["created_at"] if latest_import else None
     }
