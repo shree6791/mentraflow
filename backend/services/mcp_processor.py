@@ -1,12 +1,19 @@
 """
 MCP Processor Service
 Handles chat summarization, concept extraction, and quiz generation
+Using OpenAI SDK (industry standard, vendor-independent)
 """
 
 import logging
 import json
+import os
 from typing import List, Dict, Any
 from datetime import datetime
+from openai import AsyncOpenAI
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 
@@ -15,7 +22,16 @@ class MCPProcessor:
     """Process MCP exports: summarize, extract concepts, generate quizzes"""
     
     def __init__(self):
-        self.llm_model = "gpt-5"  # Using GPT-5 with Emergent LLM Key
+        self.llm_model = "gpt-4o"  # Using GPT-4o (or user can change to gpt-5 when available)
+        
+        # Initialize OpenAI client with API key from environment
+        api_key = os.getenv("OPENAI_API_KEY")
+        if not api_key:
+            logger.error("OPENAI_API_KEY not found in environment variables")
+            raise ValueError("OPENAI_API_KEY must be set in .env file")
+        
+        self.client = AsyncOpenAI(api_key=api_key)
+        logger.info(f"MCPProcessor initialized with model: {self.llm_model}")
         
     async def process_conversation(self, user_id: str, conversation: Any) -> Dict[str, Any]:
         """
