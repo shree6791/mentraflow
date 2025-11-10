@@ -17,6 +17,7 @@ import Insights from './pages/Insights';
 import Settings from './pages/Settings';
 import KnowledgeGraphPage from './pages/KnowledgeGraphPage';
 import MCPConnect from './pages/MCPConnect';
+import AILearningHub from './pages/AILearningHub';
 
 function App() {
   // Inject theme CSS variables on mount
