@@ -6,8 +6,6 @@ import { useAuth } from '../context/AuthContext';
 import AppLayout from '../components/AppLayout';
 import Tooltip from '../components/Tooltip';
 import LoadingBanner from '../components/LoadingBanner';
-import MCPImportsSection from '../components/MCPImportsSection';
-import RecallSessionsWidget from '../components/RecallSessionsWidget';
 import { 
   CaptureModal, 
   GeneratedContentModal, 
