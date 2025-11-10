@@ -9,7 +9,7 @@
 const https = require('https');
 
 // MentraFlow API endpoint
-const MENTRAFLOW_API = 'https://brain-vault-3.preview.emergentagent.com/api/mcp/receive-export';
+const MENTRAFLOW_API = 'https://resume-session-13.preview.emergentagent.com/api/mcp/receive-export';
 
 // JSON-RPC response helper
 function sendResponse(id, result) {

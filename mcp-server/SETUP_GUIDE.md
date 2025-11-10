@@ -117,7 +117,7 @@ You can customize the MentraFlow API endpoint:
 ```
 Environment Variables:
 Key: MENTRAFLOW_API
-Value: https://brain-vault-3.preview.emergentagent.com/api/mcp/receive-export
+Value: https://resume-session-13.preview.emergentagent.com/api/mcp/receive-export
 ```
 
 **Claude Desktop:**
@@ -129,7 +129,7 @@ Add to config:
       "command": "node",
       "args": ["/path/to/mentraflow-mcp-server.js"],
       "env": {
-        "MENTRAFLOW_API": "https://brain-vault-3.preview.emergentagent.com/api/mcp/receive-export"
+        "MENTRAFLOW_API": "https://resume-session-13.preview.emergentagent.com/api/mcp/receive-export"
       }
     }
   }
@@ -155,7 +155,7 @@ Add to config:
 
 ### No data appearing in MentraFlow
 - Check your MentraFlow user_id in the export
-- Visit https://brain-vault-3.preview.emergentagent.com/mcp-connect to verify endpoint
+- Visit https://resume-session-13.preview.emergentagent.com/mcp-connect to verify endpoint
 - Check MCP import history on the MentraFlow dashboard
 
 ---
@@ -188,6 +188,6 @@ If you encounter issues:
 1. Check the troubleshooting section above
 2. Verify file paths are absolute and correct
 3. Check that Node.js or Python is installed
-4. Visit https://brain-vault-3.preview.emergentagent.com/mcp-connect for endpoint status
+4. Visit https://resume-session-13.preview.emergentagent.com/mcp-connect for endpoint status
 
 Happy learning! 🚀

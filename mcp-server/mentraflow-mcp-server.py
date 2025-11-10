@@ -10,7 +10,7 @@ import sys
 import requests
 from datetime import datetime
 
-MENTRAFLOW_API = 'https://brain-vault-3.preview.emergentagent.com/api/mcp/receive-export'
+MENTRAFLOW_API = 'https://resume-session-13.preview.emergentagent.com/api/mcp/receive-export'
 
 def send_response(request_id, result):
     """Send JSON-RPC success response"""

@@ -10,7 +10,7 @@ import sys
 from typing import Dict, Any, List
 
 # Backend URL from environment
-BACKEND_URL = "https://brain-vault-3.preview.emergentagent.com/api"
+BACKEND_URL = "https://resume-session-13.preview.emergentagent.com/api"
 
 class Colors:
     GREEN = '\033[92m'
@@ -614,7 +614,7 @@ class BackendTester:
         """Run tests for the new naming convention refactor as requested"""
         print_header("NAMING CONVENTION REFACTOR TESTING")
         print_info("Testing all backend API endpoints with the new naming convention refactor")
-        print_info("Backend URL: https://brain-vault-3.preview.emergentagent.com/api")
+        print_info("Backend URL: https://resume-session-13.preview.emergentagent.com/api")
         print_info("")
         print_info("NAMING CONVENTION CHANGES:")
         print_info("- LIBRARY_ITEMS renamed to DOCUMENTS")
@@ -714,7 +714,7 @@ class BackendTester:
         """Run tests for the new lazy loading architecture as requested"""
         print_header("LAZY LOADING ARCHITECTURE TESTING")
         print_info("Testing the new architecture with lean NODES and on-demand content loading")
-        print_info("Backend URL: https://brain-vault-3.preview.emergentagent.com/api")
+        print_info("Backend URL: https://resume-session-13.preview.emergentagent.com/api")
         
         # Test 1: Lightweight Nodes API (Critical - should NOT have quiz/summary content)
         print_header("Test 1: GET /api/nodes - Lightweight Nodes (Lazy Loading)")
@@ -1104,7 +1104,7 @@ class BackendTester:
         """Run comprehensive YouTube integration tests"""
         print_header("YOUTUBE INTEGRATION TESTING")
         print_info("Testing YouTube integration for 'Capture New Knowledge' feature")
-        print_info("Backend URL: https://brain-vault-3.preview.emergentagent.com/api")
+        print_info("Backend URL: https://resume-session-13.preview.emergentagent.com/api")
         print_info("")
         print_info("TESTING SCOPE:")
         print_info("1. Valid YouTube URL Processing (youtube.com format)")

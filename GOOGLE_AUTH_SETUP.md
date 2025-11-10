@@ -4,7 +4,7 @@
 Google Login is currently failing with CORS error because the OAuth Client ID needs to be configured for this fork's URL.
 
 ## Current Configuration
-- **Fork URL**: `https://brain-vault-3.preview.emergentagent.com`
+- **Fork URL**: `https://resume-session-13.preview.emergentagent.com`
 - **Google Client ID**: `470321149192-291eh18146u9viph0637t0ke4qe8c0na`
 - **Client Secret**: (stored in backend/.env)
 
@@ -29,13 +29,13 @@ This happens because the current OAuth Client ID is not configured to allow requ
 
 **Authorized JavaScript origins:**
 ```
-https://brain-vault-3.preview.emergentagent.com
+https://resume-session-13.preview.emergentagent.com
 ```
 
 **Authorized redirect URIs:**
 ```
-https://brain-vault-3.preview.emergentagent.com
-https://brain-vault-3.preview.emergentagent.com/login
+https://resume-session-13.preview.emergentagent.com
+https://resume-session-13.preview.emergentagent.com/login
 ```
 
 7. Click **Save**
@@ -63,13 +63,13 @@ MentraFlow - Brain Vault 3 Fork
 
 **Authorized JavaScript origins:**
 ```
-https://brain-vault-3.preview.emergentagent.com
+https://resume-session-13.preview.emergentagent.com
 ```
 
 **Authorized redirect URIs:**
 ```
-https://brain-vault-3.preview.emergentagent.com
-https://brain-vault-3.preview.emergentagent.com/login
+https://resume-session-13.preview.emergentagent.com
+https://resume-session-13.preview.emergentagent.com/login
 ```
 
 7. Click **Create**
@@ -98,7 +98,7 @@ sudo supervisorctl restart all
 
 ## Testing After Setup
 
-1. Navigate to: `https://brain-vault-3.preview.emergentagent.com/login`
+1. Navigate to: `https://resume-session-13.preview.emergentagent.com/login`
 2. Click **Continue with Google**
 3. Select your Google account
 4. Grant permissions

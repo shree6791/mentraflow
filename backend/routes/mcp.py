@@ -189,7 +189,7 @@ async def get_mcp_settings(user_id: str):
     
     # Get the MCP endpoint URL
     # In production, this would be from environment variable
-    mcp_endpoint = "https://brain-vault-3.preview.emergentagent.com/api/mcp/receive-export"
+    mcp_endpoint = "https://resume-session-13.preview.emergentagent.com/api/mcp/receive-export"
     
     # Get user stats
     stats = get_mcp_stats(user_id)

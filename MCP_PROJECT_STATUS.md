@@ -25,12 +25,12 @@
 
 **API Endpoint Live:**
 ```
-https://brain-vault-3.preview.emergentagent.com/api/mcp/receive-export
+https://resume-session-13.preview.emergentagent.com/api/mcp/receive-export
 ```
 
 **Testing:**
 ```bash
-curl https://brain-vault-3.preview.emergentagent.com/api/mcp/settings?user_id=test_user
+curl https://resume-session-13.preview.emergentagent.com/api/mcp/settings?user_id=test_user
 # ✅ Working - returns endpoint URL and settings
 ```
 
@@ -55,7 +55,7 @@ curl https://brain-vault-3.preview.emergentagent.com/api/mcp/settings?user_id=te
 
 **Page Live:**
 ```
-https://brain-vault-3.preview.emergentagent.com/mcp-connect
+https://resume-session-13.preview.emergentagent.com/mcp-connect
 ```
 
 **Screenshot Verified:** ✅ Beautiful UI, all sections working
@@ -210,14 +210,14 @@ Save → Should show "Connected" ✅
 ## 🔗 Important URLs
 
 **Live Pages:**
-- MCP Connect: https://brain-vault-3.preview.emergentagent.com/mcp-connect
-- Dashboard: https://brain-vault-3.preview.emergentagent.com/dashboard
-- Knowledge Graph: https://brain-vault-3.preview.emergentagent.com/knowledge-graph
+- MCP Connect: https://resume-session-13.preview.emergentagent.com/mcp-connect
+- Dashboard: https://resume-session-13.preview.emergentagent.com/dashboard
+- Knowledge Graph: https://resume-session-13.preview.emergentagent.com/knowledge-graph
 
 **API Endpoints:**
-- MCP Export: https://brain-vault-3.preview.emergentagent.com/api/mcp/receive-export
-- MCP Settings: https://brain-vault-3.preview.emergentagent.com/api/mcp/settings
-- MCP History: https://brain-vault-3.preview.emergentagent.com/api/mcp/history
+- MCP Export: https://resume-session-13.preview.emergentagent.com/api/mcp/receive-export
+- MCP Settings: https://resume-session-13.preview.emergentagent.com/api/mcp/settings
+- MCP History: https://resume-session-13.preview.emergentagent.com/api/mcp/history
 
 ---
 
