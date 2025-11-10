@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Zap, ChevronRight, CheckCircle, Clock, AlertCircle, ExternalLink } from 'lucide-react';
+import { Zap, ChevronRight, CheckCircle, Clock, AlertCircle, ExternalLink, Settings } from 'lucide-react';
 import axios from 'axios';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
