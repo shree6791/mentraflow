@@ -8,8 +8,9 @@
 
 const https = require('https');
 
-// MentraFlow API endpoint
-const MENTRAFLOW_API = 'https://resume-session-13.preview.emergentagent.com/api/mcp/receive-export';
+// MentraFlow API endpoint (from environment or default)
+const MENTRAFLOW_API = process.env.MENTRAFLOW_ENDPOINT || 'https://resume-session-13.preview.emergentagent.com/api/mcp/receive-export';
+const DEFAULT_USER_ID = process.env.MENTRAFLOW_USER_ID || null;
 
 // JSON-RPC response helper
 function sendResponse(id, result) {
