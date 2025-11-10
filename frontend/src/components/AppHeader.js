@@ -166,6 +166,14 @@ const AppHeader = () => {
             <Brain size={18} />
             Knowledge Graph
           </Link>
+          <Link 
+            to="/ai-learning" 
+            className={`mobile-menu-item ${isActive('/ai-learning') ? 'active' : ''}`}
+            onClick={() => setShowMobileMenu(false)}
+          >
+            <Zap size={18} />
+            AI Learning
+          </Link>
           <div className="mobile-menu-divider" />
           <Link 
             to="/billing" 
