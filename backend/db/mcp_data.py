@@ -17,9 +17,9 @@ mcp_concepts_collection = db['mcp_concepts']
 mcp_quizzes_collection = db['mcp_quizzes']
 
 
-def create_mcp_import(user_id: str, platform: str, conversation_count: int) -> Dict[str, Any]:
+async def create_mcp_import(user_id: str, platform: str, conversation_count: int) -> Dict[str, Any]:
     """
-    Create a new MCP import record
+    Create a new MCP import record in MongoDB
     
     Returns import object with ID
     """
@@ -37,7 +37,7 @@ def create_mcp_import(user_id: str, platform: str, conversation_count: int) -> D
         "error": None
     }
     
-    MCP_IMPORTS.append(import_record)
+    await mcp_imports_collection.insert_one(import_record)
     return import_record
 
 
