@@ -224,51 +224,62 @@ Return as JSON with a 'concepts' array."""
         Returns list of quiz question objects
         """
         try:
-            from emergentintegrations import EmergentLLM
-            
-            llm = EmergentLLM()
+            logger.info(f"Generating quiz from {len(concepts)} concepts...")
             
             concepts_str = "\n".join([f"{i+1}. {concept}" for i, concept in enumerate(concepts)])
             
-            prompt = f"""Create 3-5 multiple choice quiz questions based on these concepts:
+            response = await self.client.chat.completions.create(
+                model=self.llm_model,
+                messages=[
+                    {
+                        "role": "system",
+                        "content": "You are an expert quiz creator. Always respond with valid JSON only. Create challenging but fair questions."
+                    },
+                    {
+                        "role": "user",
+                        "content": f"""Create 3-5 multiple choice quiz questions based on these concepts:
 
 {concepts_str}
 
 For each question, provide:
-- question: Clear, testable question
-- options: 4 answer choices (A, B, C, D)
-- correct: Letter of correct answer
-- explanation: Why the answer is correct
+- question: Clear, testable question (not too easy, not too hard)
+- options: Object with 4 answer choices (keys: A, B, C, D)
+- correct: Letter of correct answer (A, B, C, or D)
+- explanation: Brief explanation of why the answer is correct
 
-Return as JSON array of question objects.
+Return as JSON with a 'questions' array.
 
-Example:
-[{{
-  "question": "What is the primary purpose of Python decorators?",
-  "options": {{
-    "A": "To delete functions",
-    "B": "To modify or enhance function behavior",
-    "C": "To create classes",
-    "D": "To import modules"
-  }},
-  "correct": "B",
-  "explanation": "Decorators are used to modify or enhance the behavior of functions without changing their code."
-}}]
-
-JSON array:"""
-            
-            response = await llm.generate(
-                prompt=prompt,
-                model="gpt-5",
+Example format:
+{{
+  "questions": [
+    {{
+      "question": "What is the primary purpose of Python decorators?",
+      "options": {{
+        "A": "To delete functions",
+        "B": "To modify or enhance function behavior",
+        "C": "To create classes",
+        "D": "To import modules"
+      }},
+      "correct": "B",
+      "explanation": "Decorators are used to modify or enhance the behavior of functions without changing their code."
+    }}
+  ]
+}}"""
+                    }
+                ],
+                temperature=0.7,
                 max_tokens=1500,
-                temperature=0.7
+                response_format={"type": "json_object"}
             )
             
             # Parse JSON response
-            quiz_text = response.get('text', '[]')
-            questions = json.loads(quiz_text)
+            quiz_json = response.choices[0].message.content
+            quiz_data = json.loads(quiz_json)
+            questions = quiz_data.get("questions", [])
             
-            return questions if isinstance(questions, list) else []
+            logger.info(f"Generated {len(questions)} quiz questions")
+            
+            return questions if isinstance(questions, list) and len(questions) > 0 else self._create_simple_quiz(concepts)
             
         except Exception as e:
             logger.error(f"Error generating quiz: {str(e)}")
