@@ -43,7 +43,9 @@ const KnowledgeGraphPage = () => {
         setTopics(data?.nodes || []);
         setNodeStats({
           total: data?.total || 0,
-          showing: data?.showing || 0
+          showing: data?.showing || 0,
+          mcpNodes: data?.mcp_nodes || 0,
+          mockNodes: data?.mock_nodes || 0
         });
         setLoading(false);
       } catch (error) {
