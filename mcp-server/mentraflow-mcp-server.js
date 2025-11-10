@@ -154,6 +154,21 @@ function handleMessage(message) {
             break;
           }
           
+          // Check message count in conversations
+          let totalMessages = 0;
+          let hasLongConversation = false;
+          
+          conversations.forEach(conv => {
+            const msgCount = conv.messages ? conv.messages.length : 0;
+            totalMessages += msgCount;
+            if (msgCount > 100) {
+              hasLongConversation = true;
+              console.error(`⚠️  Conversation "${conv.title || conv.conversation_id}" has ${msgCount} messages (will be automatically truncated for optimal processing)`);
+            }
+          });
+          
+          console.error(`📊 Total messages to process: ${totalMessages}`);
+          
           exportToMentraFlow(user_id, conversations)
             .then((result) => {
               sendResponse(request.id, {
