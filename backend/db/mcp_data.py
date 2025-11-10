@@ -6,15 +6,15 @@ MongoDB collections for MCP imports, concepts, and quizzes
 from datetime import datetime
 from typing import List, Dict, Any, Optional
 import uuid
+from db.connection import get_database
 
-# Mock MCP import history (will be replaced with MongoDB)
-MCP_IMPORTS = []
+# Get MongoDB database
+db = get_database()
 
-# Mock MCP concepts (will be replaced with MongoDB)
-MCP_CONCEPTS = []
-
-# Mock MCP quizzes (will be replaced with MongoDB)
-MCP_QUIZZES = []
+# MongoDB Collections
+mcp_imports_collection = db['mcp_imports']
+mcp_concepts_collection = db['mcp_concepts']
+mcp_quizzes_collection = db['mcp_quizzes']
 
 
 def create_mcp_import(user_id: str, platform: str, conversation_count: int) -> Dict[str, Any]:
