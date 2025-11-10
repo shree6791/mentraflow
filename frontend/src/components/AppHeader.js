@@ -55,6 +55,13 @@ const AppHeader = () => {
             <Brain size={18} />
             Knowledge Graph
           </Link>
+          <Link 
+            to="/ai-learning" 
+            className={`nav-link ${isActive('/ai-learning') ? 'active' : ''}`}
+          >
+            <Zap size={18} />
+            AI Learning
+          </Link>
         </nav>
 
         {/* Profile Menu */}
