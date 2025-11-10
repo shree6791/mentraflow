@@ -41,9 +41,9 @@ async def create_mcp_import(user_id: str, platform: str, conversation_count: int
     return import_record
 
 
-def update_mcp_import(import_id: str, **updates) -> bool:
+async def update_mcp_import(import_id: str, **updates) -> bool:
     """
-    Update an MCP import record
+    Update an MCP import record in MongoDB
     
     Args:
         import_id: Import ID
@@ -52,24 +52,24 @@ def update_mcp_import(import_id: str, **updates) -> bool:
     Returns:
         True if updated, False if not found
     """
-    for import_record in MCP_IMPORTS:
-        if import_record["import_id"] == import_id:
-            import_record.update(updates)
-            return True
-    return False
+    result = await mcp_imports_collection.update_one(
+        {"import_id": import_id},
+        {"$set": updates}
+    )
+    return result.modified_count > 0
 
 
-def get_mcp_import(import_id: str) -> Optional[Dict[str, Any]]:
-    """Get import by ID"""
-    for import_record in MCP_IMPORTS:
-        if import_record["import_id"] == import_id:
-            return import_record
-    return None
+async def get_mcp_import(import_id: str) -> Optional[Dict[str, Any]]:
+    """Get import by ID from MongoDB"""
+    import_record = await mcp_imports_collection.find_one({"import_id": import_id})
+    if import_record:
+        import_record.pop('_id', None)  # Remove MongoDB _id
+    return import_record
 
 
-def get_user_mcp_history(user_id: str, limit: int = 10) -> List[Dict[str, Any]]:
+async def get_user_mcp_history(user_id: str, limit: int = 10) -> List[Dict[str, Any]]:
     """
-    Get user's MCP import history
+    Get user's MCP import history from MongoDB
     
     Args:
         user_id: User ID
@@ -78,10 +78,17 @@ def get_user_mcp_history(user_id: str, limit: int = 10) -> List[Dict[str, Any]]:
     Returns:
         List of import records, newest first
     """
-    user_imports = [imp for imp in MCP_IMPORTS if imp["user_id"] == user_id]
-    # Sort by created_at descending
-    user_imports.sort(key=lambda x: x["created_at"], reverse=True)
-    return user_imports[:limit]
+    cursor = mcp_imports_collection.find(
+        {"user_id": user_id}
+    ).sort("created_at", -1).limit(limit)
+    
+    user_imports = await cursor.to_list(length=limit)
+    
+    # Remove MongoDB _id field
+    for imp in user_imports:
+        imp.pop('_id', None)
+    
+    return user_imports
 
 
 def create_mcp_concept(
