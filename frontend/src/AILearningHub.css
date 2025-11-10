@@ -1,0 +1,125 @@
+/* ========================================
+   AI Learning Hub Page
+   ======================================== */
+
+.ai-learning-hub {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.hub-header {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #E5E7EB;
+}
+
+.hub-title-section {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.hub-icon {
+  color: #8B5CF6;
+  flex-shrink: 0;
+}
+
+.hub-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 0.5rem 0;
+}
+
+.hub-subtitle {
+  font-size: 1rem;
+  color: #6B7280;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.hub-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.hub-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Override widget styles to fit in grid */
+.hub-column .mcp-imports-section,
+.hub-column .recall-widget {
+  margin-bottom: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.hub-quick-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: #F9FAFB;
+  border-radius: 16px;
+  border: 1px solid #E5E7EB;
+}
+
+.quick-link-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: white;
+  border: 2px solid #E5E7EB;
+  border-radius: 12px;
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.quick-link-btn:hover {
+  border-color: #8B5CF6;
+  color: #8B5CF6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .hub-content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .ai-learning-hub {
+    padding: 1rem;
+  }
+
+  .hub-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .hub-title-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .hub-quick-links {
+    flex-direction: column;
+  }
+
+  .quick-link-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
