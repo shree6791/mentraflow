@@ -230,6 +230,19 @@ const KnowledgeGraphPage = () => {
           </div>
           <div className="node-stats-compact">
             {nodeStats.showing} of {nodeStats.total}
+            {nodeStats.mcpNodes > 0 && (
+              <span style={{
+                marginLeft: '0.75rem',
+                padding: '0.25rem 0.625rem',
+                background: 'linear-gradient(135deg, #14B8A6 0%, #0D9488 100%)',
+                borderRadius: '8px',
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                color: 'white'
+              }}>
+                🤖 {nodeStats.mcpNodes} from MCP
+              </span>
+            )}
           </div>
         </div>
       </div>
